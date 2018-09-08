@@ -8,17 +8,27 @@
 
 import UIKit
 
-class PageViewController: UIViewController {
+class PageViewController: UIPageViewController {
+
+    public private(set) var pageIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.setViewControllers([getTemplate()], direction: .forward, animated: true, completion: nil)
+        self.dataSource = self
+        print("pageView.viewDidoad")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getTemplate() -> TemplateViewController {
+        let template =  storyboard!.instantiateViewController(withIdentifier: "TemplateViewController") as! TemplateViewController
+        template.pageIndex = self.pageIndex
+        return template
     }
     
 
@@ -31,5 +41,17 @@ class PageViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+}
 
+extension PageViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        self.pageIndex = self.pageIndex - 1
+        return getTemplate()
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        self.pageIndex = self.pageIndex + 1
+        return getTemplate()
+    }
 }
