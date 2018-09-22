@@ -8,7 +8,27 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    let sections: [(header: String, cells: [String])] = [(header: "赤ちゃんを切り替える", cells: ["", ""]),
+                                                         (header: "赤ちゃんを編集する", cells:["", "", ""])]
+
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].header
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

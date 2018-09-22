@@ -8,15 +8,73 @@
 
 import UIKit
 
+import Firebase
+import FirebaseUI
+
+import RealmSwift
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
 
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        let authUI = FUIAuth.defaultAuthUI()
+//        authUI?.delegate = self
+        
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth()
+        ]
+//        self.authUI.providers = providers
+        authUI?.providers = providers // edit
+        authUI?.delegate = self // edit
+        
+
+        let authViewController = authUI!.authViewController()
+        
+//        self.window?.rootViewController = authViewController
+//        self.window?.makeKeyAndVisible()
+        
+        let realm = try! Realm()
+        
+        let babies = realm.objects(Baby.self)
+        if (babies.count == 0) {
+            try! realm.write {
+                realm.add(Baby())
+            }
+        }
+
         return true
+    }
+    
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+//        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication]
+//        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+//            print("application true")
+//            return true
+//        }
+//        print("application false")
+//        return false;
+//    }
+    
+    func application(_ app: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            print("***true***")
+            return true
+        }
+        // other URL handling goes here.
+        print("***false***")
+        return false
+    }
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
+        print ("*** authentication finished *** ")
+        // handle user and error as necessary
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

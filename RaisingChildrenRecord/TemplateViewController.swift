@@ -31,21 +31,21 @@ class TemplateViewController: UIViewController, UICollectionViewDataSource, UICo
         tableView1.isScrollEnabled = false
         tableView1.allowsSelection = false
         
-        FirebaseApp.configure()
-        let db = Firestore.firestore()
-        
-        var ref: DocumentReference? = nil
-        ref = db.collection("users").addDocument(data: [
-            "first": "Ada",
-            "last": "Lovelace",
-            "born": 1815
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
+//        FirebaseApp.configure()
+//        let db = Firestore.firestore()
+//        
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("users").addDocument(data: [
+//            "first": "Ada",
+//            "last": "Lovelace",
+//            "born": 1815
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
     }
     
     

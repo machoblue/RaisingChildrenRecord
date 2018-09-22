@@ -7,7 +7,10 @@ target 'RaisingChildrenRecord' do
 
   # Pods for RaisingChildrenRecord
   pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
+  pod 'RealmSwift'
+#  pod 'Firebase/Firestore'
+#  pod 'Firebase/Auth'
+  pod 'FirebaseUI'
 
   target 'RaisingChildrenRecordTests' do
     inherit! :search_paths
