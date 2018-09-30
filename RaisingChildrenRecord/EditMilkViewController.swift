@@ -10,6 +10,8 @@ import UIKit
 
 import RealmSwift
 
+import CustomRealmObject
+
 class EditMilkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var id: String?

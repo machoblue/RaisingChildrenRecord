@@ -8,6 +8,8 @@
 
 import UIKit
 
+import CustomRealmObject
+
 class UICustomTitleView: UIView {
 
     @IBOutlet weak var name: UILabel!

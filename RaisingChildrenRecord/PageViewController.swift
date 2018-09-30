@@ -8,8 +8,6 @@
 
 import UIKit
 
-import RealmSwift
-
 class PageViewController: UIPageViewController {
 
 //    var date: Date?

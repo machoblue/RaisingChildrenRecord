@@ -12,7 +12,7 @@ import Firebase
 import FirebaseUI
 
 import RealmSwift
-
+import CustomRealmObject
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
@@ -48,6 +48,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         }
 
         return true
+    }
+    
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping
+        ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        userActivity.isEligibleForPrediction = true
+        if let intent = userActivity.interaction?.intent as? RecordCreateIntent {
+//            router.goToChooseYourLocationScreen(intent)
+            print("@@@@@", intent)
+            return true
+        }
+        return false
     }
     
 //    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {

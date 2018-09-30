@@ -10,6 +10,10 @@ import UIKit
 
 import RealmSwift
 
+import Intents
+
+import CustomRealmObject
+
 class FirstViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var navigationItem2: UINavigationItem!
@@ -20,17 +24,24 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        self.baby = nil // 初期化
         
         self.babies = findAllBabies()
         self.baby = nextBaby()
         self.date = Date()
         
+        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
         self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onTitleViewTapped(_:)))
         self.navigationItem2.titleView?.addGestureRecognizer(gesture)
         self.navigationItem2.titleView?.isUserInteractionEnabled = true
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onPageForward(notification:)), name: Notification.Name.PageForward, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPageBackward(notification:)), name: Notification.Name.PageBackward, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRecordsViewDidAppear(notification:)), name: Notification.Name.RecordsViewDidAppear, object: nil)
@@ -99,6 +110,24 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
             record.commandId = sender.tag.description
             record.dateTime = Date()
             realm.add(record)
+        }
+        
+        if #available(iOS 12.0, *) {
+            print("#######################")
+            let intent = RecordCreateIntent()
+            intent.baby = baby!.name
+            intent.behavior = Command.behaviorName(id: sender.tag)
+            let interaction = INInteraction(intent: intent, response: nil)
+            interaction.donate { error in
+                guard error == nil else {
+                    print("Problems donating your Intent")
+                    return
+                }
+                print("Intent donated")
+            }
+        } else {
+            // Fallback on earlier versions
+            print("&&&&&&&&&&&&&")
         }
     }
     

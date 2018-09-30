@@ -10,6 +10,8 @@ import UIKit
 
 import RealmSwift
 
+import CustomRealmObject
+
 class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var records: [(time: String, image: String?, name: String?, description: String?)] = []
@@ -82,7 +84,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             let realm = try! Realm()
             let from = Calendar.current.startOfDay(for: unwrappedDate)
             let to = from + 60 * 60 * 24
-            results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a", from, to)
+            results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %@", from, to)
 
 //            token = results!.observe { _ in
 //                self.tableView.reloadData()
@@ -120,6 +122,14 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         print("### viewDedDisaaperw ###")
         if let unwrappedToken = token {
             unwrappedToken.invalidate()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
     }
 }

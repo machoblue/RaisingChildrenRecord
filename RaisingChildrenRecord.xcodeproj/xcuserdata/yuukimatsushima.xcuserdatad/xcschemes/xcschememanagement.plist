@@ -4,15 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CustomRealmObject.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>41</integer>
+		</dict>
 		<key>RaisingChildrenRecord.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>39</integer>
 		</dict>
 		<key>RecordCreateIntentExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>40</integer>
 		</dict>
 		<key>RecordCreateIntentExtensionUI.xcscheme</key>
 		<dict>
