@@ -73,6 +73,7 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
                         let babies = realm.objects(Baby.self)
                         for baby in babies {
                             let records = realm.objects(Record.self).filter("babyId == %@", baby.id)
+                            self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female])
                             for record in records {
                                 self.ref.child("families").child(familyId)
                                     .child("babies").child(baby.id)

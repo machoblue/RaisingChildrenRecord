@@ -23,7 +23,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     var sections: [(header: String, cells: [(label1: String, label2: String)])]
         = [(header: "赤ちゃんを切り替える", cells: []),
            (header: "赤ちゃんを編集する", cells: []),
-           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""), (label1: "他の人を家族に加える", label2: ""), (label1: "既存の家族に加わる", label2: ""), (label1: "共有しているデータを削除する", label2: "")])]
+           (header: "データ共有", cells: [(label1: "家族(共有グループ)を新規作成する", label2: ""), (label1: "他のユーザーを家族(共有グループ)に加える", label2: ""), (label1: "既存の家族(共有グループ)に加わる", label2: ""), (label1: "データを削除する", label2: "")])]
     var babies: Array<Baby> = []
     
     var ref: DatabaseReference!
@@ -43,8 +43,45 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         ref.child("users").child(unwrappedUserId).child("families").observeSingleEvent(of: .value, with: {(snapshot) in
             let value = snapshot.value as? NSDictionary
             let familyId = value?.allKeys.first // User can belong to only one family.
-            if let familyId = familyId {
+            if let familyId = familyId as? String {
                 UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
+                
+                let babiesRef = self.ref.child("families").child(familyId).child("babies")
+//                babiesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//                    guard let value = snapshot.value as? NSDictionary else { return }
+//                    for key in value.allKeys {
+//                        guard let baby = value[key] as? NSDictionary else { continue }
+//                        let newBaby = Baby()
+//                        newBaby.id = key as! String
+//                        newBaby.name = baby["name"] as! String
+//                        newBaby.born = Date(timeIntervalSince1970: baby["born"] as! Double)
+//                        newBaby.female = baby["female"] as! Bool
+//                        self.babies.append(newBaby)
+//                    }
+//                }) { (error) in
+//                    print(error.localizedDescription)
+//                }
+                
+                babiesRef.observe(.value, with: { (snapshot) in
+                    print("**** snapshot:", snapshot)
+                    guard let value = snapshot.value as? NSDictionary else { return }
+                    for key in value.allKeys {
+                        guard let baby = value[key] as? NSDictionary else { continue }
+                        let newBaby = Baby()
+                        newBaby.id = key as! String
+                        newBaby.name = baby["name"] as! String
+                        newBaby.born = Date(timeIntervalSince1970: baby["born"] as! Double)
+                        newBaby.female = baby["female"] as! Bool
+                        self.babies.append(newBaby)
+                    }
+                    
+                    self.updateSections()
+                    
+                    self.tableView.reloadData()
+                    
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -62,35 +99,23 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
         
-        let realm = try! Realm()
-        let results = realm.objects(Baby.self)
-        
-        token = results.observe { _ in
-            self.tableView.reloadData()
+        let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        if let _ = familyId , familyId! != "" {
+        } else {
+            let realm = try! Realm()
+            let results = realm.objects(Baby.self)
+
+            token = results.observe { _ in
+                self.tableView.reloadData()
+            }
+
+            babies = []
+            for result in results {
+                babies.append(result)
+            }
         }
         
-        babies = []
-        for result in results {
-            babies.append(result)
-        }
-        
-        sections[0].cells = []
-        sections[1].cells = []
-        
-        for baby in babies {
-            let name = baby.name
-            
-            let f = DateFormatter()
-            f.locale = Locale(identifier: "ja_JP")
-            f.dateStyle = .long
-            f.timeStyle = .none
-            let born = f.string(from: baby.born) + "生まれ"
-            
-            sections[0].cells.append((label1: name, label2: born))
-            sections[1].cells.append((label1: name, label2: born))
-        }
-        
-        sections[1].cells.append((label1: "赤ちゃん追加", label2: ""))
+        updateSections()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -322,6 +347,26 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         })
         alert.addAction(action)
         present(alert, animated: true, completion: nil) // display alert
+    }
+    
+    func updateSections() {
+        sections[0].cells = []
+        sections[1].cells = []
+        
+        for baby in babies {
+            let name = baby.name
+            
+            let f = DateFormatter()
+            f.locale = Locale(identifier: "ja_JP")
+            f.dateStyle = .long
+            f.timeStyle = .none
+            let born = f.string(from: baby.born) + "生まれ"
+            
+            sections[0].cells.append((label1: name, label2: born))
+            sections[1].cells.append((label1: name, label2: born))
+        }
+        
+        sections[1].cells.append((label1: "赤ちゃん追加", label2: ""))
     }
 }
 
