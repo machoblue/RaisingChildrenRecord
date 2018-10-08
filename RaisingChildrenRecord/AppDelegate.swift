@@ -13,6 +13,7 @@ import FirebaseUI
 
 import RealmSwift
 import CustomRealmObject
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
@@ -22,21 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
         FirebaseApp.configure()
         
-        let authUI = FUIAuth.defaultAuthUI()
-//        authUI?.delegate = self
-        
-        let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth()
-        ]
-//        self.authUI.providers = providers
-        authUI?.providers = providers // edit
-        authUI?.delegate = self // edit
-        
+        if Auth.auth().currentUser == nil {
+            let authUI = FUIAuth.defaultAuthUI()!
+            authUI.delegate = self
+    
+            let providers: [FUIAuthProvider] = [
+                FUIGoogleAuth()
+            ]
+            authUI.providers = providers
+            authUI.delegate = self
 
-        let authViewController = authUI!.authViewController()
-        
-//        self.window?.rootViewController = authViewController
-//        self.window?.makeKeyAndVisible()
+            let authViewController = authUI.authViewController()
+    
+            self.window?.rootViewController = authViewController
+            self.window?.makeKeyAndVisible()
+        }
         
         let realm = try! Realm()
         
@@ -56,38 +57,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         ([UIUserActivityRestoring]?) -> Void) -> Bool {
         userActivity.isEligibleForPrediction = true
         if let intent = userActivity.interaction?.intent as? RecordCreateIntent {
-//            router.goToChooseYourLocationScreen(intent)
-            print("@@@@@", intent)
+            print("INTENT:", intent)
             return true
         }
         return false
     }
     
-//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-//        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication]
-//        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-//            print("application true")
-//            return true
-//        }
-//        print("application false")
-//        return false;
-//    }
-    
+
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
         if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-            print("***true***")
+            print("*** True ***")
             return true
         }
         // other URL handling goes here.
-        print("***false***")
+        print("*** False ***")
         return false
     }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
-        print ("*** authentication finished *** ")
+        print ("*** Authentication Complete *** ")
+        
         // handle user and error as necessary
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
+        self.window?.rootViewController = viewController
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

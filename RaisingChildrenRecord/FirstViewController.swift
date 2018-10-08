@@ -78,7 +78,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // ### Notification from ###
     @objc func onPageForward(notification: Notification) -> Void {
-        print("*** onPageForward ***")
 //        self.date = self.date! + (60 * 60 * 24) // date should not be nil
         self.date = notification.userInfo!["date"] as! Date
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
@@ -86,7 +85,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @objc func onPageBackward(notification: Notification) -> Void {
-        print("*** onPageBackward***")
 //        self.date = self.date! - (60 * 60 * 24) // date should not be nil
         self.date = notification.userInfo!["date"] as! Date
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
@@ -94,7 +92,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @objc func onRecordsViewDidAppear(notification: Notification) -> Void {
-        print("*** onRecordsViewdidAppear ***")
         self.date = notification.userInfo!["date"] as! Date
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
         self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
@@ -102,7 +99,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     // ### Notification to ###
 
     @objc func onClicked(sender: UIButton!) {
-        print("Button Clicked:", sender.tag)
         let realm = try! Realm()
         try! realm.write {
             let record = Record()
@@ -113,21 +109,18 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         }
         
         if #available(iOS 12.0, *) {
-            print("#######################")
             let intent = RecordCreateIntent()
             intent.baby = baby!.name
             intent.behavior = Command.behaviorName(id: sender.tag)
             let interaction = INInteraction(intent: intent, response: nil)
             interaction.donate { error in
                 guard error == nil else {
-                    print("Problems donating your Intent")
                     return
                 }
-                print("Intent donated")
             }
         } else {
             // Fallback on earlier versions
-            print("&&&&&&&&&&&&&")
+            print("Fallback on Earlier versions")
         }
     }
     

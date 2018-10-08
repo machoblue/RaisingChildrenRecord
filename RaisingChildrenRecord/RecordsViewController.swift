@@ -64,7 +64,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             editMilkViewController.id = record.id
             self.present(editMilkViewController, animated: true, completion: nil)
         default:
-            print("default")
+            break
         }
     }
     
@@ -78,7 +78,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("### viewDidLoad ###")
 
         if let unwrappedDate = date {
             let realm = try! Realm()
@@ -88,7 +87,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
 
 //            token = results!.observe { _ in
 //                self.tableView.reloadData()
-//                print("***", self.results!.count, "***")
 //                self.tableView.scrollToRow(at: IndexPath(row: self.results!.count, section: 0), at: .top, animated: false)
 //            }
         }
@@ -96,8 +94,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("### viewDidAppear ###")
-        
+
         if let unwrappedDate = date {
             let realm = try! Realm()
             let from = Calendar.current.startOfDay(for: unwrappedDate)
@@ -119,7 +116,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("### viewDedDisaaperw ###")
         if let unwrappedToken = token {
             unwrappedToken.invalidate()
         }

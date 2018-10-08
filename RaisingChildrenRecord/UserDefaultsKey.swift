@@ -10,4 +10,5 @@ import Foundation
 
 enum UserDefaultsKey: String {
     case BabyId
+    case FamilyId
 }

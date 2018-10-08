@@ -26,12 +26,6 @@
 		0C5F37E421567597002A1B6E /* RecordCreateIntentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C5F37DD21567597002A1B6E /* RecordCreateIntentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F37E82156781D002A1B6E /* Intents.intentdefinition */; };
 		0C5F37EA2156781D002A1B6E /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F37E82156781D002A1B6E /* Intents.intentdefinition */; };
-		0C62410F21428BE800BEE829 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C62410E21428BE700BEE829 /* GoogleService-Info.plist */; };
-		0C62411021428BE800BEE829 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C62410E21428BE700BEE829 /* GoogleService-Info.plist */; };
-		0C62411121428BE800BEE829 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C62410E21428BE700BEE829 /* GoogleService-Info.plist */; };
-		0C6241172143684400BEE829 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6241162143684400BEE829 /* LoginViewController.swift */; };
-		0C6241182143684400BEE829 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6241162143684400BEE829 /* LoginViewController.swift */; };
-		0C6241192143684400BEE829 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6241162143684400BEE829 /* LoginViewController.swift */; };
 		0CBD261D20F6CBE700542E1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD261C20F6CBE700542E1B /* AppDelegate.swift */; };
 		0CBD261F20F6CBE700542E1B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD261E20F6CBE700542E1B /* FirstViewController.swift */; };
 		0CBD262120F6CBE700542E1B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD262020F6CBE700542E1B /* SecondViewController.swift */; };
@@ -45,6 +39,9 @@
 		4094A5395D9CB497AEB66712 /* Pods_RaisingChildrenRecordUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB5209A9556868F7108ECE /* Pods_RaisingChildrenRecordUITests.framework */; };
 		57FA47A3EA5ADF3DBC486F3A /* Pods_RaisingChildrenRecordTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94664E7E794C1222256125E /* Pods_RaisingChildrenRecordTests.framework */; };
 		5B4F9E248B49418FE59BB2FB /* Pods_RecordCreateIntentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095B40A234FDEE4504D683D4 /* Pods_RecordCreateIntentExtension.framework */; };
+		9C23DBE02163A66E0091970A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C23DBDF2163A66E0091970A /* GoogleService-Info.plist */; };
+		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
+		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
 		EAC035888CEB68AE4DACD904 /* Pods_CustomRealmObject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA05FB6C74EDB3D89796DFB /* Pods_CustomRealmObject.framework */; };
 /* End PBXBuildFile section */
 
@@ -126,8 +123,6 @@
 		0C5F37DF21567597002A1B6E /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		0C5F37E121567597002A1B6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5F37E82156781D002A1B6E /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
-		0C62410E21428BE700BEE829 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0C6241162143684400BEE829 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0C995BBC2155D0DB00244E68 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		0CBD261920F6CBE700542E1B /* RaisingChildrenRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaisingChildrenRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBD261C20F6CBE700542E1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +146,9 @@
 		5E349B02180E638BFB0CD454 /* Pods-CustomRealmObject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomRealmObject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CustomRealmObject/Pods-CustomRealmObject.debug.xcconfig"; sourceTree = "<group>"; };
 		6808A71133A1834EDE85CDDF /* Pods-CustomRealmObject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomRealmObject.release.xcconfig"; path = "Pods/Target Support Files/Pods-CustomRealmObject/Pods-CustomRealmObject.release.xcconfig"; sourceTree = "<group>"; };
 		780A0AFB59F399E0E8F2A42C /* Pods-RaisingChildrenRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaisingChildrenRecord.release.xcconfig"; path = "Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord.release.xcconfig"; sourceTree = "<group>"; };
+		9C23DBDF2163A66E0091970A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
+		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
 		A53A6EAF8CBBF298C25FE25C /* Pods-RaisingChildrenRecordTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaisingChildrenRecordTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RaisingChildrenRecordTests/Pods-RaisingChildrenRecordTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C94664E7E794C1222256125E /* Pods_RaisingChildrenRecordTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RaisingChildrenRecordTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9F828907230A0FA3CF9DA4 /* Pods-RaisingChildrenRecordTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaisingChildrenRecordTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RaisingChildrenRecordTests/Pods-RaisingChildrenRecordTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +252,7 @@
 		0CBD261B20F6CBE700542E1B /* RaisingChildrenRecord */ = {
 			isa = PBXGroup;
 			children = (
-				0C62410E21428BE700BEE829 /* GoogleService-Info.plist */,
+				9C23DBDF2163A66E0091970A /* GoogleService-Info.plist */,
 				0CBD261C20F6CBE700542E1B /* AppDelegate.swift */,
 				0CBD261E20F6CBE700542E1B /* FirstViewController.swift */,
 				0CBD262020F6CBE700542E1B /* SecondViewController.swift */,
@@ -265,12 +263,13 @@
 				0CBD262A20F6CBE900542E1B /* Info.plist */,
 				0C39F7A021069ABC00302D76 /* PageViewController.swift */,
 				0C0F7E8E210D30750040D268 /* UICustomTitleView.swift */,
-				0C6241162143684400BEE829 /* LoginViewController.swift */,
 				0C007B3E2145075F0001802A /* RecordsViewController.swift */,
 				0C007B422147F0C80001802A /* CustomCollectionViewCell.swift */,
 				0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */,
 				0C2F9E68214F23C400CFCD2F /* EditMilkViewController.swift */,
 				0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */,
+				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
+				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -511,9 +510,9 @@
 			files = (
 				0C0F7E8D210D2F520040D268 /* CustomTitleView.xib in Resources */,
 				0CBD262920F6CBE900542E1B /* LaunchScreen.storyboard in Resources */,
-				0C62410F21428BE800BEE829 /* GoogleService-Info.plist in Resources */,
 				0CBD262620F6CBE900542E1B /* Assets.xcassets in Resources */,
 				0CBD262420F6CBE700542E1B /* Main.storyboard in Resources */,
+				9C23DBE02163A66E0091970A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +520,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C62411021428BE800BEE829 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +527,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C62411121428BE800BEE829 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,8 +679,8 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm-iOS11.4/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift-iOS11.4/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
@@ -694,8 +691,6 @@
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm-iOS12.0/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift-iOS12.0/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -755,13 +750,14 @@
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
 				0C2F9E65214DD43D00CFCD2F /* UserDefaultsKey.swift in Sources */,
-				0C6241172143684400BEE829 /* LoginViewController.swift in Sources */,
 				0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */,
 				0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */,
 				0C0F7E8F210D30750040D268 /* UICustomTitleView.swift in Sources */,
 				0C2F9E69214F23C400CFCD2F /* EditMilkViewController.swift in Sources */,
 				0CBD262120F6CBE700542E1B /* SecondViewController.swift in Sources */,
 				0C39F7A121069ABC00302D76 /* PageViewController.swift in Sources */,
+				9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */,
+				9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */,
 				0CBD261D20F6CBE700542E1B /* AppDelegate.swift in Sources */,
 				0CBD261F20F6CBE700542E1B /* FirstViewController.swift in Sources */,
 				0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */,
@@ -772,7 +768,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C6241182143684400BEE829 /* LoginViewController.swift in Sources */,
 				0CBD263420F6CBE900542E1B /* RaisingChildrenRecordTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,7 +776,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C6241192143684400BEE829 /* LoginViewController.swift in Sources */,
 				0CBD263F20F6CBE900542E1B /* RaisingChildrenRecordUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

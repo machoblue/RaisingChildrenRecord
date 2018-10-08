@@ -36,7 +36,6 @@ class PageViewController: UIPageViewController {
     }
     
     @objc func onLeftBarButtonClicked(notification: Notification) -> Void {
-        print("$$$ onLeftBarButtonClicked $$$")
 //        self.date = self.date! - (60 * 60 * 24)
         let date = notification.userInfo!["date"] as! Date
         self.setViewControllers([getViewController(date)], direction: .reverse, animated: true, completion: nil)
@@ -44,7 +43,6 @@ class PageViewController: UIPageViewController {
     }
     
     @objc func onRightBarButtonClicked(notification: Notification) -> Void {
-        print("$$$ onRightBarButtonClicked$$$")
 //        self.date = self.date! + (60 * 60 * 24)
         let date = notification.userInfo!["date"] as! Date
         self.setViewControllers([getViewController(date)], direction: .forward, animated: true, completion: nil)
@@ -55,7 +53,6 @@ class PageViewController: UIPageViewController {
 
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("$$$ viewControllerBefore $$$")
 //        self.date = self.date! - (60 * 60 * 24)
         let date = (viewController as! RecordsViewController).date! - (60 * 60 * 24)
         
@@ -66,7 +63,6 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print("$$$ viewControllerAfter $$$")
 //        self.date = self.date! + (60 * 60 * 24)
         let date = (viewController as! RecordsViewController).date! + (60 * 60 * 24)
         
@@ -79,7 +75,6 @@ extension PageViewController: UIPageViewControllerDataSource {
 
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("*** didFinishAnimating ***")
     }
 }
 
