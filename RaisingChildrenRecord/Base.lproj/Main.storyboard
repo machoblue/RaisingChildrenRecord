@@ -452,10 +452,10 @@
             </objects>
             <point key="canvasLocation" x="2144.8000000000002" y="602.24887556221893"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Family View Controller-->
         <scene sceneID="QLs-vg-app">
             <objects>
-                <viewController id="hcJ-3D-TPe" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateFamilyViewController" id="hcJ-3D-TPe" customClass="CreateFamilyViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0aU-35-f14">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -466,18 +466,28 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="hcJ-3D-TPe" id="MMa-LQ-O94"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-ze-EhV">
-                                <rect key="frame" x="164" y="391" width="46" height="30"/>
+                                <rect key="frame" x="156" y="391" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="作成する"/>
+                                <connections>
+                                    <action selector="onCreateButtonClicked:" destination="hcJ-3D-TPe" eventType="touchUpInside" id="KBs-to-flI"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MiV-4H-39r">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="家族を作成する" id="3Ao-i8-wtt">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="d9r-g8-8fz"/>
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="d9r-g8-8fz">
+                                            <connections>
+                                                <action selector="onLeftBarButtonClicked:" destination="hcJ-3D-TPe" id="D9v-wY-9XV"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -485,6 +495,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="XzP-pF-VGs"/>
                     </view>
+                    <connections>
+                        <outlet property="familyId" destination="865-6I-BP0" id="3D4-hc-8CY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgX-Fk-gsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

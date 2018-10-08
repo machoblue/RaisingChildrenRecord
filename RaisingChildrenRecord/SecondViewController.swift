@@ -240,35 +240,14 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        guard let userId = Auth.auth().currentUser?.uid else {
+        guard let _ = Auth.auth().currentUser?.uid else {
             showAlert(title: "ご注意", message: "家族を作成するにはログインしてください。")
             return
         }
         
-        let userName = Auth.auth().currentUser?.displayName
-        let familyId = UUID().description
-        UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
-        self.ref.child("users").child(userId).setValue(["name": userName!])
-        self.ref.child("users").child(userId).child("families").setValue([familyId: true])
-        
-        let realm = try! Realm()
-        let babies = realm.objects(Baby.self)
-        for baby in babies {
-            let records = realm.objects(Record.self).filter("babyId == %@", baby.id)
-            for record in records {
-                self.ref.child("families").child(familyId)
-                    .child("babies").child(baby.id)
-                    .child("records").child(record.id)
-                    .setValue([
-                        "commandId": record.commandId!,
-                        "dateTime": record.dateTime!.timeIntervalSince1970,
-                        "value1": record.value1 ?? "",
-                        "value2": record.value2 ?? "",
-                        "value3": record.value3 ?? "",
-                        "value4": record.value4 ?? "",
-                        "value5": record.value5 ?? ""])
-            }
-        }
+        let storyboard: UIStoryboard = self.storyboard!
+        let createFamilyViewController = storyboard.instantiateViewController(withIdentifier: "CreateFamilyViewController") as! CreateFamilyViewController
+        self.present(createFamilyViewController, animated: true, completion: nil)
     }
     
     func addFamily() {
@@ -279,7 +258,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         guard let _ = Auth.auth().currentUser?.uid else {
-            showAlert(title: "ご注意", message: "家族を加わるにはログインしてください。")
+            showAlert(title: "ご注意", message: "家族に加わるにはログインしてください。")
             return
         }
         
@@ -300,7 +279,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     func joinFamily() {
         let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
-        guard userDefaultsFamilyId != nil || userDefaultsFamilyId != "" else {
+        guard userDefaultsFamilyId == nil || userDefaultsFamilyId == "" else {
             showAlert(title: "ご注意", message: "すでに家族に加わっているため、他の家族には加われません。")
             return // return when userDefaultsFamilyId is nil or ""
         }
@@ -333,7 +312,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         self.ref.child("users").child(userId).child("families").removeValue()
-        UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: ""]) // create UserDefaults
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.FamilyId.rawValue)
     }
     
     func showAlert(title: String, message: String) {
