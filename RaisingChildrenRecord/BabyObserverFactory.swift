@@ -14,8 +14,8 @@ class BabyObserverFactory {
     private init() {
     }
     
-    func createBabyObserver(_ observerType: ObserverType) -> BabyObserver {
-        switch observerType {
+    func createBabyObserver(_ databaseType: DatabaseType) -> BabyObserver {
+        switch databaseType {
         case .Local:
             return BabyObserverRealm.shared
         case .Remote:
@@ -23,9 +23,4 @@ class BabyObserverFactory {
         }
     }
     
-}
-
-enum ObserverType {
-    case Local
-    case Remote
 }

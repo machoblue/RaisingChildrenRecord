@@ -14,8 +14,8 @@ class BabyDaoFactory {
     private init() {
     }
     
-    func createBabyDao(_ daoType: DaoType) -> BabyDao {
-        switch daoType {
+    func createBabyDao(_ databaseType: DatabaseType) -> BabyDao {
+        switch databaseType {
         case .Local:
             return BabyDaoRealm.shared
         case .Remote:
@@ -23,9 +23,4 @@ class BabyDaoFactory {
         }
     }
     
-}
-
-enum DaoType {
-    case Local
-    case Remote
 }
