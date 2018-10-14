@@ -67,8 +67,10 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
                 self.ref.child("users").child(userId!).child("families").setValue([familyId: true]) { (error: Error?, ref: DatabaseReference) in
                     if let _ = error {
                     } else {
-                        UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
-                        
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
+                        }
+
                         let realm = try! Realm()
                         let babies = realm.objects(Baby.self)
                         for baby in babies {

@@ -18,6 +18,9 @@ import CustomRealmObject
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
+    
+    var babyObserver: BabyObserver?
+    var babyDao: BabyDao?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -37,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
             self.window?.rootViewController = authViewController
             self.window?.makeKeyAndVisible()
+        } else  {
+            observeRemote()
         }
         
         let realm = try! Realm()
@@ -78,12 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         print ("*** Authentication Complete *** ")
-        
+
         // handle user and error as necessary
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
         self.window?.rootViewController = viewController
         self.window?.makeKeyAndVisible()
+        
+        self.observeRemote()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -109,5 +116,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
 
 
+    // MARK: - Utility
+    func observeRemote() {
+        FamilyIdObserver.shared.observe(with: { (familyId) -> Void in
+            self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
+
+            self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
+            
+            self.babyObserver?.observeAdd(with: {(baby) -> Void in
+                print("observeAdd")
+                self.babyDao?.insertOrUpdate(baby)
+            })
+            self.babyObserver?.observeChange(with: {(baby) -> Void in
+                print("observeChange")
+                self.babyDao?.insertOrUpdate(baby)
+            })
+            self.babyObserver?.observeRemove(with: {(baby) -> Void in
+                print("observeRemove")
+                self.babyDao?.delete(baby)
+            })
+        })
+    }
 }
 

@@ -20,7 +20,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     (header: "性別", cells: [(label: "男の子", height: 60), (label: "女の子", height: 60)])
     ]
     
-    var baby: Baby!
+    var baby: BabyModel!
     @IBOutlet weak var tableView: UITableView!
     var f = DateFormatter()
     var button: UIButton!
@@ -37,7 +37,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         if let _ = self.baby {
             sections.append((header: "", cells: [(label: "削除", height: 60)]))
         } else {
-            self.baby = Baby()
+            self.baby = BabyModel(id: UUID().description, name: "赤ちゃん", born: Date(), female: false)
         }
         
         self.name = self.baby.name
@@ -155,13 +155,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func onDeleteButtonClicked(sender: UIButton) {
-        let realm = try! Realm()
-        let target = realm.objects(Baby.self).filter("id == %@", self.baby.id).first
-        if let unwrappedTarget = target {
-            try! realm.write {
-                realm.delete(unwrappedTarget)
-            }
-        }
+        BabyDaoFactory.shared.createBabyDao(.Local).delete(self.baby)
         dismiss(animated: true, completion: nil)
     }
     
@@ -176,21 +170,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
         self.name = self.textField.text!
-    
-        let realm = try! Realm()
-        try! realm.write {
-            let results = realm.objects(Baby.self).filter("id == %@", self.baby.id)
-            if results.count == 0 {
-                self.baby.born = self.born
-                self.baby.name = self.name
-                self.baby.female = self.female
-                realm.add(baby)
-            } else {
-                results.first!.born = self.born
-                results.first!.name = self.name
-                results.first!.female = self.female
-            }
-        }
+        BabyDaoFactory.shared.createBabyDao(.Local).insertOrUpdate(BabyModel(id: self.baby.id, name: self.name, born: self.born, female: self.female))
         dismiss(animated: true, completion: nil)
     }
 }

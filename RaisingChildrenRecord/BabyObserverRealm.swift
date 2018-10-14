@@ -1,0 +1,107 @@
+//
+//  BabyObserverRealm.swift
+//  RaisingChildrenRecord
+//
+//  Created by 松島勇貴 on 2018/10/14.
+//  Copyright © 2018年 松島勇貴. All rights reserved.
+//
+
+import Foundation
+
+import RealmSwift
+
+import CustomRealmObject
+
+
+
+class BabyObserverRealm: BabyObserver {
+    static let shared = BabyObserverRealm()
+    var realm: Realm!
+    var notificationToken: NotificationToken?
+    var babies: [BabyModel] = []
+    
+    private init() {
+        self.realm = try! Realm()
+        
+        let results = realm.objects(Baby.self)
+        for baby in results {
+            self.babies.append(BabyModel(id: baby.id, name: baby.name, born: baby.born, female: baby.female))
+        }
+    }
+    
+    func observeAdd(with callback: @escaping (BabyModel) -> Void) {
+        // do nothing
+    }
+    
+    func observeChange(with callback: @escaping (BabyModel) -> Void) {
+        // do nothing
+    }
+    
+    func observeRemove(with callback: @escaping (BabyModel) -> Void) {
+        // do nothing
+    }
+    
+    func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void) {
+        let results = realm.objects(Baby.self)
+        
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            var myChanges: [(BabyModel, Change)] = []
+            switch changes {
+            case .initial:
+                for baby in self!.babies {
+                    myChanges.append((baby, .Init))
+                }
+            case .update(_, let deletions, let insertions, let modifications):
+                for deletion in self!.reverce(deletions){
+                    let target = self!.babies[deletion]
+                    self!.babies.remove(at: deletion)
+                    myChanges.append((target, .Delete))
+                }
+                for insertion in self!.sort(insertions) {
+                    let result = results[insertion]
+                    let baby = BabyModel(id: result.id, name: result.name, born: result.born, female: result.female)
+                    self!.babies.insert(baby, at: insertion)
+                    myChanges.append((baby, .Insert))
+                }
+                for modification in modifications {
+                    let from = results[modification]
+                    let to = self!.babies[modification]
+                    to.id = from.id
+                    to.name = from.name
+                    to.born = from.born
+                    to.female = from.female
+                    myChanges.append((to, .Modify))
+                }
+                
+                let count = myChanges.count
+                for i in (0..<count).reversed() {
+                    if (myChanges[i].0.id == "delete") {
+                        self!.babies.remove(at: i)
+                    }
+                }
+                
+            case .error(let error):
+                fatalError("\(error)")
+            }
+            callback(myChanges)
+        }
+    }
+    
+    deinit {
+        print("deinit")
+        notificationToken?.invalidate()
+    }
+    
+    func sort(_ array: [Int]) -> [Int] {
+        var temp = array
+        temp.sort(by: {$0 < $1})
+        return temp
+    }
+    
+    func reverce(_ array: [Int]) -> [Int] {
+        var temp = array
+        temp.sort(by: {$1 < $0})
+        return temp
+    }
+    
+}
