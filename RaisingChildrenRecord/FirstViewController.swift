@@ -78,20 +78,17 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     @objc func onPageForward(notification: Notification) -> Void {
         self.date =  (notification.userInfo?["date"] as! Date)
-        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
-        self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
+        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
     }
     
     @objc func onPageBackward(notification: Notification) -> Void {
         self.date = (notification.userInfo!["date"] as! Date)
-        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
-        self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
+        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
     }
     
     @objc func onRecordsViewDidAppear(notification: Notification) -> Void {
         self.date = (notification.userInfo!["date"] as! Date)
-        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
-        self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
+        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
     }
     
     // MARK: - Event
@@ -122,12 +119,13 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @objc func onTitleViewTapped(_ sender: UITapGestureRecognizer) {
+        print("*** FirstViewController.onTitleViewTapped ***")
         self.baby = nextBaby()
         
-        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
-        self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTitleViewTapped(_:)))
-        self.navigationItem2.titleView?.addGestureRecognizer(gesture)
+        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
+
+        let userInfoDict = ["babyId": self.baby!.id]
+        NotificationCenter.default.post(name: .TitleViewClicked, object: nil, userInfo: userInfoDict)
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
@@ -182,10 +180,18 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         }
         return -1
     }
+    
+    func reloadTitleView(_ navigationItem: UINavigationItem, baby: BabyModel, data: Date) {
+        let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
+        navigationItem.titleView = UICustomTitleView(frame: frame, baby: baby, date: date)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTitleViewTapped(_:)))
+        navigationItem.titleView?.addGestureRecognizer(gesture)
+    }
 }
 
 extension Notification.Name {
     static let LeftBarButtonClicked = Notification.Name("LeftBarButtonClicked")
     static let RightBarButtonClicked = Notification.Name("RightBarButtonClicked")
+    static let TitleViewClicked = Notification.Name("TitleViewClicked")
 }
 

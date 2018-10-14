@@ -78,42 +78,32 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let unwrappedDate = date {
-            let realm = try! Realm()
-            let from = Calendar.current.startOfDay(for: unwrappedDate)
-            let to = from + 60 * 60 * 24
-            results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %@", from, to)
-
-//            token = results!.observe { _ in
-//                self.tableView.reloadData()
-//                self.tableView.scrollToRow(at: IndexPath(row: self.results!.count, section: 0), at: .top, animated: false)
-//            }
-        }
+        
+        guard let date = self.date else { return }
+        
+        let realm = try! Realm()
+        
+        let babyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String ?? realm.objects(Baby.self).first!.id
+        
+        let from = Calendar.current.startOfDay(for: date)
+        let to = from + 60 * 60 * 24
+        results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a AND babyId == %@", from, to, babyId)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let unwrappedDate = date {
-            let realm = try! Realm()
-            let from = Calendar.current.startOfDay(for: unwrappedDate)
-            let to = from + 60 * 60 * 24
-            results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a", from, to)
-            
-            token = results!.observe { _ in
-                self.tableView.reloadData()
-            }
+        token = results!.observe { _ in
+            print("### RecordViewController.viewDidLoad.observe ###")
+            self.tableView.reloadData()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
         
         let userInfoDict = ["date": self.date!]
         NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if let unwrappedToken = token {
@@ -126,6 +116,24 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+    }
+    
+    @objc func onTitleViewClicked(notification: Notification) -> Void {
+        guard let babyId = notification.userInfo?["babyId"] as? String else { return }
+        guard let date = self.date else { return }
+        
+        let realm = try! Realm()
+        let from = Calendar.current.startOfDay(for: date)
+        let to = from + 60 * 60 * 24
+        results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a AND babyId == %@", from, to, babyId)
+        
+        if let token = self.token {
+            token.invalidate()
+        }
+
+        token = results!.observe { _ in
+            self.tableView.reloadData()
         }
     }
 }
