@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class BabyDaoFirebase: BabyDao {
-    
+
     static let shared = BabyDaoFirebase()
     
     let ref: DatabaseReference!
@@ -30,6 +30,12 @@ class BabyDaoFirebase: BabyDao {
         let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
         guard familyId != nil && familyId! != "" else { return }
         self.ref.child("families").child(familyId!).child("babies").child(baby.id).removeValue()
+    }
+    
+    func findAll() -> [BabyModel] {
+        // do nothing
+        let babies: [BabyModel] = []
+        return babies
     }
     
 }

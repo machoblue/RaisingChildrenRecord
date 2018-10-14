@@ -16,7 +16,7 @@ class UICustomTitleView: UIView {
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var date: UILabel!
     
-    var baby: Baby?
+    var baby: BabyModel?
     var day: Date?
     
     /*
@@ -37,7 +37,7 @@ class UICustomTitleView: UIView {
 //        initViews()
     }
     
-    convenience init(frame: CGRect, baby: Baby?, date: Date?) {
+    convenience init(frame: CGRect, baby: BabyModel?, date: Date?) {
         self.init(frame: frame)
         self.baby = baby
         self.day = date

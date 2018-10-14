@@ -56,4 +56,16 @@ class BabyDaoRealm: BabyDao {
         babyDaoImplFirebase.delete(baby)
     }
     
+    func findAll() -> Array<BabyModel> {
+        let realm = try! Realm()
+        let results = realm.objects(Baby.self)
+        var babies: [BabyModel] = []
+        for result in results {
+            let baby = BabyModel(id: result.id, name: result.name, born: result.born, female: result.female)
+            babies.append(baby)
+        }
+        return babies
+    }
+    
+    
 }

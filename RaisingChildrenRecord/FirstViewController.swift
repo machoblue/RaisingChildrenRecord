@@ -18,21 +18,24 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     @IBOutlet weak var navigationItem2: UINavigationItem!
     
-    var baby: Baby?
+    var baby: BabyModel?
     var date: Date?
-    var babies: Array<Baby>?
+    var babies: [BabyModel]?
     
+    var babyDao: BabyDao?
+    
+    // MARK: ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
         self.baby = nil // 初期化
         
-        self.babies = findAllBabies()
+        self.babies = babyDao?.findAll()
         self.baby = nextBaby()
         self.date = Date()
         
@@ -47,11 +50,8 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         NotificationCenter.default.addObserver(self, selector: #selector(onRecordsViewDidAppear(notification:)), name: Notification.Name.RecordsViewDidAppear, object: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    // ### CollectionViewDelegate from ###
+    
+    // MARK: CollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Command.values.count
     }
@@ -74,30 +74,27 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    // ### CollectionViewDelegate to ###
     
-    // ### Notification from ###
+
     @objc func onPageForward(notification: Notification) -> Void {
-//        self.date = self.date! + (60 * 60 * 24) // date should not be nil
-        self.date = notification.userInfo!["date"] as! Date
+        self.date =  (notification.userInfo?["date"] as! Date)
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
         self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
     }
     
     @objc func onPageBackward(notification: Notification) -> Void {
-//        self.date = self.date! - (60 * 60 * 24) // date should not be nil
-        self.date = notification.userInfo!["date"] as! Date
+        self.date = (notification.userInfo!["date"] as! Date)
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
         self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
     }
     
     @objc func onRecordsViewDidAppear(notification: Notification) -> Void {
-        self.date = notification.userInfo!["date"] as! Date
+        self.date = (notification.userInfo!["date"] as! Date)
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
         self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
     }
-    // ### Notification to ###
-
+    
+    // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
         let realm = try! Realm()
         try! realm.write {
@@ -146,55 +143,45 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     
-    func nextBaby() -> Baby {
+    // MARK: - Utility
+    func nextBaby() -> BabyModel {
         let userDefaults = UserDefaults.standard
         if let unwrappedBaby = self.baby {
             if babies!.count < 2 { // babies shouldn't be nil
                 return unwrappedBaby
                 
             } else {
-                let index = babies!.index(of: unwrappedBaby)! // unwrappedBaby should exist in babies
+                let index = self.index(of: unwrappedBaby)
                 let baby = babies![(index + 1) % babies!.count] // babies shouldn't be nil
                 userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: baby.id])
                 return baby
             }
             
         } else {
-            let babyId = userDefaults.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String
-            if let unwrappedBabyId = babyId {
-                var baby: Baby?
+            if let babyId = userDefaults.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String {
                 for b in babies! { // babies shouldn't be nil
-                    if (b.id == unwrappedBabyId) {
-                        baby = b
+                    if (b.id == babyId) {
+                        return b
                     }
                 }
-                
-                if (baby == nil) {
-                    userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: babies!.first!.id])
-                    return babies!.first!
-                    
-                } else {
-                    return baby!
-                }
-
-            } else {
-                let baby = babies!.first! // babies and first shouldn't be nil
-                userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: baby.id])
-                return baby
             }
+            
+            let baby = babies!.first! // babies and first shouldn't be nil
+            userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: baby.id])
+            return baby
         }
     }
     
-    func findAllBabies() -> Array<Baby> {
-        let realm = try! Realm()
-        let results: Results<Baby> = realm.objects(Baby.self)
-        var babies: Array<Baby> = []
-        for result in results {
-            babies.append(result)
+    func index(of baby: BabyModel) -> Int {
+        var index = 0
+        for b in self.babies! {
+            if baby.id == b.id {
+                return index
+            }
+            index = index + 1
         }
-        return babies
+        return -1
     }
-    
 }
 
 extension Notification.Name {

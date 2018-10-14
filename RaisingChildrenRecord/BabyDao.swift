@@ -12,4 +12,5 @@ protocol BabyDao {
     func insertOrUpdate(_ baby: BabyModel)
 //    func observe(with callback: (BabyModel, Change) -> Void)
     func delete(_ baby: BabyModel)
+    func findAll() -> [BabyModel]
 }
