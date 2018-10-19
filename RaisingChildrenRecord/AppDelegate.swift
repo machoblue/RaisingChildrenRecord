@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
     var babyObserver: BabyObserver?
     var babyDao: BabyDao?
-
+    
+    var recordObserver: RecordObserver?
+    var recordDao: RecordDao?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
@@ -126,6 +129,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             self.babyObserver?.observeAdd(with: {(baby) -> Void in
                 print("observeAdd")
                 self.babyDao?.insertOrUpdate(baby)
+                
+                self.recordObserver?.reload()
+                self.observerRemoteRecords()
             })
             self.babyObserver?.observeChange(with: {(baby) -> Void in
                 print("observeChange")
@@ -134,7 +140,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             self.babyObserver?.observeRemove(with: {(baby) -> Void in
                 print("observeRemove")
                 self.babyDao?.delete(baby)
+                
+                self.recordObserver?.reload()
+                self.observerRemoteRecords()
             })
+            
+            self.observerRemoteRecords()
+        })
+    }
+    
+    func observerRemoteRecords() {
+        self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
+        
+        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Remote)
+        self.recordObserver?.observe(with: { (recordAndChangeArray) in
+            for recordAndChange in recordAndChangeArray {
+                let record = recordAndChange.0
+                let change = recordAndChange.1
+                switch change {
+                case .Init:
+                    break
+                case .Insert:
+                    self.recordDao?.insertOrUpdate(record)
+                case .Modify:
+                    self.recordDao?.insertOrUpdate(record)
+                case .Delete:
+                    self.recordDao?.delete(record)
+                }
+            }
         })
     }
 }

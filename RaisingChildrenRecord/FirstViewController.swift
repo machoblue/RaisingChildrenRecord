@@ -22,20 +22,22 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     var date: Date?
     var babies: [BabyModel]?
     
-    var babyDao: BabyDao?
+    var babyDao: BabyDao!
+    var recordDao: RecordDao!
     
     // MARK: ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
+        self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.baby = nil // 初期化
         
-        self.babies = babyDao?.findAll()
+        self.babies = babyDao.findAll()
         self.baby = nextBaby()
         self.date = Date()
         
@@ -93,15 +95,9 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
-        let realm = try! Realm()
-        try! realm.write {
-            let record = Record()
-            record.babyId = self.baby!.id
-            record.commandId = sender.tag.description
-            record.dateTime = Date()
-            realm.add(record)
-        }
-        
+        self.recordDao.insertOrUpdate(RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: Date(),
+                                                  value1: "", value2: "", value3: "", value4: "", value5: ""))
+
         if #available(iOS 12.0, *) {
             let intent = RecordCreateIntent()
             intent.baby = baby!.name

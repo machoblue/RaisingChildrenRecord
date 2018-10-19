@@ -15,12 +15,12 @@ import CustomRealmObject
 class BabyDaoRealm: BabyDao {
     static let shared = BabyDaoRealm()
     
-    var realm: Realm!
-    var babyDaoImplFirebase: BabyDao!
+    let realm: Realm!
+    let babyDaoImplFirebase: BabyDao!
     
     private init() {
         self.realm = try! Realm()
-        babyDaoImplFirebase = BabyDaoFirebase.shared
+        self.babyDaoImplFirebase = BabyDaoFactory.shared.createBabyDao(.Remote)
     }
     
     func insertOrUpdate(_ baby: BabyModel) {

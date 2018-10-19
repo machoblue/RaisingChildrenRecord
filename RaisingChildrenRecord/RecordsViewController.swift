@@ -14,22 +14,20 @@ import CustomRealmObject
 
 class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var records: [(time: String, image: String?, name: String?, description: String?)] = []
-    
     var date: Date?
     
-    var token: NotificationToken?
-    
-    var results: Results<Record>?
+    var records: [RecordModel] = []
 
     @IBOutlet weak var tableView: UITableView!
     
+    var recordObserver: RecordObserver!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results!.count
+        return records.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let record = results![indexPath.row]
+        let record = records[indexPath.row]
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
@@ -56,7 +54,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let record = results![indexPath.row]
+        let record = records[indexPath.row]
         switch record.commandId {
         case "1":
             let storyboard: UIStoryboard = self.storyboard!
@@ -79,38 +77,19 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let date = self.date else { return }
-        
-        let realm = try! Realm()
-        
-        let babyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String ?? realm.objects(Baby.self).first!.id
-        
-        let from = Calendar.current.startOfDay(for: date)
-        let to = from + 60 * 60 * 24
-        results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a AND babyId == %@", from, to, babyId)
+        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
+        self.observeRecord()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        token = results!.observe { _ in
-            print("### RecordViewController.viewDidLoad.observe ###")
-            self.tableView.reloadData()
-        }
-        
         NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
         
         let userInfoDict = ["date": self.date!]
         NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if let unwrappedToken = token {
-            unwrappedToken.invalidate()
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -120,21 +99,65 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func onTitleViewClicked(notification: Notification) -> Void {
-        guard let babyId = notification.userInfo?["babyId"] as? String else { return }
+        self.recordObserver.reload()
+        self.observeRecord()
+    }
+
+    func modify(_ newRecord: RecordModel) {
+        for record in self.records {
+            if (record.id == newRecord.id) {
+                record.babyId = newRecord.babyId
+                record.commandId = newRecord.commandId
+                record.dateTime = newRecord.dateTime
+                record.userId = newRecord.userId
+                record.value1 = newRecord.value1
+                record.value2 = newRecord.value2
+                record.value3 = newRecord.value3
+                record.value4 = newRecord.value4
+                record.value5 = newRecord.value5
+            }
+        }
+    }
+    
+    func delete(_ target: RecordModel) {
+        var index = 0
+        let tempRecords = records
+        for record in tempRecords {
+            if (record.id == target.id) {
+                records.remove(at: index)
+            }
+            index = index + 1
+        }
+    }
+    
+    func observeRecord() {
         guard let date = self.date else { return }
-        
         let realm = try! Realm()
+        let babyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String ?? realm.objects(Baby.self).first?.id
+        guard let unwrappedBabyId = babyId else { return }
+        
         let from = Calendar.current.startOfDay(for: date)
         let to = from + 60 * 60 * 24
-        results = realm.objects(Record.self).filter("%@ <= dateTime AND dateTime <= %a AND babyId == %@", from, to, babyId)
         
-        if let token = self.token {
-            token.invalidate()
-        }
+        self.recordObserver.observe(with: { (recordAndChanges) in
+            for recordAndChange in recordAndChanges {
+                let record = recordAndChange.0
+                let change = recordAndChange.1
 
-        token = results!.observe { _ in
+                guard record.babyId == unwrappedBabyId && from <= record.dateTime! && record.dateTime! <= to else { break }
+                switch change {
+                case .Init:
+                    self.records.append(record)
+                case .Insert:
+                    self.records.append(record)
+                case .Modify:
+                    self.modify(record)
+                case .Delete:
+                    self.delete(record)
+                }
+            }
             self.tableView.reloadData()
-        }
+        })
     }
 }
 

@@ -9,6 +9,6 @@
 import Foundation
 
 protocol RecordDao {
-    func insertOrUpdate(record: RecordModel)
-    func delete(record: RecordModel)
+    func insertOrUpdate(_ record: RecordModel)
+    func delete(_ record: RecordModel)
 }

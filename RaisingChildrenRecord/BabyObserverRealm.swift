@@ -73,13 +73,6 @@ class BabyObserverRealm: BabyObserver {
                     myChanges.append((to, .Modify))
                 }
                 
-                let count = myChanges.count
-                for i in (0..<count).reversed() {
-                    if (myChanges[i].0.id == "delete") {
-                        self!.babies.remove(at: i)
-                    }
-                }
-                
             case .error(let error):
                 fatalError("\(error)")
             }

@@ -10,4 +10,5 @@ import Foundation
 
 protocol RecordObserver {
     func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void)
+    func reload()
 }

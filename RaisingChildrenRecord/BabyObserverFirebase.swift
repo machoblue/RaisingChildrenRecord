@@ -63,4 +63,8 @@ class BabyObserverFirebase: BabyObserver {
         // do nothing
     }
     
+    deinit {
+        self.babiesRef.removeAllObservers()
+    }
+    
 }
