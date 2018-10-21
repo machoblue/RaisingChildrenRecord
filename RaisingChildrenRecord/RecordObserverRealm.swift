@@ -107,6 +107,7 @@ class RecordObserverRealm: RecordObserver {
     
     func clear() {
         notificationToken?.invalidate()
+        self.records = []
     }
 
 }

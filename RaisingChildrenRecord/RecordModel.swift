@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RecordModel {
+class RecordModel: NSObject {
     var id: String?
     var babyId: String?
     var userId: String?
@@ -19,6 +19,10 @@ class RecordModel {
     var value3: String?
     var value4: String?
     var value5: String?
+    
+    override var description: String {
+        return "id=\(self.id ?? ""), babyId=\(self.babyId ?? "")"
+    }
     
     init(id: String?, babyId: String?, userId: String?, commandId: String?, dateTime: Date?, value1: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
         self.id = id

@@ -24,7 +24,6 @@ class FamilyIdObserver {
         self.familiesRef?.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let familiesDict = snapshot.value as? NSDictionary else { return }
             guard let familyId = familiesDict.allKeys.first as? String else { return }
-            print("*** FamilyIdObserver.observe.observeSingleEvent *** familyId:", familyId)
             DispatchQueue.main.async {
                 self.userDefaults.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
                 callback(familyId)
@@ -33,7 +32,6 @@ class FamilyIdObserver {
         self.familiesRef?.observe(.value, with: { (snapshot) -> Void in
             guard let familiesDict = snapshot.value as? NSDictionary else { return }
             guard let familyId = familiesDict.allKeys.first as? String else { return }
-            print("*** FamilyIdObserver.observe.observeSingleEvent *** familyId:", familyId)
             DispatchQueue.main.async {
                 self.userDefaults.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
                 callback(familyId)

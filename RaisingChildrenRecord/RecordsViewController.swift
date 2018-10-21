@@ -78,7 +78,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
-        self.observeRecord()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,10 +95,15 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
+        
+        self.recordObserver.reload()
+        self.records = []
+        self.observeRecord()
     }
     
     @objc func onTitleViewClicked(notification: Notification) -> Void {
         self.recordObserver.reload()
+        self.records = []
         self.observeRecord()
     }
 
@@ -144,7 +148,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 let record = recordAndChange.0
                 let change = recordAndChange.1
 
-                guard record.babyId == unwrappedBabyId && from <= record.dateTime! && record.dateTime! <= to else { break }
+                guard record.babyId == unwrappedBabyId && from <= record.dateTime! && record.dateTime! <= to else { continue }
                 switch change {
                 case .Init:
                     self.records.append(record)

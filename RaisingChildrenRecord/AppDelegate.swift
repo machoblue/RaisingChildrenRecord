@@ -127,22 +127,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
             
             self.babyObserver?.observeAdd(with: {(baby) -> Void in
-                print("observeAdd")
+                print("*** AppDelegate.observeRemote.observeAdd ***")
                 self.babyDao?.insertOrUpdate(baby)
-                
-                self.recordObserver?.reload()
-                self.observerRemoteRecords()
             })
             self.babyObserver?.observeChange(with: {(baby) -> Void in
-                print("observeChange")
+                print("*** AppDelegate.observeRemote.observeChange ***")
                 self.babyDao?.insertOrUpdate(baby)
             })
             self.babyObserver?.observeRemove(with: {(baby) -> Void in
-                print("observeRemove")
+                print("*** AppDelegate.observeRemote.observeRemove ***")
                 self.babyDao?.delete(baby)
-                
-                self.recordObserver?.reload()
-                self.observerRemoteRecords()
             })
             
             self.observerRemoteRecords()
