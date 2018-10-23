@@ -148,7 +148,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         guard let unwrappedBabyId = babyId else { return }
         
         let from = Calendar.current.startOfDay(for: date)
-        let to = from + 60 * 60 * 24 + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
+        let to = from + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
         
         self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
             for recordAndChange in recordAndChanges {
