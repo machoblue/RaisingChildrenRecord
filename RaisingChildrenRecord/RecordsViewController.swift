@@ -84,6 +84,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidAppear(animated)
 
         NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onCommandButtonClicked(notification:)), name: Notification.Name.CommandButtonClicked, object: nil)
         
         let userInfoDict = ["date": self.date!]
         NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
@@ -102,6 +103,12 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func onTitleViewClicked(notification: Notification) -> Void {
+        self.recordObserver.reload()
+        self.records = []
+        self.observeRecord()
+    }
+    
+    @objc func onCommandButtonClicked(notification: Notification) -> Void {
         self.recordObserver.reload()
         self.records = []
         self.observeRecord()
@@ -141,9 +148,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         guard let unwrappedBabyId = babyId else { return }
         
         let from = Calendar.current.startOfDay(for: date)
-        let to = from + 60 * 60 * 24
+        let to = from + 60 * 60 * 24 + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
         
-        self.recordObserver.observe(with: { (recordAndChanges) in
+        self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
             for recordAndChange in recordAndChanges {
                 let record = recordAndChange.0
                 let change = recordAndChange.1

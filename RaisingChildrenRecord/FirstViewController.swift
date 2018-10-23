@@ -24,6 +24,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     var babyDao: BabyDao!
     var recordDao: RecordDao!
+    var recordDaoRemote: RecordDao!
     
     // MARK: ViewController Lifecycle
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
         self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
+        self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,8 +97,11 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
-        self.recordDao.insertOrUpdate(RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: Date(),
-                                                  value1: "", value2: "", value3: "", value4: "", value5: ""))
+        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: Date(), value1: "", value2: "", value3: "", value4: "", value5: "")
+        self.recordDao.insertOrUpdate(record)
+        self.recordDaoRemote.insertOrUpdate(record)
+        
+        NotificationCenter.default.post(name: .CommandButtonClicked, object: nil)
 
         if #available(iOS 12.0, *) {
             let intent = RecordCreateIntent()
@@ -189,5 +194,6 @@ extension Notification.Name {
     static let LeftBarButtonClicked = Notification.Name("LeftBarButtonClicked")
     static let RightBarButtonClicked = Notification.Name("RightBarButtonClicked")
     static let TitleViewClicked = Notification.Name("TitleViewClicked")
+    static let CommandButtonClicked = Notification.Name("CommandButtonClicked")
 }
 

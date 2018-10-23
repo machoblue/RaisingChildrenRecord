@@ -16,11 +16,9 @@ class BabyDaoRealm: BabyDao {
     static let shared = BabyDaoRealm()
     
     let realm: Realm!
-    let babyDaoImplFirebase: BabyDao!
-    
+
     private init() {
         self.realm = try! Realm()
-        self.babyDaoImplFirebase = BabyDaoFactory.shared.createBabyDao(.Remote)
     }
     
     func insertOrUpdate(_ baby: BabyModel) {
@@ -40,8 +38,6 @@ class BabyDaoRealm: BabyDao {
                 existBaby.female = baby.female
             }
         }
-        
-        babyDaoImplFirebase.insertOrUpdate(baby)
     }
     
     func delete(_ baby: BabyModel) {
@@ -52,8 +48,6 @@ class BabyDaoRealm: BabyDao {
                 realm.delete(unwrappedTarget)
             }
         }
-        
-        babyDaoImplFirebase.delete(baby)
     }
     
     func findAll() -> Array<BabyModel> {

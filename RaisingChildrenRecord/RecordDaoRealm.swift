@@ -15,11 +15,9 @@ import CustomRealmObject
 class RecordDaoRealm: RecordDao {
     static let shared = RecordDaoRealm()
     let realm: Realm!
-    let recordDao: RecordDao!
 
     private init() {
         self.realm = try! Realm()
-        self.recordDao = RecordDaoFactory.shared.createRecordDao(.Remote)
     }
     
     func insertOrUpdate(_ record: RecordModel) {
@@ -52,8 +50,6 @@ class RecordDaoRealm: RecordDao {
                 existRecord.value5 = record.value5
             }
         }
-        
-        recordDao.insertOrUpdate(record)
     }
     
     func delete(_ record: RecordModel) {
@@ -62,8 +58,6 @@ class RecordDaoRealm: RecordDao {
         try! self.realm.write {
             realm.delete(target)
         }
-
-        recordDao.delete(record)
     }
 
 }

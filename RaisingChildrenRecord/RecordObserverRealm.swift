@@ -37,7 +37,12 @@ class RecordObserverRealm: RecordObserver {
     
     
     func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
-        notificationToken = self.results.observe { [weak self] (changes: RealmCollectionChange) in
+        // do nothing
+    }
+    
+    func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+        notificationToken = self.results.filter("babyId == %@ AND dateTime <= %@ AND %@ <= dateTime", babyId, from ,to).observe { [weak self] (changes: RealmCollectionChange) in
+            print("*** RecordObserverRealm.observe*** ", changes)
             var myChanges: [(RecordModel, Change)] = []
             switch changes {
             case .initial:
@@ -48,7 +53,7 @@ class RecordObserverRealm: RecordObserver {
                 for deletion in self!.reverce(deletions){
                     let target = self!.records[deletion]
                     self!.records.remove(at: deletion)
-
+                    
                     myChanges.append((target, .Delete))
                 }
                 for insertion in self!.sort(insertions) {

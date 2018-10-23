@@ -30,6 +30,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     var born: Date!
     var female: Bool!
     
+    var babyDaoLocal: BabyDao!
+    var babyDaoRemote: BabyDao!
+    
     // MARK: - UIViewController LifeCycle Callback
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         f.locale = Locale(identifier: "ja_JP")
         f.dateStyle = .medium
         f.timeStyle = .short
+        
+        self.babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
+        self.babyDaoRemote = BabyDaoFactory.shared.createBabyDao(.Remote)
     }
     
 
@@ -155,7 +161,8 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func onDeleteButtonClicked(sender: UIButton) {
-        BabyDaoFactory.shared.createBabyDao(.Local).delete(self.baby)
+        babyDaoLocal.delete(self.baby)
+        babyDaoRemote.delete(self.baby)
         dismiss(animated: true, completion: nil)
     }
     
@@ -170,7 +177,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
         self.name = self.textField.text!
-        BabyDaoFactory.shared.createBabyDao(.Local).insertOrUpdate(BabyModel(id: self.baby.id, name: self.name, born: self.born, female: self.female))
+        let baby = BabyModel(id: self.baby.id, name: self.name, born: self.born, female: self.female)
+        babyDaoLocal.insertOrUpdate(baby)
+        babyDaoRemote.insertOrUpdate(baby)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -63,6 +63,10 @@ class RecordObserverFirebase: RecordObserver {
         return RecordModel(id: id, babyId: babyId, userId: userId, commandId: commandId, dateTime: dateTime, value1: value1, value2: value2, value3: value3, value4: value4, value5: value5)
     }
     
+    func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+        // do nothing
+    }
+    
     func reload() {
         self.clear()
         self.initRecordsRef()
