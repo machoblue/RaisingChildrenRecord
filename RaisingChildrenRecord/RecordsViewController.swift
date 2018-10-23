@@ -22,6 +22,37 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var recordObserver: RecordObserver!
     
+    // MARK: - ViewController lifecycle callback
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onCommandButtonClicked(notification:)), name: Notification.Name.CommandButtonClicked, object: nil)
+        
+        let userInfoDict = ["date": self.date!]
+        NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
+        }
+        
+        self.recordObserver.reload()
+        self.records = []
+        self.observeRecord()
+    }
+    
+    
+    // MARK: - UITableViewDatasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
     }
@@ -53,6 +84,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         return 1
     }
     
+    
+    // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let record = records[indexPath.row]
         switch record.commandId {
@@ -74,34 +107,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         return .leastNormalMagnitude
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onCommandButtonClicked(notification:)), name: Notification.Name.CommandButtonClicked, object: nil)
-        
-        let userInfoDict = ["date": self.date!]
-        NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
-        }
-        
-        self.recordObserver.reload()
-        self.records = []
-        self.observeRecord()
-    }
-    
+    // MARK: - Event
     @objc func onTitleViewClicked(notification: Notification) -> Void {
         self.recordObserver.reload()
         self.records = []
@@ -114,6 +121,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.observeRecord()
     }
 
+    
+    // MARK: - Utility
     func modify(_ newRecord: RecordModel) {
         for record in self.records {
             if (record.id == newRecord.id) {
