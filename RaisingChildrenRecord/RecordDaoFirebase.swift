@@ -37,4 +37,8 @@ class RecordDaoFirebase: RecordDao {
         self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).removeValue()
     }
     
+    func find(id: String) -> RecordModel? {
+        // do nothing
+        return nil
+    }
 }

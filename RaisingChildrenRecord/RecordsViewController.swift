@@ -88,15 +88,10 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let record = records[indexPath.row]
-        switch record.commandId {
-        case "1":
-            let storyboard: UIStoryboard = self.storyboard!
-            let editMilkViewController = storyboard.instantiateViewController(withIdentifier: "EditMilkViewController") as! EditMilkViewController
-            editMilkViewController.id = record.id
-            self.present(editMilkViewController, animated: true, completion: nil)
-        default:
-            break
-        }
+        let storyboard: UIStoryboard = self.storyboard!
+        let editMilkViewController = storyboard.instantiateViewController(withIdentifier: "EditMilkViewController") as! EditMilkViewController
+        editMilkViewController.id = record.id!
+        self.present(editMilkViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

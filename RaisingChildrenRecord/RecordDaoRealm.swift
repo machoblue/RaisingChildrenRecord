@@ -60,4 +60,8 @@ class RecordDaoRealm: RecordDao {
         }
     }
 
+    func find(id: String) -> RecordModel? {
+        guard let r = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
+        return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5)
+    }
 }

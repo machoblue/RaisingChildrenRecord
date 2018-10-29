@@ -8,12 +8,12 @@
 
 import Foundation
 
-class BabyModel {
-    var id: String
-    var name: String
-    var born: Date
-    var female: Bool
-    init(id: String, name: String, born: Date, female: Bool) {
+public class BabyModel {
+    public var id: String
+    public var name: String
+    public var born: Date
+    public var female: Bool
+    public init(id: String, name: String, born: Date, female: Bool) {
         self.id = id
         self.name = name
         self.born = born
