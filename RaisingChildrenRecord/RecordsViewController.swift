@@ -10,7 +10,7 @@ import UIKit
 
 import RealmSwift
 
-import CustomRealmObject
+import Shared
 
 class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     

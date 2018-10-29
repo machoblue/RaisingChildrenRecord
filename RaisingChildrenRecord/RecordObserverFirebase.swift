@@ -10,6 +10,8 @@ import Foundation
 
 import Firebase
 
+import Shared
+
 class RecordObserverFirebase: RecordObserver {
     static let shared = RecordObserverFirebase()
     var recordsRef: DatabaseReference!

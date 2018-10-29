@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 protocol BabyObserver {
     func observeAdd(with callback: @escaping (BabyModel) -> Void)
     func observeChange(with callback: @escaping (BabyModel) -> Void)

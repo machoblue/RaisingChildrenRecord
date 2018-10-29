@@ -137,25 +137,6 @@ extension IntentHandler: RecordCreateIntentHandling {
         print("$$$$$", intent)
         // Call your API here
         
-        let realm = try! Realm()
-//        let babyId = realm.objects(Baby.self).filter("name = '赤ちゃん'", intent.baby!.description).first!.id
-//        let babyId = realm.objects(Baby.self).first?.id
-        let babyId = "abc"
-        
-        try! realm.write
-        {
-            /*
-            let record = Record()
-            record.babyId = babyId
-            record.commandId = Command.id(of: intent.behavior!).description
-            record.dateTime = Date()
-            realm.add(record)
- */
-            let item = Item()
-            item.value = "aaa"
-            realm.add(item)
-        }
- 
         completion(response)
  
     }

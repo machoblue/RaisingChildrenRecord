@@ -35,7 +35,7 @@ target 'RecordCreateIntentExtension' do
 
 end
 
-target 'CustomRealmObject' do
-  use_frameworks!
-  pod 'RealmSwift'
-end
+# target 'CustomRealmObject' do
+#  use_frameworks!
+#  pod 'RealmSwift'
+# end

@@ -12,7 +12,7 @@ import RealmSwift
 
 import Intents
 
-import CustomRealmObject
+import Shared
 
 class FirstViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 

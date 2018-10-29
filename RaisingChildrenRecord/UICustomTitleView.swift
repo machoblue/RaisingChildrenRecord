@@ -8,7 +8,7 @@
 
 import UIKit
 
-import CustomRealmObject
+import Shared
 
 class UICustomTitleView: UIView {
 

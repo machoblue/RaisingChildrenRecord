@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 protocol BabyDao {
     func insertOrUpdate(_ baby: BabyModel)
 //    func observe(with callback: (BabyModel, Change) -> Void)

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 protocol RecordDao {
     func insertOrUpdate(_ record: RecordModel)
     func delete(_ record: RecordModel)

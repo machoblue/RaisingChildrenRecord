@@ -10,7 +10,7 @@ import Foundation
 
 import RealmSwift
 
-import CustomRealmObject
+import Shared
 
 class RecordDaoRealm: RecordDao {
     static let shared = RecordDaoRealm()

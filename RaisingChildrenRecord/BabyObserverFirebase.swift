@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import Shared
 
 class BabyObserverFirebase: BabyObserver {
     static let shared = BabyObserverFirebase()

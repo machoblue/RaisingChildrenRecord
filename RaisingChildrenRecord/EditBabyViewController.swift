@@ -8,9 +8,9 @@
 
 import UIKit
 
-import CustomRealmObject
-
 import RealmSwift
+
+import Shared
 
 class EditBabyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     

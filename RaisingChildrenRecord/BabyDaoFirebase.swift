@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+import Shared
+
 class BabyDaoFirebase: BabyDao {
 
     static let shared = BabyDaoFirebase()

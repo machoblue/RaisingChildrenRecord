@@ -10,9 +10,9 @@ import UIKit
 
 import RealmSwift
 
-import CustomRealmObject
-
 import Firebase
+
+import Shared
 
 class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
