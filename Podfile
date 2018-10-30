@@ -39,3 +39,7 @@ end
 #  use_frameworks!
 #  pod 'RealmSwift'
 # end
+target 'Shared' do
+  use_frameworks!
+  pod 'RealmSwift'
+end

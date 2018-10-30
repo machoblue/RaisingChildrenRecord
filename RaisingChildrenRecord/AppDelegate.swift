@@ -12,7 +12,6 @@ import Firebase
 import FirebaseUI
 
 import RealmSwift
-import CustomRealmObject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {

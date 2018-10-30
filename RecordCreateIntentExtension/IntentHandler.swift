@@ -8,13 +8,6 @@
 
 import Intents
 
-//import RealmSwift
-import RealmSwift
-//import RaisingChildrenRecord
-//import RaisingChildrenRecord
-import CustomRealmObject
-
-
 // As an example, this class is set up to handle Message intents.
 // You will want to replace this or add other intents as appropriate.
 // The intents you wish to handle must be declared in the extension's Info.plist.
@@ -140,9 +133,4 @@ extension IntentHandler: RecordCreateIntentHandling {
         completion(response)
  
     }
-}
-
-class Item: Object {
-    @objc dynamic var id: String = UUID().description
-    @objc dynamic var value: String?
 }
