@@ -10,13 +10,15 @@ import Foundation
 
 public class Command {
     static public let values: [(id: Int, name: String, image: String, behaviorName: String)] = [
-        (1, "ミルク", "milk", "ミルクを飲んだ"),
-        (2, "母乳", "breast", "母乳を飲んだ"),
-        (3, "体温", "temperature", ""),
-        (4, "うんち", "poo", "した"),
-        (5, "寝る", "sleep", "寝た"),
-        (6, "起きる", "awake", "起きた"),
-        (7, "その他", "other", "")
+        (1, "ミルク", "milk", "ミルクを飲んだ"), // SVO
+        (2, "母乳", "breast", "母乳を飲んだ"), // SVO
+        (3, "体温", "temperature", ""), // SVC
+        (4, "うんち", "poo", "した"), // SVO
+        (5, "寝る", "sleep", "寝た"), // SV
+        (6, "起きる", "awake", "起きた"), // SV
+        (7, "その他", "other", "") // ???
+        
+        // 離乳食を食べた。湿疹がでた。下痢が出た。
     ]
     
     static public func name(id: Int) -> String? {

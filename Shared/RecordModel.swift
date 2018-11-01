@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RecordModel: NSObject {
+public class RecordModel: NSObject, Codable {
     public var id: String?
     public var babyId: String?
     public var userId: String?
@@ -35,5 +35,9 @@ public class RecordModel: NSObject {
         self.value3 = value3
         self.value4 = value4
         self.value5 = value5
+    }
+    
+    public convenience init(babyId: String?, commandId: String?) {
+        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
     }
 }

@@ -8,6 +8,8 @@
 
 import Intents
 
+import Shared
+
 // As an example, this class is set up to handle Message intents.
 // You will want to replace this or add other intents as appropriate.
 // The intents you wish to handle must be declared in the extension's Info.plist.
@@ -127,10 +129,20 @@ extension IntentHandler: RecordCreateIntentHandling {
     func handle(intent: RecordCreateIntent, completion: @escaping
         (RecordCreateIntentResponse) -> Void) {
         let response = RecordCreateIntentResponse(code: .success, userActivity: nil)
-        print("$$$$$", intent)
-        // Call your API here
+        print("*** IntentHandler.handle ***", intent)
         
+        guard let babyName = intent.baby, let behavior = intent.behavior else { return }
+
+//        let recordDao = RecordDaoFactory.
+        let babyId = ""
+        let commandId = Command.id(of: behavior).description
+        
+        // TODO: Convert RecordCreateIntent to RecordModel
+        let record = RecordModel(babyId: babyId, commandId: commandId)
+
+        let recordDataManager = RecordDataManager()
+        recordDataManager.createRecord(record)
+
         completion(response)
- 
     }
 }

@@ -13,6 +13,8 @@ import FirebaseUI
 
 import RealmSwift
 
+import Shared
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
