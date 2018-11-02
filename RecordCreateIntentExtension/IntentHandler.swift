@@ -137,7 +137,6 @@ extension IntentHandler: RecordCreateIntentHandling {
         let babyId = ""
         let commandId = Command.id(of: behavior).description
         
-        // TODO: Convert RecordCreateIntent to RecordModel
         let record = RecordModel(babyId: babyId, commandId: commandId)
 
         let recordDataManager = RecordDataManager()

@@ -35,6 +35,9 @@
 		5B4F9E248B49418FE59BB2FB /* Pods_RecordCreateIntentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095B40A234FDEE4504D683D4 /* Pods_RecordCreateIntentExtension.framework */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
+		9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB33218C1CDC005F068E /* RecordDataManager.swift */; };
+		9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */; };
+		9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */; };
 		9CBAE9D4216AEAC000284EDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */; };
 		9CBAE9E0216D71D900284EDE /* BabyDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9DF216D71D900284EDE /* BabyDao.swift */; };
@@ -188,6 +191,8 @@
 		780A0AFB59F399E0E8F2A42C /* Pods-RaisingChildrenRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RaisingChildrenRecord.release.xcconfig"; path = "Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord.release.xcconfig"; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
+		9C62EB33218C1CDC005F068E /* RecordDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDataManager.swift; sourceTree = "<group>"; };
+		9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+DataSuite.swift"; sourceTree = "<group>"; };
 		9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFamilyViewController.swift; sourceTree = "<group>"; };
 		9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9CBAE9D5216C237D00284EDE /* BabyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyModel.swift; sourceTree = "<group>"; };
@@ -233,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */,
 				5B4F9E248B49418FE59BB2FB /* Pods_RecordCreateIntentExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +409,8 @@
 		9CE76AFB2187432B002B00ED /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9C62EB33218C1CDC005F068E /* RecordDataManager.swift */,
+				9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */,
 				0C2F9E66214DDE7E00CFCD2F /* Command.swift */,
 				9CBAE9D5216C237D00284EDE /* BabyModel.swift */,
 				9CBAE9F72172C99800284EDE /* RecordModel.swift */,
@@ -952,6 +960,8 @@
 			files = (
 				9CE76B1B2187CDF3002B00ED /* RecordModel.swift in Sources */,
 				9CE76B222187D3D2002B00ED /* DataManager.swift in Sources */,
+				9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */,
+				9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */,
 				9CE76B182187435C002B00ED /* Utils.swift in Sources */,
 				9CE76B1D2187CE4B002B00ED /* BabyModel.swift in Sources */,
 				9CE76B1E2187CE51002B00ED /* Command.swift in Sources */,
