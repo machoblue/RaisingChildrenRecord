@@ -3,12 +3,12 @@
 abstract_target 'All' do
 
   pod 'Firebase/Core'
-  pod 'FirebaseUI'
   pod 'RealmSwift'
 
   target 'RaisingChildrenRecord' do
     # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     use_frameworks!
+    pod 'FirebaseUI'
 
     target 'RaisingChildrenRecordTests' do
       inherit! :search_paths

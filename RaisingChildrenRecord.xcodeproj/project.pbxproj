@@ -28,11 +28,8 @@
 		0CBD263420F6CBE900542E1B /* RaisingChildrenRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD263320F6CBE900542E1B /* RaisingChildrenRecordTests.swift */; };
 		0CBD263F20F6CBE900542E1B /* RaisingChildrenRecordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD263E20F6CBE900542E1B /* RaisingChildrenRecordUITests.swift */; };
 		0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F37DF21567597002A1B6E /* IntentHandler.swift */; };
-		29B6F9391A4D959FC6CED79E /* Pods_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F917576BC9530265857FCE54 /* Pods_Shared.framework */; };
-		2ABD979055E844B147C3C12F /* Pods_RaisingChildrenRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC49CE53A1238CDC35587BA0 /* Pods_RaisingChildrenRecord.framework */; };
 		4094A5395D9CB497AEB66712 /* Pods_RaisingChildrenRecordUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB5209A9556868F7108ECE /* Pods_RaisingChildrenRecordUITests.framework */; };
 		57FA47A3EA5ADF3DBC486F3A /* Pods_RaisingChildrenRecordTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94664E7E794C1222256125E /* Pods_RaisingChildrenRecordTests.framework */; };
-		5B4F9E248B49418FE59BB2FB /* Pods_RecordCreateIntentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095B40A234FDEE4504D683D4 /* Pods_RecordCreateIntentExtension.framework */; };
 		5CD32947432B7B999169AA20 /* Pods_All_RaisingChildrenRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C3F10285797D0EB4CFCF07 /* Pods_All_RaisingChildrenRecord.framework */; };
 		759A5E5155F7CB531CA4E02C /* Pods_All_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361E53E0FF583D927555B7A4 /* Pods_All_Shared.framework */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
@@ -251,7 +248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */,
-				5B4F9E248B49418FE59BB2FB /* Pods_RecordCreateIntentExtension.framework in Frameworks */,
 				D16CF33D30F5C75E12D087B0 /* Pods_All_RecordCreateIntentExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CE76B0F2187432B002B00ED /* Shared.framework in Frameworks */,
-				2ABD979055E844B147C3C12F /* Pods_RaisingChildrenRecord.framework in Frameworks */,
 				5CD32947432B7B999169AA20 /* Pods_All_RaisingChildrenRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +281,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B6F9391A4D959FC6CED79E /* Pods_Shared.framework in Frameworks */,
 				759A5E5155F7CB531CA4E02C /* Pods_All_Shared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,7 +490,6 @@
 				0C5F37D921567597002A1B6E /* Sources */,
 				0C5F37DA21567597002A1B6E /* Frameworks */,
 				0C5F37DB21567597002A1B6E /* Resources */,
-				4CBDB06A314DA7A44DB47E0D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -578,7 +571,6 @@
 				9CE76AF62187432B002B00ED /* Sources */,
 				9CE76AF72187432B002B00ED /* Frameworks */,
 				9CE76AF82187432B002B00ED /* Resources */,
-				49F9E66B128F3D87306E63F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -719,78 +711,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		49F9E66B128F3D87306E63F3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-All-Shared/Pods-All-Shared-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAnonymousAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Shared/Pods-All-Shared-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4CBDB06A314DA7A44DB47E0D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-All-RecordCreateIntentExtension/Pods-All-RecordCreateIntentExtension-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAnonymousAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-RecordCreateIntentExtension/Pods-All-RecordCreateIntentExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		523CC6C39723D5F21BAC0622 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
