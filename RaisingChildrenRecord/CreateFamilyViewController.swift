@@ -12,6 +12,8 @@ import RealmSwift
 
 import Firebase
 
+import Shared
+
 class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var familyId: UITextField!
     

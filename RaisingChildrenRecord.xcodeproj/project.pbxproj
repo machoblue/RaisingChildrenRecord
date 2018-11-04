@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07C48C10A3C7CB8D18E620CB /* Pods_RecordCreateIntentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095B40A234FDEE4504D683D4 /* Pods_RecordCreateIntentExtension.framework */; };
+		097ADC495C4ED441B200DB3E /* Pods_RaisingChildrenRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC49CE53A1238CDC35587BA0 /* Pods_RaisingChildrenRecord.framework */; };
 		0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B3E2145075F0001802A /* RecordsViewController.swift */; };
 		0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B422147F0C80001802A /* CustomCollectionViewCell.swift */; };
 		0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */; };
@@ -28,10 +30,9 @@
 		0CBD263420F6CBE900542E1B /* RaisingChildrenRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD263320F6CBE900542E1B /* RaisingChildrenRecordTests.swift */; };
 		0CBD263F20F6CBE900542E1B /* RaisingChildrenRecordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBD263E20F6CBE900542E1B /* RaisingChildrenRecordUITests.swift */; };
 		0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F37DF21567597002A1B6E /* IntentHandler.swift */; };
+		14CAB6E3C53B6B558C43FA1A /* Pods_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F917576BC9530265857FCE54 /* Pods_Shared.framework */; };
 		4094A5395D9CB497AEB66712 /* Pods_RaisingChildrenRecordUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB5209A9556868F7108ECE /* Pods_RaisingChildrenRecordUITests.framework */; };
 		57FA47A3EA5ADF3DBC486F3A /* Pods_RaisingChildrenRecordTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94664E7E794C1222256125E /* Pods_RaisingChildrenRecordTests.framework */; };
-		5CD32947432B7B999169AA20 /* Pods_All_RaisingChildrenRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C3F10285797D0EB4CFCF07 /* Pods_All_RaisingChildrenRecord.framework */; };
-		759A5E5155F7CB531CA4E02C /* Pods_All_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 361E53E0FF583D927555B7A4 /* Pods_All_Shared.framework */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
 		9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB33218C1CDC005F068E /* RecordDataManager.swift */; };
@@ -39,26 +40,30 @@
 		9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */; };
 		9CBAE9D4216AEAC000284EDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */; };
-		9CBAE9E0216D71D900284EDE /* BabyDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9DF216D71D900284EDE /* BabyDao.swift */; };
-		9CBAE9E2216D722C00284EDE /* BabyDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */; };
-		9CBAE9E4216D729A00284EDE /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
 		9CBAE9E6216D75BC00284EDE /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E5216D75BC00284EDE /* Change.swift */; };
-		9CBAE9E8216E2ADF00284EDE /* BabyDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */; };
 		9CBAE9EA216EFCCB00284EDE /* BabyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */; };
 		9CBAE9EC216EFD6A00284EDE /* BabyObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */; };
 		9CBAE9EE216F8E2E00284EDE /* BabyObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */; };
 		9CBAE9F02170154800284EDE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EF2170154800284EDE /* Utils.swift */; };
 		9CBAE9F2217168C100284EDE /* FamilyIdObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */; };
 		9CBAE9F42172C1E000284EDE /* BabyObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */; };
-		9CBAE9F62172C95D00284EDE /* RecordDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F52172C95D00284EDE /* RecordDao.swift */; };
-		9CBAE9FA2172CAA500284EDE /* RecordDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */; };
-		9CBAE9FC2172CAFE00284EDE /* RecordDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */; };
-		9CBAE9FE2172CB5900284EDE /* RecordDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */; };
-		9CBAEA002172CBAB00284EDE /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */; };
 		9CBAEA022172CC8500284EDE /* RecordObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA012172CC8500284EDE /* RecordObserver.swift */; };
 		9CBAEA042172CD2D00284EDE /* RecordObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */; };
 		9CBAEA062172CD7000284EDE /* RecordObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */; };
 		9CBAEA082172CDB000284EDE /* RecordObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */; };
+		9CDA325F218E6F5200F38D61 /* RecordDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */; };
+		9CDA3260218E6F5200F38D61 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B46214BDD9C0001802A /* Record.swift */; };
+		9CDA3261218E6F5200F38D61 /* RecordDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F52172C95D00284EDE /* RecordDao.swift */; };
+		9CDA3262218E6F5200F38D61 /* RecordDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */; };
+		9CDA3263218E6F5200F38D61 /* RecordDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */; };
+		9CDA3264218E6F5200F38D61 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */; };
+		9CDA3268218E72E000F38D61 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */; };
+		9CDA3269218E739500F38D61 /* Baby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B44214885F40001802A /* Baby.swift */; };
+		9CDA326A218E739500F38D61 /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
+		9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */; };
+		9CDA326C218E739500F38D61 /* BabyDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */; };
+		9CDA326D218E739500F38D61 /* BabyDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9DF216D71D900284EDE /* BabyDao.swift */; };
+		9CDA326F218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */; };
 		9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76AF321854F7D002B00ED /* PickerViewController.swift */; };
 		9CE76B032187432B002B00ED /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CE76B0A2187432B002B00ED /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76B092187432B002B00ED /* SharedTests.swift */; };
@@ -69,10 +74,7 @@
 		9CE76B1B2187CDF3002B00ED /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F72172C99800284EDE /* RecordModel.swift */; };
 		9CE76B1D2187CE4B002B00ED /* BabyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D5216C237D00284EDE /* BabyModel.swift */; };
 		9CE76B1E2187CE51002B00ED /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F9E66214DDE7E00CFCD2F /* Command.swift */; };
-		9CE76B1F2187CE58002B00ED /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B46214BDD9C0001802A /* Record.swift */; };
-		9CE76B202187CE58002B00ED /* Baby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B44214885F40001802A /* Baby.swift */; };
 		9CE76B222187D3D2002B00ED /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76B212187D3D2002B00ED /* DataManager.swift */; };
-		D16CF33D30F5C75E12D087B0 /* Pods_All_RecordCreateIntentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5DB31D376FEDB570A18180 /* Pods_All_RecordCreateIntentExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +226,8 @@
 		9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverRealm.swift; sourceTree = "<group>"; };
 		9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFirebase.swift; sourceTree = "<group>"; };
 		9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFactory.swift; sourceTree = "<group>"; };
+		9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
+		9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseApp+ConfigureIfNeed.swift"; sourceTree = "<group>"; };
 		9CE76AF321854F7D002B00ED /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		9CE76AFA2187432B002B00ED /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE76AFC2187432B002B00ED /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
@@ -248,7 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */,
-				D16CF33D30F5C75E12D087B0 /* Pods_All_RecordCreateIntentExtension.framework in Frameworks */,
+				07C48C10A3C7CB8D18E620CB /* Pods_RecordCreateIntentExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CE76B0F2187432B002B00ED /* Shared.framework in Frameworks */,
-				5CD32947432B7B999169AA20 /* Pods_All_RaisingChildrenRecord.framework in Frameworks */,
+				097ADC495C4ED441B200DB3E /* Pods_RaisingChildrenRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				759A5E5155F7CB531CA4E02C /* Pods_All_Shared.framework in Frameworks */,
+				14CAB6E3C53B6B558C43FA1A /* Pods_Shared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,29 +360,18 @@
 				0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */,
 				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
 				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
-				9CBAE9DF216D71D900284EDE /* BabyDao.swift */,
-				9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */,
-				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
 				9CBAE9E5216D75BC00284EDE /* Change.swift */,
-				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
 				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
 				9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */,
 				9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */,
 				9CBAE9EF2170154800284EDE /* Utils.swift */,
 				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
 				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
-				9CBAE9F52172C95D00284EDE /* RecordDao.swift */,
-				9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */,
-				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
-				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
-				9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */,
 				9CBAEA012172CC8500284EDE /* RecordObserver.swift */,
 				9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */,
 				9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */,
 				9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */,
 				9CE76AF321854F7D002B00ED /* PickerViewController.swift */,
-				0C007B44214885F40001802A /* Baby.swift */,
-				0C007B46214BDD9C0001802A /* Record.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -421,6 +414,18 @@
 		9CE76AFB2187432B002B00ED /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9CBAE9DF216D71D900284EDE /* BabyDao.swift */,
+				9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */,
+				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
+				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
+				0C007B44214885F40001802A /* Baby.swift */,
+				0C007B46214BDD9C0001802A /* Record.swift */,
+				9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */,
+				9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */,
+				9CBAE9F52172C95D00284EDE /* RecordDao.swift */,
+				9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */,
+				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
+				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
 				9C62EB33218C1CDC005F068E /* RecordDataManager.swift */,
 				9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */,
 				0C2F9E66214DDE7E00CFCD2F /* Command.swift */,
@@ -430,6 +435,7 @@
 				9CE76AFD2187432B002B00ED /* Info.plist */,
 				9CE76B172187435C002B00ED /* Utils.swift */,
 				9CE76B212187D3D2002B00ED /* DataManager.swift */,
+				9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -762,7 +768,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-All-Shared-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Shared-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -780,7 +786,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-All-RaisingChildrenRecord-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RaisingChildrenRecord-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -793,7 +799,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-All-RaisingChildrenRecord/Pods-All-RaisingChildrenRecord-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
@@ -816,7 +822,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-RaisingChildrenRecord/Pods-All-RaisingChildrenRecord-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E94F0B4C8A1933ACE2AE730F /* [CP] Check Pods Manifest.lock */ = {
@@ -834,7 +840,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-All-RecordCreateIntentExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RecordCreateIntentExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -847,7 +853,10 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-All-RaisingChildrenRecord/Pods-All-RaisingChildrenRecord-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-Environment-Logger/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -855,10 +864,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
@@ -867,11 +873,15 @@
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-00567490/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -879,10 +889,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
@@ -891,12 +898,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-RaisingChildrenRecord/Pods-All-RaisingChildrenRecord-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RaisingChildrenRecord/Pods-RaisingChildrenRecord-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -915,18 +922,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CBAE9E2216D722C00284EDE /* BabyDaoRealm.swift in Sources */,
 				9CBAE9EA216EFCCB00284EDE /* BabyObserver.swift in Sources */,
 				9CBAE9E6216D75BC00284EDE /* Change.swift in Sources */,
 				9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */,
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
-				9CBAE9FC2172CAFE00284EDE /* RecordDaoFirebase.swift in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
-				9CE76B202187CE58002B00ED /* Baby.swift in Sources */,
 				9CBAE9F02170154800284EDE /* Utils.swift in Sources */,
 				0C2F9E65214DD43D00CFCD2F /* UserDefaultsKey.swift in Sources */,
 				0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */,
-				9CBAE9E8216E2ADF00284EDE /* BabyDaoFirebase.swift in Sources */,
 				0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */,
 				9CBAEA042172CD2D00284EDE /* RecordObserverRealm.swift in Sources */,
 				0C0F7E8F210D30750040D268 /* UICustomTitleView.swift in Sources */,
@@ -935,21 +938,14 @@
 				9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */,
 				0C39F7A121069ABC00302D76 /* PageViewController.swift in Sources */,
 				9CBAEA022172CC8500284EDE /* RecordObserver.swift in Sources */,
-				9CBAE9FA2172CAA500284EDE /* RecordDaoRealm.swift in Sources */,
 				9CBAEA082172CDB000284EDE /* RecordObserverFactory.swift in Sources */,
 				9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */,
-				9CBAE9F62172C95D00284EDE /* RecordDao.swift in Sources */,
-				9CE76B1F2187CE58002B00ED /* Record.swift in Sources */,
 				9CBAEA062172CD7000284EDE /* RecordObserverFirebase.swift in Sources */,
-				9CBAE9E0216D71D900284EDE /* BabyDao.swift in Sources */,
 				9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */,
 				9CBAE9EE216F8E2E00284EDE /* BabyObserverFactory.swift in Sources */,
 				0CBD261D20F6CBE700542E1B /* AppDelegate.swift in Sources */,
 				9CBAE9EC216EFD6A00284EDE /* BabyObserverFirebase.swift in Sources */,
 				9CBAE9F2217168C100284EDE /* FamilyIdObserver.swift in Sources */,
-				9CBAE9E4216D729A00284EDE /* BabyDaoFactory.swift in Sources */,
-				9CBAEA002172CBAB00284EDE /* DatabaseType.swift in Sources */,
-				9CBAE9FE2172CB5900284EDE /* RecordDaoFactory.swift in Sources */,
 				0CBD261F20F6CBE700542E1B /* FirstViewController.swift in Sources */,
 				9CBAE9F42172C1E000284EDE /* BabyObserverRealm.swift in Sources */,
 				0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */,
@@ -976,12 +972,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CDA3268218E72E000F38D61 /* UserDefaults+Keys.swift in Sources */,
 				9CE76B1B2187CDF3002B00ED /* RecordModel.swift in Sources */,
+				9CDA326F218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift in Sources */,
+				9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */,
+				9CDA3262218E6F5200F38D61 /* RecordDaoRealm.swift in Sources */,
 				9CE76B222187D3D2002B00ED /* DataManager.swift in Sources */,
+				9CDA326C218E739500F38D61 /* BabyDaoFirebase.swift in Sources */,
+				9CDA3260218E6F5200F38D61 /* Record.swift in Sources */,
 				9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */,
 				9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */,
+				9CDA3261218E6F5200F38D61 /* RecordDao.swift in Sources */,
 				9CE76B182187435C002B00ED /* Utils.swift in Sources */,
+				9CDA326A218E739500F38D61 /* BabyDaoFactory.swift in Sources */,
+				9CDA3264218E6F5200F38D61 /* DatabaseType.swift in Sources */,
+				9CDA3263218E6F5200F38D61 /* RecordDaoFactory.swift in Sources */,
+				9CDA326D218E739500F38D61 /* BabyDao.swift in Sources */,
 				9CE76B1D2187CE4B002B00ED /* BabyModel.swift in Sources */,
+				9CDA325F218E6F5200F38D61 /* RecordDaoFirebase.swift in Sources */,
+				9CDA3269218E739500F38D61 /* Baby.swift in Sources */,
 				9CE76B1E2187CE51002B00ED /* Command.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1051,7 +1060,7 @@
 /* Begin XCBuildConfiguration section */
 		0C5F37E621567597002A1B6E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF86A4BB5475683C3BB3928 /* Pods-All-RecordCreateIntentExtension.debug.xcconfig */;
+			baseConfigurationReference = 029BC516EE919DB630751BBF /* Pods-RecordCreateIntentExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
@@ -1074,7 +1083,7 @@
 		};
 		0C5F37E721567597002A1B6E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E69AFD3F287763B79A009EC3 /* Pods-All-RecordCreateIntentExtension.release.xcconfig */;
+			baseConfigurationReference = 111E3B47BC71087CF433D38B /* Pods-RecordCreateIntentExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
@@ -1210,7 +1219,7 @@
 		};
 		0CBD264420F6CBE900542E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33EAA7F56793D44C54EEF856 /* Pods-All-RaisingChildrenRecord.debug.xcconfig */;
+			baseConfigurationReference = 5104A7A4757040F08FD851B8 /* Pods-RaisingChildrenRecord.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1230,7 +1239,7 @@
 		};
 		0CBD264520F6CBE900542E1B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2195300DEAC3D877358BCCD5 /* Pods-All-RaisingChildrenRecord.release.xcconfig */;
+			baseConfigurationReference = 780A0AFB59F399E0E8F2A42C /* Pods-RaisingChildrenRecord.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1336,7 +1345,7 @@
 		};
 		9CE76B122187432B002B00ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8088BC7618155569E320932B /* Pods-All-Shared.debug.xcconfig */;
+			baseConfigurationReference = 7255525C02F20766B49984FF /* Pods-Shared.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1369,7 +1378,7 @@
 		};
 		9CE76B132187432B002B00ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFA2DACC07E117CAE3570BC8 /* Pods-All-Shared.release.xcconfig */;
+			baseConfigurationReference = 4D49BB12B0BCAC64F5D887D3 /* Pods-Shared.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";

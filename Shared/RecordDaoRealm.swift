@@ -10,17 +10,15 @@ import Foundation
 
 import RealmSwift
 
-import Shared
-
-class RecordDaoRealm: RecordDao {
-    static let shared = RecordDaoRealm()
+public class RecordDaoRealm: RecordDao {
+    public static let shared = RecordDaoRealm()
     let realm: Realm!
 
     private init() {
         self.realm = try! Realm()
     }
     
-    func insertOrUpdate(_ record: RecordModel) {
+    public func insertOrUpdate(_ record: RecordModel) {
         try! self.realm.write {
             guard let id = record.id else { return }
             let results = self.realm.objects(Record.self).filter("id == %@", id)
@@ -52,7 +50,7 @@ class RecordDaoRealm: RecordDao {
         }
     }
     
-    func delete(_ record: RecordModel) {
+    public func delete(_ record: RecordModel) {
         guard let id = record.id else { return }
         guard let target = self.realm.objects(Record.self).filter("id == %@", id).first else { return }
         try! self.realm.write {
@@ -60,7 +58,7 @@ class RecordDaoRealm: RecordDao {
         }
     }
 
-    func find(id: String) -> RecordModel? {
+    public func find(id: String) -> RecordModel? {
         guard let r = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
         return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5)
     }

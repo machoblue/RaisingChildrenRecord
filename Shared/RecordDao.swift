@@ -8,9 +8,7 @@
 
 import Foundation
 
-import Shared
-
-protocol RecordDao {
+public protocol RecordDao {
     func insertOrUpdate(_ record: RecordModel)
     func delete(_ record: RecordModel)
     func find(id: String) -> RecordModel?

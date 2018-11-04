@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     var recordDao: RecordDao?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        print("*** AppDelegate.application.didFinishLaunchingWithOptoins ***")
 
         FirebaseApp.configure()
         

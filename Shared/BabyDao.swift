@@ -8,9 +8,7 @@
 
 import Foundation
 
-import Shared
-
-protocol BabyDao {
+public protocol BabyDao {
     func insertOrUpdate(_ baby: BabyModel)
 //    func observe(with callback: (BabyModel, Change) -> Void)
     func delete(_ baby: BabyModel)

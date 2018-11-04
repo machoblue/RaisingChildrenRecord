@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 class RecordObserverFactory {
     static let shared = RecordObserverFactory()
     private init(){

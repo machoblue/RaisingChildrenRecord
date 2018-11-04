@@ -8,13 +8,13 @@
 
 import Foundation
 
-class BabyDaoFactory {
-    static let shared = BabyDaoFactory()
+public class BabyDaoFactory {
+    public static let shared = BabyDaoFactory()
 
     private init() {
     }
     
-    func createBabyDao(_ databaseType: DatabaseType) -> BabyDao {
+    public func createBabyDao(_ databaseType: DatabaseType) -> BabyDao {
         switch databaseType {
         case .Local:
             return BabyDaoRealm.shared

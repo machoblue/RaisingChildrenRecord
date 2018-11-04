@@ -10,10 +10,8 @@ import Foundation
 
 import RealmSwift
 
-import Shared
-
-class BabyDaoRealm: BabyDao {
-    static let shared = BabyDaoRealm()
+public class BabyDaoRealm: BabyDao {
+    public static let shared = BabyDaoRealm()
     
     let realm: Realm!
 
@@ -21,7 +19,7 @@ class BabyDaoRealm: BabyDao {
         self.realm = try! Realm()
     }
     
-    func insertOrUpdate(_ baby: BabyModel) {
+    public func insertOrUpdate(_ baby: BabyModel) {
         try! realm.write {
             let results = realm.objects(Baby.self).filter("id == %@", baby.id)
             if results.count == 0 {
@@ -40,7 +38,7 @@ class BabyDaoRealm: BabyDao {
         }
     }
     
-    func delete(_ baby: BabyModel) {
+    public func delete(_ baby: BabyModel) {
         let realm = try! Realm()
         let target = realm.objects(Baby.self).filter("id == %@", baby.id).first
         if let unwrappedTarget = target {
@@ -50,7 +48,7 @@ class BabyDaoRealm: BabyDao {
         }
     }
     
-    func findAll() -> Array<BabyModel> {
+    public func findAll() -> Array<BabyModel> {
         let realm = try! Realm()
         let results = realm.objects(Baby.self)
         var babies: [BabyModel] = []

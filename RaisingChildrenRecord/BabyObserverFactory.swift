@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 class BabyObserverFactory {
     static let shared = BabyObserverFactory()
     

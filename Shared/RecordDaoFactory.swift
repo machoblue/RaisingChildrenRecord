@@ -8,12 +8,12 @@
 
 import Foundation
 
-class RecordDaoFactory {
-    static let shared = RecordDaoFactory()
+public class RecordDaoFactory {
+    public static let shared = RecordDaoFactory()
     private init() {
     }
     
-    func createRecordDao(_ databaseType: DatabaseType) -> RecordDao {
+    public func createRecordDao(_ databaseType: DatabaseType) -> RecordDao {
         switch databaseType {
         case .Local:
             return RecordDaoRealm.shared

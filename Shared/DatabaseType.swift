@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DatabaseType {
+public enum DatabaseType {
     case Local
     case Remote
 }

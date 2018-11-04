@@ -10,19 +10,18 @@ import Foundation
 
 import Firebase
 
-import Shared
-
-class RecordDaoFirebase: RecordDao {
+public class RecordDaoFirebase: RecordDao {
     static let shared = RecordDaoFirebase()
     let ref: DatabaseReference!
     
     private init() {
+        FirebaseApp.configureIfNeed()
         self.ref = Database.database().reference()
     }
     
-    func insertOrUpdate(_ record: RecordModel) {
+    public func insertOrUpdate(_ record: RecordModel) {
         print("*** RecordDaoFirebase.insertOrUpdate ***")
-        guard let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String else { return }
+        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
         guard let babyId = record.babyId else { return }
         guard let id = record.id else { return }
@@ -31,15 +30,15 @@ class RecordDaoFirebase: RecordDao {
         self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).setValue(recordDict)
     }
     
-    func delete(_ record: RecordModel) {
-        guard let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String else { return }
+    public func delete(_ record: RecordModel) {
+        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
         guard let id = record.id else { return }
 //        guard let babyId = record.babyId else { return }
         self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).removeValue()
     }
     
-    func find(id: String) -> RecordModel? {
+    public func find(id: String) -> RecordModel? {
         // do nothing
         return nil
     }
