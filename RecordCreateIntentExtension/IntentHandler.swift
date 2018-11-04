@@ -132,9 +132,8 @@ extension IntentHandler: RecordCreateIntentHandling {
         print("*** IntentHandler.handle ***", intent)
         
         guard let babyName = intent.baby, let behavior = intent.behavior else { return }
-
-//        let recordDao = RecordDaoFactory.
-        let babyId = ""
+        guard let babyId = BabyDaoRealm.shared.id(from: babyName) else { return }
+        
         let commandId = Command.id(of: behavior).description
         
         let record = RecordModel(babyId: babyId, commandId: commandId)
@@ -145,3 +144,15 @@ extension IntentHandler: RecordCreateIntentHandling {
         completion(response)
     }
 }
+
+extension BabyDaoRealm {
+    public func id(from name: String) -> String? {
+        for baby in self.findAll() {
+            if (name == baby.name) {
+                return baby.id
+            }
+        }
+        return nil
+    }
+}
+
