@@ -59,6 +59,10 @@ extension RecordDataManager {
         
 //        donateInteraction(for: record) // This isn't required.
     }
+    
+    public func clear() {
+        self.deployInitialData()
+    }
 }
 
 extension UserDefaults {

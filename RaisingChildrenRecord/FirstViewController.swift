@@ -26,6 +26,8 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     var recordDao: RecordDao!
     var recordDaoRemote: RecordDao!
     
+    private var notificationToken: NSObjectProtocol?
+    
     // MARK: ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,30 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
         self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
+        
+        notificationToken = NotificationCenter.default.addObserver(forName: dataChangedNotificationKey,
+                                                                   object: self,
+                                                                   queue: OperationQueue.main) {  [weak self] (notification) in
+                                                                    self!.restoreData()
+        }
+    }
+    
+    func restoreData() {
+        let recordDataManager = RecordDataManager()
+        let records = recordDataManager.records
+        print(" *** FirstViewController.restoreData *** ", records)
+        for record in records {
+            self.recordDao.insertOrUpdate(record)
+            self.recordDaoRemote.insertOrUpdate(record)
+        }
+        
+        recordDataManager.clear()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("*** FirstViewController.viewWillAppear ***")
+        super.viewWillAppear(animated)
+        
+        restoreData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,6 +123,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
+        print("*** FirstViewController.onClicked ***")
         let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: Date(), value1: "", value2: "", value3: "", value4: "", value5: "")
         self.recordDao.insertOrUpdate(record)
         self.recordDaoRemote.insertOrUpdate(record)
@@ -110,6 +137,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
             let interaction = INInteraction(intent: intent, response: nil)
             interaction.donate { error in
                 guard error == nil else {
+                    print("*** FirstViewController.onClick *** interaction.donate->error:", error.debugDescription)
                     return
                 }
             }

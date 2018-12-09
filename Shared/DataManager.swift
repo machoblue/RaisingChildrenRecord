@@ -25,8 +25,8 @@ public let dataChangedNotificationKey = NSNotification.Name(rawValue: "DataChang
 public class DataManager<ManagedDataType: Codable> {
     
     /// This sample uses App Groups to share a suite of data between the main app and the different extensions.
-//    let userDefaults = UserDefaults.dataSuite
-    let userDefaults = UserDefaults.standard
+    let userDefaults = UserDefaults.dataSuite
+//    let userDefaults = UserDefaults.standard
     
     /// To prevent data races, all access to `UserDefaults` uses this queue.
     private let userDefaultsAccessQueue = DispatchQueue(label: "User Defaults Access Queue")

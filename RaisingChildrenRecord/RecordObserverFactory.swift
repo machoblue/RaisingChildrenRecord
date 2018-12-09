@@ -10,12 +10,12 @@ import Foundation
 
 import Shared
 
-class RecordObserverFactory {
-    static let shared = RecordObserverFactory()
+public class RecordObserverFactory {
+    public static let shared = RecordObserverFactory()
     private init(){
     }
     
-    func createRecordObserver(_ databaseType: DatabaseType) -> RecordObserver {
+    public func createRecordObserver(_ databaseType: DatabaseType) -> RecordObserver {
         switch databaseType {
         case .Local:
             return RecordObserverRealm.shared

@@ -12,8 +12,9 @@ import RealmSwift
 
 import Shared
 
-class RecordObserverRealm: RecordObserver {
-    static let shared = RecordObserverRealm()
+public class RecordObserverRealm: RecordObserver {
+    public static let shared = RecordObserverRealm()
+    var realm: Realm!
     var results: Results<Record>!
     var notificationToken: NotificationToken?
     var records: [RecordModel] = []
@@ -22,13 +23,13 @@ class RecordObserverRealm: RecordObserver {
         self.initRecordRef()
     }
     
-    func reload() {
+    public func reload() {
         self.clear()
         self.initRecordRef()
     }
     
     func initRecordRef() {
-        let realm = try! Realm()
+        self.realm = try! Realm()
         self.results = realm.objects(Record.self)
         for record in results {
             self.records.append(self.recordModel(from: record))
@@ -36,13 +37,15 @@ class RecordObserverRealm: RecordObserver {
     }
     
     
-    func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+    public func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
         // do nothing
     }
     
-    func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
-        notificationToken = self.results.filter("babyId == %@ AND dateTime <= %@ AND %@ <= dateTime", babyId, from ,to).observe { [weak self] (changes: RealmCollectionChange) in
-            print("*** RecordObserverRealm.observe*** ", changes)
+    public func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+        print("*** RecordObserverRealm.observe ***")
+        
+        notificationToken = self.results.filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to).observe { [weak self] (changes: RealmCollectionChange) in
+            print("*** RecordObserverRealm.observe.results.observe*** ", changes)
             var myChanges: [(RecordModel, Change)] = []
             switch changes {
             case .initial:

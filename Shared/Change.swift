@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Change {
+public enum Change {
     case Init
     case Insert
     case Delete

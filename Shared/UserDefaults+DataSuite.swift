@@ -12,7 +12,7 @@ extension UserDefaults {
     
     /// - Tag: app_group
     // Note: This project does not share data between iOS and watchOS. Orders placed on the watch will not display in the iOS order history.
-    private static let AppGroup = "group.blue.macho"
+    private static let AppGroup = "group.blue.macho.RaisingChildrenRecord"
     
     enum StorageKeys: String {
         case records

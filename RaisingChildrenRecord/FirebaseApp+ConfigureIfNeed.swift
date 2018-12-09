@@ -14,10 +14,11 @@ extension FirebaseApp {
     private static var configured = false;
     private static let firebaseStatusAccessQueue = DispatchQueue(label: "Firebase Status Access Queue")
     public static func configureIfNeed() {
-        firebaseStatusAccessQueue.sync {
-            guard !configured else { return }
-            FirebaseApp.configure()
-            configured = true
-        }
+//        firebaseStatusAccessQueue.sync {
+//            guard !configured else { return }
+//            FirebaseApp.configure()
+//            configured = true
+//        }
+        // TODO: remove
     }
 }

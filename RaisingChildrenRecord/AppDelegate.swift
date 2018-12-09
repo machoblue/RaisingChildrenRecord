@@ -50,18 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             observeRemote()
         }
         
-        let realm = try! Realm()
-        
-        let babies = realm.objects(Baby.self)
-        if (babies.count == 0) {
-            try! realm.write {
-                realm.add(Baby())
-            }
+        self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
+        let babies = self.babyDao?.findAll()
+        if (babies?.count == 0) {
+            babyDao?.insertOrUpdate(BabyModel(id: UUID().description, name: "赤ちゃん", born: Date(), female: false))
         }
 
         return true
     }
     
+    /*
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping
@@ -73,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         }
         return false
     }
+ */
     
 
     func application(_ app: UIApplication, open url: URL,
@@ -124,8 +123,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     // MARK: - Utility
     func observeRemote() {
+        print("*** AppDelegate.observeRemote ***")
         FamilyIdObserver.shared.observe(with: { (familyId) -> Void in
-            self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
+            print("*** AppDelegate.observeRemote.FamilyIdObserver.shared.observe ***")
 
             self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
             
@@ -147,6 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
     
     func observerRemoteRecords() {
+        print("*** AppDelegate.observerRemoteRecords ***")
         self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Remote)
@@ -154,6 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             for recordAndChange in recordAndChangeArray {
                 let record = recordAndChange.0
                 let change = recordAndChange.1
+                print("*** AppDelegate.observerRemoteRecords.recordObserver.observe ***: ", record)
                 switch change {
                 case .Init:
                     break

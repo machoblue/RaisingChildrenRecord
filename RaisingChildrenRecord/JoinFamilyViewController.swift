@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+import Shared
+
 class JoinFamilyViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var familyId: UITextField!

@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 public class BabyDaoFactory {
     public static let shared = BabyDaoFactory()
 

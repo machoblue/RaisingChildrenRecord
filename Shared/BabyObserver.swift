@@ -10,7 +10,7 @@ import Foundation
 
 import Shared
 
-protocol BabyObserver {
+public protocol BabyObserver {
     func observeAdd(with callback: @escaping (BabyModel) -> Void)
     func observeChange(with callback: @escaping (BabyModel) -> Void)
     func observeRemove(with callback: @escaping (BabyModel) -> Void)

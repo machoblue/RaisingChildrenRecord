@@ -21,7 +21,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var recordObserver: RecordObserver!
-    
+
     // MARK: - ViewController lifecycle callback
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("*** RecordViewController.viewWillAppear ***")
         super.viewWillAppear(animated)
         
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
@@ -111,6 +112,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func onCommandButtonClicked(notification: Notification) -> Void {
+        print("*** RecordsViewController.onCommandButtonClicked ***")
         self.recordObserver.reload()
         self.records = []
         self.observeRecord()
@@ -146,6 +148,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func observeRecord() {
+        print("*** RecordViewController.observeRecord ***")
         guard let date = self.date else { return }
         let realm = try! Realm()
         let babyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String ?? realm.objects(Baby.self).first?.id
@@ -155,6 +158,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         let to = from + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
         
         self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
+            print("*** RecordViewController.observeRecord.recordObserver.observe *** recordAndChanges.count:", recordAndChanges.count)
             for recordAndChange in recordAndChanges {
                 let record = recordAndChange.0
                 let change = recordAndChange.1

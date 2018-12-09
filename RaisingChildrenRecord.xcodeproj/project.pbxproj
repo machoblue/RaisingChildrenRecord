@@ -14,7 +14,6 @@
 		0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */; };
 		0C0F7E8D210D2F520040D268 /* CustomTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0F7E8C210D2F520040D268 /* CustomTitleView.xib */; };
 		0C0F7E8F210D30750040D268 /* UICustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0F7E8E210D30750040D268 /* UICustomTitleView.swift */; };
-		0C2F9E65214DD43D00CFCD2F /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */; };
 		0C2F9E69214F23C400CFCD2F /* EditMilkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F9E68214F23C400CFCD2F /* EditMilkViewController.swift */; };
 		0C39F7A121069ABC00302D76 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C39F7A021069ABC00302D76 /* PageViewController.swift */; };
 		0C5F37E021567597002A1B6E /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5F37DF21567597002A1B6E /* IntentHandler.swift */; };
@@ -33,6 +32,23 @@
 		14CAB6E3C53B6B558C43FA1A /* Pods_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F917576BC9530265857FCE54 /* Pods_Shared.framework */; };
 		4094A5395D9CB497AEB66712 /* Pods_RaisingChildrenRecordUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB5209A9556868F7108ECE /* Pods_RaisingChildrenRecordUITests.framework */; };
 		57FA47A3EA5ADF3DBC486F3A /* Pods_RaisingChildrenRecordTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94664E7E794C1222256125E /* Pods_RaisingChildrenRecordTests.framework */; };
+		9C186E9621B8959800A089EF /* Realm+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C186E9521B8959800A089EF /* Realm+Configuration.swift */; };
+		9C186E9A21BB675C00A089EF /* BabyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */; };
+		9C186E9D21BB675C00A089EF /* RecordObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA012172CC8500284EDE /* RecordObserver.swift */; };
+		9C186E9F21BB675C00A089EF /* BabyObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */; };
+		9C186EA121BB675C00A089EF /* RecordObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */; };
+		9C186EA321BB699C00A089EF /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E5216D75BC00284EDE /* Change.swift */; };
+		9C186EA421BB6A1000A089EF /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */; };
+		9C186EA521BB6C1C00A089EF /* FamilyIdObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */; };
+		9C186EA621BBBFBA00A089EF /* BabyDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */; };
+		9C186EA721BBBFBA00A089EF /* BabyObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */; };
+		9C186EA821BBBFBA00A089EF /* RecordDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */; };
+		9C186EA921BBBFBA00A089EF /* FirebaseApp+ConfigureIfNeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */; };
+		9C186EAA21BBBFBA00A089EF /* BabyObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */; };
+		9C186EAB21BBBFBA00A089EF /* RecordObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */; };
+		9C186EAC21BBBFBA00A089EF /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
+		9C186EAD21BBBFBA00A089EF /* RecordObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */; };
+		9C186EAE21BBBFBA00A089EF /* RecordDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
 		9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB33218C1CDC005F068E /* RecordDataManager.swift */; };
@@ -40,30 +56,14 @@
 		9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */; };
 		9CBAE9D4216AEAC000284EDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */; };
-		9CBAE9E6216D75BC00284EDE /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E5216D75BC00284EDE /* Change.swift */; };
-		9CBAE9EA216EFCCB00284EDE /* BabyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */; };
-		9CBAE9EC216EFD6A00284EDE /* BabyObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */; };
-		9CBAE9EE216F8E2E00284EDE /* BabyObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */; };
-		9CBAE9F02170154800284EDE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EF2170154800284EDE /* Utils.swift */; };
-		9CBAE9F2217168C100284EDE /* FamilyIdObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */; };
-		9CBAE9F42172C1E000284EDE /* BabyObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */; };
-		9CBAEA022172CC8500284EDE /* RecordObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA012172CC8500284EDE /* RecordObserver.swift */; };
-		9CBAEA042172CD2D00284EDE /* RecordObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */; };
-		9CBAEA062172CD7000284EDE /* RecordObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */; };
-		9CBAEA082172CDB000284EDE /* RecordObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */; };
-		9CDA325F218E6F5200F38D61 /* RecordDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */; };
 		9CDA3260218E6F5200F38D61 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B46214BDD9C0001802A /* Record.swift */; };
 		9CDA3261218E6F5200F38D61 /* RecordDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F52172C95D00284EDE /* RecordDao.swift */; };
 		9CDA3262218E6F5200F38D61 /* RecordDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */; };
-		9CDA3263218E6F5200F38D61 /* RecordDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */; };
 		9CDA3264218E6F5200F38D61 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */; };
 		9CDA3268218E72E000F38D61 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */; };
 		9CDA3269218E739500F38D61 /* Baby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B44214885F40001802A /* Baby.swift */; };
-		9CDA326A218E739500F38D61 /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
 		9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */; };
-		9CDA326C218E739500F38D61 /* BabyDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */; };
 		9CDA326D218E739500F38D61 /* BabyDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9DF216D71D900284EDE /* BabyDao.swift */; };
-		9CDA326F218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */; };
 		9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76AF321854F7D002B00ED /* PickerViewController.swift */; };
 		9CE76B032187432B002B00ED /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CE76B0A2187432B002B00ED /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76B092187432B002B00ED /* SharedTests.swift */; };
@@ -198,6 +198,9 @@
 		79C3F10285797D0EB4CFCF07 /* Pods_All_RaisingChildrenRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_RaisingChildrenRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8088BC7618155569E320932B /* Pods-All-Shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Shared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Shared/Pods-All-Shared.debug.xcconfig"; sourceTree = "<group>"; };
 		8F5DB31D376FEDB570A18180 /* Pods_All_RecordCreateIntentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_RecordCreateIntentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C186E9521B8959800A089EF /* Realm+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Configuration.swift"; sourceTree = "<group>"; };
+		9C186E9721B8995E00A089EF /* RaisingChildrenRecord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingChildrenRecord.entitlements; sourceTree = "<group>"; };
+		9C186E9821B8D1D300A089EF /* RecordCreateIntentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RecordCreateIntentExtension.entitlements; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
 		9C62EB33218C1CDC005F068E /* RecordDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDataManager.swift; sourceTree = "<group>"; };
@@ -213,7 +216,6 @@
 		9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyObserver.swift; sourceTree = "<group>"; };
 		9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyObserverFirebase.swift; sourceTree = "<group>"; };
 		9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyObserverFactory.swift; sourceTree = "<group>"; };
-		9CBAE9EF2170154800284EDE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdObserver.swift; sourceTree = "<group>"; };
 		9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyObserverRealm.swift; sourceTree = "<group>"; };
 		9CBAE9F52172C95D00284EDE /* RecordDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDao.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 		0C5F37DE21567597002A1B6E /* RecordCreateIntentExtension */ = {
 			isa = PBXGroup;
 			children = (
+				9C186E9821B8D1D300A089EF /* RecordCreateIntentExtension.entitlements */,
 				0C5F37DF21567597002A1B6E /* IntentHandler.swift */,
 				0C5F37E121567597002A1B6E /* Info.plist */,
 				0C5F37E82156781D002A1B6E /* Intents.intentdefinition */,
@@ -341,6 +344,7 @@
 		0CBD261B20F6CBE700542E1B /* RaisingChildrenRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9C186E9721B8995E00A089EF /* RaisingChildrenRecord.entitlements */,
 				9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */,
 				0CBD261C20F6CBE700542E1B /* AppDelegate.swift */,
 				0CBD261E20F6CBE700542E1B /* FirstViewController.swift */,
@@ -355,23 +359,21 @@
 				0C007B3E2145075F0001802A /* RecordsViewController.swift */,
 				0C007B422147F0C80001802A /* CustomCollectionViewCell.swift */,
 				9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */,
-				0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */,
 				0C2F9E68214F23C400CFCD2F /* EditMilkViewController.swift */,
 				0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */,
 				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
 				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
-				9CBAE9E5216D75BC00284EDE /* Change.swift */,
-				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
+				9CE76AF321854F7D002B00ED /* PickerViewController.swift */,
+				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
 				9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */,
 				9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */,
-				9CBAE9EF2170154800284EDE /* Utils.swift */,
-				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
-				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
-				9CBAEA012172CC8500284EDE /* RecordObserver.swift */,
-				9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */,
 				9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */,
 				9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */,
-				9CE76AF321854F7D002B00ED /* PickerViewController.swift */,
+				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
+				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
+				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
+				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
+				9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -414,18 +416,20 @@
 		9CE76AFB2187432B002B00ED /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */,
+				9CBAE9E5216D75BC00284EDE /* Change.swift */,
+				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
+				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
+				9CBAEA012172CC8500284EDE /* RecordObserver.swift */,
+				9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */,
 				9CBAE9DF216D71D900284EDE /* BabyDao.swift */,
 				9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */,
-				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
-				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
 				0C007B44214885F40001802A /* Baby.swift */,
 				0C007B46214BDD9C0001802A /* Record.swift */,
 				9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */,
 				9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */,
 				9CBAE9F52172C95D00284EDE /* RecordDao.swift */,
 				9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */,
-				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
-				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
 				9C62EB33218C1CDC005F068E /* RecordDataManager.swift */,
 				9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */,
 				0C2F9E66214DDE7E00CFCD2F /* Command.swift */,
@@ -435,7 +439,7 @@
 				9CE76AFD2187432B002B00ED /* Info.plist */,
 				9CE76B172187435C002B00ED /* Utils.swift */,
 				9CE76B212187D3D2002B00ED /* DataManager.swift */,
-				9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */,
+				9C186E9521B8959800A089EF /* Realm+Configuration.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -618,10 +622,20 @@
 				TargetAttributes = {
 					0C5F37DC21567597002A1B6E = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					0CBD261820F6CBE700542E1B = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					0CBD262E20F6CBE900542E1B = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -922,33 +936,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CBAE9EA216EFCCB00284EDE /* BabyObserver.swift in Sources */,
-				9CBAE9E6216D75BC00284EDE /* Change.swift in Sources */,
+				9C186EA721BBBFBA00A089EF /* BabyObserverFirebase.swift in Sources */,
 				9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */,
+				9C186EA921BBBFBA00A089EF /* FirebaseApp+ConfigureIfNeed.swift in Sources */,
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
-				9CBAE9F02170154800284EDE /* Utils.swift in Sources */,
-				0C2F9E65214DD43D00CFCD2F /* UserDefaultsKey.swift in Sources */,
 				0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */,
+				9C186EAE21BBBFBA00A089EF /* RecordDaoFirebase.swift in Sources */,
 				0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */,
-				9CBAEA042172CD2D00284EDE /* RecordObserverRealm.swift in Sources */,
 				0C0F7E8F210D30750040D268 /* UICustomTitleView.swift in Sources */,
 				0C2F9E69214F23C400CFCD2F /* EditMilkViewController.swift in Sources */,
+				9C186EAB21BBBFBA00A089EF /* RecordObserverFactory.swift in Sources */,
 				0CBD262120F6CBE700542E1B /* SecondViewController.swift in Sources */,
+				9C186EA521BB6C1C00A089EF /* FamilyIdObserver.swift in Sources */,
 				9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */,
 				0C39F7A121069ABC00302D76 /* PageViewController.swift in Sources */,
-				9CBAEA022172CC8500284EDE /* RecordObserver.swift in Sources */,
-				9CBAEA082172CDB000284EDE /* RecordObserverFactory.swift in Sources */,
 				9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */,
-				9CBAEA062172CD7000284EDE /* RecordObserverFirebase.swift in Sources */,
 				9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */,
-				9CBAE9EE216F8E2E00284EDE /* BabyObserverFactory.swift in Sources */,
 				0CBD261D20F6CBE700542E1B /* AppDelegate.swift in Sources */,
-				9CBAE9EC216EFD6A00284EDE /* BabyObserverFirebase.swift in Sources */,
-				9CBAE9F2217168C100284EDE /* FamilyIdObserver.swift in Sources */,
+				9C186EAC21BBBFBA00A089EF /* BabyDaoFactory.swift in Sources */,
+				9C186EA621BBBFBA00A089EF /* BabyDaoFirebase.swift in Sources */,
 				0CBD261F20F6CBE700542E1B /* FirstViewController.swift in Sources */,
-				9CBAE9F42172C1E000284EDE /* BabyObserverRealm.swift in Sources */,
+				9C186EAA21BBBFBA00A089EF /* BabyObserverFactory.swift in Sources */,
+				9C186EA821BBBFBA00A089EF /* RecordDaoFactory.swift in Sources */,
 				0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */,
+				9C186EAD21BBBFBA00A089EF /* RecordObserverFirebase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,25 +984,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C186E9D21BB675C00A089EF /* RecordObserver.swift in Sources */,
 				9CDA3268218E72E000F38D61 /* UserDefaults+Keys.swift in Sources */,
+				9C186EA121BB675C00A089EF /* RecordObserverRealm.swift in Sources */,
 				9CE76B1B2187CDF3002B00ED /* RecordModel.swift in Sources */,
-				9CDA326F218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift in Sources */,
 				9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */,
 				9CDA3262218E6F5200F38D61 /* RecordDaoRealm.swift in Sources */,
 				9CE76B222187D3D2002B00ED /* DataManager.swift in Sources */,
-				9CDA326C218E739500F38D61 /* BabyDaoFirebase.swift in Sources */,
 				9CDA3260218E6F5200F38D61 /* Record.swift in Sources */,
 				9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */,
 				9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */,
+				9C186EA421BB6A1000A089EF /* UserDefaultsKey.swift in Sources */,
 				9CDA3261218E6F5200F38D61 /* RecordDao.swift in Sources */,
 				9CE76B182187435C002B00ED /* Utils.swift in Sources */,
-				9CDA326A218E739500F38D61 /* BabyDaoFactory.swift in Sources */,
+				9C186E9A21BB675C00A089EF /* BabyObserver.swift in Sources */,
 				9CDA3264218E6F5200F38D61 /* DatabaseType.swift in Sources */,
-				9CDA3263218E6F5200F38D61 /* RecordDaoFactory.swift in Sources */,
+				9C186E9621B8959800A089EF /* Realm+Configuration.swift in Sources */,
 				9CDA326D218E739500F38D61 /* BabyDao.swift in Sources */,
+				9C186E9F21BB675C00A089EF /* BabyObserverRealm.swift in Sources */,
 				9CE76B1D2187CE4B002B00ED /* BabyModel.swift in Sources */,
-				9CDA325F218E6F5200F38D61 /* RecordDaoFirebase.swift in Sources */,
 				9CDA3269218E739500F38D61 /* Baby.swift in Sources */,
+				9C186EA321BB699C00A089EF /* Change.swift in Sources */,
 				9CE76B1E2187CE51002B00ED /* Command.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1062,6 +1076,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 029BC516EE919DB630751BBF /* Pods-RecordCreateIntentExtension.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RecordCreateIntentExtension/RecordCreateIntentExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
 				INFOPLIST_FILE = RecordCreateIntentExtension/Info.plist;
@@ -1085,6 +1100,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 111E3B47BC71087CF433D38B /* Pods-RecordCreateIntentExtension.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = RecordCreateIntentExtension/RecordCreateIntentExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
 				INFOPLIST_FILE = RecordCreateIntentExtension/Info.plist;
@@ -1223,6 +1239,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RaisingChildrenRecord/RaisingChildrenRecord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
 				INFOPLIST_FILE = RaisingChildrenRecord/Info.plist;
@@ -1243,6 +1260,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RaisingChildrenRecord/RaisingChildrenRecord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U7VG5Q4924;
 				INFOPLIST_FILE = RaisingChildrenRecord/Info.plist;

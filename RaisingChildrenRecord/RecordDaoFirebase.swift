@@ -10,6 +10,8 @@ import Foundation
 
 import Firebase
 
+import Shared
+
 public class RecordDaoFirebase: RecordDao {
     static let shared = RecordDaoFirebase()
     let ref: DatabaseReference!

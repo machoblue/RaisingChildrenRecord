@@ -64,8 +64,9 @@ public class Command {
     static public func id(of behaviorName: String) -> Int {
         var id: Int?
         for value in values {
-            if (value.name == behaviorName) {
+            if (value.behaviorName == behaviorName) {
                 id = value.id
+                break
             }
         }
         return id!

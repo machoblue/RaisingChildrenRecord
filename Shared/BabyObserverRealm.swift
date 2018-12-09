@@ -12,8 +12,8 @@ import RealmSwift
 
 import Shared
 
-class BabyObserverRealm: BabyObserver {
-    static let shared = BabyObserverRealm()
+public class BabyObserverRealm: BabyObserver {
+    public static let shared = BabyObserverRealm()
     var realm: Realm!
     var notificationToken: NotificationToken?
     var babies: [BabyModel] = []
@@ -27,19 +27,19 @@ class BabyObserverRealm: BabyObserver {
         }
     }
     
-    func observeAdd(with callback: @escaping (BabyModel) -> Void) {
+    public func observeAdd(with callback: @escaping (BabyModel) -> Void) {
         // do nothing
     }
     
-    func observeChange(with callback: @escaping (BabyModel) -> Void) {
+    public func observeChange(with callback: @escaping (BabyModel) -> Void) {
         // do nothing
     }
     
-    func observeRemove(with callback: @escaping (BabyModel) -> Void) {
+    public func observeRemove(with callback: @escaping (BabyModel) -> Void) {
         // do nothing
     }
     
-    func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void) {
+    public func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void) {
         let results = realm.objects(Baby.self)
         
         notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in

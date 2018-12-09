@@ -10,7 +10,7 @@ import Foundation
 
 import Shared
 
-protocol RecordObserver {
+public protocol RecordObserver {
     func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void)
     func observe(babyId: String, from: Date, to: Date, with callback: @escaping([(RecordModel, Change)]) -> Void)
     func reload()

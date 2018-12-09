@@ -19,6 +19,7 @@ public class RecordDaoRealm: RecordDao {
     }
     
     public func insertOrUpdate(_ record: RecordModel) {
+        print("*** RecordDaoRealm.insertOrUpdate *** ")
         try! self.realm.write {
             guard let id = record.id else { return }
             let results = self.realm.objects(Record.self).filter("id == %@", id)

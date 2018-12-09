@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 public class RecordDaoFactory {
     public static let shared = RecordDaoFactory()
     private init() {

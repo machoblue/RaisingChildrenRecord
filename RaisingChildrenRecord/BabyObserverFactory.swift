@@ -10,13 +10,13 @@ import Foundation
 
 import Shared
 
-class BabyObserverFactory {
-    static let shared = BabyObserverFactory()
+public class BabyObserverFactory {
+    public static let shared = BabyObserverFactory()
     
     private init() {
     }
     
-    func createBabyObserver(_ databaseType: DatabaseType) -> BabyObserver {
+    public func createBabyObserver(_ databaseType: DatabaseType) -> BabyObserver {
         switch databaseType {
         case .Local:
             return BabyObserverRealm.shared

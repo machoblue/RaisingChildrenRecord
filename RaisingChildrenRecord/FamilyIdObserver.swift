@@ -10,6 +10,8 @@ import Foundation
 
 import Firebase
 
+import Shared
+
 class FamilyIdObserver {
     static let shared = FamilyIdObserver()
     var userDefaults: UserDefaults!

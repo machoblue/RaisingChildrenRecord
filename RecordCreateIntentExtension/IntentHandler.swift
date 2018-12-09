@@ -130,16 +130,18 @@ extension IntentHandler: RecordCreateIntentHandling {
         (RecordCreateIntentResponse) -> Void) {
         let response = RecordCreateIntentResponse(code: .success, userActivity: nil)
         print("*** IntentHandler.handle ***", intent)
-        
+
         guard let babyName = intent.baby, let behavior = intent.behavior else { return }
         guard let babyId = BabyDaoRealm.shared.id(from: babyName) else { return }
-        
+
         let commandId = Command.id(of: behavior).description
-        
+
         let record = RecordModel(babyId: babyId, commandId: commandId)
 
+//        RecordDaoRealm.shared.insertOrUpdate(record)
         let recordDataManager = RecordDataManager()
         recordDataManager.createRecord(record)
+        print("*** IntentHandler.handle recordDataManager.createRecord ***:", record)
 
         completion(response)
     }
@@ -147,12 +149,13 @@ extension IntentHandler: RecordCreateIntentHandling {
 
 extension BabyDaoRealm {
     public func id(from name: String) -> String? {
-        for baby in self.findAll() {
-            if (name == baby.name) {
-                return baby.id
-            }
-        }
-        return nil
+//        for baby in self.findAll() {
+//            if (name == baby.name) {
+//                return baby.id
+//            }
+//        }
+//        return nil
+        return self.findAll().first?.id
     }
 }
 
