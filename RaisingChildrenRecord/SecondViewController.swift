@@ -287,7 +287,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         self.ref.child("users").child(userId).child("families").removeValue()
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
+        UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: ""])
     }
     
     func showAlert(title: String, message: String) {
