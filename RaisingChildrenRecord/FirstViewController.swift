@@ -35,30 +35,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
         self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
-        
-        notificationToken = NotificationCenter.default.addObserver(forName: dataChangedNotificationKey,
-                                                                   object: self,
-                                                                   queue: OperationQueue.main) {  [weak self] (notification) in
-                                                                    self!.restoreData()
-        }
-    }
-    
-    func restoreData() {
-        let recordDataManager = RecordDataManager()
-        let records = recordDataManager.records
-        print(" *** FirstViewController.restoreData *** ", records)
-        for record in records {
-            self.recordDao.insertOrUpdate(record)
-            self.recordDaoRemote.insertOrUpdate(record)
-        }
-        
-        recordDataManager.clear()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        print("*** FirstViewController.viewWillAppear ***")
-        super.viewWillAppear(animated)
-        
-        restoreData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,12 +156,12 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
             } else {
                 let index = self.index(of: unwrappedBaby)
                 let baby = babies![(index + 1) % babies!.count] // babies shouldn't be nil
-                userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: baby.id])
+                userDefaults.register(defaults: [UserDefaults.Keys.BabyId.rawValue: baby.id])
                 return baby
             }
             
         } else {
-            if let babyId = userDefaults.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String {
+            if let babyId = userDefaults.object(forKey: UserDefaults.Keys.BabyId.rawValue) as? String {
                 for b in babies! { // babies shouldn't be nil
                     if (b.id == babyId) {
                         return b
@@ -194,7 +170,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
             }
             
             let baby = babies!.first! // babies and first shouldn't be nil
-            userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: baby.id])
+            userDefaults.register(defaults: [UserDefaults.Keys.BabyId.rawValue: baby.id])
             return baby
         }
     }

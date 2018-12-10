@@ -30,10 +30,6 @@ public class RecordObserverRealm: RecordObserver {
     
     func initRecordRef() {
         self.realm = try! Realm()
-        self.results = realm.objects(Record.self)
-        for record in results {
-            self.records.append(self.recordModel(from: record))
-        }
     }
     
     
@@ -42,9 +38,14 @@ public class RecordObserverRealm: RecordObserver {
     }
     
     public func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
-        print("*** RecordObserverRealm.observe ***")
+        print("*** RecordObserverRealm.observe ***", babyId, from, to)
         
-        notificationToken = self.results.filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to).observe { [weak self] (changes: RealmCollectionChange) in
+        self.results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
+        for record in results {
+            self.records.append(self.recordModel(from: record))
+        }
+        
+        notificationToken = self.results.observe { [weak self] (changes: RealmCollectionChange) in
             print("*** RecordObserverRealm.observe.results.observe*** ", changes)
             var myChanges: [(RecordModel, Change)] = []
             switch changes {
@@ -53,8 +54,9 @@ public class RecordObserverRealm: RecordObserver {
                     myChanges.append((record, .Init))
                 }
             case .update(_, let deletions, let insertions, let modifications):
-                for deletion in self!.reverce(deletions){
+                for deletion in self!.reverce(deletions) {
                     let target = self!.records[deletion]
+                    print("*** RecordObserverRealm.observe.results.observe *** deleteTarget:", target)
                     self!.records.remove(at: deletion)
                     
                     myChanges.append((target, .Delete))

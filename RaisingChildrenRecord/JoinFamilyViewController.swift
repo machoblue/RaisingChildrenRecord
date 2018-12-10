@@ -66,7 +66,7 @@ class JoinFamilyViewController: UIViewController, UITextFieldDelegate {
                 print("Succeed Joining")
             }
         }
-        UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId ?? ""])
+        UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId ?? ""])
         dismiss(animated: true, completion: nil)
     }
     

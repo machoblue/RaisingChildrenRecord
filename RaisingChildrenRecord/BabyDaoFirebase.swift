@@ -18,7 +18,6 @@ public class BabyDaoFirebase: BabyDao {
     let ref: DatabaseReference!
 
     private init() {
-        FirebaseApp.configureIfNeed()
         self.ref = Database.database().reference()
     }
     

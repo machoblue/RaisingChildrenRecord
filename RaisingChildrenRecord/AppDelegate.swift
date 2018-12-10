@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
     var recordObserver: RecordObserver?
     var recordDao: RecordDao?
+    var recordDaoRemote: RecordDao?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -55,6 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         if (babies?.count == 0) {
             babyDao?.insertOrUpdate(BabyModel(id: UUID().description, name: "赤ちゃん", born: Date(), female: false))
         }
+        
+        self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
+        self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
+        self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
+        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Remote)
+        
+        restoreRecords() // To receive records from IntentHandler
 
         return true
     }
@@ -110,6 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        print("*** AppDelegate.applicationWillEnterForeground ***")
+        restoreRecords() // To receive records from IntentHandler
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -127,8 +137,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         FamilyIdObserver.shared.observe(with: { (familyId) -> Void in
             print("*** AppDelegate.observeRemote.FamilyIdObserver.shared.observe ***")
 
-            self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
-            
             self.babyObserver?.observeAdd(with: {(baby) -> Void in
                 print("*** AppDelegate.observeRemote.observeAdd ***")
                 self.babyDao?.insertOrUpdate(baby)
@@ -148,9 +156,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     
     func observerRemoteRecords() {
         print("*** AppDelegate.observerRemoteRecords ***")
-        self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
-        
-        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Remote)
         self.recordObserver?.observe(with: { (recordAndChangeArray) in
             for recordAndChange in recordAndChangeArray {
                 let record = recordAndChange.0
@@ -169,5 +174,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             }
         })
     }
+    
+    func restoreRecords() {
+        let recordDataManager = RecordDataManager()
+        let records = recordDataManager.records
+        for record in records {
+            recordDao?.insertOrUpdate(record)
+            recordDaoRemote?.insertOrUpdate(record)
+        }
+        
+        recordDataManager.clear()
+    }
+    
 }
 

@@ -18,7 +18,7 @@ class BabyObserverFirebase: BabyObserver {
     
     private init() {
         self.ref = Database.database().reference()
-        self.familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        self.familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard let familyId = self.familyId else { return }
         self.babiesRef = self.ref.child("families").child(familyId).child("babies")
     }

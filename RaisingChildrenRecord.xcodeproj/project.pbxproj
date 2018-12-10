@@ -38,12 +38,10 @@
 		9C186E9F21BB675C00A089EF /* BabyObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */; };
 		9C186EA121BB675C00A089EF /* RecordObserverRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */; };
 		9C186EA321BB699C00A089EF /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E5216D75BC00284EDE /* Change.swift */; };
-		9C186EA421BB6A1000A089EF /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */; };
 		9C186EA521BB6C1C00A089EF /* FamilyIdObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */; };
 		9C186EA621BBBFBA00A089EF /* BabyDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */; };
 		9C186EA721BBBFBA00A089EF /* BabyObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */; };
 		9C186EA821BBBFBA00A089EF /* RecordDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */; };
-		9C186EA921BBBFBA00A089EF /* FirebaseApp+ConfigureIfNeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */; };
 		9C186EAA21BBBFBA00A089EF /* BabyObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */; };
 		9C186EAB21BBBFBA00A089EF /* RecordObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */; };
 		9C186EAC21BBBFBA00A089EF /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
@@ -158,7 +156,6 @@
 		0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBabyViewController.swift; sourceTree = "<group>"; };
 		0C0F7E8C210D2F520040D268 /* CustomTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTitleView.xib; sourceTree = "<group>"; };
 		0C0F7E8E210D30750040D268 /* UICustomTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICustomTitleView.swift; sourceTree = "<group>"; };
-		0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		0C2F9E66214DDE7E00CFCD2F /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		0C2F9E68214F23C400CFCD2F /* EditMilkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMilkViewController.swift; sourceTree = "<group>"; };
 		0C39F7A021069ABC00302D76 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -229,7 +226,6 @@
 		9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFirebase.swift; sourceTree = "<group>"; };
 		9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFactory.swift; sourceTree = "<group>"; };
 		9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
-		9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseApp+ConfigureIfNeed.swift"; sourceTree = "<group>"; };
 		9CE76AF321854F7D002B00ED /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		9CE76AFA2187432B002B00ED /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE76AFC2187432B002B00ED /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
@@ -373,7 +369,6 @@
 				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
 				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
 				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
-				9CDA326E218E813E00F38D61 /* FirebaseApp+ConfigureIfNeed.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -416,7 +411,6 @@
 		9CE76AFB2187432B002B00ED /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0C2F9E64214DD43D00CFCD2F /* UserDefaultsKey.swift */,
 				9CBAE9E5216D75BC00284EDE /* Change.swift */,
 				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
 				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
@@ -938,7 +932,6 @@
 			files = (
 				9C186EA721BBBFBA00A089EF /* BabyObserverFirebase.swift in Sources */,
 				9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */,
-				9C186EA921BBBFBA00A089EF /* FirebaseApp+ConfigureIfNeed.swift in Sources */,
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
 				0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */,
@@ -994,7 +987,6 @@
 				9CDA3260218E6F5200F38D61 /* Record.swift in Sources */,
 				9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */,
 				9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */,
-				9C186EA421BB6A1000A089EF /* UserDefaultsKey.swift in Sources */,
 				9CDA3261218E6F5200F38D61 /* RecordDao.swift in Sources */,
 				9CE76B182187435C002B00ED /* Utils.swift in Sources */,
 				9C186E9A21BB675C00A089EF /* BabyObserver.swift in Sources */,

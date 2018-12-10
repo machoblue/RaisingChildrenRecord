@@ -21,12 +21,18 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var recordObserver: RecordObserver!
+    var babyDao: BabyDao!
 
     // MARK: - ViewController lifecycle callback
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
+        self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
+        
+        self.recordObserver.reload()
+        self.records = []
+        self.observeRecord()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,10 +52,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
-        
-        self.recordObserver.reload()
-        self.records = []
-        self.observeRecord()
     }
     
     
@@ -145,13 +147,13 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             index = index + 1
         }
+        print("*** RecordsViewController.delete *** records.count:", records.count)
     }
     
     func observeRecord() {
         print("*** RecordViewController.observeRecord ***")
         guard let date = self.date else { return }
-        let realm = try! Realm()
-        let babyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String ?? realm.objects(Baby.self).first?.id
+        let babyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.BabyId.rawValue) as? String ?? babyDao.findAll().first?.id
         guard let unwrappedBabyId = babyId else { return }
         
         let from = Calendar.current.startOfDay(for: date)
@@ -162,8 +164,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             for recordAndChange in recordAndChanges {
                 let record = recordAndChange.0
                 let change = recordAndChange.1
+                print("*** RecordViewController.observeRecord.recordObserver.observe.for *** :", recordAndChange)
 
-                guard record.babyId == unwrappedBabyId && from <= record.dateTime! && record.dateTime! <= to else { continue }
                 switch change {
                 case .Init:
                     self.records.append(record)

@@ -139,9 +139,8 @@ extension IntentHandler: RecordCreateIntentHandling {
         let record = RecordModel(babyId: babyId, commandId: commandId)
 
 //        RecordDaoRealm.shared.insertOrUpdate(record)
-        let recordDataManager = RecordDataManager()
-        recordDataManager.createRecord(record)
-        print("*** IntentHandler.handle recordDataManager.createRecord ***:", record)
+        RecordDataManager().createRecord(record)
+        print("*** IntentHandler.handle recordDaoRealm.insertOrUpdate ***:", record)
 
         completion(response)
     }

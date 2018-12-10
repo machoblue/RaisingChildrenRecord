@@ -21,7 +21,7 @@ class RecordObserverFirebase: RecordObserver {
     }
     
     func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
-        recordsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        recordsRef?.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let recordsDict = snapshot.value as? NSDictionary else { return }
             for key in recordsDict.allKeys {
                 let recordDict = recordsDict.value(forKey: key as! String) as! NSDictionary
@@ -30,17 +30,17 @@ class RecordObserverFirebase: RecordObserver {
             }
         })
 
-        recordsRef.observe(.childAdded, with: { (snapshot) in
+        recordsRef?.observe(.childAdded, with: { (snapshot) in
             guard let newRecord = self.record(from: snapshot) else { return }
             callback([(newRecord, Change.Insert)])
         })
 
-        recordsRef.observe(.childChanged, with: { (snapshot) in
+        recordsRef?.observe(.childChanged, with: { (snapshot) in
             guard let newRecord = self.record(from: snapshot) else { return }
             callback([(newRecord, Change.Modify)])
         })
 
-        recordsRef.observe(.childRemoved, with: { (snapshot) in
+        recordsRef?.observe(.childRemoved, with: { (snapshot) in
             guard let newRecord = self.record(from: snapshot) else { return }
             callback([(newRecord, Change.Delete)])
         })
@@ -75,7 +75,7 @@ class RecordObserverFirebase: RecordObserver {
     }
     
     func initRecordsRef() {
-        guard let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String else { return }
+        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
 
         self.recordsRef = Database.database().reference().child("families").child(familyId).child("records")
     }

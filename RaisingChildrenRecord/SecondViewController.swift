@@ -193,7 +193,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - Utility
     func isSelected(_ babyId: String) -> Bool {
-        let currentBabyId = UserDefaults.standard.object(forKey: UserDefaultsKey.BabyId.rawValue) as? String
+        let currentBabyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.BabyId.rawValue) as? String
         if let unwrappedCurrentBabyId = currentBabyId {
             return unwrappedCurrentBabyId == babyId
         } else {
@@ -205,11 +205,11 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     func select(_ babyId: String) {
         let userDefaults = UserDefaults.standard
-        userDefaults.register(defaults: [UserDefaultsKey.BabyId.rawValue: babyId])
+        userDefaults.register(defaults: [UserDefaults.Keys.BabyId.rawValue: babyId])
     }
     
     func createFamily() {
-        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId! == "" else {
             showAlert(title: "ご注意", message: "すでに家族に加わっているため、新しい家族を作成できません。")
             return // return when userDefaultsFamilyId is nil or ""
@@ -226,7 +226,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func addFamily() {
-        let familyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard let _ = familyId, familyId != "" else {
             showAlert(title: "ご注意", message: "他のユーザーを家族に加える前に、新しく家族を作成してください。")
             return
@@ -253,7 +253,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func joinFamily() {
-        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId == "" else {
             showAlert(title: "ご注意", message: "すでに家族に加わっているため、他の家族には加われません。")
             return // return when userDefaultsFamilyId is nil or ""
@@ -265,7 +265,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func deleteFamilyData() {
-        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaultsKey.FamilyId.rawValue) as? String
+        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard let _ = userDefaultsFamilyId, userDefaultsFamilyId! != "" else {
             showAlert(title: "ご注意", message: "どの家族にも加わっていないため、削除機能は利用できません。")
             return // return when userDefaultsFamilyId is nil or ""
@@ -287,7 +287,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         self.ref.child("users").child(userId).child("families").removeValue()
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.FamilyId.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
     }
     
     func showAlert(title: String, message: String) {

@@ -69,7 +69,7 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
                     if let _ = error {
                     } else {
                         DispatchQueue.main.async {
-                            UserDefaults.standard.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
+                            UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId])
                         }
 
                         let realm = try! Realm()

@@ -17,7 +17,6 @@ public class RecordDaoFirebase: RecordDao {
     let ref: DatabaseReference!
     
     private init() {
-        FirebaseApp.configureIfNeed()
         self.ref = Database.database().reference()
     }
     

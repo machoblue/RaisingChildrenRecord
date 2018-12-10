@@ -27,7 +27,7 @@ class FamilyIdObserver {
             guard let familiesDict = snapshot.value as? NSDictionary else { return }
             guard let familyId = familiesDict.allKeys.first as? String else { return }
             DispatchQueue.main.async {
-                self.userDefaults.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
+                self.userDefaults.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId])
                 callback(familyId)
             }
         })
@@ -35,7 +35,7 @@ class FamilyIdObserver {
             guard let familiesDict = snapshot.value as? NSDictionary else { return }
             guard let familyId = familiesDict.allKeys.first as? String else { return }
             DispatchQueue.main.async {
-                self.userDefaults.register(defaults: [UserDefaultsKey.FamilyId.rawValue: familyId])
+                self.userDefaults.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId])
                 callback(familyId)
             }
         })
