@@ -47,6 +47,8 @@
 		9C186EAC21BBBFBA00A089EF /* BabyDaoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */; };
 		9C186EAD21BBBFBA00A089EF /* RecordObserverFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */; };
 		9C186EAE21BBBFBA00A089EF /* RecordDaoFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */; };
+		9C186EB021C4C30400A089EF /* RecordDetailTableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */; };
+		9C186EB621C53F3700A089EF /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
 		9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB33218C1CDC005F068E /* RecordDataManager.swift */; };
@@ -198,6 +200,8 @@
 		9C186E9521B8959800A089EF /* Realm+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Configuration.swift"; sourceTree = "<group>"; };
 		9C186E9721B8995E00A089EF /* RaisingChildrenRecord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaisingChildrenRecord.entitlements; sourceTree = "<group>"; };
 		9C186E9821B8D1D300A089EF /* RecordCreateIntentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RecordCreateIntentExtension.entitlements; sourceTree = "<group>"; };
+		9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTableConfiguration.swift; sourceTree = "<group>"; };
+		9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
 		9C62EB33218C1CDC005F068E /* RecordDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDataManager.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
 				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
 				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
+				9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */,
+				9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -934,12 +940,14 @@
 				9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */,
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
+				9C186EB621C53F3700A089EF /* RecordDetailViewController.swift in Sources */,
 				0C007B432147F0C80001802A /* CustomCollectionViewCell.swift in Sources */,
 				9C186EAE21BBBFBA00A089EF /* RecordDaoFirebase.swift in Sources */,
 				0C0DCB142159AC28001D1FCC /* EditBabyViewController.swift in Sources */,
 				0C0F7E8F210D30750040D268 /* UICustomTitleView.swift in Sources */,
 				0C2F9E69214F23C400CFCD2F /* EditMilkViewController.swift in Sources */,
 				9C186EAB21BBBFBA00A089EF /* RecordObserverFactory.swift in Sources */,
+				9C186EB021C4C30400A089EF /* RecordDetailTableConfiguration.swift in Sources */,
 				0CBD262120F6CBE700542E1B /* SecondViewController.swift in Sources */,
 				9C186EA521BB6C1C00A089EF /* FamilyIdObserver.swift in Sources */,
 				9CBAE9D2216AE19800284EDE /* CreateFamilyViewController.swift in Sources */,

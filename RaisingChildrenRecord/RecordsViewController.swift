@@ -90,11 +90,11 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let record = records[indexPath.row]
         let storyboard: UIStoryboard = self.storyboard!
-        let editMilkViewController = storyboard.instantiateViewController(withIdentifier: "EditMilkViewController") as! EditMilkViewController
-        editMilkViewController.id = record.id!
-        self.present(editMilkViewController, animated: true, completion: nil)
+        let recordDetailViewController = storyboard.instantiateViewController(withIdentifier: "RecordDetailViewController") as! RecordDetailViewController
+        let record = records[indexPath.row]
+        recordDetailViewController.configure(record: record)
+        self.present(recordDetailViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
