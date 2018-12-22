@@ -27,7 +27,7 @@ import Foundation
  */
 struct RecordDetailTableConfiguration {
     enum RecordType {
-        case /*milk, breast, temperature, poo, */sleep/*, awake, other*/
+        case milk,/* breast, temperature, poo, */sleep, awake, other
     }
     
     enum SectionType: String {
@@ -57,6 +57,13 @@ struct RecordDetailTableConfiguration {
     
     typealias SectionModel = (type: SectionType, rowCount: Int, cellReuseIdentifier: String)
     
+    private static let milkRecordSectionModels: [SectionModel] = [
+        SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
+        SectionModel(type: .milliLitters, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.quantityCell.rawValue),
+        SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
+        SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
+    ]
+    
     private static let sleepRecordSectionModels: [SectionModel] = [
         SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
         SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
@@ -65,7 +72,14 @@ struct RecordDetailTableConfiguration {
     
     var sections: [SectionModel] {
         switch recordType {
-            case .sleep: return RecordDetailTableConfiguration.sleepRecordSectionModels
+        case .milk:
+            return RecordDetailTableConfiguration.milkRecordSectionModels
+        case .sleep:
+            return RecordDetailTableConfiguration.sleepRecordSectionModels
+        case .awake:
+            return RecordDetailTableConfiguration.sleepRecordSectionModels // same sectionModels as sleep
+        case .other:
+            return RecordDetailTableConfiguration.sleepRecordSectionModels // same sectionModels as sleep
         }
     }
 }

@@ -14,11 +14,11 @@ public class RecordModel: NSObject, Codable {
     public var userId: String?
     public var commandId: String?
     public var dateTime: Date?
-    public var value1: String?
-    public var value2: String?
-    public var value3: String?
-    public var value4: String?
-    public var value5: String?
+    public var value1: String? // note
+    public var value2: String? // amount1
+    public var value3: String? // unit1
+    public var value4: String? // amount2
+    public var value5: String? // unit2
     
     override public var description: String {
         return "id=\(self.id ?? ""), babyId=\(self.babyId ?? "")"

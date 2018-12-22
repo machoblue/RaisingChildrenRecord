@@ -14,41 +14,46 @@ class RecordDetailViewController: UIViewController {
     
     private(set) var record: RecordModel!
     
-    private var tableConfig = RecordDetailTableConfiguration(recordType: .sleep)
+    private var tableConfig: RecordDetailTableConfiguration!
     
     private weak var dateTimeButton: UIButton?
+    private weak var datePicker: UIDatePicker?
     private weak var deleteButton: UIButton?
     private weak var quantityLabel: UILabel?
     private weak var noteTextField: UITextField?
     
     private let f = DateFormatter()
     
+    private var hideDatePicker = true
+
+    @IBOutlet weak var tableView: UITableView!
+
+    private weak var datePickerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var titleBar: UINavigationItem!
+    private var titleStr: String!
+    
+    private var recordDao: RecordDao!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleBar.title = titleStr
+        tableView.allowsSelection = false
         
         // Do any additional setup after loading the view.
         f.locale = Locale(identifier: "ja_JP")
         f.dateStyle = .medium
         f.timeStyle = .short
+        
+        recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func configure(record: RecordModel) {
         self.record = record
         var recordType: RecordDetailTableConfiguration.RecordType? = nil
-//        if (record.commandId == "1") {
-//            recordType = .milk
-//        }
+        if (record.commandId == "1") {
+            recordType = .milk
+        }
 //        if (record.commandId == "2") {
 //            recordType = .breast
 //        }
@@ -61,26 +66,32 @@ class RecordDetailViewController: UIViewController {
         if (record.commandId == "5") {
             recordType = .sleep
         }
-//        if (record.commandId == "6") {
-//            recordType = .awake
-//        }
-//        if (record.commandId == "7") {
-//            recordType = .other
-//        }
+        if (record.commandId == "6") {
+            recordType = .awake
+        }
+        if (record.commandId == "7") {
+            recordType = .other
+        }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
+        titleStr = Command.name(id: Int(record.commandId!)!)
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {
         print("*** RecordDetailViewControler.stepperChanged ***")
+        record.value2 = Int(sender.value).description
+        quantityLabel?.text = record.value2! + "ml"
     }
     
     @IBAction private func onDateTimeButtonClicked(_ sender: UIButton) {
         print("*** RecordDetailViewControler.onDateTimeButtonClicked ***")
+        hideDatePicker = !hideDatePicker
+        tableView.reloadData()
     }
     
     @IBAction private func onDeleteButtonClicked(_ sender: UIButton) {
         print("*** RecordDetailViewControler.onDeleteButtonClicked ***")
+        recordDao.delete(record)
         dismiss(animated: true, completion: nil)
     }
 
@@ -91,8 +102,19 @@ class RecordDetailViewController: UIViewController {
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
         print("*** RecordDetailViewControler.onSaveButtonClicked ***")
+        recordDao.insertOrUpdate(record)
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func onValueChanged(sender: UIDatePicker!) {
+        self.record.dateTime = sender.date
+        dateTimeButton?.setTitle(f.string(from: self.record.dateTime!), for: .normal)
+    }
+    
+    @IBAction func onTextFieldChanged(sender: UITextField!) {
+        self.record.value1 = sender.text
+    }
+    
 }
 
 extension RecordDetailViewController: UITableViewDataSource {
@@ -118,14 +140,21 @@ extension RecordDetailViewController: UITableViewDataSource {
     private func configure(cell: UITableViewCell, at indexPath: IndexPath, with sectionModel: RecordDetailTableConfiguration.SectionModel) {
         switch sectionModel.type {
         case .dateTime:
-            print("*** RecordDetailViewController.configure case .dateTime ***")
             if let cell = cell as? DateTimeTableViewCell {
                 dateTimeButton = cell.button
-                let title = record.dateTime == nil ? "dateTime is nil" : f.string(from: record.dateTime!)
-                print("*** RecordDetailViewController.configure case .dateTime ***:", title)
                 dateTimeButton?.setTitle(title, for: .normal)
-//                dateTimeButton?.setTitle(f.string(from: record.dateTime!), for: .normal)
+                dateTimeButton?.setTitle(f.string(from: record.dateTime!), for: .normal)
                 dateTimeButton?.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
+
+                datePicker = cell.datePicker
+                datePicker?.timeZone = NSTimeZone.local
+                datePicker?.locale = Locale(identifier: "en_US") // en_US?
+                datePicker?.date = record.dateTime!
+                datePicker?.addTarget(self, action: #selector(onValueChanged), for: .valueChanged)
+                
+                datePickerHeightConstraint = cell.datePickerHeightConstraint
+                datePickerHeightConstraint.constant = hideDatePicker ? 0 : 216
+                
             }
         case .deleteButton:
             if let cell = cell as? DeleteButtonTableViewCell {
@@ -136,13 +165,26 @@ extension RecordDetailViewController: UITableViewDataSource {
         case .note:
             if let cell = cell as? TextTableViewCell {
                 noteTextField = cell.textField
-                // TODO: RecordModelのメモの値をnoteTextFieldに設定する
+                noteTextField!.layer.cornerRadius = 10
+                noteTextField!.text = record.value1
+                noteTextField!.addTarget(self, action: #selector(onTextFieldChanged), for: .editingChanged)
             }
             break
         case .milliLitters:
             if let cell = cell as? QuantityTableViewCell {
-                quantityLabel = cell.label
+                cell.stepper.stepValue = 10
+                cell.stepper.minimumValue = 0
+                cell.stepper.maximumValue = 500
+                
+                if record.value2 == nil || record.value2 == "" {
+                    record.value2 = 100.description
+                }
+                
+                cell.stepper.value = Double(record.value2!)!
                 cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
+                
+                quantityLabel = cell.label
+                quantityLabel?.text = record.value2! + "ml"
             }
         case .minutes:
             if let cell = cell as? QuantityTableViewCell {
@@ -165,14 +207,30 @@ extension RecordDetailViewController: UITableViewDataSource {
 
 extension RecordDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let section = indexPath.section
-//        let row = indexPath.row
+        let section = indexPath.section
+        let row = indexPath.row
+        let isDateTimeCell = section == 0 && row == 0
+        if (isDateTimeCell && !hideDatePicker) {
+            return 276
+        }
+
         return 60
+    }
+}
+
+extension RecordDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // キーボードを閉じる
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
 
 class DateTimeTableViewCell: UITableViewCell {
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerHeightConstraint: NSLayoutConstraint!
 }
 
 class DatePickerTableViewCell: UITableViewCell {
