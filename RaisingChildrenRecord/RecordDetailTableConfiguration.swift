@@ -29,7 +29,7 @@ import Shared
  */
 struct RecordDetailTableConfiguration {
     enum RecordType {
-        case milk,/* breast, temperature,*/ poo, sleep, awake, other
+        case milk, breast, temperature, poo, sleep, awake, other
     }
     
     enum SectionType: String {
@@ -66,6 +66,20 @@ struct RecordDetailTableConfiguration {
         SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
     ]
     
+    private static let breastRecordSectionModels: [SectionModel] = [
+        SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
+        SectionModel(type: .minutes, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.quantityCell.rawValue),
+        SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
+        SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
+    ]
+    
+    private static let temperatureRecordSectionModels: [SectionModel] = [
+        SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
+        SectionModel(type: .temperature, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.quantityCell.rawValue),
+        SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
+        SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
+    ]
+    
     private static let pooRecordSectionModels: [SectionModel] = [
         SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
         SectionModel(type: .hardness, rowCount: Command.HardnessOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
@@ -84,6 +98,10 @@ struct RecordDetailTableConfiguration {
         switch recordType {
         case .milk:
             return RecordDetailTableConfiguration.milkRecordSectionModels
+        case .breast:
+            return RecordDetailTableConfiguration.breastRecordSectionModels
+        case .temperature:
+            return RecordDetailTableConfiguration.temperatureRecordSectionModels
         case .poo:
             return RecordDetailTableConfiguration.pooRecordSectionModels
         case .sleep:

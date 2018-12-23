@@ -54,12 +54,12 @@ class RecordDetailViewController: UIViewController {
         if (record.commandId == "1") {
             recordType = .milk
         }
-//        if (record.commandId == "2") {
-//            recordType = .breast
-//        }
-//        if (record.commandId == "3") {
-//            recordType = .temperature
-//        }
+        if (record.commandId == "2") {
+            recordType = .breast
+        }
+        if (record.commandId == "3") {
+            recordType = .temperature
+        }
         if (record.commandId == "4") {
             recordType = .poo
         }
@@ -78,9 +78,18 @@ class RecordDetailViewController: UIViewController {
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {
-        print("*** RecordDetailViewControler.stepperChanged ***")
         record.value2 = Int(sender.value).description
         quantityLabel?.text = record.value2! + "ml"
+    }
+    
+    @IBAction private func onStepperChanged2(_ sender: UIStepper) {
+        record.value2 = Int(sender.value).description
+        quantityLabel?.text = record.value2! + "分"
+    }
+    
+    @IBAction private func onStepperChanged3(_ sender: UIStepper) {
+        record.value2 = (round(Double(sender.value) * 10) / 10).description
+        quantityLabel?.text = record.value2! + "℃"
     }
     
     @IBAction private func onDateTimeButtonClicked(_ sender: UIButton) {
@@ -188,13 +197,35 @@ extension RecordDetailViewController: UITableViewDataSource {
             }
         case .minutes:
             if let cell = cell as? QuantityTableViewCell {
+                cell.stepper.stepValue = 5
+                cell.stepper.minimumValue = 0
+                cell.stepper.maximumValue = 60
+                
+                if record.value2 == nil || record.value2 == "" {
+                    record.value2 = 10.description
+                }
+                
+                cell.stepper.value = Double(record.value2!)!
+                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged2(_:)), for: .valueChanged)
+                
                 quantityLabel = cell.label
-                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
+                quantityLabel?.text = record.value2! + "分"
             }
         case .temperature:
             if let cell = cell as? QuantityTableViewCell {
+                cell.stepper.stepValue = 0.1
+                cell.stepper.minimumValue = 34.0
+                cell.stepper.maximumValue = 42.0
+                
+                if record.value2 == nil || record.value2 == "" {
+                    record.value2 = 37.0.description
+                }
+                
+                cell.stepper.value = Double(record.value2!)!
+                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged3(_:)), for: .valueChanged)
+                
                 quantityLabel = cell.label
-                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
+                quantityLabel?.text = record.value2! + "℃"
             }
         case .hardness:
             if record.value2 == nil || record.value2 == "" {
