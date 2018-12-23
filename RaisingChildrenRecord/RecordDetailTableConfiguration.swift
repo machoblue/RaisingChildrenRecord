@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Shared
+
 /*
  共通
   時間
@@ -27,7 +29,7 @@ import Foundation
  */
 struct RecordDetailTableConfiguration {
     enum RecordType {
-        case milk,/* breast, temperature, poo, */sleep, awake, other
+        case milk,/* breast, temperature,*/ poo, sleep, awake, other
     }
     
     enum SectionType: String {
@@ -64,6 +66,13 @@ struct RecordDetailTableConfiguration {
         SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
     ]
     
+    private static let pooRecordSectionModels: [SectionModel] = [
+        SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
+        SectionModel(type: .hardness, rowCount: Command.HardnessOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
+        SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
+        SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
+    ]
+    
     private static let sleepRecordSectionModels: [SectionModel] = [
         SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
         SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
@@ -74,6 +83,8 @@ struct RecordDetailTableConfiguration {
         switch recordType {
         case .milk:
             return RecordDetailTableConfiguration.milkRecordSectionModels
+        case .poo:
+            return RecordDetailTableConfiguration.pooRecordSectionModels
         case .sleep:
             return RecordDetailTableConfiguration.sleepRecordSectionModels
         case .awake:

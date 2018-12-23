@@ -38,7 +38,7 @@ class RecordDetailViewController: UIViewController {
         super.viewDidLoad()
         
         titleBar.title = titleStr
-        tableView.allowsSelection = false
+//        tableView.allowsSelection = false
         
         // Do any additional setup after loading the view.
         f.locale = Locale(identifier: "ja_JP")
@@ -60,9 +60,9 @@ class RecordDetailViewController: UIViewController {
 //        if (record.commandId == "3") {
 //            recordType = .temperature
 //        }
-//        if (record.commandId == "4") {
-//            recordType = .poo
-//        }
+        if (record.commandId == "4") {
+            recordType = .poo
+        }
         if (record.commandId == "5") {
             recordType = .sleep
         }
@@ -197,7 +197,13 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
             }
         case .hardness:
-            break
+            if record.value2 == nil || record.value2 == "" {
+                record.value2 = "normal"
+            }
+
+            let option = Command.HardnessOption.all[indexPath.row]
+            cell.textLabel?.text = option.label
+            cell.accessoryType = option.rawValue == record.value2 ? .checkmark : .none
         case .amount:
             break
         }
@@ -211,10 +217,33 @@ extension RecordDetailViewController: UITableViewDelegate {
         let row = indexPath.row
         let isDateTimeCell = section == 0 && row == 0
         if (isDateTimeCell && !hideDatePicker) {
-            return 276
+            return 266
         }
 
-        return 60
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let sectionModel: RecordDetailTableConfiguration.SectionModel = tableConfig.sections[section]
+        if sectionModel.type == RecordDetailTableConfiguration.SectionType.hardness {
+            guard let cell = tableView.cellForRow(at: indexPath),
+                let cellText = cell.textLabel?.text else {return}
+
+            if Command.HardnessOption(rawValue: record.value2!)?.label == cellText {
+            } else {
+                for row in 0..<tableConfig.sections[indexPath.section].rowCount {
+                    let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))
+                    cell?.accessoryType = .none
+                }
+
+                cell.accessoryType = .checkmark
+
+                record.value2 = Command.HardnessOption.all[indexPath.row].rawValue
+            }
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
