@@ -71,4 +71,42 @@ public class Command {
         }
         return id!
     }
+    
+    public enum HardnessOption: String {
+        case soft = "soft"
+        case normal = "normal"
+        case hard = "hard"
+        
+        public static let all: [HardnessOption] = [.soft, .normal, .hard]
+        
+        public var label: String {
+            switch self {
+            case .soft:
+                return "柔らかめ"
+            case .normal:
+                return "普通"
+            case .hard:
+                return "硬め"
+            }
+        }
+    }
+    
+    public enum AmountOption: String {
+        case little = "little"
+        case normal = "normal"
+        case much = "much"
+        
+        public static let all: [AmountOption] = [.little, .normal, .much]
+        
+        public var label: String {
+            switch self {
+            case .little:
+                return "少なめ"
+            case .normal:
+                return "普通"
+            case .much:
+                return "多め"
+            }
+        }
+    }
 }
