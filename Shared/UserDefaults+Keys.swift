@@ -12,5 +12,10 @@ extension UserDefaults {
     public enum Keys: String {
         case FamilyId
         case BabyId
+        case MilkMillilitters
+        case BreastMinutes
+        case Temperature
+        case PooHardness
+        case PooAmount
     }
 }
