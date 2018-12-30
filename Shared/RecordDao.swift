@@ -12,4 +12,6 @@ public protocol RecordDao {
     func insertOrUpdate(_ record: RecordModel)
     func delete(_ record: RecordModel)
     func find(id: String) -> RecordModel?
+    func find(babyId: String) -> [RecordModel]
+    func deleteAll()
 }

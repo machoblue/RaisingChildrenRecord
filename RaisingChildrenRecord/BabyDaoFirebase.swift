@@ -22,22 +22,28 @@ public class BabyDaoFirebase: BabyDao {
     }
     
     public func insertOrUpdate(_ baby: BabyModel) {
-        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
-        guard familyId != nil && familyId! != "" else { return }
+        guard FirebaseUtils.ready() else { return }
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
         let babyDict = ["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female] as [String : Any]
-        self.ref.child("families").child(familyId!).child("babies").child(baby.id).setValue(babyDict)
+        self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(babyDict)
     }
     
     public func delete(_ baby: BabyModel) {
-        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
-        guard familyId != nil && familyId! != "" else { return }
-        self.ref.child("families").child(familyId!).child("babies").child(baby.id).removeValue()
+        guard FirebaseUtils.ready() else { return }
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
+        self.ref.child("families").child(familyId).child("babies").child(baby.id).removeValue()
     }
     
     public func findAll() -> [BabyModel] {
         // do nothing
         let babies: [BabyModel] = []
         return babies
+    }
+    
+    public func deleteAll() {
+        guard FirebaseUtils.ready() else { return }
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
+        ref.child("families").child(familyId).child("babies").removeValue()
     }
     
 }

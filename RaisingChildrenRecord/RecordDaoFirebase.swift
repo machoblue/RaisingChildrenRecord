@@ -21,6 +21,7 @@ public class RecordDaoFirebase: RecordDao {
     }
     
     public func insertOrUpdate(_ record: RecordModel) {
+        guard FirebaseUtils.ready() else { return }
         print("*** RecordDaoFirebase.insertOrUpdate ***")
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
@@ -32,6 +33,7 @@ public class RecordDaoFirebase: RecordDao {
     }
     
     public func delete(_ record: RecordModel) {
+        guard FirebaseUtils.ready() else { return }
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
         guard let id = record.id else { return }
@@ -43,4 +45,15 @@ public class RecordDaoFirebase: RecordDao {
         // do nothing
         return nil
     }
+    
+    public func find(babyId: String) -> [RecordModel] {
+        return []
+    }
+    
+    public func deleteAll() {
+        guard FirebaseUtils.ready() else { return }
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
+        ref.child("families").child(familyId).child("records").removeValue()
+    }
+    
 }

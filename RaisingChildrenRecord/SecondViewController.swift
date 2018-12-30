@@ -11,6 +11,7 @@ import UIKit
 import RealmSwift
 
 import Firebase
+import FirebaseUI
 
 import Shared
 
@@ -209,15 +210,15 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func createFamily() {
+        guard let _ = Auth.auth().currentUser?.uid else {
+            showAuthAlert()
+            return
+        }
+        
         let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId! == "" else {
             showAlert(title: "ご注意", message: "すでに家族に加わっているため、新しい家族を作成できません。")
             return // return when userDefaultsFamilyId is nil or ""
-        }
-        
-        guard let _ = Auth.auth().currentUser?.uid else {
-            showAlert(title: "ご注意", message: "家族を作成するにはログインしてください。")
-            return
         }
         
         let storyboard: UIStoryboard = self.storyboard!
@@ -226,14 +227,14 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func addFamily() {
-        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
-        guard let _ = familyId, familyId != "" else {
-            showAlert(title: "ご注意", message: "他のユーザーを家族に加える前に、新しく家族を作成してください。")
+        guard let _ = Auth.auth().currentUser?.uid else {
+            showAuthAlert()
             return
         }
         
-        guard let _ = Auth.auth().currentUser?.uid else {
-            showAlert(title: "ご注意", message: "家族に加わるにはログインしてください。")
+        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String,
+            !familyId.isEmpty else {
+            showAlert(title: "ご注意", message: "他のユーザーを家族に加える前に、新しく家族を作成してください。")
             return
         }
         
@@ -242,7 +243,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         let expirationDate = Date() + 60 * 5 // 5 minutes
 
         // save onetime password and expiration date
-        self.ref.child("families").child(familyId!).child("passcode").setValue(["value": passcode, "expirationDate": expirationDate.timeIntervalSince1970])
+        self.ref.child("families").child(familyId).child("passcode").setValue(["value": passcode, "expirationDate": expirationDate.timeIntervalSince1970])
 
         // display familyId and onetime password
         let storyboard: UIStoryboard = self.storyboard!
@@ -253,6 +254,11 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func joinFamily() {
+        guard let _ = Auth.auth().currentUser?.uid else {
+            showAuthAlert()
+            return
+        }
+        
         let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId == "" else {
             showAlert(title: "ご注意", message: "すでに家族に加わっているため、他の家族には加われません。")
@@ -265,29 +271,31 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func deleteFamilyData() {
-        let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
-        guard let _ = userDefaultsFamilyId, userDefaultsFamilyId! != "" else {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            showAuthAlert()
+            return
+        }
+        
+        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String,
+            !familyId.isEmpty else {
             showAlert(title: "ご注意", message: "どの家族にも加わっていないため、削除機能は利用できません。")
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        guard let userId = Auth.auth().currentUser?.uid else {
-            showAlert(title: "ご注意", message: "家族を作成するにはログインしてください。")
-            return
-        }
-        
-        self.ref.child("families").child(userDefaultsFamilyId!).removeValue() {
+        self.ref.child("families").child(familyId).removeValue() {
             (error: Error?, ref: DatabaseReference) in
             if let error = error {
                 self.showAlert(title: "エラー", message: "データの削除に失敗しました。：" + error.localizedDescription)
                 
             } else {
-                print("Succeed Joining")
+                print("Succeed Deleting")
             }
         }
         
         self.ref.child("users").child(userId).child("families").removeValue()
-        UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: ""])
+        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
+        
+        FirebaseUtils.shared.invalidateObservation()
     }
     
     func showAlert(title: String, message: String) {
@@ -341,3 +349,37 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
 }
 
+extension SecondViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
+        print ("*** Authentication Complete *** ")
+    }
+    
+    func showAuthView() {
+        let authUI = FUIAuth.defaultAuthUI()!
+        authUI.delegate = self
+        
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth()
+        ]
+        authUI.providers = providers
+        
+        let authViewController = authUI.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
+    }
+    
+    func showAuthAlert() {
+        let title = "Googleログインが必要です。"
+        let message = "この機能を利用するためにはGoogleログインが必要です。Googleログインしますか？"
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
+            // do nothing
+        })
+        alert.addAction(cancelAction)
+        let loginAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
+            self.showAuthView()
+        })
+        alert.addAction(loginAction)
+        present(alert, animated: true, completion: nil) // display alert
+    }
+    
+}

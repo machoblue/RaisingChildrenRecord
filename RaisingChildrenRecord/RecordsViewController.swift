@@ -30,7 +30,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
         
-        self.recordObserver.reload()
         self.records = []
         self.observeRecord()
     }
@@ -108,14 +107,12 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // MARK: - Event
     @objc func onTitleViewClicked(notification: Notification) -> Void {
-        self.recordObserver.reload()
         self.records = []
         self.observeRecord()
     }
     
     @objc func onCommandButtonClicked(notification: Notification) -> Void {
         print("*** RecordsViewController.onCommandButtonClicked ***")
-        self.recordObserver.reload()
         self.records = []
         self.observeRecord()
     }

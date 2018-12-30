@@ -63,4 +63,20 @@ public class RecordDaoRealm: RecordDao {
         guard let r = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
         return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5)
     }
+    
+    public func find(babyId: String) -> [RecordModel] {
+        var records: [RecordModel] = []
+        let results = realm.objects(Record.self).filter("babyId == %@", babyId)
+        for r in results {
+            records.append(RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5))
+        }
+        return records
+    }
+    
+    public func deleteAll() {
+        try! realm.write {
+            realm.delete(realm.objects(Record.self))
+        }
+    }
+    
 }

@@ -17,10 +17,11 @@ class RecordObserverFirebase: RecordObserver {
     var recordsRef: DatabaseReference!
 
     private init() {
-        initRecordsRef()
     }
     
     func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+        guard FirebaseUtils.ready() else { return }
+        setup()
         recordsRef?.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let recordsDict = snapshot.value as? NSDictionary else { return }
             for key in recordsDict.allKeys {
@@ -69,22 +70,18 @@ class RecordObserverFirebase: RecordObserver {
         // do nothing
     }
     
-    func reload() {
-        self.clear()
-        self.initRecordsRef()
-    }
-    
-    func initRecordsRef() {
-        guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
+    func setup() {
+        recordsRef?.removeAllObservers()
 
-        self.recordsRef = Database.database().reference().child("families").child(familyId).child("records")
-    }
-    
-    func clear() {
-        self.recordsRef.removeAllObservers()
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
+        recordsRef = Database.database().reference().child("families").child(familyId).child("records")
     }
     
     deinit {
-        self.clear()
+        invalidate()
+    }
+    
+    public func invalidate() {
+        recordsRef?.removeAllObservers()
     }
 }

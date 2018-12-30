@@ -27,18 +27,6 @@ public class BabyObserverRealm: BabyObserver {
         }
     }
     
-    public func observeAdd(with callback: @escaping (BabyModel) -> Void) {
-        // do nothing
-    }
-    
-    public func observeChange(with callback: @escaping (BabyModel) -> Void) {
-        // do nothing
-    }
-    
-    public func observeRemove(with callback: @escaping (BabyModel) -> Void) {
-        // do nothing
-    }
-    
     public func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void) {
         let results = realm.objects(Baby.self)
         
@@ -79,8 +67,7 @@ public class BabyObserverRealm: BabyObserver {
     }
     
     deinit {
-        print("deinit")
-        notificationToken?.invalidate()
+        invalidate()
     }
     
     func sort(_ array: [Int]) -> [Int] {
@@ -93,6 +80,10 @@ public class BabyObserverRealm: BabyObserver {
         var temp = array
         temp.sort(by: {$1 < $0})
         return temp
+    }
+    
+    public func invalidate() {
+        notificationToken?.invalidate()
     }
     
 }

@@ -59,5 +59,11 @@ public class BabyDaoRealm: BabyDao {
         return babies
     }
     
+    public func deleteAll() {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(realm.objects(Baby.self))
+        }
+    }
     
 }

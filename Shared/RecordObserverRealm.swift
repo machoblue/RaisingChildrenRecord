@@ -20,18 +20,7 @@ public class RecordObserverRealm: RecordObserver {
     var records: [RecordModel] = []
 
     private init() {
-        self.initRecordRef()
     }
-    
-    public func reload() {
-        self.clear()
-        self.initRecordRef()
-    }
-    
-    func initRecordRef() {
-        self.realm = try! Realm()
-    }
-    
     
     public func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
         // do nothing
@@ -39,6 +28,9 @@ public class RecordObserverRealm: RecordObserver {
     
     public func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
         print("*** RecordObserverRealm.observe ***", babyId, from, to)
+        notificationToken?.invalidate()
+        records = []
+        realm = try! Realm()
         
         self.results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
         for record in results {
@@ -82,7 +74,7 @@ public class RecordObserverRealm: RecordObserver {
     }
     
     deinit {
-        clear()
+        invalidate()
     }
     
     func sort(_ array: [Int]) -> [Int] {
@@ -115,9 +107,8 @@ public class RecordObserverRealm: RecordObserver {
         to.value5 = from.value5
     }
     
-    func clear() {
+    public func invalidate() {
+        records = []
         notificationToken?.invalidate()
-        self.records = []
     }
-
 }

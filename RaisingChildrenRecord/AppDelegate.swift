@@ -41,14 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
                 FUIGoogleAuth()
             ]
             authUI.providers = providers
-            authUI.delegate = self
 
             let authViewController = authUI.authViewController()
-    
+
             self.window?.rootViewController = authViewController
             self.window?.makeKeyAndVisible()
         } else  {
-            observeRemote()
+            FirebaseUtils.shared.observeRemote()
         }
         
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
@@ -103,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         self.window?.rootViewController = viewController
         self.window?.makeKeyAndVisible()
         
-        self.observeRemote()
+        FirebaseUtils.shared.observeRemote()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -132,49 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
 
     // MARK: - Utility
-    func observeRemote() {
-        print("*** AppDelegate.observeRemote ***")
-        FamilyIdObserver.shared.observe(with: { (familyId) -> Void in
-            print("*** AppDelegate.observeRemote.FamilyIdObserver.shared.observe ***")
-
-            self.babyObserver?.observeAdd(with: {(baby) -> Void in
-                print("*** AppDelegate.observeRemote.observeAdd ***")
-                self.babyDao?.insertOrUpdate(baby)
-            })
-            self.babyObserver?.observeChange(with: {(baby) -> Void in
-                print("*** AppDelegate.observeRemote.observeChange ***")
-                self.babyDao?.insertOrUpdate(baby)
-            })
-            self.babyObserver?.observeRemove(with: {(baby) -> Void in
-                print("*** AppDelegate.observeRemote.observeRemove ***")
-                self.babyDao?.delete(baby)
-            })
-            
-            self.observerRemoteRecords()
-        })
-    }
-    
-    func observerRemoteRecords() {
-        print("*** AppDelegate.observerRemoteRecords ***")
-        self.recordObserver?.observe(with: { (recordAndChangeArray) in
-            for recordAndChange in recordAndChangeArray {
-                let record = recordAndChange.0
-                let change = recordAndChange.1
-                print("*** AppDelegate.observerRemoteRecords.recordObserver.observe ***: ", record)
-                switch change {
-                case .Init:
-                    break
-                case .Insert:
-                    self.recordDao?.insertOrUpdate(record)
-                case .Modify:
-                    self.recordDao?.insertOrUpdate(record)
-                case .Delete:
-                    self.recordDao?.delete(record)
-                }
-            }
-        })
-    }
-    
     func restoreRecords() {
         let recordDataManager = RecordDataManager()
         let records = recordDataManager.records

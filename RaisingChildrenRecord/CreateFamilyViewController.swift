@@ -18,11 +18,15 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var familyId: UITextField!
     
     var ref: DatabaseReference!
+    var babyDaoLocal: BabyDao!
+    var recordDaoLocal: RecordDao!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.ref = Database.database().reference()
+        babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
+        recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
     }
     
 
@@ -72,15 +76,14 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
                             UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId])
                         }
 
-                        let realm = try! Realm()
-                        let babies = realm.objects(Baby.self)
+                        let babies = self.babyDaoLocal.findAll()
                         for baby in babies {
-                            let records = realm.objects(Record.self).filter("babyId == %@", baby.id)
                             self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female])
+                            let records = self.recordDaoLocal.find(babyId: baby.id)
                             for record in records {
                                 self.ref.child("families").child(familyId)
-                                    .child("babies").child(baby.id)
-                                    .child("records").child(record.id)
+//                                    .child("babies").child(baby.id)
+                                    .child("records").child(record.id!)
                                     .setValue([
                                         "commandId": record.commandId!,
                                         "dateTime": record.dateTime!.timeIntervalSince1970,
@@ -100,6 +103,7 @@ class CreateFamilyViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         }
+                        FirebaseUtils.shared.observeRemote()
                         self.dismiss(animated: true, completion: nil)
                     }
                 }

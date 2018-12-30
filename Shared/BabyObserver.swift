@@ -11,8 +11,6 @@ import Foundation
 import Shared
 
 public protocol BabyObserver {
-    func observeAdd(with callback: @escaping (BabyModel) -> Void)
-    func observeChange(with callback: @escaping (BabyModel) -> Void)
-    func observeRemove(with callback: @escaping (BabyModel) -> Void)
     func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void)
+    func invalidate()
 }

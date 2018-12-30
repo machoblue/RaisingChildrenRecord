@@ -17,42 +17,15 @@ class BabyObserverFirebase: BabyObserver {
     var babiesRef: DatabaseReference!
     
     private init() {
-        self.ref = Database.database().reference()
-        self.familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
-        guard let familyId = self.familyId else { return }
-        self.babiesRef = self.ref.child("families").child(familyId).child("babies")
-    }
-    
-    func observeAdd(with callback: @escaping (BabyModel) -> Void) {
-        guard let _ = self.familyId else { return }
-        self.babiesRef.observe(DataEventType.childAdded, with: { (snapshot) in
-            print("snapshot:", snapshot)
-            guard let newBaby = self.baby(from: snapshot) else {return}
-            callback(newBaby)
-        })
-    }
-    
-    func observeChange(with callback: @escaping (BabyModel) -> Void) {
-        guard let _ = self.familyId else { return }
-        self.babiesRef.observe(DataEventType.childChanged, with: { (snapshot) in
-            print("snapshot:", snapshot)
-            guard let newBaby = self.baby(from: snapshot) else {return}
-            callback(newBaby)
-        })
-    }
-    
-    func observeRemove(with callback: @escaping (BabyModel) -> Void) {
-        guard let _ = self.familyId else { return }
-        self.babiesRef.observe(DataEventType.childRemoved, with: { (snapshot) in
-            print("snapshot:", snapshot)
-            guard let newBaby = self.baby(from: snapshot) else {return}
-            callback(newBaby)
-        })
     }
     
     func baby(from snapshot: DataSnapshot) -> BabyModel? {
         guard let babyDict = snapshot.value as? NSDictionary else { return nil }
-        let id = snapshot.key
+        return baby(key: snapshot.key, dict: babyDict)
+    }
+    
+    func baby(key: String, dict babyDict: NSDictionary) -> BabyModel? {
+        let id = key
         let name = babyDict["name"] as! String
         let born = Date(timeIntervalSince1970: babyDict["born"] as! Double)
         let female = babyDict["female"] as! Bool
@@ -61,11 +34,47 @@ class BabyObserverFirebase: BabyObserver {
     }
     
     func observe(with callback: @escaping ([(BabyModel, Change)]) -> Void) {
-        // do nothing
+        guard FirebaseUtils.ready() else { return }
+        setup()
+        babiesRef?.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let babiesDict = snapshot.value as? NSDictionary else { return }
+            for key in babiesDict.allKeys {
+                let babyDict = babiesDict.value(forKey: key as! String) as! NSDictionary
+                guard let newBaby = self.baby(key: key as! String, dict: babyDict) else { return }
+                callback([(newBaby, .Init)])
+            }
+        })
+        
+        babiesRef.observe(DataEventType.childAdded, with: { (snapshot) in
+            print("snapshot:", snapshot)
+            guard let newBaby = self.baby(from: snapshot) else {return}
+            callback([(newBaby, .Insert)])
+        })
+        
+        babiesRef.observe(DataEventType.childChanged, with: { (snapshot) in
+            print("snapshot:", snapshot)
+            guard let newBaby = self.baby(from: snapshot) else {return}
+            callback([(newBaby, .Modify)])
+        })
+        
+       babiesRef.observe(DataEventType.childRemoved, with: { (snapshot) in
+            print("snapshot:", snapshot)
+            guard let newBaby = self.baby(from: snapshot) else {return}
+            callback([(newBaby, .Delete)])
+        })
+    }
+    
+    func setup() {
+        babiesRef?.removeAllObservers()
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
+        babiesRef = Database.database().reference().child("families").child(familyId).child("babies")
     }
     
     deinit {
-        self.babiesRef.removeAllObservers()
+        invalidate()
     }
     
+    public func invalidate() {
+        babiesRef?.removeAllObservers()
+    }
 }
