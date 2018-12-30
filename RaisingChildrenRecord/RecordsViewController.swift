@@ -77,7 +77,17 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         label2.text = Command.name(id: Int(record.commandId!)!)
 
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
-        label3.text = record.value1
+        if (record.commandId == "1") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
+        } else if (record.commandId == "2") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "分"
+        } else if (record.commandId == "3") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "℃"
+        } else if (record.commandId == "4") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : Command.HardnessOption(rawValue: record.value2!)!.label
+        } else {
+            label3.text = record.value1
+        }
 
         return cell
     }
