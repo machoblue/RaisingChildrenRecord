@@ -9,20 +9,18 @@
 import UIKit
 
 class FamilyIdAndPasscodeViewController: UIViewController {
+    typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String, footer: String)
+    let sections: [SectionModel] = [
+        SectionModel("家族ID", 1, "LabelCell", ""),
+        SectionModel("パスコード", 1, "LabelCell", "この家族IDとパスコードを共有相手の端末で入力してください。"),
+    ]
 
-    @IBOutlet weak var familyId: UILabel!
-    @IBOutlet weak var passcode: UILabel!
-    
     var familyIdText: String!
     var passcodeText: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        familyId.text = familyIdText
-        passcode.text = passcodeText
-
-        // Do any additional setup after loading the view.
     }
     
 
@@ -39,4 +37,44 @@ class FamilyIdAndPasscodeViewController: UIViewController {
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+}
+
+extension FamilyIdAndPasscodeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].rowCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("*** tableVie3wCell" )
+        let sectionModel = sections[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier, for: indexPath)
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = familyIdText
+        case 1:
+            cell.textLabel?.text = passcodeText
+        default:
+            break
+        }
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return sections[section].footer
+    }
+}
+
+extension FamilyIdAndPasscodeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
 }

@@ -11,10 +11,15 @@ import Firebase
 
 import Shared
 
-class JoinFamilyViewController: UIViewController, UITextFieldDelegate {
+class JoinFamilyViewController: UIViewController {
+    typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String)
+    let sections: [SectionModel] = [
+        SectionModel("参加する家族の家族ID", 1, "TextFieldCell"),
+        SectionModel("パスコード", 1, "TextFieldCell")
+    ]
 
-    @IBOutlet weak var familyId: UITextField!
-    @IBOutlet weak var passcode: UITextField!
+    weak var familyId: UITextField!
+    weak var passcode: UITextField!
     
     var activityIndicatorView: UIActivityIndicatorView!
     
@@ -36,25 +41,6 @@ class JoinFamilyViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // Mark: TextField Delegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
     }
     
     // MARK: Event
@@ -152,4 +138,55 @@ class JoinFamilyViewController: UIViewController, UITextFieldDelegate {
         let newBaby = BabyModel(id: id, name: name, born: born, female: female)
         return newBaby
     }
+}
+
+
+extension JoinFamilyViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        // キーボードを閉じる
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
+extension JoinFamilyViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].rowCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let sectionModel = sections[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier, for: indexPath)
+        if let cell = cell as? TextFieldTableViewCell {
+            cell.textField.layer.cornerRadius = 10
+            switch indexPath.section {
+            case 0:
+                familyId = cell.textField
+            case 1:
+                passcode = cell.textField
+            default:
+                break
+            }
+        }
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].title
+    }
+}
+
+extension JoinFamilyViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+}
+
+class TextFieldCell: UITableViewCell {
+    @IBOutlet weak var textField: UITextField!
 }
