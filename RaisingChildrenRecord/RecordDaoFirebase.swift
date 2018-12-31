@@ -27,7 +27,7 @@ public class RecordDaoFirebase: RecordDao {
         guard familyId != "" else { return }
         guard let babyId = record.babyId else { return }
         guard let id = record.id else { return }
-        let recordDict = ["babyId": babyId, "commandId": record.commandId, "userId": record.userId, "dateTime": record.dateTime?.timeIntervalSince1970,
+        let recordDict = ["babyId": babyId, "commandId": record.commandId, "userId": Auth.auth().currentUser?.uid, "dateTime": record.dateTime?.timeIntervalSince1970,
                           "value1": record.value1, "value2": record.value2, "value3": record.value3, "value4": record.value4, "value5": record.value5] as [String : Any]
         self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).setValue(recordDict)
     }

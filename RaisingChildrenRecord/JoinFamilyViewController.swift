@@ -158,7 +158,7 @@ extension JoinFamilyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionModel = sections[indexPath.section]
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier, for: indexPath)
-        if let cell = cell as? TextFieldTableViewCell {
+        if let cell = cell as? TextFieldCell {
             cell.textField.layer.cornerRadius = 10
             switch indexPath.section {
             case 0:

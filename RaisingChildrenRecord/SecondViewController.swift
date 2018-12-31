@@ -22,7 +22,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     var sections: [(header: String, cells: [(label1: String, label2: String)])]
         = [(header: "赤ちゃんを切り替える", cells: []),
            (header: "赤ちゃんを編集する", cells: []),
-           (header: "データ共有", cells: [(label1: "家族(共有グループ)を新規作成する", label2: ""), (label1: "他のユーザーを家族(共有グループ)に加える", label2: ""), (label1: "既存の家族(共有グループ)に加わる", label2: ""), (label1: "データを削除する", label2: "")])]
+           (header: "データ共有", cells: [(label1: "家族(共有グループ)を新規作成する", label2: ""), (label1: "他のユーザーを家族(共有グループ)に加える", label2: ""), (label1: "既存の家族(共有グループ)に加わる", label2: ""), (label1: "共有した記録を全て削除する", label2: "")])]
     var babies: Array<BabyModel> = []
     
     var ref: DatabaseReference!
@@ -282,20 +282,47 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        self.ref.child("families").child(familyId).removeValue() {
-            (error: Error?, ref: DatabaseReference) in
-            if let error = error {
-                self.showAlert(title: "エラー", message: "データの削除に失敗しました。：" + error.localizedDescription)
+        let title = "記録を削除するときのご注意"
+        let message = "一度削除すると元に戻せません。また、家族を抜けることになります。よろしいですか？"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
+            // do nothing
+        })
+        alert.addAction(cancelAction)
+        
+        let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
+            self.ref.child("families").child(familyId).child("records").observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let recordsDict = snapshot.value as? NSDictionary else { return }
+                var keysToDelete: [String] = []
+                for key in recordsDict.allKeys {
+                    let recordDict = recordsDict.value(forKey: key as! String) as! NSDictionary
+                    if (recordDict["userId"] as? String == userId) {
+                        keysToDelete.append(key as! String)
+                    }
+                }
+
+                var recordsToUpdate: [AnyHashable: Any] = [:]
+                for keyToDelete in keysToDelete {
+                    recordsToUpdate[keyToDelete] = NSNull()
+                }
                 
-            } else {
-                print("Succeed Deleting")
-            }
-        }
+                self.ref.child("families").child(familyId).child("records").updateChildValues(recordsToUpdate, withCompletionBlock: {(error, snapshot) in
+                    if let error = error {
+                        print("データ削除に失敗しました。", error)
+                    } else {
+                        self.ref.child("users").child(userId).child("families").removeValue()
+                    }
+                })
+            })
+
+            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
+    
+            FirebaseUtils.shared.invalidateObservation()
+        })
+        alert.addAction(okAction)
         
-        self.ref.child("users").child(userId).child("families").removeValue()
-        UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
-        
-        FirebaseUtils.shared.invalidateObservation()
+        present(alert, animated: true, completion: nil)
     }
     
     func showAlert(title: String, message: String) {
