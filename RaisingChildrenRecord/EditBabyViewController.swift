@@ -23,8 +23,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     var baby: BabyModel!
     @IBOutlet weak var tableView: UITableView!
     var f = DateFormatter()
-    var button: UIButton!
+    var dateTimeButton: UIButton!
     var textField: UITextField!
+    var deleteButton: UIButton!
     
     var name: String!
     var born: Date!
@@ -77,9 +78,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
             switch row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
-                self.button = cell.viewWithTag(1) as! UIButton
-                self.button.setTitle(f.string(from: self.born), for: .normal)
-                self.button.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
+                self.dateTimeButton = cell.viewWithTag(1) as! UIButton
+                self.dateTimeButton.setTitle(f.string(from: self.born), for: .normal)
+                self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
             
             case 1:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BornDatePickerCell", for: indexPath)
@@ -106,9 +107,9 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         
         case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
-            self.button = cell.viewWithTag(1) as! UIButton
-            self.button.setTitle(sections[3].cells[0].label, for: .normal)
-            self.button.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
+            self.deleteButton = cell.viewWithTag(1) as! UIButton
+            self.deleteButton.setTitle(sections[3].cells[0].label, for: .normal)
+            self.deleteButton.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
             
         default:
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
@@ -168,7 +169,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @objc func onDatePickerValueChanged(sender: UIDatePicker!) {
         self.born = sender.date
-        self.button.setTitle(f.string(from: self.born), for: .normal)
+        self.dateTimeButton.setTitle(f.string(from: self.born), for: .normal)
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {
