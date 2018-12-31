@@ -12,7 +12,7 @@ class FamilyIdAndPasscodeViewController: UIViewController {
     typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String, footer: String)
     let sections: [SectionModel] = [
         SectionModel("家族ID", 1, "LabelCell", ""),
-        SectionModel("パスコード", 1, "LabelCell", "この家族IDとパスコードを共有相手の端末で入力してください。"),
+        SectionModel("パスコード(有効期限は発行してから5分です。)", 1, "LabelCell", "この家族IDとパスコードを共有相手の端末で入力してください。"),
     ]
 
     var familyIdText: String!

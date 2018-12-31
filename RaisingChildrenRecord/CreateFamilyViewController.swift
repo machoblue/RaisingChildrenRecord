@@ -46,6 +46,11 @@ class CreateFamilyViewController: UIViewController {
             return
         }
         
+        guard familyId.isValidFamilyId() else {
+            self.showAlert(title: "エラー", message: "家族IDは半角英数字で入力してください。")
+            return
+        }
+        
         let userId = Auth.auth().currentUser?.uid
         let userName = Auth.auth().currentUser?.displayName
         ref.child("users").child(userId!).setValue(["name": userName])
@@ -156,4 +161,13 @@ extension CreateFamilyViewController: UITableViewDelegate {
 
 class TextFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var textField: UITextField!
+}
+
+extension String {
+    func isValidFamilyId() -> Bool {
+        let pattern = "^[0-9a-zA-Z]+$"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
+        let matches = regex.matches(in: self, range: NSRange(location: 0, length: self.count))
+        return matches.count > 0
+    }
 }
