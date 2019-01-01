@@ -100,7 +100,14 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
         print("*** FirstViewController.onClicked ***")
-        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: Date(), value1: "", value2: "", value3: "", value4: "", value5: "")
+        let displayDate = self.date!
+        let now = Date()
+        let calendar = Calendar.current
+        let ymd = calendar.dateComponents([.year, .month, .day], from: displayDate)
+        let hms = calendar.dateComponents([.hour, .minute, .second], from: now)
+        let date = calendar.date(from: DateComponents(year: ymd.year, month: ymd.month, day: ymd.day, hour: hms.hour, minute: hms.minute, second: hms.second))
+        
+        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: date, value1: "", value2: "", value3: "", value4: "", value5: "")
         self.recordDao.insertOrUpdate(record)
         self.recordDaoRemote.insertOrUpdate(record)
         
@@ -200,4 +207,3 @@ extension Notification.Name {
     static let TitleViewClicked = Notification.Name("TitleViewClicked")
     static let CommandButtonClicked = Notification.Name("CommandButtonClicked")
 }
-

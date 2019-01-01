@@ -30,11 +30,13 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
         
+        // ページをめくった瞬間に表示するため、ここでもobserveする
         self.records = []
         self.observeRecord()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("*** RecordViewController.viewDidAppear ***")
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
@@ -42,6 +44,10 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let userInfoDict = ["date": self.date!]
         NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
+        
+        // 設定画面の赤ちゃん切り替え後や、記録の編集後にtableviewに反映させるため、ここでobserveRecordする
+        self.records = []
+        self.observeRecord()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +59,24 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("*** RecordViewController.viewWillDisappear ***")
+        super.viewWillDisappear(animated)
+        
+    }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        print("*** RecordViewController.viewDidDisappear ***")
+        super.viewWillDisappear(animated)
+        
+        // 1. 次のRecordsViewControllerのviewWillAppear
+        // 2. 前のRecordsViewControllerのviewWillDisappear
+        // 3. 前のRecordsViewControllerのviewDidDisappear  <-observe終了
+        // 4. 次のRecordsViewControllerのviewDidAppear     <-observe開始
+        self.recordObserver.invalidate()
+        records = []
+    }
+
     // MARK: - UITableViewDatasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
@@ -123,8 +146,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func onCommandButtonClicked(notification: Notification) -> Void {
         print("*** RecordsViewController.onCommandButtonClicked ***")
-        self.records = []
-        self.observeRecord()
+//        self.records = []
+//        self.observeRecord()
     }
 
     
@@ -168,6 +191,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
             print("*** RecordViewController.observeRecord.recordObserver.observe *** recordAndChanges.count:", recordAndChanges.count)
+            
+            var needScroll = false
+            
             for recordAndChange in recordAndChanges {
                 let record = recordAndChange.0
                 let change = recordAndChange.1
@@ -178,6 +204,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.records.append(record)
                 case .Insert:
                     self.records.append(record)
+                    needScroll = true
                 case .Modify:
                     self.modify(record)
                 case .Delete:
@@ -185,10 +212,32 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
             }
             self.tableView.reloadData()
+            
+            if needScroll {
+                self.tableView.scrollToBottom()
+            }
         })
     }
 }
 
 extension Notification.Name {
     static let RecordsViewDidAppear = Notification.Name("RecordsViewDidAppear")
+}
+
+extension UITableView {
+    
+    func scrollToBottom(){
+        
+        DispatchQueue.main.async {
+            var row = self.numberOfRows(inSection:  self.numberOfSections - 1) - 1
+            row = row >= 0 ? row : 0
+            var section = self.numberOfSections - 1
+            section = section >= 0 ? section : 0
+            
+            let indexPath = IndexPath(
+                row: row,
+                section: section)
+            self.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
 }
