@@ -100,6 +100,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         label2.text = Command.name(id: Int(record.commandId!)!)
 
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
+        label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
         if (record.commandId == "1") {
             label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
         } else if (record.commandId == "2") {

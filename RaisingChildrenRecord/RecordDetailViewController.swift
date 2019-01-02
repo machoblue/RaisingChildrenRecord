@@ -72,6 +72,9 @@ class RecordDetailViewController: UIViewController {
         if (record.commandId == "7") {
             recordType = .other
         }
+        if (record.commandId == "8") {
+            recordType = .medicine
+        }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
         titleStr = Command.name(id: Int(record.commandId!)!)

@@ -409,7 +409,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me4-Ud-go9">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="他ユーザーを家族に加える" id="hQc-Cj-Qub">
+                                    <navigationItem title="他ユーザーを家族に招待する" id="hQc-Cj-Qub">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="B6V-ST-nGw">
                                             <connections>
                                                 <action selector="onLeftBarButtonClicked:" destination="zdi-7f-DP6" id="fJs-fn-Z5v"/>
@@ -546,7 +546,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ng3-at-L1a">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="既存の家族に加わる" id="qd6-La-BMp">
+                                    <navigationItem title="招待された家族に参加する" id="qd6-La-BMp">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="c8L-s7-4na">
                                             <connections>
                                                 <action selector="onLeftBarButtonClicked:" destination="90t-z3-ceI" id="biO-Fa-YHa"/>

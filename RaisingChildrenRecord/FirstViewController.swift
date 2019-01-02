@@ -67,13 +67,13 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         let cellImage = UIImage(named: Command.values[indexPath.row].image)
         cell.button.setBackgroundImage(cellImage, for: .normal)
-        cell.button.setTitle(Command.values[indexPath.row].name, for: .normal)
-        cell.button.setTitleColor(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        cell.button.setTitle("", for: .normal)
         cell.button.addTarget(self, action: #selector(onClicked), for: .touchUpInside)
         cell.button.tag = Command.values[indexPath.row].id
 
         cell.label.text = Command.values[indexPath.row].name
-        
+        cell.label.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
+
         return cell
     }
     

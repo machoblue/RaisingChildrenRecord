@@ -22,7 +22,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     var sections: [(header: String, cells: [(label1: String, label2: String)])]
         = [(header: "赤ちゃんを切り替える", cells: []),
            (header: "赤ちゃんを編集する", cells: []),
-           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""), (label1: "家族に他のユーザーを加える", label2: ""), (label1: "既存の家族に加わる", label2: ""), (label1: "共有した記録を全て削除する", label2: "")])]
+           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""), (label1: "家族に他のユーザーを招待する", label2: ""), (label1: "招待された家族に参加する", label2: ""), (label1: "共有した記録を全て削除する", label2: "")])]
     var babies: Array<BabyModel> = []
     
     var ref: DatabaseReference!
