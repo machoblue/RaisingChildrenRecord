@@ -14,4 +14,5 @@ public protocol BabyDao {
     func delete(_ baby: BabyModel)
     func findAll() -> [BabyModel]
     func deleteAll()
+    func find(_ id: String) -> BabyModel?
 }

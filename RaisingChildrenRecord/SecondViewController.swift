@@ -292,6 +292,9 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         alert.addAction(cancelAction)
         
         let okAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
+            
+            FirebaseUtils.shared.invalidateObservation()
+            
             self.ref.child("families").child(familyId).child("records").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let recordsDict = snapshot.value as? NSDictionary else { return }
                 var keysToDelete: [String] = []
@@ -317,8 +320,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             })
 
             UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
-    
-            FirebaseUtils.shared.invalidateObservation()
         })
         alert.addAction(okAction)
         

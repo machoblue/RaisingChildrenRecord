@@ -59,6 +59,13 @@ public class BabyDaoRealm: BabyDao {
         return babies
     }
     
+    public func find(_ id: String) -> BabyModel? {
+        let realm = try! Realm()
+        guard let result = realm.objects(Baby.self).filter("id == %@", id).first else { return nil }
+        let baby = BabyModel(id: result.id, name: result.name, born: result.born, female: result.female)
+        return baby
+    }
+    
     public func deleteAll() {
         let realm = try! Realm()
         try! realm.write {

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import IntentsUI
+
+import os.log
 
 import Shared
 
@@ -32,6 +35,8 @@ class RecordDetailViewController: UIViewController {
     @IBOutlet weak var titleBar: UINavigationItem!
     private var titleStr: String!
     
+    @IBOutlet var tableFooterView: UIView!
+    
     private var recordDao: RecordDao!
     
     override func viewDidLoad() {
@@ -39,6 +44,7 @@ class RecordDetailViewController: UIViewController {
         
         titleBar.title = titleStr
 //        tableView.allowsSelection = false
+        configureTableFooterView()
         
         // Do any additional setup after loading the view.
         f.locale = Locale(identifier: "ja_JP")
@@ -78,6 +84,20 @@ class RecordDetailViewController: UIViewController {
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
         titleStr = Command.name(id: Int(record.commandId!)!)
+    }
+    
+    /// - Tag: add_to_siri_button
+    private func configureTableFooterView() {
+            let addShortcutButton = INUIAddVoiceShortcutButton(style: .whiteOutline)
+            addShortcutButton.shortcut = INShortcut(intent: record.intent)
+            addShortcutButton.delegate = self
+        
+            addShortcutButton.translatesAutoresizingMaskIntoConstraints = false
+            tableFooterView.addSubview(addShortcutButton)
+            tableFooterView.centerXAnchor.constraint(equalTo: addShortcutButton.centerXAnchor).isActive = true
+            tableFooterView.centerYAnchor.constraint(equalTo: addShortcutButton.centerYAnchor).isActive = true
+        
+            tableView.tableFooterView = tableFooterView
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {
@@ -306,6 +326,59 @@ extension RecordDetailViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
+    }
+}
+
+extension RecordDetailViewController: INUIAddVoiceShortcutButtonDelegate {
+    
+    func present(_ addVoiceShortcutViewController: INUIAddVoiceShortcutViewController, for addVoiceShortcutButton: INUIAddVoiceShortcutButton) {
+        addVoiceShortcutViewController.delegate = self
+        present(addVoiceShortcutViewController, animated: true, completion: nil)
+    }
+    
+    /// - Tag: edit_phrase
+    func present(_ editVoiceShortcutViewController: INUIEditVoiceShortcutViewController, for addVoiceShortcutButton: INUIAddVoiceShortcutButton) {
+        editVoiceShortcutViewController.delegate = self
+        present(editVoiceShortcutViewController, animated: true, completion: nil)
+    }
+}
+
+extension RecordDetailViewController: INUIAddVoiceShortcutViewControllerDelegate {
+    
+    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController,
+                                        didFinishWith voiceShortcut: INVoiceShortcut?,
+                                        error: Error?) {
+        if let error = error as NSError? {
+            os_log("Error adding voice shortcut: %@", log: OSLog.default, type: .error, error)
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension RecordDetailViewController: INUIEditVoiceShortcutViewControllerDelegate {
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController,
+                                         didUpdate voiceShortcut: INVoiceShortcut?,
+                                         error: Error?) {
+        if let error = error as NSError? {
+            os_log("Error adding voice shortcut: %@", log: OSLog.default, type: .error, error)
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController,
+                                         didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

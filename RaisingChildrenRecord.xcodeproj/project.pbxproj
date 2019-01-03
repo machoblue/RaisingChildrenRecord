@@ -51,6 +51,7 @@
 		9C215D2121D0AA8700E9515A /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
+		9C4B220A21DDF267009DEAD2 /* RecordModel+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4B220921DDF267009DEAD2 /* RecordModel+Intents.swift */; };
 		9C62EB35218C1CDC005F068E /* RecordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB33218C1CDC005F068E /* RecordDataManager.swift */; };
 		9C62EB36218C1CDC005F068E /* UserDefaults+DataSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */; };
 		9C62EB37218C47FA005F068E /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
@@ -203,6 +204,7 @@
 		9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
+		9C4B220921DDF267009DEAD2 /* RecordModel+Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordModel+Intents.swift"; sourceTree = "<group>"; };
 		9C62EB33218C1CDC005F068E /* RecordDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDataManager.swift; sourceTree = "<group>"; };
 		9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+DataSuite.swift"; sourceTree = "<group>"; };
 		9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFamilyViewController.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */,
 				9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */,
 				9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */,
+				9C4B220921DDF267009DEAD2 /* RecordModel+Intents.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				0CBD261F20F6CBE700542E1B /* FirstViewController.swift in Sources */,
 				9C186EAA21BBBFBA00A089EF /* BabyObserverFactory.swift in Sources */,
 				9C186EA821BBBFBA00A089EF /* RecordDaoFactory.swift in Sources */,
+				9C4B220A21DDF267009DEAD2 /* RecordModel+Intents.swift in Sources */,
 				0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */,
 				9C186EAD21BBBFBA00A089EF /* RecordObserverFirebase.swift in Sources */,
 			);

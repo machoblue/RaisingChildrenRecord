@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,18 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Rnh-30-NVV">
-                                <rect key="frame" x="137.5" y="283.5" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-OU-YIo">
+                                <rect key="frame" x="133" y="283.5" width="109" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="YYr-zZ-TQd"/>
-                                    <constraint firstAttribute="height" constant="100" id="kdp-mw-GY7"/>
+                                    <constraint firstAttribute="width" constant="109" id="DjS-QS-FW1"/>
+                                    <constraint firstAttribute="height" constant="100" id="Rrn-Bu-t6Y"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Rnh-30-NVV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bND-8L-fZb"/>
-                            <constraint firstItem="Rnh-30-NVV" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qoJ-K9-wAM"/>
+                            <constraint firstItem="M6h-OU-YIo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="38H-71-Mpq"/>
+                            <constraint firstItem="M6h-OU-YIo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oDe-om-AB6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash" width="130" height="140"/>
+        <image name="splash" width="194" height="163"/>
     </resources>
 </document>

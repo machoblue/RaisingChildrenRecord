@@ -67,34 +67,27 @@ class CreateFamilyViewController: UIViewController {
                         DispatchQueue.main.async {
                             UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId])
                         }
+                        
+                        var recordsDict: [String:[String: Any]] = [:]
 
                         let babies = self.babyDaoLocal.findAll()
                         for baby in babies {
                             self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female])
                             let records = self.recordDaoLocal.find(babyId: baby.id)
                             for record in records {
-                                self.ref.child("families").child(familyId)
-//                                    .child("babies").child(baby.id)
-                                    .child("records").child(record.id!)
-                                    .setValue([
-                                        "commandId": record.commandId!,
-                                        "dateTime": record.dateTime!.timeIntervalSince1970,
-                                        "value1": record.value1 ?? "",
-                                        "value2": record.value2 ?? "",
-                                        "value3": record.value3 ?? "",
-                                        "value4": record.value4 ?? "",
-                                        "value5": record.value5 ?? ""]) {
-                                            (error: Error?, ref: DatabaseReference) in
-                                            if let error = error {
-                                                self.showAlert(title: "エラー", message: "家族の新規作成に失敗しました。：" + error.localizedDescription)
-                                                
-                                                
-                                            } else {
-                                                print("Succeed Creating")
-                                            }
-                                }
+                                recordsDict[record.id!] = [
+                                    "babyId": baby.id,
+                                    "userId": userId!,
+                                    "commandId": record.commandId!,
+                                    "dateTime": record.dateTime!.timeIntervalSince1970,
+                                    "value1": record.value1 ?? "",
+                                    "value2": record.value2 ?? "",
+                                    "value3": record.value3 ?? "",
+                                    "value4": record.value4 ?? "",
+                                    "value5": record.value5 ?? ""]
                             }
                         }
+                        self.ref.child("families").child(familyId).child("records").setValue(recordsDict)
                         FirebaseUtils.shared.observeRemote()
                         self.dismiss(animated: true, completion: nil)
                     }
