@@ -31,20 +31,26 @@ extension RecordModel {
             recordCreateIntent.amount = amount as NSNumber
             recordCreateIntent.unit = "分"
         case "3":
-            recordCreateIntent.property = Command.values[Int(commandId!)! - 1].property
-            guard let amountStr = value2, let amount = Float(amountStr) else { break }
-            recordCreateIntent.amountDecimal = amount as NSNumber
-            recordCreateIntent.unit = "℃"
+            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
+            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
         case "4":
             recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
             recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
         case "5":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
+            recordCreateIntent.property = Command.values[Int(commandId!)! - 1].property
+            guard let amountStr = value2, let amount = Float(amountStr) else { break }
+            recordCreateIntent.amountDecimal = amount as NSNumber
+            recordCreateIntent.unit = "℃"
         case "6":
             recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
+            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
+        case "7":
+            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
         case "8":
-            recordCreateIntent.behavior = Command.values[6].verb
-            recordCreateIntent.target = Command.values[6].target
+            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
+        case "9":
+            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
+            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
         default:
             break
         }

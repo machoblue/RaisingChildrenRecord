@@ -29,7 +29,7 @@ import Shared
  */
 struct RecordDetailTableConfiguration {
     enum RecordType {
-        case milk, breast, temperature, poo, sleep, awake, medicine, other
+        case milk, breast, babyfood, snack, temperature, poo, sleep, awake, medicine, other
     }
     
     enum SectionType: String {
@@ -100,6 +100,10 @@ struct RecordDetailTableConfiguration {
             return RecordDetailTableConfiguration.milkRecordSectionModels
         case .breast:
             return RecordDetailTableConfiguration.breastRecordSectionModels
+        case .babyfood:
+            return RecordDetailTableConfiguration.sleepRecordSectionModels // same sectionModels as sleep
+        case .snack:
+            return RecordDetailTableConfiguration.sleepRecordSectionModels // same sectionModels as sleep
         case .temperature:
             return RecordDetailTableConfiguration.temperatureRecordSectionModels
         case .poo:

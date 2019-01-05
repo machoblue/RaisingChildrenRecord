@@ -64,22 +64,28 @@ class RecordDetailViewController: UIViewController {
             recordType = .breast
         }
         if (record.commandId == "3") {
-            recordType = .temperature
+            recordType = .babyfood
         }
         if (record.commandId == "4") {
-            recordType = .poo
+            recordType = .snack
         }
         if (record.commandId == "5") {
-            recordType = .sleep
+            recordType = .temperature
         }
         if (record.commandId == "6") {
-            recordType = .awake
+            recordType = .poo
         }
         if (record.commandId == "7") {
-            recordType = .other
+            recordType = .sleep
         }
         if (record.commandId == "8") {
+            recordType = .awake
+        }
+        if (record.commandId == "9") {
             recordType = .medicine
+        }
+        if (record.commandId == "99") {
+            recordType = .other
         }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
