@@ -9,15 +9,16 @@
 import Foundation
 
 public class Command {
-    static public let values: [(id: Int, name: String, image: String, behaviorName: String)] = [
-        (1, "ミルク", "milk", "ミルクを飲んだ"), // SVO
-        (2, "母乳", "breast", "母乳を飲んだ"), // SVO
-        (3, "体温", "temperature", ""), // SVC
-        (4, "うんち", "poo", "した"), // SVO
-        (5, "寝る", "sleep", "寝た"), // SV
-        (6, "起きる", "awake", "起きた"), // SV
-        (8, "くすり", "medicine", "くすりを飲んだ"), // SV0
-        (7, "その他", "other", "") // ???
+    // (baby), verb, unit, object(=target), property
+    static public let values: [(id: Int, name: String, image: String, verb: String, unit: String, target: String, property: String)] = [
+        (1, "ミルク", "milk", "飲んだ", "ml", "ミルク", ""), // SVO
+        (2, "母乳", "breast", "飲んだ", "分", "母乳", ""), // SVO
+        (3, "体温", "temperature", "", "℃", "", "体温"), // SVC
+        (4, "うんち", "poo", "した", "", "うんち", ""), // SVO
+        (5, "寝る", "sleep", "寝た", "", "", ""), // SV
+        (6, "起きる", "awake", "起きた", "", "", ""), // SV
+        (8, "くすり", "medicine", "飲んだ", "", "くすり", ""), // SV0
+        (7, "その他", "other", "", "", "", "") // ???
         
         // 離乳食を食べた。湿疹がでた。下痢が出た。
     ]
@@ -40,37 +41,6 @@ public class Command {
             }
         }
         return image
-    }
-    
-    static public func behaviorName(id: Int) -> String? {
-        var behaviorName: String?
-        for value in values {
-            if (value.id == id) {
-                behaviorName = value.behaviorName
-            }
-        }
-        return behaviorName
-    }
-    
-//    static func id(of babyName: String) -> Int {
-//        var id: Int?
-//        for value in values {
-//            if (value.name == babyName) {
-//                id = value.id
-//            }
-//        }
-//        return id!
-//    }
-    
-    static public func id(of behaviorName: String) -> Int {
-        var id: Int?
-        for value in values {
-            if (value.behaviorName == behaviorName) {
-                id = value.id
-                break
-            }
-        }
-        return id!
     }
     
     public enum HardnessOption: String {

@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-OU-YIo">
-                                <rect key="frame" x="133" y="283.5" width="109" height="100"/>
+                                <rect key="frame" x="131.5" y="283.5" width="112" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="109" id="DjS-QS-FW1"/>
+                                    <constraint firstAttribute="width" constant="112" id="DjS-QS-FW1"/>
                                     <constraint firstAttribute="height" constant="100" id="Rrn-Bu-t6Y"/>
                                 </constraints>
                             </imageView>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash" width="194" height="163"/>
+        <image name="splash" width="161" height="144"/>
     </resources>
 </document>

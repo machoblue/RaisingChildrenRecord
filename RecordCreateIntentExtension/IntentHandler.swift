@@ -130,31 +130,85 @@ extension IntentHandler: RecordCreateIntentHandling {
         (RecordCreateIntentResponse) -> Void) {
         let response = RecordCreateIntentResponse(code: .success, userActivity: nil)
         print("*** IntentHandler.handle ***", intent)
+        
+        let record = RecordModel(from: intent)
 
-        guard let babyName = intent.baby, let behavior = intent.behavior else { return }
-        guard let babyId = BabyDaoRealm.shared.id(from: babyName) else { return }
-
-        let commandId = Command.id(of: behavior).description
-
-        let record = RecordModel(babyId: babyId, commandId: commandId)
-
-//        RecordDaoRealm.shared.insertOrUpdate(record)
-        RecordDataManager().createRecord(record)
-        print("*** IntentHandler.handle recordDaoRealm.insertOrUpdate ***:", record)
+        RecordDataManager().createRecord(record!)
+        print("*** IntentHandler.handle recordDaoRealm.insertOrUpdate ***:", record!)
 
         completion(response)
     }
 }
 
-extension BabyDaoRealm {
-    public func id(from name: String) -> String? {
-//        for baby in self.findAll() {
-//            if (name == baby.name) {
-//                return baby.id
-//            }
-//        }
-//        return nil
-        return self.findAll().first?.id
-    }
-}
 
+// TODO: 別のファイルに抽出したい
+extension RecordModel {
+
+    public convenience init?(from intent: RecordCreateIntent) {
+        guard let babyName = intent.baby,
+            let babyId = BabyDaoRealm.shared.find(name: babyName)?.id
+            else { return nil }
+        if let behavior = intent.behavior {
+            switch behavior {
+            case "飲んだ":
+                guard let target = intent.target else { return nil }
+                switch target {
+                case "ミルク":
+                    if let amount = intent.amount {
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                        return
+                    } else {
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        return
+                    }
+                case "母乳":
+                    if let amount = intent.amount {
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                        return
+                    } else {
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        return
+                    }
+                case "くすり":
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    return
+                default:
+                    return nil
+                }
+            case "した":
+                guard let target = intent.target else { return nil }
+                switch target {
+                case "うんち":
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "4", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    return
+                default:
+                    return nil
+                }
+            case "寝た":
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "5", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                return
+            case "起きた":
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "6", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                return
+            default:
+                return nil
+            }
+        } else if let property = intent.property {
+            switch property {
+            case "体温":
+                if let amount = intent.amount {
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                    return
+                } else {
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    return
+                }
+            default:
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+
+}

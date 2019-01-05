@@ -44,6 +44,11 @@ public class BabyDaoFirebase: BabyDao {
         return nil
     }
     
+    
+    public func find(name: String) -> BabyModel? {
+        return nil
+    }
+    
     public func deleteAll() {
         guard FirebaseUtils.ready() else { return }
         let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String

@@ -114,10 +114,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         NotificationCenter.default.post(name: .CommandButtonClicked, object: nil)
 
         if #available(iOS 12.0, *) {
-            let intent = RecordCreateIntent()
-            intent.baby = baby!.name
-            intent.behavior = Command.behaviorName(id: sender.tag)
-            let interaction = INInteraction(intent: intent, response: nil)
+            let interaction = INInteraction(intent: record.intent, response: nil)
             interaction.donate { error in
                 guard error == nil else {
                     print("*** FirstViewController.onClick *** interaction.donate->error:", error.debugDescription)
