@@ -44,7 +44,9 @@ class RecordDetailViewController: UIViewController {
         
         titleBar.title = titleStr
 //        tableView.allowsSelection = false
-        configureTableFooterView()
+        if tableConfig.recordType != .other {
+            configureTableFooterView()
+        }
         
         // Do any additional setup after loading the view.
         f.locale = Locale(identifier: "ja_JP")

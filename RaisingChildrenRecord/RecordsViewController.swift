@@ -212,6 +212,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.delete(record)
                 }
             }
+            
+            self.records.sort(by: {$0.dateTime! < $1.dateTime!})
+            
             self.tableView.reloadData()
             
             if needScroll {
