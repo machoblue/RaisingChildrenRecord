@@ -33,7 +33,7 @@ extension RecordModel {
         case "3":
             recordCreateIntent.property = Command.values[Int(commandId!)! - 1].property
             guard let amountStr = value2, let amount = Float(amountStr) else { break }
-            recordCreateIntent.amount = amount as NSNumber
+            recordCreateIntent.amountDecimal = amount as NSNumber
             recordCreateIntent.unit = "℃"
         case "4":
             recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb

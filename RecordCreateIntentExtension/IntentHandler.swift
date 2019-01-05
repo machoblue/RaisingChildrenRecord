@@ -155,7 +155,7 @@ extension RecordModel {
                 switch target {
                 case "ミルク":
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
                         self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
@@ -163,7 +163,7 @@ extension RecordModel {
                     }
                 case "母乳":
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
                         self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
@@ -196,8 +196,8 @@ extension RecordModel {
         } else if let property = intent.property {
             switch property {
             case "体温":
-                if let amount = intent.amount {
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: amount.description, value2: nil, value3: nil, value4: nil, value5: nil)
+                if let amount = intent.amountDecimal {
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                     return
                 } else {
                     self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)

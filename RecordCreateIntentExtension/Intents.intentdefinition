@@ -22,7 +22,7 @@
 			<key>INIntentDescriptionID</key>
 			<string>DKiQ2W</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>7</integer>
+			<integer>9</integer>
 			<key>INIntentName</key>
 			<string>RecordCreate</string>
 			<key>INIntentParameterCombinations</key>
@@ -86,6 +86,21 @@
 					<string>${baby}は${target}を${behavior}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>OndJxo</string>
+				</dict>
+				<key>property,unit,baby,amountDecimal</key>
+				<dict>
+					<key>INIntentParameterCombinationIsPrimary</key>
+					<false/>
+					<key>INIntentParameterCombinationSubtitle</key>
+					<string></string>
+					<key>INIntentParameterCombinationSubtitleID</key>
+					<string>bWjAst</string>
+					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
+					<true/>
+					<key>INIntentParameterCombinationTitle</key>
+					<string>${baby}の${property}は${amountDecimal}${unit}だった</string>
+					<key>INIntentParameterCombinationTitleID</key>
+					<string>C7spsK</string>
 				</dict>
 			</dict>
 			<key>INIntentParameters</key>
@@ -161,6 +176,18 @@
 					<integer>7</integer>
 					<key>INIntentParameterType</key>
 					<string>String</string>
+				</dict>
+				<dict>
+					<key>INIntentParameterDisplayPriority</key>
+					<integer>7</integer>
+					<key>INIntentParameterName</key>
+					<string>amountDecimal</string>
+					<key>INIntentParameterSupportsMultipleValues</key>
+					<false/>
+					<key>INIntentParameterTag</key>
+					<integer>9</integer>
+					<key>INIntentParameterType</key>
+					<string>Decimal</string>
 				</dict>
 			</array>
 			<key>INIntentResponse</key>
