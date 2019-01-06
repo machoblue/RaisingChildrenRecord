@@ -192,7 +192,6 @@ extension RecordDetailViewController: UITableViewDataSource {
 
                 datePicker = cell.datePicker
                 datePicker?.timeZone = NSTimeZone.local
-                datePicker?.locale = Locale(identifier: "en_US") // en_US?
                 datePicker?.date = record.dateTime!
                 datePicker?.addTarget(self, action: #selector(onValueChanged), for: .valueChanged)
                 

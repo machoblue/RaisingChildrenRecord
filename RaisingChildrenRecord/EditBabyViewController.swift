@@ -87,7 +87,6 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 let datePicker = cell.contentView.viewWithTag(1) as! UIDatePicker
                 datePicker.timeZone = NSTimeZone.local
-                datePicker.locale = Locale(identifier: "en_US")
                 datePicker.date = self.born
                 datePicker.addTarget(self, action: #selector(onDatePickerValueChanged), for: .valueChanged)
                 
