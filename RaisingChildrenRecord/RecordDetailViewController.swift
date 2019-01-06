@@ -38,6 +38,7 @@ class RecordDetailViewController: UIViewController {
     @IBOutlet var tableFooterView: UIView!
     
     private var recordDao: RecordDao!
+    private var recordDaoRemote: RecordDao!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,7 @@ class RecordDetailViewController: UIViewController {
         f.timeStyle = .short
         
         recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
+        recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
     }
     
     func configure(record: RecordModel) {
@@ -132,6 +134,7 @@ class RecordDetailViewController: UIViewController {
     @IBAction private func onDeleteButtonClicked(_ sender: UIButton) {
         print("*** RecordDetailViewControler.onDeleteButtonClicked ***")
         recordDao.delete(record)
+        recordDaoRemote.delete(record)
         dismiss(animated: true, completion: nil)
     }
 
@@ -143,6 +146,7 @@ class RecordDetailViewController: UIViewController {
     @IBAction func onSaveButtonClicked(_ sender: Any) {
         print("*** RecordDetailViewControler.onSaveButtonClicked ***")
         recordDao.insertOrUpdate(record)
+        recordDaoRemote.insertOrUpdate(record)
         dismiss(animated: true, completion: nil)
     }
     

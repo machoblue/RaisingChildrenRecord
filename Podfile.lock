@@ -203,7 +203,6 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core
-  - Firebase/Database
   - FirebaseUI
   - RealmSwift
 
@@ -278,6 +277,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 439b54ac241d6c10897dd5b922458a1a650417f7
+PODFILE CHECKSUM: 21d76fd6f7bf5243f1d54a962a8bcccbd6e4c261
 
 COCOAPODS: 1.5.3
