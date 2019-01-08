@@ -20,6 +20,13 @@ class PageViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
         
+        // disable transit on tap
+        for recognizer in self.gestureRecognizers {
+            if recognizer is UITapGestureRecognizer {
+                recognizer.isEnabled = false
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onLeftBarButtonClicked(notification:)), name: Notification.Name.LeftBarButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRightBarButtonClicked(notification:)), name: Notification.Name.RightBarButtonClicked, object: nil)
     }
