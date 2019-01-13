@@ -17,6 +17,7 @@ import Shared
 class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableFooterView: UIView!
     
     var sections: [(header: String, cells: [(label1: String, label2: String)])]
         = [(header: "赤ちゃんを切り替える", cells: []),
@@ -73,6 +74,8 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
+        
+        configureTableFooter()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -324,7 +327,9 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             })
 
+            UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: ""])
             UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.FamilyId.rawValue)
+            self.configureTableFooter()
         })
         alert.addAction(okAction)
         
@@ -337,6 +342,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         do {
             try firebaseAuth.signOut()
             UserDefaults.standard.register(defaults: [UserDefaults.Keys.IsSignInSkipped.rawValue: false])
+            configureTableFooter()
 
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
@@ -391,6 +397,23 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             }
             index = index + 1
         }
+    }
+    
+    func configureTableFooter() {
+        let userMailAddressLabel = tableFooterView.viewWithTag(1) as? UILabel
+        let email = Auth.auth().currentUser?.email ?? ""
+        userMailAddressLabel?.text = "サインイン中のユーザー: [\(email)]"
+        
+        let familyIdLabel = tableFooterView.viewWithTag(2) as? UILabel
+        UserDefaults.standard.synchronize()
+        let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String ?? ""
+        familyIdLabel?.text = "あなたの家族の家族ID: [\(familyId)]"
+        
+        let appVersionLabel = tableFooterView.viewWithTag(3) as? UILabel
+        let appVersion = "1.1"
+        appVersionLabel?.text = "アプリのバージョン: [\(appVersion)]"
+        
+        tableView.tableFooterView = tableFooterView
     }
 }
 
