@@ -9,21 +9,18 @@
 import UIKit
 
 import Firebase
-import FirebaseUI
 
 import RealmSwift
 
 import Shared
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var babyObserver: BabyObserver?
     var babyDao: BabyDao?
     
-    var recordObserver: RecordObserver?
     var recordDao: RecordDao?
     var recordDaoRemote: RecordDao?
     
@@ -34,19 +31,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         FirebaseApp.configure()
         
         if Auth.auth().currentUser == nil {
-            let authUI = FUIAuth.defaultAuthUI()!
-            authUI.delegate = self
-    
-            let providers: [FUIAuthProvider] = [
-                FUIGoogleAuth()
-            ]
-            authUI.providers = providers
-
-            let authViewController = authUI.authViewController()
-
-            self.window?.rootViewController = authViewController
-            self.window?.makeKeyAndVisible()
-        } else  {
+            if UserDefaults.standard.object(forKey: UserDefaults.Keys.IsSignInSkipped.rawValue) as? Bool ?? false { // Once skipped, never show signInScreen
+                // do nothing
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+                signInViewController.onSignedIn = { result in
+                    FirebaseUtils.shared.observeRemote()
+                    
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
+                    self.window?.rootViewController = viewController
+                    self.window?.makeKeyAndVisible()
+                }
+                signInViewController.onSkipped = { result in
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
+                    self.window?.rootViewController = viewController
+                    self.window?.makeKeyAndVisible()
+                }
+                
+                self.window?.rootViewController = signInViewController
+                self.window?.makeKeyAndVisible()
+            }
+            
+        } else {
             FirebaseUtils.shared.observeRemote()
         }
         
@@ -56,53 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             babyDao?.insertOrUpdate(BabyModel(id: UUID().description, name: "赤ちゃん", born: Date(), female: false))
         }
         
-        self.babyObserver = BabyObserverFactory.shared.createBabyObserver(.Remote)
         self.recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
-        self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Remote)
         
         restoreRecords() // To receive records from IntentHandler
 
         return true
-    }
-    
-    /*
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping
-        ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        userActivity.isEligibleForPrediction = true
-        if let intent = userActivity.interaction?.intent as? RecordCreateIntent {
-            print("INTENT:", intent)
-            return true
-        }
-        return false
-    }
- */
-    
-
-    func application(_ app: UIApplication, open url: URL,
-                     options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
-        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-            print("*** True ***")
-            return true
-        }
-        // other URL handling goes here.
-        print("*** False ***")
-        return false
-    }
-    
-    func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
-        print ("*** Authentication Complete *** ")
-
-        // handle user and error as necessary
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
-        self.window?.rootViewController = viewController
-        self.window?.makeKeyAndVisible()
-        
-        FirebaseUtils.shared.observeRemote()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

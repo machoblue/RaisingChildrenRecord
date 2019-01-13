@@ -17,5 +17,6 @@ extension UserDefaults {
         case Temperature
         case PooHardness
         case PooAmount
+        case IsSignInSkipped
     }
 }

@@ -1,0 +1,162 @@
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "19T-Uw-wfb"; */
+"19T-Uw-wfb.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "家族を新規作成する"; ObjectID = "3Ao-i8-wtt"; */
+"3Ao-i8-wtt.title" = "家族を新規作成する";
+
+/* Class = "UILabel"; text = "200cc"; ObjectID = "43S-Jt-cZ8"; */
+"43S-Jt-cZ8.text" = "200cc";
+
+/* Class = "UILabel"; text = "サインインしなくてもアプリを使うことができます。"; ObjectID = "5P1-vx-deE"; */
+"5P1-vx-deE.text" = "サインインしなくてもアプリを使うことができます。";
+
+/* Class = "UIBarButtonItem"; title = "＜ 前の日"; ObjectID = "64a-7k-nzg"; */
+"64a-7k-nzg.title" = "＜ 前の日";
+
+/* Class = "UIBarButtonItem"; title = "作成"; ObjectID = "7yx-hg-jWT"; */
+"7yx-hg-jWT.title" = "作成";
+
+/* Class = "UIButton"; normalTitle = "サインイン"; ObjectID = "9De-GS-VLe"; */
+"9De-GS-VLe.normalTitle" = "サインイン";
+
+/* Class = "UIButton"; normalTitle = "キャンセル"; ObjectID = "Aj6-Yq-vGm"; */
+"Aj6-Yq-vGm.normalTitle" = "キャンセル";
+
+/* Class = "UIBarButtonItem"; title = "戻る"; ObjectID = "B6V-ST-nGw"; */
+"B6V-ST-nGw.title" = "戻る";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "ByL-Uu-8Zf"; */
+"ByL-Uu-8Zf.text" = "Name";
+
+/* Class = "UILabel"; text = "ミルク"; ObjectID = "E9A-UN-Bu4"; */
+"E9A-UN-Bu4.text" = "ミルク";
+
+/* Class = "UITextField"; placeholder = "メールアドレス"; ObjectID = "G4T-00-QAR"; */
+"G4T-00-QAR.placeholder" = "メールアドレス";
+
+/* Class = "UITextField"; placeholder = "赤ちゃん"; ObjectID = "H0m-t6-xRB"; */
+"H0m-t6-xRB.placeholder" = "赤ちゃん";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "HSY-Hb-g6s"; */
+"HSY-Hb-g6s.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "スキップ"; ObjectID = "JNm-1K-ehQ"; */
+"JNm-1K-ehQ.normalTitle" = "スキップ";
+
+/* Class = "UILabel"; text = "家族間でデータを共有する機能を利用するにはサインインが必要です。"; ObjectID = "Jsx-Jf-G7i"; */
+"Jsx-Jf-G7i.text" = "家族間でデータを共有する機能を利用するにはサインインが必要です。";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Maa-Yh-bRr"; */
+"Maa-Yh-bRr.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Maa-oY-eN2"; */
+"Maa-oY-eN2.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "設定"; ObjectID = "NVY-wd-8If"; */
+"NVY-wd-8If.title" = "設定";
+
+/* Class = "UIBarButtonItem"; title = "加わる"; ObjectID = "OAh-5C-5Cc"; */
+"OAh-5C-5Cc.title" = "加わる";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "P9V-gQ-T3X"; */
+"P9V-gQ-T3X.text" = "00:00";
+
+/* Class = "UIViewController"; title = "Records"; ObjectID = "QGF-H5-SXP"; */
+"QGF-H5-SXP.title" = "Records";
+
+/* Class = "UIBarButtonItem"; title = "次の日 ＞"; ObjectID = "QJ4-6u-4YZ"; */
+"QJ4-6u-4YZ.title" = "次の日 ＞";
+
+/* Class = "UIButton"; normalTitle = "ユーザー登録"; ObjectID = "RHL-aB-q2G"; */
+"RHL-aB-q2G.normalTitle" = "ユーザー登録";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "RpN-2D-aMZ"; */
+"RpN-2D-aMZ.text" = "Detail";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "TfH-xt-uEg"; */
+"TfH-xt-uEg.title" = "Title";
+
+/* Class = "UILabel"; text = "サインイン"; ObjectID = "ULU-6b-Wad"; */
+"ULU-6b-Wad.text" = "サインイン";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "WxK-5p-b37"; */
+"WxK-5p-b37.title" = "保存";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "Xs9-mn-EHT"; */
+"Xs9-mn-EHT.title" = "保存";
+
+/* Class = "UITextField"; placeholder = "パスワード確認用"; ObjectID = "YOH-My-erI"; */
+"YOH-My-erI.placeholder" = "パスワード確認用";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "ZpO-M1-KMa"; */
+"ZpO-M1-KMa.title" = "Title";
+
+/* Class = "UITabBarItem"; title = "記録"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "記録";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bez-Rr-EbH"; */
+"bez-Rr-EbH.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "メールアドレス"; ObjectID = "c5p-SA-xnC"; */
+"c5p-SA-xnC.placeholder" = "メールアドレス";
+
+/* Class = "UIBarButtonItem"; title = "戻る"; ObjectID = "c8L-s7-4na"; */
+"c8L-s7-4na.title" = "戻る";
+
+/* Class = "UILabel"; text = "はじめての利用する場合、新規ユーザー登録をしてください。"; ObjectID = "cJT-BU-gsQ"; */
+"cJT-BU-gsQ.text" = "はじめての利用する場合、新規ユーザー登録をしてください。";
+
+/* Class = "UITabBarItem"; title = "設定"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "設定";
+
+/* Class = "UIBarButtonItem"; title = "戻る"; ObjectID = "d9r-g8-8fz"; */
+"d9r-g8-8fz.title" = "戻る";
+
+/* Class = "UIBarButtonItem"; title = "< 戻る"; ObjectID = "fUe-oT-H1H"; */
+"fUe-oT-H1H.title" = "< 戻る";
+
+/* Class = "UITextField"; placeholder = "パスワード"; ObjectID = "hOw-0I-xCc"; */
+"hOw-0I-xCc.placeholder" = "パスワード";
+
+/* Class = "UINavigationItem"; title = "他ユーザーを家族に招待する"; ObjectID = "hQc-Cj-Qub"; */
+"hQc-Cj-Qub.title" = "他ユーザーを家族に招待する";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "ice-Go-VYX"; */
+"ice-Go-VYX.text" = "Name";
+
+/* Class = "UINavigationItem"; title = "赤ちゃん"; ObjectID = "mIT-ln-V1E"; */
+"mIT-ln-V1E.title" = "赤ちゃん";
+
+/* Class = "UIButton"; normalTitle = "ユーザー登録"; ObjectID = "njJ-fB-I46"; */
+"njJ-fB-I46.normalTitle" = "ユーザー登録";
+
+/* Class = "UILabel"; text = "新規ユーザー登録"; ObjectID = "pdp-HA-cvA"; */
+"pdp-HA-cvA.text" = "新規ユーザー登録";
+
+/* Class = "UINavigationItem"; title = "招待された家族に参加する"; ObjectID = "qd6-La-BMp"; */
+"qd6-La-BMp.title" = "招待された家族に参加する";
+
+/* Class = "UILabel"; text = "Gender"; ObjectID = "rMh-pP-mzk"; */
+"rMh-pP-mzk.text" = "Gender";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sWB-5g-Q7T"; */
+"sWB-5g-Q7T.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "tQj-xU-BEy"; */
+"tQj-xU-BEy.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ttz-4Z-gg3"; */
+"ttz-4Z-gg3.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "＜ 戻る"; ObjectID = "v7a-Z8-IuJ"; */
+"v7a-Z8-IuJ.title" = "＜ 戻る";
+
+/* Class = "UILabel"; text = "メールアドレスとパスワードを入力してユーザー登録をしてください。"; ObjectID = "xKE-t8-pT8"; */
+"xKE-t8-pT8.text" = "メールアドレスとパスワードを入力してユーザー登録をしてください。";
+
+/* Class = "UITextField"; placeholder = "パスワード"; ObjectID = "yGe-2D-lfV"; */
+"yGe-2D-lfV.placeholder" = "パスワード";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "ztP-9Q-qsh"; */
+"ztP-9Q-qsh.text" = "Detail";

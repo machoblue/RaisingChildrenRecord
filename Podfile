@@ -8,9 +8,10 @@ target 'Shared' do
   target 'RaisingChildrenRecord' do
     # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     inherit! :search_paths
-    pod 'FirebaseUI'
+    # pod 'FirebaseUI'
     pod 'Firebase/Core'
-    # pod 'Firebase/Database'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
 
     target 'RaisingChildrenRecordTests' do
       inherit! :search_paths

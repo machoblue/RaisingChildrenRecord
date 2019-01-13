@@ -11,7 +11,6 @@ import UIKit
 import RealmSwift
 
 import Firebase
-import FirebaseUI
 
 import Shared
 
@@ -22,7 +21,11 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     var sections: [(header: String, cells: [(label1: String, label2: String)])]
         = [(header: "赤ちゃんを切り替える", cells: []),
            (header: "赤ちゃんを編集する", cells: []),
-           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""), (label1: "家族に他のユーザーを招待する", label2: ""), (label1: "招待された家族に参加する", label2: ""), (label1: "共有した記録を全て削除する", label2: "")])]
+           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""),
+                                        (label1: "家族に他のユーザーを招待する", label2: ""),
+                                        (label1: "招待された家族に参加する", label2: ""),
+                                        (label1: "共有した記録を全て削除する", label2: ""),
+                                        (label1: "サインアウト", label2: "")])]
     var babies: Array<BabyModel> = []
     
     var ref: DatabaseReference!
@@ -178,6 +181,8 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
                 joinFamily()
             case 3:
                 deleteFamilyData()
+            case 4:
+                signOut()
             default:
                 break
             }
@@ -326,6 +331,18 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         present(alert, animated: true, completion: nil)
     }
     
+    func signOut() {
+        let firebaseAuth = Auth.auth()
+        
+        do {
+            try firebaseAuth.signOut()
+            UserDefaults.standard.register(defaults: [UserDefaults.Keys.IsSignInSkipped.rawValue: false])
+
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
     func showAlert(title: String, message: String) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let action: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
@@ -377,22 +394,11 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
 }
 
-extension SecondViewController: FUIAuthDelegate {
-    func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
-        print ("*** Authentication Complete *** ")
-    }
+extension SecondViewController {
     
     func showAuthView() {
-        let authUI = FUIAuth.defaultAuthUI()!
-        authUI.delegate = self
-        
-        let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth()
-        ]
-        authUI.providers = providers
-        
-        let authViewController = authUI.authViewController()
-        self.present(authViewController, animated: true, completion: nil)
+        let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
+        self.present(signInViewController, animated: true, completion: nil)
     }
     
     func showAuthAlert() {
