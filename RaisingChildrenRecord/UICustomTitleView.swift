@@ -56,7 +56,7 @@ class UICustomTitleView: UIView {
         if let unwrappedBaby = baby, let unwrappedDay = day {
             self.name.text = unwrappedBaby.name
 //            self.image.image = UIImage(named: unwrappedBaby.female ? "temperature" : "milk")
-            self.date.text = format(date: unwrappedDay)
+            self.date.text = UIUtils.shared.formatToLongYYYYMMDD(unwrappedDay)
             self.year.text = resolveAge(born: unwrappedBaby.born, now: unwrappedDay)
 
         } else {
@@ -66,27 +66,23 @@ class UICustomTitleView: UIView {
         }
     }
     
-    func format(date: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "ja_JP")
-        f.dateStyle = .long
-        f.timeStyle = .none
-        return f.string(from: date)
-    }
-    
     func resolveAge(born: Date, now: Date) -> String? {
-        let timeInterval = now.timeIntervalSince(born)
         let f = DateComponentsFormatter()
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "ja")
         f.calendar = calendar
         f.unitsStyle = .full
         f.allowedUnits = [.year, .month]
+        
+        let timeInterval = now.timeIntervalSince(born)
+        
         var formatted = f.string(from: timeInterval)
+        
         if let range = formatted?.range(of: "年") {
             formatted?.replaceSubrange(range, with: "歳")
         }
-        return "(" + formatted! + ")"
+        
+        return "(\(formatted!))"
     }
     
 }

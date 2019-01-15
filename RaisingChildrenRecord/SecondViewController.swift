@@ -371,12 +371,8 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         for baby in babies {
             let name = baby.name
-            
-            let f = DateFormatter()
-            f.locale = Locale(identifier: "ja_JP")
-            f.dateStyle = .long
-            f.timeStyle = .none
-            let born = f.string(from: baby.born) + "生まれ"
+            let yyyyMMdd = UIUtils.shared.formatToLongYYYYMMDD(baby.born)
+            let born = "\(yyyyMMdd)生まれ"
             
             sections[0].cells.append((label1: name, label2: born))
             sections[1].cells.append((label1: name, label2: born))

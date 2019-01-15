@@ -25,8 +25,6 @@ class RecordDetailViewController: UIViewController {
     private weak var quantityLabel: UILabel?
     private weak var noteTextField: UITextField?
     
-    private let f = DateFormatter()
-    
     private var hideDatePicker = true
 
     @IBOutlet weak var tableView: UITableView!
@@ -48,11 +46,6 @@ class RecordDetailViewController: UIViewController {
         if tableConfig.recordType != .other {
             configureTableFooterView()
         }
-        
-        // Do any additional setup after loading the view.
-        f.locale = Locale(identifier: "ja_JP")
-        f.dateStyle = .medium
-        f.timeStyle = .short
         
         recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
@@ -155,7 +148,7 @@ class RecordDetailViewController: UIViewController {
     
     @IBAction func onValueChanged(sender: UIDatePicker!) {
         self.record.dateTime = sender.date
-        dateTimeButton?.setTitle(f.string(from: self.record.dateTime!), for: .normal)
+        dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.record.dateTime!), for: .normal)
     }
     
     @IBAction func onTextFieldChanged(sender: UITextField!) {
@@ -190,7 +183,7 @@ extension RecordDetailViewController: UITableViewDataSource {
             if let cell = cell as? DateTimeTableViewCell {
                 dateTimeButton = cell.button
                 dateTimeButton?.setTitle(title, for: .normal)
-                dateTimeButton?.setTitle(f.string(from: record.dateTime!), for: .normal)
+                dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(record.dateTime!), for: .normal)
                 dateTimeButton?.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
 
                 datePicker = cell.datePicker

@@ -87,9 +87,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
-        let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "HHmm", options: 0, locale: Locale.current)
-        label1.text = formatter.string(from: record.dateTime!)
+        label1.text = UIUtils.shared.formatToHHMM(record.dateTime!)
 
         let imageView = cell.contentView.viewWithTag(2) as! UIImageView
         imageView.contentMode = .scaleAspectFit

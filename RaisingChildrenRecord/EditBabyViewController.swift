@@ -22,7 +22,6 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var baby: BabyModel!
     @IBOutlet weak var tableView: UITableView!
-    var f = DateFormatter()
     var dateTimeButton: UIButton!
     var textField: UITextField!
     var deleteButton: UIButton!
@@ -47,10 +46,6 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         self.name = self.baby.name
         self.born = self.baby.born
         self.female = self.baby.female
-
-        f.locale = Locale(identifier: "ja_JP")
-        f.dateStyle = .medium
-        f.timeStyle = .short
         
         self.babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         self.babyDaoRemote = BabyDaoFactory.shared.createBabyDao(.Remote)
@@ -81,7 +76,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
                 self.dateTimeButton = cell.viewWithTag(1) as! UIButton
-                self.dateTimeButton.setTitle(f.string(from: self.born), for: .normal)
+                self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
                 self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
             
             case 1:
@@ -171,7 +166,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @objc func onDatePickerValueChanged(sender: UIDatePicker!) {
         self.born = sender.date
-        self.dateTimeButton.setTitle(f.string(from: self.born), for: .normal)
+        self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {

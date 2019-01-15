@@ -12,7 +12,21 @@ import UIKit
 
 class UIUtils {
     public static let shared = UIUtils()
+    
+    let longYYYYMMDDFormat = DateFormatter()
+    let mediumYYYYMMDDFormat = DateFormatter()
+    let hhmmFormat = DateFormatter()
+    
     private init() {
+        longYYYYMMDDFormat.locale = Locale(identifier: "ja_JP")
+        longYYYYMMDDFormat.dateStyle = .long
+        longYYYYMMDDFormat.timeStyle = .none
+        
+        mediumYYYYMMDDFormat.locale = Locale(identifier: "ja_JP")
+        mediumYYYYMMDDFormat.dateStyle = .medium
+        mediumYYYYMMDDFormat.timeStyle = .none
+        
+        hhmmFormat.dateFormat = DateFormatter.dateFormat(fromTemplate: "HHmm", options: 0, locale: Locale.current)
     }
     
     func showAlert(title: String, message: String, viewController: UIViewController) {
@@ -22,5 +36,17 @@ class UIUtils {
         })
         alert.addAction(action)
         viewController.present(alert, animated: true, completion: nil) // display alert
+    }
+    
+    func formatToLongYYYYMMDD(_ date: Date) -> String {
+        return longYYYYMMDDFormat.string(from: date)
+    }
+    
+    func formatToMediumYYYYMMDD(_ date: Date) -> String {
+        return mediumYYYYMMDDFormat.string(from: date)
+    }
+    
+    func formatToHHMM(_ date: Date) -> String {
+        return hhmmFormat.string(from: date)
     }
 }
