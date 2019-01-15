@@ -21,6 +21,7 @@ class FamilyIdAndPasscodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AdUtils.shared.loadAndAddAdView(self)
     }
     
 
@@ -36,6 +37,7 @@ class FamilyIdAndPasscodeViewController: UIViewController {
 
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
 }
 

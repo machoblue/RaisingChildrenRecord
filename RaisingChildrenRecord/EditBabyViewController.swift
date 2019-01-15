@@ -54,6 +54,8 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         self.babyDaoRemote = BabyDaoFactory.shared.createBabyDao(.Remote)
+        
+        AdUtils.shared.loadAndAddAdView(self)
     }
     
 
@@ -164,6 +166,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         babyDaoLocal.delete(self.baby)
         babyDaoRemote.delete(self.baby)
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
     
     @objc func onDatePickerValueChanged(sender: UIDatePicker!) {
@@ -173,6 +176,7 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBAction func onBackButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
@@ -181,5 +185,6 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         babyDaoLocal.insertOrUpdate(baby)
         babyDaoRemote.insertOrUpdate(baby)
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
 }

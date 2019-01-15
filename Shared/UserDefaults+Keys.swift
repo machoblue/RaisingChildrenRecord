@@ -18,5 +18,6 @@ extension UserDefaults {
         case PooHardness
         case PooAmount
         case IsSignInSkipped
+        case CountToShowInterstitial
     }
 }

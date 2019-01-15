@@ -56,6 +56,8 @@ class RecordDetailViewController: UIViewController {
         
         recordDao = RecordDaoFactory.shared.createRecordDao(.Local)
         recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
+        
+        AdUtils.shared.loadAndAddAdView(self)
     }
     
     func configure(record: RecordModel) {
@@ -98,16 +100,17 @@ class RecordDetailViewController: UIViewController {
     
     /// - Tag: add_to_siri_button
     private func configureTableFooterView() {
-            let addShortcutButton = INUIAddVoiceShortcutButton(style: .whiteOutline)
-            addShortcutButton.shortcut = INShortcut(intent: record.intent)
-            addShortcutButton.delegate = self
-        
-            addShortcutButton.translatesAutoresizingMaskIntoConstraints = false
-            tableFooterView.addSubview(addShortcutButton)
-            tableFooterView.centerXAnchor.constraint(equalTo: addShortcutButton.centerXAnchor).isActive = true
-            tableFooterView.centerYAnchor.constraint(equalTo: addShortcutButton.centerYAnchor).isActive = true
-        
-            tableView.tableFooterView = tableFooterView
+        let addShortcutButton = INUIAddVoiceShortcutButton(style: .whiteOutline)
+        addShortcutButton.shortcut = INShortcut(intent: record.intent)
+        addShortcutButton.delegate = self
+    
+        addShortcutButton.translatesAutoresizingMaskIntoConstraints = false
+        tableFooterView.addSubview(addShortcutButton)
+        tableFooterView.centerXAnchor.constraint(equalTo: addShortcutButton.centerXAnchor).isActive = true
+//        tableFooterView.centerYAnchor.constraint(equalTo: addShortcutButton.centerYAnchor).isActive = true
+        NSLayoutConstraint(item: addShortcutButton, attribute: .top, relatedBy: .equal, toItem: tableFooterView, attribute: .topMargin, multiplier: 1.0, constant: 20).isActive = true
+    
+        tableView.tableFooterView = tableFooterView
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("*** AppDelegate.application.didFinishLaunchingWithOptoins ***")
 
         FirebaseApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-2062076007725970~5164800220")
         
         if Auth.auth().currentUser == nil {
             if UserDefaults.standard.object(forKey: UserDefaults.Keys.IsSignInSkipped.rawValue) as? Bool ?? false { // Once skipped, never show signInScreen

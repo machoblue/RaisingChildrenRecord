@@ -12,6 +12,7 @@ target 'Shared' do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
+    pod 'Firebase/AdMob'
 
     target 'RaisingChildrenRecordTests' do
       inherit! :search_paths

@@ -32,6 +32,8 @@ class CreateFamilyViewController: UIViewController {
         self.ref = Database.database().reference()
         babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
+        
+        AdUtils.shared.loadAndAddAdView(self)
     }
     
 
@@ -90,6 +92,7 @@ class CreateFamilyViewController: UIViewController {
                         self.ref.child("families").child(familyId).child("records").setValue(recordsDict)
                         FirebaseUtils.shared.observeRemote()
                         self.dismiss(animated: true, completion: nil)
+                        AdUtils.shared.notifyToShowInterstitial()
                     }
                 }
             }
@@ -100,6 +103,7 @@ class CreateFamilyViewController: UIViewController {
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
     
     func showAlert(title: String, message: String) {

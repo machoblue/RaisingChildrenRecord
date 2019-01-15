@@ -49,6 +49,7 @@
 		9C186EB021C4C30400A089EF /* RecordDetailTableConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */; };
 		9C186EB621C53F3700A089EF /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */; };
 		9C215D2121D0AA8700E9515A /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */; };
+		9C21678B21EE196C00C42158 /* AdUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21678A21EE196C00C42158 /* AdUtils.swift */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
 		9C4B220E21E02671009DEAD2 /* RecordModel+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */; };
@@ -205,6 +206,7 @@
 		9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailTableConfiguration.swift; sourceTree = "<group>"; };
 		9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
+		9C21678A21EE196C00C42158 /* AdUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUtils.swift; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
 		9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordModel+Intents.swift"; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				9C4B221321E6BA88009DEAD2 /* SignInViewController.swift */,
 				9C4B221721E79114009DEAD2 /* SignUpViewController.swift */,
 				9C4B221921E808FA009DEAD2 /* UIUtils.swift */,
+				9C21678A21EE196C00C42158 /* AdUtils.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				9C186EA821BBBFBA00A089EF /* RecordDaoFactory.swift in Sources */,
 				9C4B220E21E02671009DEAD2 /* RecordModel+Intents.swift in Sources */,
 				0C007B3F2145075F0001802A /* RecordsViewController.swift in Sources */,
+				9C21678B21EE196C00C42158 /* AdUtils.swift in Sources */,
 				9C186EAD21BBBFBA00A089EF /* RecordObserverFirebase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

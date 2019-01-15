@@ -51,6 +51,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         self.navigationItem2.titleView?.addGestureRecognizer(gesture)
         self.navigationItem2.titleView?.isUserInteractionEnabled = true
         
+        // why observe at viewDidAppear
         NotificationCenter.default.addObserver(self, selector: #selector(onPageForward(notification:)), name: Notification.Name.PageForward, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onPageBackward(notification:)), name: Notification.Name.PageBackward, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onRecordsViewDidAppear(notification:)), name: Notification.Name.RecordsViewDidAppear, object: nil)

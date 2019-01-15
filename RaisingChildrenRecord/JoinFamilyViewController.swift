@@ -41,6 +41,8 @@ class JoinFamilyViewController: UIViewController {
         ref = Database.database().reference()
         babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
+        
+        AdUtils.shared.loadAndAddAdView(self)
     }
     
     // MARK: Event
@@ -101,6 +103,7 @@ class JoinFamilyViewController: UIViewController {
                         FirebaseUtils.shared.observeRemote()
                         
                         self.activityIndicatorView.stopAnimating()
+                        AdUtils.shared.notifyToShowInterstitial()
                         self.dismiss(animated: true, completion: nil)
                     })
                 }
@@ -114,6 +117,7 @@ class JoinFamilyViewController: UIViewController {
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        AdUtils.shared.notifyToShowInterstitial()
     }
 
     func showAlert(title: String, message: String) {

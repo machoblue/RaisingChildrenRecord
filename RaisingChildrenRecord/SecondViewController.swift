@@ -33,6 +33,8 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     var babyObserver: BabyObserver?
     
+    var interstitial: GADInterstitial!
+    
     // MARK: - UIViewController LifeCycle Callback
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,11 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             self.updateSections()
             self.tableView?.reloadData()
         })
+        
+        AdUtils.shared.loadAndAddAdView(self)
+        
+        interstitial = AdUtils.shared.createAndLoadInterstitial(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(onShowInterstitialAd(notification:)), name: .ShowInterstitialAd, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -415,6 +422,10 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.tableFooterView = tableFooterView
     }
+    
+    @objc func onShowInterstitialAd(notification: Notification) -> Void  {
+        AdUtils.shared.showInterstitial(interstitial, viewController: self)
+    }
 }
 
 extension SecondViewController {
@@ -439,4 +450,11 @@ extension SecondViewController {
         present(alert, animated: true, completion: nil) // display alert
     }
     
+}
+
+extension SecondViewController: GADInterstitialDelegate {
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        print("interstitialDidDismissScreen")
+        interstitial = AdUtils.shared.createAndLoadInterstitial(self)
+    }
 }
