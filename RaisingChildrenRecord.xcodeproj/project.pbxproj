@@ -71,7 +71,6 @@
 		9CDA3269218E739500F38D61 /* Baby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C007B44214885F40001802A /* Baby.swift */; };
 		9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */; };
 		9CDA326D218E739500F38D61 /* BabyDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBAE9DF216D71D900284EDE /* BabyDao.swift */; };
-		9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76AF321854F7D002B00ED /* PickerViewController.swift */; };
 		9CE76B032187432B002B00ED /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE76AFA2187432B002B00ED /* Shared.framework */; };
 		9CE76B0A2187432B002B00ED /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE76B092187432B002B00ED /* SharedTests.swift */; };
 		9CE76B0C2187432B002B00ED /* Shared.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE76AFC2187432B002B00ED /* Shared.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -245,7 +244,6 @@
 		9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFirebase.swift; sourceTree = "<group>"; };
 		9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordObserverFactory.swift; sourceTree = "<group>"; };
 		9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
-		9CE76AF321854F7D002B00ED /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		9CE76AFA2187432B002B00ED /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE76AFC2187432B002B00ED /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
 		9CE76AFD2187432B002B00ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */,
 				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
 				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
-				9CE76AF321854F7D002B00ED /* PickerViewController.swift */,
 				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
 				9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */,
 				9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */,
@@ -894,7 +891,6 @@
 			files = (
 				9C4B221421E6BA88009DEAD2 /* SignInViewController.swift in Sources */,
 				9C186EA721BBBFBA00A089EF /* BabyObserverFirebase.swift in Sources */,
-				9CE76AF421854F7D002B00ED /* PickerViewController.swift in Sources */,
 				0C5F37E92156781D002A1B6E /* Intents.intentdefinition in Sources */,
 				0CC2B8C021568A8E00F92645 /* IntentHandler.swift in Sources */,
 				9C186EB621C53F3700A089EF /* RecordDetailViewController.swift in Sources */,
