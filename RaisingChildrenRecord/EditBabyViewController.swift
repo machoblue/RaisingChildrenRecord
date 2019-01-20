@@ -15,9 +15,9 @@ import Shared
 class EditBabyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var sections: [(header: String, cells: [(label: String, height: CGFloat)])] = [
-    (header: "名前", cells: [(label: "", height: 60)]),
-    (header: "生年月日", cells: [(label: "", height: 60)]),
-    (header: "性別", cells: [(label: "男の子", height: 60), (label: "女の子", height: 60)])
+    (header: "名前", cells: [(label: "", height: 50)]),
+    (header: "生年月日", cells: [(label: "", height: 50)]),
+    (header: "性別", cells: [(label: "男の子", height: 50), (label: "女の子", height: 50)])
     ]
     
     var baby: BabyModel!
