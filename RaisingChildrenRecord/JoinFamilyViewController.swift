@@ -87,7 +87,7 @@ class JoinFamilyViewController: UIViewController {
                         var newBabies: [BabyModel] = []
                         for key in babiesDict.allKeys {
                             let babyDict = babiesDict.value(forKey: key as! String) as! NSDictionary
-                            guard let newBaby = self.baby(key: key as! String, dict: babyDict) else { return }
+                            guard let newBaby = BabyModel(key: key as! String, dict: babyDict) else { return }
 //                            self.babyDaoLocal?.insertOrUpdate(newBaby)
                             newBabies.append(newBaby)
                         }
@@ -127,20 +127,6 @@ class JoinFamilyViewController: UIViewController {
         })
         alert.addAction(action)
         present(alert, animated: true, completion: nil) // display alert
-    }
-    
-    func baby(from snapshot: DataSnapshot) -> BabyModel? {
-        guard let babyDict = snapshot.value as? NSDictionary else { return nil }
-        return baby(key: snapshot.key, dict: babyDict)
-    }
-    
-    func baby(key: String, dict babyDict: NSDictionary) -> BabyModel? {
-        let id = key
-        let name = babyDict["name"] as! String
-        let born = Date(timeIntervalSince1970: babyDict["born"] as! Double)
-        let female = babyDict["female"] as! Bool
-        let newBaby = BabyModel(id: id, name: name, born: born, female: female)
-        return newBaby
     }
 }
 
