@@ -232,7 +232,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId! == "" else {
-            showAlert(title: "ご注意", message: "すでに家族に加わっているため、新しい家族を作成できません。")
+            UIUtils.shared.showAlert(title: "ご注意", message: "すでに家族に加わっているため、新しい家族を作成できません。", viewController: self)
             return // return when userDefaultsFamilyId is nil or ""
         }
         
@@ -249,7 +249,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String,
             !familyId.isEmpty else {
-            showAlert(title: "ご注意", message: "他のユーザーを家族に加える前に、新しく家族を作成してください。")
+            UIUtils.shared.showAlert(title: "ご注意", message: "他のユーザーを家族に加える前に、新しく家族を作成してください。", viewController: self)
             return
         }
         
@@ -276,7 +276,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         let userDefaultsFamilyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String
         guard userDefaultsFamilyId == nil || userDefaultsFamilyId == "" else {
-            showAlert(title: "ご注意", message: "すでに家族に加わっているため、他の家族には加われません。")
+            UIUtils.shared.showAlert(title: "ご注意", message: "すでに家族に加わっているため、他の家族には加われません。", viewController: self)
             return // return when userDefaultsFamilyId is nil or ""
         }
         
@@ -293,7 +293,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String,
             !familyId.isEmpty else {
-            showAlert(title: "ご注意", message: "どの家族にも加わっていないため、削除機能は利用できません。")
+            UIUtils.shared.showAlert(title: "ご注意", message: "どの家族にも加わっていないため、削除機能は利用できません。", viewController: self)
             return // return when userDefaultsFamilyId is nil or ""
         }
         
@@ -354,15 +354,6 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-    }
-    
-    func showAlert(title: String, message: String) {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let action: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) -> Void in
-            // do nothing
-        })
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil) // display alert
     }
     
     func updateSections() {
