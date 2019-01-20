@@ -12,7 +12,7 @@ import RealmSwift
 
 import Shared
 
-class EditBabyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EditBabyViewController: UIViewController {
     
     var sections: [(header: String, cells: [(label: String, height: CGFloat)])] = [
     (header: "名前", cells: [(label: "", height: 50)]),
@@ -51,94 +51,6 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         self.babyDaoRemote = BabyDaoFactory.shared.createBabyDao(.Remote)
         
         AdUtils.shared.loadAndAddAdView(self)
-    }
-    
-
-    // MARK: - UITAbleViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].cells.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell!
-        let section = indexPath.section
-        let row = indexPath.row
-        switch section {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "NameCell", for: indexPath)
-            self.textField = cell.viewWithTag(1) as! UITextField
-            self.textField.text = self.name
-            self.textField.layer.cornerRadius = 0
-            self.textField.addTarget(self, action: #selector(onTextFieldValueChanged), for: .editingChanged)
-            
-        case 1:
-            switch row {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
-                self.dateTimeButton = cell.viewWithTag(1) as! UIButton
-                self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
-                self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
-            
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BornDatePickerCell", for: indexPath)
-                
-                let datePicker = cell.contentView.viewWithTag(1) as! UIDatePicker
-                datePicker.timeZone = NSTimeZone.local
-                datePicker.date = self.born
-                datePicker.addTarget(self, action: #selector(onDatePickerValueChanged), for: .valueChanged)
-                
-            default:
-                cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            }
-                
-            
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "GenderCell", for: indexPath)
-            let label = cell.viewWithTag(1) as! UILabel
-            label.text = sections[section].cells[row].label
-            
-            let check = (self.female && row == 1) || (!self.female && row == 0)
-            cell.accessoryType = check ? .checkmark : .none
-            
-        
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
-            self.deleteButton = cell.viewWithTag(1) as! UIButton
-            self.deleteButton.setTitle(sections[3].cells[0].label, for: .normal)
-            self.deleteButton.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
-            
-        default:
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].header
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-    
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
-            for r in 0...1 {
-                let c = tableView.cellForRow(at: IndexPath(row: r, section: indexPath.section))
-                c!.accessoryType = .none
-            }
-            let cell = tableView.cellForRow(at: indexPath)
-            cell!.accessoryType = .checkmark
-            self.female = (indexPath.row == 1)
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return sections[indexPath.section].cells[indexPath.row].height
     }
     
     // MARK: - Event
@@ -181,5 +93,93 @@ class EditBabyViewController: UIViewController, UITableViewDataSource, UITableVi
         babyDaoRemote.insertOrUpdate(baby)
         dismiss(animated: true, completion: nil)
         AdUtils.shared.notifyToShowInterstitial()
+    }
+}
+
+extension EditBabyViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell!
+        let section = indexPath.section
+        let row = indexPath.row
+        switch section {
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: "NameCell", for: indexPath)
+            self.textField = cell.viewWithTag(1) as! UITextField
+            self.textField.text = self.name
+            self.textField.layer.cornerRadius = 0
+            self.textField.addTarget(self, action: #selector(onTextFieldValueChanged), for: .editingChanged)
+            
+        case 1:
+            switch row {
+            case 0:
+                cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
+                self.dateTimeButton = cell.viewWithTag(1) as! UIButton
+                self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
+                self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
+                
+            case 1:
+                cell = tableView.dequeueReusableCell(withIdentifier: "BornDatePickerCell", for: indexPath)
+                
+                let datePicker = cell.contentView.viewWithTag(1) as! UIDatePicker
+                datePicker.timeZone = NSTimeZone.local
+                datePicker.date = self.born
+                datePicker.addTarget(self, action: #selector(onDatePickerValueChanged), for: .valueChanged)
+                
+            default:
+                cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            }
+            
+            
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: "GenderCell", for: indexPath)
+            let label = cell.viewWithTag(1) as! UILabel
+            label.text = sections[section].cells[row].label
+            
+            let check = (self.female && row == 1) || (!self.female && row == 0)
+            cell.accessoryType = check ? .checkmark : .none
+            
+            
+        case 3:
+            cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
+            self.deleteButton = cell.viewWithTag(1) as! UIButton
+            self.deleteButton.setTitle(sections[3].cells[0].label, for: .normal)
+            self.deleteButton.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
+            
+        default:
+            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].header
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+}
+
+extension EditBabyViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            for r in 0...1 {
+                let c = tableView.cellForRow(at: IndexPath(row: r, section: indexPath.section))
+                c!.accessoryType = .none
+            }
+            let cell = tableView.cellForRow(at: indexPath)
+            cell!.accessoryType = .checkmark
+            self.female = (indexPath.row == 1)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return sections[indexPath.section].cells[indexPath.row].height
     }
 }

@@ -12,7 +12,7 @@ import RealmSwift
 
 import Shared
 
-class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecordsViewController: UIViewController {
     
     var date: Date?
     
@@ -76,66 +76,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.recordObserver.invalidate()
         records = []
     }
-
-    // MARK: - UITableViewDatasource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let record = records[indexPath.row]
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        let label1 = cell.contentView.viewWithTag(1) as! UILabel
-        label1.text = UIUtils.shared.formatToHHMM(record.dateTime!)
-
-        let imageView = cell.contentView.viewWithTag(2) as! UIImageView
-        imageView.contentMode = .scaleAspectFit
-        let cellImage = UIImage(named: Command.image(id: Int(record.commandId!)!)!)
-        imageView.image = cellImage
-
-        let label2 = cell.contentView.viewWithTag(3) as! UILabel
-        label2.text = Command.name(id: Int(record.commandId!)!)
-
-        let label3 = cell.contentView.viewWithTag(4) as! UILabel
-        label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
-        if (record.commandId == "1") {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
-        } else if (record.commandId == "2") {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "分"
-        } else if (record.commandId == "5") {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "℃"
-        } else if (record.commandId == "6") {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : Command.HardnessOption(rawValue: record.value2!)!.label
-        } else {
-            label3.text = record.value1
-        }
-
-        return cell
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let recordDetailViewController = storyboard.instantiateViewController(withIdentifier: "RecordDetailViewController") as! RecordDetailViewController
-        let record = records[indexPath.row]
-        recordDetailViewController.configure(record: record)
-        self.present(recordDetailViewController, animated: true, completion: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-
 
     // MARK: - Event
     @objc func onTitleViewClicked(notification: Notification) -> Void {
@@ -242,4 +182,66 @@ extension UITableView {
             self.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
+}
+
+extension RecordsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard: UIStoryboard = self.storyboard!
+        let recordDetailViewController = storyboard.instantiateViewController(withIdentifier: "RecordDetailViewController") as! RecordDetailViewController
+        let record = records[indexPath.row]
+        recordDetailViewController.configure(record: record)
+        self.present(recordDetailViewController, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+}
+
+extension RecordsViewController: UITableViewDataSource {
+    // MARK: - UITableViewDatasource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return records.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let record = records[indexPath.row]
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let label1 = cell.contentView.viewWithTag(1) as! UILabel
+        label1.text = UIUtils.shared.formatToHHMM(record.dateTime!)
+        
+        let imageView = cell.contentView.viewWithTag(2) as! UIImageView
+        imageView.contentMode = .scaleAspectFit
+        let cellImage = UIImage(named: Command.image(id: Int(record.commandId!)!)!)
+        imageView.image = cellImage
+        
+        let label2 = cell.contentView.viewWithTag(3) as! UILabel
+        label2.text = Command.name(id: Int(record.commandId!)!)
+        
+        let label3 = cell.contentView.viewWithTag(4) as! UILabel
+        label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
+        if (record.commandId == "1") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
+        } else if (record.commandId == "2") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "分"
+        } else if (record.commandId == "5") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "℃"
+        } else if (record.commandId == "6") {
+            label3.text = record.value2 == nil || record.value2 == "" ? "" : Command.HardnessOption(rawValue: record.value2!)!.label
+        } else {
+            label3.text = record.value1
+        }
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
 }
