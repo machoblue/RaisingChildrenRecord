@@ -17,43 +17,28 @@ extension RecordModel {
         
         recordCreateIntent.baby = BabyDaoRealm.shared.find(babyId!)?.name
         
-        switch commandId {
-        case "1":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
+        let command = Commands.command(from: Int(commandId!)!)!
+        recordCreateIntent.behavior = command.verb.rawValue.isEmpty ? nil : command.verb.rawValue
+        recordCreateIntent.target = command.target.rawValue.isEmpty ? nil : command.target.rawValue
+        recordCreateIntent.property = command.property.rawValue.isEmpty ? nil : command.property.rawValue
+        
+        switch command.unit {
+        case .ml:
             guard let amountStr = value2, let amount = Int(amountStr) else { break }
             recordCreateIntent.amount = amount as NSNumber
-            recordCreateIntent.unit = "ml"
-        case "2":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
+            recordCreateIntent.unit = command.unit.rawValue
+        case .minute:
             guard let amountStr = value2, let amount = Int(amountStr) else { break }
             recordCreateIntent.amount = amount as NSNumber
-            recordCreateIntent.unit = "分"
-        case "3":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
-        case "4":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
-        case "5":
-            recordCreateIntent.property = Command.values[Int(commandId!)! - 1].property
+            recordCreateIntent.unit = command.unit.rawValue
+        case .celcius:
             guard let amountStr = value2, let amount = Float(amountStr) else { break }
             recordCreateIntent.amountDecimal = amount as NSNumber
-            recordCreateIntent.unit = "℃"
-        case "6":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
-        case "7":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-        case "8":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-        case "9":
-            recordCreateIntent.behavior = Command.values[Int(commandId!)! - 1].verb
-            recordCreateIntent.target = Command.values[Int(commandId!)! - 1].target
-        default:
+            recordCreateIntent.unit = command.unit.rawValue
+        case .none:
             break
         }
+        
         print("*** RecordModel.intent *** self  :", self, self.commandId)
         print("*** RecordModel.intent *** intent:", recordCreateIntent)
         

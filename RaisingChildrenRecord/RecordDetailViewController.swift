@@ -88,7 +88,7 @@ class RecordDetailViewController: UIViewController {
         }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
-        titleStr = Command.name(id: Int(record.commandId!)!)
+        titleStr = Commands.command(from: Int(record.commandId!)!)?.name
     }
     
     /// - Tag: add_to_siri_button
@@ -262,7 +262,7 @@ extension RecordDetailViewController: UITableViewDataSource {
                 record.value2 = "normal"
             }
 
-            let option = Command.HardnessOption.all[indexPath.row]
+            let option = Commands.HardnessOption.all[indexPath.row]
             cell.textLabel?.text = option.label
             cell.accessoryType = option.rawValue == record.value2 ? .checkmark : .none
         case .amount:
@@ -270,7 +270,7 @@ extension RecordDetailViewController: UITableViewDataSource {
                 record.value3 = "normal"
             }
             
-            let option = Command.AmountOption.all[indexPath.row]
+            let option = Commands.AmountOption.all[indexPath.row]
             cell.textLabel?.text = option.label
             cell.accessoryType = option.rawValue == record.value3 ? .checkmark : .none
         }
@@ -297,7 +297,7 @@ extension RecordDetailViewController: UITableViewDelegate {
         let section = indexPath.section
         let sectionModel: RecordDetailTableConfiguration.SectionModel = tableConfig.sections[section]
         if sectionModel.type == RecordDetailTableConfiguration.SectionType.hardness {
-            if Command.HardnessOption(rawValue: record.value2!)?.label == cellText {
+            if Commands.HardnessOption(rawValue: record.value2!)?.label == cellText {
             } else {
                 for row in 0..<tableConfig.sections[indexPath.section].rowCount {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))
@@ -306,11 +306,11 @@ extension RecordDetailViewController: UITableViewDelegate {
                 
                 cell.accessoryType = .checkmark
                 
-                record.value2 = Command.HardnessOption.all[indexPath.row].rawValue
+                record.value2 = Commands.HardnessOption.all[indexPath.row].rawValue
             }
             
         } else if sectionModel.type == RecordDetailTableConfiguration.SectionType.amount {
-            if Command.AmountOption(rawValue: record.value3!)?.label == cellText {
+            if Commands.AmountOption(rawValue: record.value3!)?.label == cellText {
             } else {
                 for row in 0..<tableConfig.sections[indexPath.section].rowCount {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))
@@ -319,7 +319,7 @@ extension RecordDetailViewController: UITableViewDelegate {
 
                 cell.accessoryType = .checkmark
 
-                record.value3 = Command.AmountOption.all[indexPath.row].rawValue
+                record.value3 = Commands.AmountOption.all[indexPath.row].rawValue
             }
         }
 

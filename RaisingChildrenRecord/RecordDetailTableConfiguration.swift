@@ -82,8 +82,8 @@ struct RecordDetailTableConfiguration {
     
     private static let pooRecordSectionModels: [SectionModel] = [
         SectionModel(type: .dateTime, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.dateTimeCell.rawValue),
-        SectionModel(type: .hardness, rowCount: Command.HardnessOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
-        SectionModel(type: .amount, rowCount: Command.AmountOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
+        SectionModel(type: .hardness, rowCount: Commands.HardnessOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
+        SectionModel(type: .amount, rowCount: Commands.AmountOption.all.count, cellReuseIdentifier: ReuseIdentifiers.labelCell.rawValue),
         SectionModel(type: .note, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.textCell.rawValue),
         SectionModel(type: .deleteButton, rowCount: 1, cellReuseIdentifier: ReuseIdentifiers.deleteButtonCell.rawValue)
     ]

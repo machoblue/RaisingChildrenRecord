@@ -60,19 +60,19 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: CollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Command.values.count
+        return Commands.values.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CustomCollectionViewCell
         
-        let cellImage = UIImage(named: Command.values[indexPath.row].image)
+        let cellImage = UIImage(named: Commands.values[indexPath.row].image)
         cell.button.setBackgroundImage(cellImage, for: .normal)
         cell.button.setTitle("", for: .normal)
         cell.button.addTarget(self, action: #selector(onClicked), for: .touchUpInside)
-        cell.button.tag = Command.values[indexPath.row].id
+        cell.button.tag = Commands.values[indexPath.row].id
 
-        cell.label.text = Command.values[indexPath.row].name
+        cell.label.text = Commands.values[indexPath.row].name
         cell.label.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
 
         return cell
