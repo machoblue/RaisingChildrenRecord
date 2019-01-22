@@ -90,16 +90,16 @@ public class RecordObserverRealm: RecordObserver {
     }
     
     func recordModel(from: Record) -> RecordModel {
-        let to = RecordModel(id: from.id, babyId: from.babyId, userId: from.userId, commandId: from.commandId, dateTime: from.dateTime,
+        let to = RecordModel(id: from.id, babyId: from.babyId!, userId: from.userId, commandId: from.commandId!, dateTime: from.dateTime!,
                              value1: from.value1, value2: from.value2, value3: from.value3, value4: from.value4, value5: from.value5)
         return to
     }
     
     func copy(from: Record, to: RecordModel) {
-        to.babyId = from.babyId
-        to.commandId = from.commandId
+        to.babyId = from.babyId!
+        to.commandId = from.commandId!
         to.userId = from.userId
-        to.dateTime = from.dateTime
+        to.dateTime = from.dateTime!
         to.value1 = from.value1
         to.value2 = from.value2
         to.value3 = from.value3

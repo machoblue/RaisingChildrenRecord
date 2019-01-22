@@ -19,9 +19,13 @@ extension RecordModel {
     
     public convenience init?(key: String, dict recordDict: NSDictionary) {
         let id = key
-        let babyId = recordDict["babyId"] as? String
+        
+        guard let babyId = recordDict["babyId"] as? String else { return nil }
+        
         let userId = recordDict["userId"] as? String
-        let commandId = recordDict["commandId"] as? String
+        
+        guard let commandId = recordDict["commandId"] as? String else { return nil }
+        
         let dateTime = Date(timeIntervalSince1970: recordDict["dateTime"] as! Double)
         let value1 = recordDict["value1"] as? String
         let value2 = recordDict["value2"] as? String

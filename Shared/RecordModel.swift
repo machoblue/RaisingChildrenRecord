@@ -9,11 +9,11 @@
 import Foundation
 
 public class RecordModel: NSObject, Codable {
-    public var id: String?
-    public var babyId: String?
+    public var id: String = UUID().uuidString
+    public var babyId: String
     public var userId: String?
-    public var commandId: String?
-    public var dateTime: Date?
+    public var commandId: String
+    public var dateTime: Date = Date()
     public var value1: String? // note
     public var value2: String? {
         didSet {
@@ -47,10 +47,10 @@ public class RecordModel: NSObject, Codable {
     public var value5: String? // unit2
     
     override public var description: String {
-        return "id=\(self.id ?? ""), babyId=\(self.babyId ?? "")"
+        return "id=\(self.id), babyId=\(self.babyId)"
     }
     
-    public init(id: String?, babyId: String?, userId: String?, commandId: String?, dateTime: Date?, value1: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
+    public init(id: String, babyId: String, userId: String?, commandId: String, dateTime: Date, value1: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
         self.id = id
         self.babyId = babyId
         self.userId = userId
@@ -88,7 +88,7 @@ public class RecordModel: NSObject, Codable {
         self.value5 = value5
     }
     
-    public convenience init(babyId: String?, commandId: String?) {
+    public convenience init(babyId: String, commandId: String) {
         self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
     }
 }

@@ -25,20 +25,17 @@ public class RecordDaoFirebase: RecordDao {
         print("*** RecordDaoFirebase.insertOrUpdate ***")
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
-        guard let babyId = record.babyId else { return }
-        guard let id = record.id else { return }
-        let recordDict = ["babyId": babyId, "commandId": record.commandId, "userId": Auth.auth().currentUser?.uid, "dateTime": record.dateTime?.timeIntervalSince1970,
+        let recordDict = ["babyId": record.babyId, "commandId": record.commandId, "userId": Auth.auth().currentUser?.uid, "dateTime": record.dateTime.timeIntervalSince1970,
                           "value1": record.value1, "value2": record.value2, "value3": record.value3, "value4": record.value4, "value5": record.value5] as [String : Any]
-        self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).setValue(recordDict)
+        self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(record.id).setValue(recordDict)
     }
     
     public func delete(_ record: RecordModel) {
         guard FirebaseUtils.ready() else { return }
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
-        guard let id = record.id else { return }
 //        guard let babyId = record.babyId else { return }
-        self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(id).removeValue()
+        self.ref.child("families").child(familyId)/*.child("babies").child(babyId)*/.child("records").child(record.id).removeValue()
     }
     
     public func find(id: String) -> RecordModel? {

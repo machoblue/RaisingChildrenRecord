@@ -88,7 +88,7 @@ class RecordDetailViewController: UIViewController {
         }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
-        titleStr = Commands.command(from: Int(record.commandId!)!)?.name
+        titleStr = Commands.command(from: Int(record.commandId)!)?.name
     }
     
     /// - Tag: add_to_siri_button
@@ -148,7 +148,7 @@ class RecordDetailViewController: UIViewController {
     
     @IBAction func onValueChanged(sender: UIDatePicker!) {
         self.record.dateTime = sender.date
-        dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.record.dateTime!), for: .normal)
+        dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.record.dateTime), for: .normal)
     }
     
     @IBAction func onTextFieldChanged(sender: UITextField!) {
@@ -183,12 +183,12 @@ extension RecordDetailViewController: UITableViewDataSource {
             if let cell = cell as? DateTimeTableViewCell {
                 dateTimeButton = cell.button
                 dateTimeButton?.setTitle(title, for: .normal)
-                dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(record.dateTime!), for: .normal)
+                dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(record.dateTime), for: .normal)
                 dateTimeButton?.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
 
                 datePicker = cell.datePicker
                 datePicker?.timeZone = NSTimeZone.local
-                datePicker?.date = record.dateTime!
+                datePicker?.date = record.dateTime
                 datePicker?.addTarget(self, action: #selector(onValueChanged), for: .valueChanged)
                 
                 datePickerHeightConstraint = cell.datePickerHeightConstraint

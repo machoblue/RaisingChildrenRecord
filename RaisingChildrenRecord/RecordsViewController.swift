@@ -151,7 +151,7 @@ class RecordsViewController: UIViewController {
                 }
             }
             
-            self.records.sort(by: {$0.dateTime! < $1.dateTime!})
+            self.records.sort(by: {$0.dateTime < $1.dateTime})
             
             self.tableView.reloadData()
             
@@ -213,15 +213,15 @@ extension RecordsViewController: UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let label1 = cell.contentView.viewWithTag(1) as! UILabel
-        label1.text = UIUtils.shared.formatToHHMM(record.dateTime!)
+        label1.text = UIUtils.shared.formatToHHMM(record.dateTime)
         
         let imageView = cell.contentView.viewWithTag(2) as! UIImageView
         imageView.contentMode = .scaleAspectFit
-        let cellImage = UIImage(named: Commands.command(from: Int(record.commandId!)!)!.image)
+        let cellImage = UIImage(named: Commands.command(from: Int(record.commandId)!)!.image)
         imageView.image = cellImage
         
         let label2 = cell.contentView.viewWithTag(3) as! UILabel
-        label2.text = Commands.command(from: Int(record.commandId!)!)?.name
+        label2.text = Commands.command(from: Int(record.commandId)!)?.name
         
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
         label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
