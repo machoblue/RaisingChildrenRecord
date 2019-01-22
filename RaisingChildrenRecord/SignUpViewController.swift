@@ -104,13 +104,3 @@ class SignUpViewController: UIViewController {
         return result
     }
 }
-
-
-extension SignUpViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}

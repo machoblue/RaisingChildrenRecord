@@ -96,12 +96,3 @@ class SignInViewController: UIViewController {
     }
     
 }
-
-extension SignInViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}

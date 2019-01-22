@@ -117,15 +117,6 @@ class CreateFamilyViewController: UIViewController {
     
 }
 
-extension CreateFamilyViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}
-
 extension CreateFamilyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rowCount

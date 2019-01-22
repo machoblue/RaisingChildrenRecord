@@ -130,16 +130,6 @@ class JoinFamilyViewController: UIViewController {
     }
 }
 
-
-extension JoinFamilyViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}
-
 extension JoinFamilyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rowCount

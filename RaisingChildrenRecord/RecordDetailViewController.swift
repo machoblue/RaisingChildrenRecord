@@ -327,15 +327,6 @@ extension RecordDetailViewController: UITableViewDelegate {
     }
 }
 
-extension RecordDetailViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        // キーボードを閉じる
-        textField.resignFirstResponder()
-        
-        return true
-    }
-}
-
 extension RecordDetailViewController: INUIAddVoiceShortcutButtonDelegate {
     
     func present(_ addVoiceShortcutViewController: INUIAddVoiceShortcutViewController, for addVoiceShortcutButton: INUIAddVoiceShortcutButton) {
