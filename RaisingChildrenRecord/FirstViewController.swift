@@ -70,7 +70,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         cell.button.setBackgroundImage(cellImage, for: .normal)
         cell.button.setTitle("", for: .normal)
         cell.button.addTarget(self, action: #selector(onClicked), for: .touchUpInside)
-        cell.button.tag = Commands.values[indexPath.row].id
+        cell.button.tag = Commands.values[indexPath.row].id.rawValue
 
         cell.label.text = Commands.values[indexPath.row].name
         cell.label.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)

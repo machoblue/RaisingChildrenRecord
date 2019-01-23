@@ -8,24 +8,37 @@
 
 import Foundation
 
-public typealias Command = (id: Int, name: String, image: String, verb: Commands.Verb, unit: Commands.Unit, target: Commands.Target, property: Commands.Property)
+public typealias Command = (id: Commands.Identifier, name: String, image: String, verb: Commands.Verb, unit: Commands.Unit, target: Commands.Target, property: Commands.Property)
 public typealias CommandMenu = [Command]
 
 public enum Commands {
     // (baby), verb, unit, object(=target), property
     static public let values: CommandMenu = [
-        Command(id: 1, name: "ミルク", image: "milk", verb: .drink, unit: .ml, target: .milk, property: .none),
-        Command(id: 2, name: "母乳", image: "breast", verb: .drink, unit: .minute, target: .breast, property: .none), // SVO
-        Command(id: 3, name: "離乳食", image: "babyfood", verb: .eat, unit: .none, target: .babyfood, property: .none),
-        Command(id: 4, name: "おやつ", image: "snack", verb: .eat, unit: .none, target: .snack, property: .none),
-        Command(id: 5, name: "体温", image: "temperature", verb: .none, unit: .celcius, target: .none, property: .temperature), // SVC
-        Command(id: 6, name: "うんち", image: "poo", verb: .do, unit: .none, target: .poo, property: .none), // SVO
-        Command(id: 7, name: "寝る", image: "sleep", verb: .sleep, unit: .none, target: .none, property: .none), // SV
-        Command(id: 8, name: "起きる", image: "awake", verb: .awake, unit: .none, target: .none, property: .none), // SV
-        Command(id: 9, name: "くすり", image: "medicine", verb: .drink, unit: .none, target: .medicine, property: .none), // SV0
-        Command(id: 99, name: "その他", image: "other", verb: .none, unit: .none, target: .none, property: .none) // ???
+        Command(id: .milk, name: "ミルク", image: "milk", verb: .drink, unit: .ml, target: .milk, property: .none),
+        Command(id: .breast, name: "母乳", image: "breast", verb: .drink, unit: .minute, target: .breast, property: .none), // SVO
+        Command(id: .babyfood, name: "離乳食", image: "babyfood", verb: .eat, unit: .none, target: .babyfood, property: .none),
+        Command(id: .snack, name: "おやつ", image: "snack", verb: .eat, unit: .none, target: .snack, property: .none),
+        Command(id: .temperature, name: "体温", image: "temperature", verb: .none, unit: .celcius, target: .none, property: .temperature), // SVC
+        Command(id: .poo, name: "うんち", image: "poo", verb: .do, unit: .none, target: .poo, property: .none), // SVO
+        Command(id: .sleep, name: "寝る", image: "sleep", verb: .sleep, unit: .none, target: .none, property: .none), // SV
+        Command(id: .awake, name: "起きる", image: "awake", verb: .awake, unit: .none, target: .none, property: .none), // SV
+        Command(id: .medicine, name: "くすり", image: "medicine", verb: .drink, unit: .none, target: .medicine, property: .none), // SV0
+        Command(id: .other, name: "その他", image: "other", verb: .none, unit: .none, target: .none, property: .none) // ???
         // 離乳食を食べた。湿疹がでた。下痢が出た。
     ]
+    
+    public enum Identifier: Int {
+        case milk = 1
+        case breast = 2
+        case babyfood = 3
+        case snack = 4
+        case temperature = 5
+        case poo = 6
+        case sleep = 7
+        case awake = 8
+        case medicine = 9
+        case other = 99
+    }
     
     public enum Verb: String {
         case drink = "飲んだ"
@@ -59,7 +72,7 @@ public enum Commands {
     }
     
     static public func command(from id: Int) -> Command? {
-        return values.first { $0.id == id }
+        return values.first { $0.id.rawValue == id }
     }
     
     public enum HardnessOption: String {

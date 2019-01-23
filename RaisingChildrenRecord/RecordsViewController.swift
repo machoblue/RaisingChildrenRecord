@@ -225,17 +225,7 @@ extension RecordsViewController: UITableViewDataSource {
         
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
         label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
-        if (record.commandId == 1) {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
-        } else if (record.commandId == 2) {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "分"
-        } else if (record.commandId == 5) {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "℃"
-        } else if (record.commandId == 6) {
-            label3.text = record.value2 == nil || record.value2 == "" ? "" : Commands.HardnessOption(rawValue: record.value2!)!.label
-        } else {
-            label3.text = record.value1
-        }
+        label3.text = record.label
         
         return cell
     }

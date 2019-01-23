@@ -50,6 +50,20 @@ public class RecordModel: NSObject, Codable {
         return "id=\(self.id), babyId=\(self.babyId)"
     }
     
+    public var label: String {
+        if let unit = Commands.command(from: commandId)?.unit, unit != .none,
+            let value2 = value2, !value2.isEmpty {
+            return "\(value2)\(unit.rawValue)"
+            
+        } else if commandId == Commands.Identifier.poo.rawValue,
+            let value2 = value2, !value2.isEmpty {
+            return Commands.HardnessOption(rawValue: value2)!.label
+            
+        } else {
+            return value1 ?? ""
+        }
+    }
+    
     public init(id: String, babyId: String, userId: String?, commandId: Int, dateTime: Date, value1: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
         self.id = id
         self.babyId = babyId
