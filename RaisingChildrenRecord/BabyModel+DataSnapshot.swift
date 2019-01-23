@@ -23,4 +23,13 @@ extension BabyModel {
         let female = babyDict["female"] as! Bool
         self.init(id: id, name: name, born: born, female: female)
     }
+    
+    public var dictionary: [String: Any] {
+        return [
+            "id": id,
+            "name": name,
+            "born": born.timeIntervalSince1970,
+            "female": female
+        ]
+    }
 }

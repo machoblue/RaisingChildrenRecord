@@ -24,8 +24,7 @@ public class BabyDaoFirebase: BabyDao {
     public func insertOrUpdate(_ baby: BabyModel) {
         guard FirebaseUtils.ready() else { return }
         let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String
-        let babyDict = ["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female] as [String : Any]
-        self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(babyDict)
+        self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(baby.dictionary)
     }
     
     public func delete(_ baby: BabyModel) {
