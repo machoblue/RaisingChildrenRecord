@@ -155,22 +155,22 @@ extension RecordModel {
                 switch target {
                 case "ミルク":
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 1, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "1", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 1, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                         return
                     }
                 case "母乳":
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 2, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "2", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 2, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                         return
                     }
                 case "くすり":
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "9", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 9, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
@@ -179,10 +179,10 @@ extension RecordModel {
                 guard let target = intent.target else { return nil }
                 switch target {
                 case "離乳食":
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "3", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 3, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 case "おやつ":
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "4", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 4, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
@@ -191,16 +191,16 @@ extension RecordModel {
                 guard let target = intent.target else { return nil }
                 switch target {
                 case "うんち":
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "6", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 6, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
                 }
             case "寝た":
-                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "7", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 7, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                 return
             case "起きた":
-                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "8", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 8, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                 return
             default:
                 return nil
@@ -209,10 +209,10 @@ extension RecordModel {
             switch property {
             case "体温":
                 if let amount = intent.amountDecimal {
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "5", dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 5, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                     return
                 } else {
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: "5", dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: 5, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 }
             default:

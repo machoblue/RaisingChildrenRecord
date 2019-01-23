@@ -17,7 +17,7 @@ extension RecordModel {
         
         recordCreateIntent.baby = BabyDaoRealm.shared.find(babyId)?.name
         
-        let command = Commands.command(from: Int(commandId)!)!
+        let command = Commands.command(from: commandId)!
         recordCreateIntent.behavior = command.verb.rawValue.isEmpty ? nil : command.verb.rawValue
         recordCreateIntent.target = command.target.rawValue.isEmpty ? nil : command.target.rawValue
         recordCreateIntent.property = command.property.rawValue.isEmpty ? nil : command.property.rawValue

@@ -217,21 +217,21 @@ extension RecordsViewController: UITableViewDataSource {
         
         let imageView = cell.contentView.viewWithTag(2) as! UIImageView
         imageView.contentMode = .scaleAspectFit
-        let cellImage = UIImage(named: Commands.command(from: Int(record.commandId)!)!.image)
+        let cellImage = UIImage(named: Commands.command(from: record.commandId)!.image)
         imageView.image = cellImage
         
         let label2 = cell.contentView.viewWithTag(3) as! UILabel
-        label2.text = Commands.command(from: Int(record.commandId)!)?.name
+        label2.text = Commands.command(from: record.commandId)?.name
         
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
         label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
-        if (record.commandId == "1") {
+        if (record.commandId == 1) {
             label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "ml"
-        } else if (record.commandId == "2") {
+        } else if (record.commandId == 2) {
             label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "分"
-        } else if (record.commandId == "5") {
+        } else if (record.commandId == 5) {
             label3.text = record.value2 == nil || record.value2 == "" ? "" : record.value2! + "℃"
-        } else if (record.commandId == "6") {
+        } else if (record.commandId == 6) {
             label3.text = record.value2 == nil || record.value2 == "" ? "" : Commands.HardnessOption(rawValue: record.value2!)!.label
         } else {
             label3.text = record.value1

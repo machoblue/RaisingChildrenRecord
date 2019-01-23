@@ -56,39 +56,39 @@ class RecordDetailViewController: UIViewController {
     func configure(record: RecordModel) {
         self.record = record
         var recordType: RecordDetailTableConfiguration.RecordType? = nil
-        if (record.commandId == "1") {
+        if (record.commandId == 1) {
             recordType = .milk
         }
-        if (record.commandId == "2") {
+        if (record.commandId == 2) {
             recordType = .breast
         }
-        if (record.commandId == "3") {
+        if (record.commandId == 3) {
             recordType = .babyfood
         }
-        if (record.commandId == "4") {
+        if (record.commandId == 4) {
             recordType = .snack
         }
-        if (record.commandId == "5") {
+        if (record.commandId == 5) {
             recordType = .temperature
         }
-        if (record.commandId == "6") {
+        if (record.commandId == 6) {
             recordType = .poo
         }
-        if (record.commandId == "7") {
+        if (record.commandId == 7) {
             recordType = .sleep
         }
-        if (record.commandId == "8") {
+        if (record.commandId == 8) {
             recordType = .awake
         }
-        if (record.commandId == "9") {
+        if (record.commandId == 9) {
             recordType = .medicine
         }
-        if (record.commandId == "99") {
+        if (record.commandId == 99) {
             recordType = .other
         }
         
         self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
-        titleStr = Commands.command(from: Int(record.commandId)!)?.name
+        titleStr = Commands.command(from: record.commandId)?.name
     }
     
     /// - Tag: add_to_siri_button

@@ -108,7 +108,7 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         let hms = calendar.dateComponents([.hour, .minute, .second], from: now)
         let date = calendar.date(from: DateComponents(year: ymd.year, month: ymd.month, day: ymd.day, hour: hms.hour, minute: hms.minute, second: hms.second))
         
-        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag.description, dateTime: date!, value1: "", value2: "", value3: "", value4: "", value5: "")
+        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag, dateTime: date!, value1: "", value2: "", value3: "", value4: "", value5: "")
         self.recordDao.insertOrUpdate(record)
         self.recordDaoRemote.insertOrUpdate(record)
         

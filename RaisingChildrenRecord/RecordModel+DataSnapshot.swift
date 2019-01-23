@@ -24,7 +24,7 @@ extension RecordModel {
         
         let userId = recordDict["userId"] as? String
         
-        guard let commandId = recordDict["commandId"] as? String else { return nil }
+        guard let commandId = recordDict["commandId"] as? Int else { return nil }
         
         let dateTime = Date(timeIntervalSince1970: recordDict["dateTime"] as! Double)
         let value1 = recordDict["value1"] as? String
