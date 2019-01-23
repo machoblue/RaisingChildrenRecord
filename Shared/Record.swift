@@ -12,10 +12,10 @@ import RealmSwift
 
 public class Record: Object {
     @objc dynamic public var id = UUID().uuidString
-    @objc dynamic public var babyId: String?
+    @objc dynamic public var babyId: String = ""
     @objc dynamic public var userId: String?
-    @objc dynamic public var commandId: String?
-    @objc dynamic public var dateTime: Date?
+    @objc dynamic public var commandId: String = ""
+    @objc dynamic public var dateTime: Date = Date()
     @objc dynamic public var value1: String?
     @objc dynamic public var value2: String?
     @objc dynamic public var value3: String?
