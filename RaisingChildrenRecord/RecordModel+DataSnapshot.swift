@@ -34,4 +34,19 @@ extension RecordModel {
         let value5 = recordDict["value5"] as? String
         self.init(id: id, babyId: babyId, userId: userId, commandId: commandId, dateTime: dateTime, value1: value1, value2: value2, value3: value3, value4: value4, value5: value5)
     }
+    
+    public var dictionary: [String: Any] {
+        return [
+            "id": id,
+            "babyId": babyId,
+            "commandId": commandId,
+            "userId": Auth.auth().currentUser?.uid ?? "",
+            "dateTime": dateTime.timeIntervalSince1970,
+            "value1": value1 ?? "",
+            "value2": value2 ?? "",
+            "value3": value3 ?? "",
+            "value4": value4 ?? "",
+            "value5": value5 ?? ""
+        ]
+    }
 }

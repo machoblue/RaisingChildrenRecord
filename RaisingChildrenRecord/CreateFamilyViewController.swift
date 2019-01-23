@@ -77,16 +77,7 @@ class CreateFamilyViewController: UIViewController {
                             self.ref.child("families").child(familyId).child("babies").child(baby.id).setValue(["name": baby.name, "born": baby.born.timeIntervalSince1970, "female": baby.female])
                             let records = self.recordDaoLocal.find(babyId: baby.id)
                             for record in records {
-                                recordsDict[record.id] = [
-                                    "babyId": baby.id,
-                                    "userId": userId!,
-                                    "commandId": record.commandId,
-                                    "dateTime": record.dateTime.timeIntervalSince1970,
-                                    "value1": record.value1 ?? "",
-                                    "value2": record.value2 ?? "",
-                                    "value3": record.value3 ?? "",
-                                    "value4": record.value4 ?? "",
-                                    "value5": record.value5 ?? ""]
+                                recordsDict[record.id] = record.dictionary
                             }
                         }
                         self.ref.child("families").child(familyId).child("records").setValue(recordsDict)
