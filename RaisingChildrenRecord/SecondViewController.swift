@@ -120,9 +120,7 @@ class SecondViewController: UIViewController {
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        let storyboard: UIStoryboard = self.storyboard!
-        let createFamilyViewController = storyboard.instantiateViewController(withIdentifier: "CreateFamilyViewController") as! CreateFamilyViewController
-        self.present(createFamilyViewController, animated: true, completion: nil)
+        performSegue(withIdentifier: "Create Family", sender: nil)
     }
     
     func addFamily() {
@@ -145,11 +143,8 @@ class SecondViewController: UIViewController {
         self.ref.child("families").child(familyId).child("passcode").setValue(["value": passcode, "expirationDate": expirationDate.timeIntervalSince1970])
 
         // display familyId and onetime password
-        let storyboard: UIStoryboard = self.storyboard!
-        let familyIdAndPasscodeViewController = storyboard.instantiateViewController(withIdentifier: "FamilyIdAndPasscodeViewController") as! FamilyIdAndPasscodeViewController
-        familyIdAndPasscodeViewController.familyIdText = familyId
-        familyIdAndPasscodeViewController.passcodeText = passcode
-        self.present(familyIdAndPasscodeViewController, animated: true, completion: nil)
+        let parameterDict = ["familyId": familyId, "passcode": passcode]
+        performSegue(withIdentifier: "Create Family", sender: parameterDict)
     }
     
     func joinFamily() {
@@ -164,9 +159,7 @@ class SecondViewController: UIViewController {
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        let storyboard: UIStoryboard = self.storyboard!
-        let joinFamilyViewController = storyboard.instantiateViewController(withIdentifier: "JoinFamilyViewController") as! JoinFamilyViewController
-        self.present(joinFamilyViewController, animated: true, completion: nil)
+        performSegue(withIdentifier: "Join Family", sender: nil)
     }
     
     func deleteFamilyData() {
@@ -400,21 +393,7 @@ extension SecondViewController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             
         case 1:
-            switch row {
-            case sections[1].cells.count - 1:
-                // to AddBabyScreen
-                let storyboard: UIStoryboard = self.storyboard!
-                let editBabyViewController = storyboard.instantiateViewController(withIdentifier: "EditBabyViewController") as! EditBabyViewController
-                editBabyViewController.baby = nil
-                self.present(editBabyViewController, animated: true, completion: nil)
-                
-            default:
-                // to EditBabyScreen
-                let storyboard: UIStoryboard = self.storyboard!
-                let editBabyViewController = storyboard.instantiateViewController(withIdentifier: "EditBabyViewController") as! EditBabyViewController
-                editBabyViewController.baby = babies[row]
-                self.present(editBabyViewController, animated: true, completion: nil)
-            }
+            performSegue(withIdentifier: "Show Baby Detail", sender: nil)
             
         case 2:
             switch row {
@@ -438,6 +417,18 @@ extension SecondViewController: UITableViewDelegate {
             
         default:
             break
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let editBaby = segue.destination as? EditBabyViewController {
+            let row = tableView.indexPathForSelectedRow!.row
+            editBaby.baby = row >= babies.count ? nil : babies[row]
+            
+        } else if let familyIdAndPasscode = segue.destination as? FamilyIdAndPasscodeViewController {
+            let parameterDict = sender as! [String: String]
+            familyIdAndPasscode.familyIdText = parameterDict["familyId"]
+            familyIdAndPasscode.passcodeText = parameterDict["passcode"]
         }
     }
 }
