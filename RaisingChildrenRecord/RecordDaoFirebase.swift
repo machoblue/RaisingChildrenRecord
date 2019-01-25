@@ -22,7 +22,6 @@ public class RecordDaoFirebase: RecordDao {
     
     public func insertOrUpdate(_ record: RecordModel) {
         guard FirebaseUtils.ready() else { return }
-        print("*** RecordDaoFirebase.insertOrUpdate ***")
         guard let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as? String else { return }
         guard familyId != "" else { return }
         self.ref.child("families").child(familyId).child("records").child(record.id).setValue(record.dictionary)

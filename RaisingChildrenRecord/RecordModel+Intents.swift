@@ -39,9 +39,6 @@ extension RecordModel {
             break
         }
         
-        print("*** RecordModel.intent *** self  :", self, self.commandId)
-        print("*** RecordModel.intent *** intent:", recordCreateIntent)
-        
         return recordCreateIntent
     }
     

@@ -21,25 +21,6 @@ public class RecordDataManager: DataManager<[RecordModel]> {
             self.managedData = []
         }
     }
-    
-    /*
-    // The following code isn't required.
-    private func donateInteraction(for record: RecordModel) {
-        let interaction = INInteraction(intent: record.intent, response: nil)
-        
-        interaction.identifier = record.id
-        
-        interaction.donate { (error) in
-            if error != nil {
-                if let error = error as NSError? {
-                    print("Interaction donation failed: %@", error)
-                }
-            } else {
-                print("Successfully donated interaction")
-            }
-        }
-    }
- */
 
 }
 

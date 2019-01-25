@@ -39,7 +39,6 @@ class FirebaseUtils {
     }
     
     func observeRemote() {
-        print("*** AppDelegate.observeRemote ***")
         FamilyIdObserver.shared.observe(with: { (familyId) -> Void in
             self.observeRemoteBabies()
             self.observeRemoteRecords()
@@ -66,12 +65,10 @@ class FirebaseUtils {
     }
     
     func observeRemoteRecords() {
-        print("*** AppDelegate.observerRemoteRecords ***")
         self.recordObserverRemote?.observe(with: { (recordAndChangeArray) in
             for recordAndChange in recordAndChangeArray {
                 let record = recordAndChange.0
                 let change = recordAndChange.1
-                print("*** AppDelegate.observerRemoteRecords.recordObserver.observe ***: ", record)
                 switch change {
                 case .Init:
                     self.recordDaoLocal?.insertOrUpdate(record)

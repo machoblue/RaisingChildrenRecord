@@ -20,7 +20,6 @@ class CustomTextField: UITextField {
 extension CustomTextField: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        print("*** CustomTextField.textFieldShouldReturn ***")
         // キーボードを閉じる
         self.resignFirstResponder()
         

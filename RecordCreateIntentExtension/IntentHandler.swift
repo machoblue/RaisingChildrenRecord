@@ -129,12 +129,10 @@ extension IntentHandler: RecordCreateIntentHandling {
     func handle(intent: RecordCreateIntent, completion: @escaping
         (RecordCreateIntentResponse) -> Void) {
         let response = RecordCreateIntentResponse(code: .success, userActivity: nil)
-        print("*** IntentHandler.handle ***", intent)
         
         let record = RecordModel(from: intent)
 
         RecordDataManager().createRecord(record!)
-        print("*** IntentHandler.handle recordDaoRealm.insertOrUpdate ***:", record!)
 
         completion(response)
     }

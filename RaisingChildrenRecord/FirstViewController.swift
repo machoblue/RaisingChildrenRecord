@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 import RealmSwift
 
@@ -100,7 +101,6 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
-        print("*** FirstViewController.onClicked ***")
         let displayDate = self.date!
         let now = Date()
         let calendar = Calendar.current
@@ -111,25 +111,22 @@ class FirstViewController: UIViewController, UICollectionViewDataSource, UIColle
         let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag, dateTime: date!, value1: "", value2: "", value3: "", value4: "", value5: "")
         self.recordDao.insertOrUpdate(record)
         self.recordDaoRemote.insertOrUpdate(record)
-        
-        NotificationCenter.default.post(name: .CommandButtonClicked, object: nil)
 
         if #available(iOS 12.0, *) {
             let interaction = INInteraction(intent: record.intent, response: nil)
             interaction.donate { error in
                 guard error == nil else {
-                    print("*** FirstViewController.onClick *** interaction.donate->error:", error.debugDescription)
+                    os_log("Could not donate interaction: %@", log: OSLog.default, type: .error, error.debugDescription)
                     return
                 }
             }
         } else {
             // Fallback on earlier versions
-            print("Fallback on Earlier versions")
+            os_log("Fallback on Earlier versions", log: OSLog.default, type: .debug)
         }
     }
     
     @objc func onTitleViewTapped(_ sender: UITapGestureRecognizer) {
-        print("*** FirstViewController.onTitleViewTapped ***")
         self.baby = nextBaby()
         
         self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
@@ -203,5 +200,4 @@ extension Notification.Name {
     static let LeftBarButtonClicked = Notification.Name("LeftBarButtonClicked")
     static let RightBarButtonClicked = Notification.Name("RightBarButtonClicked")
     static let TitleViewClicked = Notification.Name("TitleViewClicked")
-    static let CommandButtonClicked = Notification.Name("CommandButtonClicked")
 }

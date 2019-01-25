@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 import RealmSwift
 
@@ -48,16 +49,12 @@ class SecondViewController: UIViewController {
                 let change = babyAndChange.1
                 switch change {
                 case .Init:
-                    print("*** SecondViewController.viewDidLoad.observe.Init ***")
                     self.babies.append(baby)
                 case .Insert:
-                    print("*** SecondViewController.viewDidLoad.observe.Insert ***")
                     self.babies.append(baby)
                 case .Modify:
-                    print("*** SecondViewController.viewDidLoad.observe.Modify ***")
                     self.modify(baby)
                 case .Delete:
-                    print("*** SecondViewController.viewDidLoad.observe.Delete***")
                     self.delete(baby)
                 }
             }
@@ -214,7 +211,7 @@ class SecondViewController: UIViewController {
                 
                 self.ref.child("families").child(familyId).child("records").updateChildValues(recordsToUpdate, withCompletionBlock: {(error, snapshot) in
                     if let error = error {
-                        print("データ削除に失敗しました。", error)
+                        os_log("Could not delete all records: %@", log: OSLog.default, type: .error, error.localizedDescription)
                     } else {
                         self.ref.child("users").child(userId).child("families").removeValue()
                     }
@@ -239,7 +236,7 @@ class SecondViewController: UIViewController {
             configureTableFooter()
 
         } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+            os_log("Error signing out: %@", log: OSLog.default, type: .error, signOutError)
         }
     }
     
@@ -328,7 +325,6 @@ extension SecondViewController {
 
 extension SecondViewController: GADInterstitialDelegate {
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        print("interstitialDidDismissScreen")
         interstitial = AdUtils.shared.createAndLoadInterstitial(self)
     }
 }

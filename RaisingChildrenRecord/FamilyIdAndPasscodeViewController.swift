@@ -47,7 +47,6 @@ extension FamilyIdAndPasscodeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("*** tableVie3wCell" )
         let sectionModel = sections[indexPath.section]
         let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier, for: indexPath)
         switch indexPath.section {

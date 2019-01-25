@@ -32,19 +32,16 @@ class BabyObserverFirebase: BabyObserver {
         })
         
         babiesRef.observe(DataEventType.childAdded, with: { (snapshot) in
-            print("snapshot:", snapshot)
             guard let newBaby = BabyModel(from: snapshot) else {return}
             callback([(newBaby, .Insert)])
         })
         
         babiesRef.observe(DataEventType.childChanged, with: { (snapshot) in
-            print("snapshot:", snapshot)
             guard let newBaby = BabyModel(from: snapshot) else {return}
             callback([(newBaby, .Modify)])
         })
         
        babiesRef.observe(DataEventType.childRemoved, with: { (snapshot) in
-            print("snapshot:", snapshot)
             guard let newBaby = BabyModel(from: snapshot) else {return}
             callback([(newBaby, .Delete)])
         })

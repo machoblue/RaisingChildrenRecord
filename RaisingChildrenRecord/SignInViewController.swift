@@ -73,7 +73,6 @@ class SignInViewController: UIViewController {
             
             if let error = error {
                 UIUtils.shared.showAlert(title: "サインインエラー", message: error.localizedDescription, viewController: self)
-                print(error.localizedDescription)
                 
             } else {
                 self.dismiss(animated: true, completion: nil)

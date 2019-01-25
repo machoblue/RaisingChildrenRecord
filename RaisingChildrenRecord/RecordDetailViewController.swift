@@ -122,25 +122,21 @@ class RecordDetailViewController: UIViewController {
     }
     
     @IBAction private func onDateTimeButtonClicked(_ sender: UIButton) {
-        print("*** RecordDetailViewControler.onDateTimeButtonClicked ***")
         hideDatePicker = !hideDatePicker
         tableView.reloadData()
     }
     
     @IBAction private func onDeleteButtonClicked(_ sender: UIButton) {
-        print("*** RecordDetailViewControler.onDeleteButtonClicked ***")
         recordDao.delete(record)
         recordDaoRemote.delete(record)
         dismiss(animated: true, completion: nil)
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {
-        print("*** RecordDetailViewControler.onBackButtonClicked ***")
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
-        print("*** RecordDetailViewControler.onSaveButtonClicked ***")
         recordDao.insertOrUpdate(record)
         recordDaoRemote.insertOrUpdate(record)
         dismiss(animated: true, completion: nil)

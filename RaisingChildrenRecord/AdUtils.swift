@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 import GoogleMobileAds
 
@@ -59,13 +60,12 @@ class AdUtils {
     
     func showInterstitial(_ interstitial: GADInterstitial, viewController: UIViewController) {
         var countToShowInterstitial = UserDefaults.standard.object(forKey: UserDefaults.Keys.CountToShowInterstitial.rawValue) as? Int ?? 0
-        print("*** UIUtils.showInterstitial ***", countToShowInterstitial)
         countToShowInterstitial = countToShowInterstitial + 1
         if countToShowInterstitial >= 3 && interstitial.isReady {
             interstitial.present(fromRootViewController: viewController)
             countToShowInterstitial = 0
         } else {
-            print("Ad wasn't ready")
+            os_log("Ad wasn't ready", log: OSLog.default, type: .debug)
         }
         UserDefaults.standard.register(defaults: [UserDefaults.Keys.CountToShowInterstitial.rawValue: countToShowInterstitial])
     }

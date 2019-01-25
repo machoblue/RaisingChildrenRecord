@@ -77,7 +77,6 @@ class JoinFamilyViewController: UIViewController {
                     self.showAlert(title: "エラー", message: "家族への参加に失敗しました。：" + error.localizedDescription)
                     
                 } else {
-                    print("Succeed Joining")
                     UserDefaults.standard.register(defaults: [UserDefaults.Keys.FamilyId.rawValue: familyId ?? ""])
                     
                     // remove all local data

@@ -36,11 +36,9 @@ class RecordsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("*** RecordViewController.viewDidAppear ***")
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onCommandButtonClicked(notification:)), name: Notification.Name.CommandButtonClicked, object: nil)
         
         let userInfoDict = ["date": self.date!]
         NotificationCenter.default.post(name: .RecordsViewDidAppear, object: nil, userInfo: userInfoDict)
@@ -51,7 +49,6 @@ class RecordsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("*** RecordViewController.viewWillAppear ***")
         super.viewWillAppear(animated)
         
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
@@ -59,14 +56,7 @@ class RecordsViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("*** RecordViewController.viewWillDisappear ***")
-        super.viewWillDisappear(animated)
-        
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
-        print("*** RecordViewController.viewDidDisappear ***")
         super.viewWillDisappear(animated)
         
         // 1. 次のRecordsViewControllerのviewWillAppear
@@ -81,12 +71,6 @@ class RecordsViewController: UIViewController {
     @objc func onTitleViewClicked(notification: Notification) -> Void {
         self.records = []
         self.observeRecord()
-    }
-    
-    @objc func onCommandButtonClicked(notification: Notification) -> Void {
-        print("*** RecordsViewController.onCommandButtonClicked ***")
-//        self.records = []
-//        self.observeRecord()
     }
 
     
@@ -116,11 +100,9 @@ class RecordsViewController: UIViewController {
             }
             index = index + 1
         }
-        print("*** RecordsViewController.delete *** records.count:", records.count)
     }
     
     func observeRecord() {
-        print("*** RecordViewController.observeRecord ***")
         guard let date = self.date else { return }
         let babyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.BabyId.rawValue) as? String ?? babyDao.findAll().first?.id
         guard let unwrappedBabyId = babyId else { return }
@@ -129,14 +111,12 @@ class RecordsViewController: UIViewController {
         let to = from + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
         
         self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
-            print("*** RecordViewController.observeRecord.recordObserver.observe *** recordAndChanges.count:", recordAndChanges.count)
             
             var needScroll = false
             
             for recordAndChange in recordAndChanges {
                 let record = recordAndChange.0
                 let change = recordAndChange.1
-                print("*** RecordViewController.observeRecord.recordObserver.observe.for *** :", recordAndChange)
 
                 switch change {
                 case .Init:
