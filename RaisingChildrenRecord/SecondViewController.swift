@@ -20,14 +20,28 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableFooterView: UIView!
     
-    var sections: [(header: String, cells: [(label1: String, label2: String)])]
-        = [(header: "赤ちゃんを切り替える", cells: []),
-           (header: "赤ちゃんを編集する", cells: []),
-           (header: "データ共有", cells: [(label1: "家族を新規作成する", label2: ""),
-                                        (label1: "家族に他のユーザーを招待する", label2: ""),
-                                        (label1: "招待された家族に参加する", label2: ""),
-                                        (label1: "共有した記録を全て削除する", label2: ""),
-                                        (label1: "サインアウト", label2: "")])]
+    typealias SectionModel = (type: SectionType, title: String, rowCount: Int, cellReuseIdentifier: String)
+    var sections: [SectionModel] = [
+        SectionModel(.BabyOption, "赤ちゃんを切り替える", 0, "Cell"),
+        SectionModel(.EditBabyButton, "赤ちゃんを編集する", 0, "Cell2"),
+        SectionModel(.DataShareButton, "", 5, "ShareCell")
+    ]
+    
+    enum SectionType: String {
+        case BabyOption
+        case EditBabyButton
+        case DataShareButton
+    }
+    
+    typealias CellModel = (label: String, action: Selector)
+    var cells: [CellModel] = [
+        CellModel("家族を新規作成する", action: #selector(createFamily)),
+        CellModel("家族に他のユーザーを招待する", action: #selector(addFamily)),
+        CellModel("招待された家族に参加する", action: #selector(joinFamily)),
+        CellModel("共有した記録を全て削除する", action: #selector(deleteFamilyData)),
+        CellModel("サインアウト", action: #selector(signOut)),
+    ]
+    
     var babies: Array<BabyModel> = []
     
     var ref: DatabaseReference!
@@ -62,10 +76,6 @@ class SecondViewController: UIViewController {
         
         AdUtils.shared.loadAndAddAdView(self)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,10 +85,6 @@ class SecondViewController: UIViewController {
         }
         
         configureTableFooter()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -103,7 +109,7 @@ class SecondViewController: UIViewController {
         userDefaults.register(defaults: [UserDefaults.Keys.BabyId.rawValue: babyId])
     }
     
-    func createFamily() {
+    @objc func createFamily() {
         guard let _ = Auth.auth().currentUser?.uid else {
             showAuthAlert()
             return
@@ -118,7 +124,7 @@ class SecondViewController: UIViewController {
         performSegue(withIdentifier: "Create Family", sender: nil)
     }
     
-    func addFamily() {
+    @objc func addFamily() {
         guard let _ = Auth.auth().currentUser?.uid else {
             showAuthAlert()
             return
@@ -142,7 +148,7 @@ class SecondViewController: UIViewController {
         performSegue(withIdentifier: "Create Family", sender: parameterDict)
     }
     
-    func joinFamily() {
+    @objc func joinFamily() {
         guard let _ = Auth.auth().currentUser?.uid else {
             showAuthAlert()
             return
@@ -157,7 +163,7 @@ class SecondViewController: UIViewController {
         performSegue(withIdentifier: "Join Family", sender: nil)
     }
     
-    func deleteFamilyData() {
+    @objc func deleteFamilyData() {
         guard let userId = Auth.auth().currentUser?.uid else {
             showAuthAlert()
             return
@@ -215,7 +221,7 @@ class SecondViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func signOut() {
+    @objc func signOut() {
         let firebaseAuth = Auth.auth()
         
         do {
@@ -229,19 +235,11 @@ class SecondViewController: UIViewController {
     }
     
     func updateSections() {
-        sections[0].cells = []
-        sections[1].cells = []
-        
-        for baby in babies {
-            let name = baby.name
-            let yyyyMMdd = UIUtils.shared.formatToLongYYYYMMDD(baby.born)
-            let born = "\(yyyyMMdd)生まれ"
-            
-            sections[0].cells.append((label1: name, label2: born))
-            sections[1].cells.append((label1: name, label2: born))
-        }
-        
-        sections[1].cells.append((label1: "赤ちゃん追加", label2: ""))
+        sections = [
+            SectionModel(.BabyOption, "赤ちゃんを切り替える", babies.count, "Cell"),
+            SectionModel(.EditBabyButton, "赤ちゃんを編集する", babies.count + 1, "Cell2"),
+            SectionModel(.DataShareButton, "", 5, "ShareCell")
+        ]
     }
     
     func modify(_ newBaby: BabyModel) {
@@ -314,43 +312,58 @@ extension SecondViewController {
 extension SecondViewController: UITableViewDataSource {
     // MARK: - UITableViewDateSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].cells.count
+        return sections[section].rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell!
-        let section = indexPath.section
-        let row = indexPath.row
-        switch section {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            let label1 = cell.viewWithTag(1) as! UILabel
-            label1.text = sections[section].cells[row].label1
-            let label2 = cell.viewWithTag(2) as! UILabel
-            label2.text = sections[section].cells[row].label2
-            cell.accessoryType = isSelected(babies[row].id) ? .checkmark : .none
-            
-        case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell2", for: indexPath)
-            let label1 = cell.viewWithTag(1) as! UILabel
-            label1.text = sections[section].cells[row].label1
-            let label2 = cell.viewWithTag(2) as! UILabel
-            label2.text = sections[section].cells[row].label2
-            
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "ShareCell", for: indexPath)
-            let label = cell.viewWithTag(1) as! UILabel
-            label.text = sections[section].cells[row].label1
-            
-        default:
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        }
-        
+        let sectionModel = sections[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier)!
+        configure(cell, with: sectionModel, indexPath: indexPath)
         return cell
     }
     
+    func configure(_ cell: UITableViewCell, with sectionModel: SectionModel, indexPath: IndexPath) {
+        switch sectionModel.type {
+        case .BabyOption:
+            let baby = babies[indexPath.row]
+            
+            let name = baby.name
+            let label1 = cell.viewWithTag(1) as! UILabel
+            label1.text = name
+            
+            let label2 = cell.viewWithTag(2) as! UILabel
+            label2.text = "\(UIUtils.shared.formatToLongYYYYMMDD(baby.born))生まれ"
+            
+            cell.accessoryType = isSelected(babies[indexPath.row].id) ? .checkmark : .none
+            
+        case .EditBabyButton:
+            if indexPath.row < babies.count {
+                let baby = babies[indexPath.row]
+                
+                let name = baby.name
+                let label1 = cell.viewWithTag(1) as! UILabel
+                label1.text = name
+                
+                let label2 = cell.viewWithTag(2) as! UILabel
+                label2.text = "\(UIUtils.shared.formatToLongYYYYMMDD(baby.born))生まれ"
+                
+            } else {
+                let label1 = cell.viewWithTag(1) as! UILabel
+                label1.text = "赤ちゃん追加"
+                let label2 = cell.viewWithTag(2) as! UILabel
+                label2.text = ""
+            }
+            
+        case .DataShareButton:
+            let cellModel = cells[indexPath.row]
+            let label = cell.viewWithTag(1) as! UILabel
+            label.text = cellModel.label
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].header
+        return sections[section].title
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -365,10 +378,12 @@ extension SecondViewController: UITableViewDelegate {
         let section = indexPath.section
         let row = indexPath.row
         
-        switch section {
-        case 0:
+        let sectionModel = sections[section]
+        
+        switch sectionModel.type {
+        case .BabyOption:
             if (!isSelected(babies[row].id)) {
-                for row in 0..<sections[0].cells.count {
+                for row in 0..<sections[0].rowCount {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0))
                     cell?.accessoryType = .none
                 }
@@ -381,31 +396,16 @@ extension SecondViewController: UITableViewDelegate {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-        case 1:
+        case .EditBabyButton:
             performSegue(withIdentifier: "Show Baby Detail", sender: nil)
             
-        case 2:
-            switch row {
-            case 0:
-                createFamily()
-            case 1:
-                addFamily()
-            case 2:
-                joinFamily()
-            case 3:
-                deleteFamilyData()
-            case 4:
-                signOut()
-            default:
-                break
-            }
+        case .DataShareButton:
+            let cellModel = cells[indexPath.row]
+            perform(cellModel.action)
             
             if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
             }
-            
-        default:
-            break
         }
     }
     
