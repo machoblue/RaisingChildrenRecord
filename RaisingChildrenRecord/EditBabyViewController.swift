@@ -15,11 +15,26 @@ import Shared
 
 class EditBabyViewController: InterstitialAdBaseViewController {
     
-    var sections: [(header: String, cells: [(label: String, height: CGFloat)])] = [
-    (header: "名前", cells: [(label: "", height: 50)]),
-    (header: "生年月日", cells: [(label: "", height: 50)]),
-    (header: "性別", cells: [(label: "男の子", height: 50), (label: "女の子", height: 50)])
+//    var sections: [(header: String, cells: [(label: String, height: CGFloat)])] = [
+//    (header: "名前", cells: [(label: "", height: 50)]),
+//    (header: "生年月日", cells: [(label: "", height: 50)]),
+//    (header: "性別", cells: [(label: "男の子", height: 50), (label: "女の子", height: 50)])
+//    ]
+    
+    typealias SectionModel = (type: SectionType, title: String, rowCount: Int, cellReuseIdentifier: String)
+    var sections: [SectionModel] = [
+        SectionModel(.TextField, "名前", 1, "NameCell"),
+        SectionModel(.DateTime, "生年月日", 1, "BornDateTimeCell"),
+        SectionModel(.Option, "性別", 2, "GenderCell"),
+        SectionModel(.Button, "", 1, "DeleteCell")
     ]
+    
+    enum SectionType: String {
+        case TextField
+        case DateTime
+        case Option
+        case Button
+    }
     
     var baby: BabyModel!
     @IBOutlet weak var tableView: UITableView!
@@ -34,12 +49,15 @@ class EditBabyViewController: InterstitialAdBaseViewController {
     var babyDaoLocal: BabyDao!
     var babyDaoRemote: BabyDao!
     
+    private var hideDatePicker = true
+    private weak var datePickerHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - UIViewController LifeCycle Callback
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let _ = self.baby {
-            sections.append((header: "", cells: [(label: "削除", height: 60)]))
+//            sections.append((header: "", cells: [(label: "削除", height: 60)]))
         } else {
             self.baby = BabyModel(id: UUID().description, name: "赤ちゃん", born: Date(), female: false)
         }
@@ -60,13 +78,7 @@ class EditBabyViewController: InterstitialAdBaseViewController {
     }
     
     @objc func onDateTimeButtonClicked(sender: UIButton) {
-        if sections[1].cells.count == 1 {
-            sections[1].cells.append((label: "", height: 216))
-            
-        } else if sections[1].cells.count == 2 {
-            sections[1].cells.remove(at: 1)
-        }
-        
+        hideDatePicker = !hideDatePicker
         tableView.reloadData()
     }
     
@@ -98,65 +110,94 @@ class EditBabyViewController: InterstitialAdBaseViewController {
 
 extension EditBabyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].cells.count
+        return sections[section].rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell!
-        let section = indexPath.section
-        let row = indexPath.row
-        switch section {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "NameCell", for: indexPath)
-            self.textField = cell.viewWithTag(1) as! UITextField
-            self.textField.text = self.name
-            self.textField.layer.cornerRadius = 0
-            self.textField.addTarget(self, action: #selector(onTextFieldValueChanged), for: .editingChanged)
+        let sectionModel = sections[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: sectionModel.cellReuseIdentifier, for: indexPath)
+        configure(cell, with: sectionModel, indexPath: indexPath)
+        
+        return cell
+    }
+    
+    func configure(_ cell: UITableViewCell, with sectionModel: SectionModel, indexPath: IndexPath) {
+        switch sectionModel.type {
+        case .TextField:
+            self.textField = cell.viewWithTag(1) as? UITextField
+            self.textField?.text = self.name
+            self.textField?.layer.cornerRadius = 0
+            self.textField?.addTarget(self, action: #selector(onTextFieldValueChanged), for: .editingChanged)
             
-        case 1:
-            switch row {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
-                self.dateTimeButton = cell.viewWithTag(1) as! UIButton
-                self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
-                self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
+        case .DateTime:
+            if let cell = cell as? DateTimeTableViewCell2 {
+                self.dateTimeButton = cell.viewWithTag(1) as? UIButton
+                self.dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
+                self.dateTimeButton?.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
                 
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BornDatePickerCell", for: indexPath)
-                
-                let datePicker = cell.contentView.viewWithTag(1) as! UIDatePicker
+                let datePicker = cell.contentView.viewWithTag(2) as! UIDatePicker
                 datePicker.timeZone = NSTimeZone.local
                 datePicker.date = self.born
                 datePicker.addTarget(self, action: #selector(onDatePickerValueChanged), for: .valueChanged)
                 
-            default:
-                cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+                datePickerHeightConstraint = cell.datePickerHeightConstraints
+                datePickerHeightConstraint.constant = hideDatePicker ? 0 : 216
             }
             
+            //            switch row {
+            //            case 0:
+            //                cell = tableView.dequeueReusableCell(withIdentifier: "BornDateTimeCell", for: indexPath)
+            //                self.dateTimeButton = cell.viewWithTag(1) as! UIButton
+            //                self.dateTimeButton.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(self.born), for: .normal)
+            //                self.dateTimeButton.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
+            //
+            //            case 1:
+            //                cell = tableView.dequeueReusableCell(withIdentifier: "BornDatePickerCell", for: indexPath)
+            //
+            //                let datePicker = cell.contentView.viewWithTag(1) as! UIDatePicker
+            //                datePicker.timeZone = NSTimeZone.local
+            //                datePicker.date = self.born
+            //                datePicker.addTarget(self, action: #selector(onDatePickerValueChanged), for: .valueChanged)
+            //
+            //            default:
+            //                cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            //            }
             
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "GenderCell", for: indexPath)
+            
+        case .Option:
             let label = cell.viewWithTag(1) as! UILabel
-            label.text = sections[section].cells[row].label
+            label.text = indexPath.row == 0 ? "男の子" : "女の子"
             
-            let check = (self.female && row == 1) || (!self.female && row == 0)
+            let check = (self.female && indexPath.row == 1) || (!self.female && indexPath.row == 0)
             cell.accessoryType = check ? .checkmark : .none
             
+            //        case 2:
+            //            cell = tableView.dequeueReusableCell(withIdentifier: "GenderCell", for: indexPath)
+            //            let label = cell.viewWithTag(1) as! UILabel
+            //            label.text = sections[section].cells[row].label
+            //
+            //            let check = (self.female && row == 1) || (!self.female && row == 0)
+            //            cell.accessoryType = check ? .checkmark : .none
             
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
-            self.deleteButton = cell.viewWithTag(1) as! UIButton
-            self.deleteButton.setTitle(sections[3].cells[0].label, for: .normal)
-            self.deleteButton.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
+        case .Button:
+            self.deleteButton = cell.viewWithTag(1) as? UIButton
+            self.deleteButton?.setTitle("削除", for: .normal)
+            self.deleteButton?.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
             
-        default:
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            //        case 3:
+            //            cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
+            //            self.deleteButton = cell.viewWithTag(1) as! UIButton
+            //            self.deleteButton.setTitle(sections[3].cells[0].label, for: .normal)
+            //            self.deleteButton.addTarget(self, action: #selector(onDeleteButtonClicked), for: .touchUpInside)
+            //
+            //        default:
+            //            cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
-        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].header
+        return sections[section].title
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -165,8 +206,27 @@ extension EditBabyViewController: UITableViewDataSource {
 }
 
 extension EditBabyViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.section == 2 {
+//            for r in 0...1 {
+//                let c = tableView.cellForRow(at: IndexPath(row: r, section: indexPath.section))
+//                c!.accessoryType = .none
+//            }
+//            let cell = tableView.cellForRow(at: indexPath)
+//            cell!.accessoryType = .checkmark
+//            self.female = (indexPath.row == 1)
+//        }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        let sectionModel = sections[indexPath.section]
+        switch sectionModel.type {
+        case .TextField:
+            // do nothing
+            break
+        case .DateTime:
+            // do nothing
+            break
+        case .Option:
             for r in 0...1 {
                 let c = tableView.cellForRow(at: IndexPath(row: r, section: indexPath.section))
                 c!.accessoryType = .none
@@ -174,12 +234,22 @@ extension EditBabyViewController: UITableViewDelegate {
             let cell = tableView.cellForRow(at: indexPath)
             cell!.accessoryType = .checkmark
             self.female = (indexPath.row == 1)
+        case .Button:
+            // do nothing
+            break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return sections[indexPath.section].cells[indexPath.row].height
+        let sectionModel = sections[indexPath.section]
+        return (sectionModel.type == .DateTime && !hideDatePicker) ? 276 : 50
     }
+}
+
+class DateTimeTableViewCell2: UITableViewCell {
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerHeightConstraints: NSLayoutConstraint!
 }

@@ -275,7 +275,7 @@ extension RecordDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let row = indexPath.row
-        let isDateTimeCell = section == 0 && row == 0
+        let isDateTimeCell = (section == 0 && row == 0)
         if (isDateTimeCell && !hideDatePicker) {
             return 266
         }

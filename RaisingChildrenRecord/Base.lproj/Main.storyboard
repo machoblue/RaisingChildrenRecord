@@ -583,28 +583,46 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BornDateTimeCell" id="VKp-03-adf">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BornDateTimeCell" rowHeight="277" id="VKp-03-adf" customClass="DateTimeTableViewCell2" customModule="RaisingChildrenRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="277"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VKp-03-adf" id="hB0-Ok-qFF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="276.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Maa-oY-eN2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
+                                                <datePicker tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="z5G-T6-52q">
+                                                    <rect key="frame" x="0.0" y="60.5" width="375" height="216"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="216" id="u9k-aQ-1QS"/>
+                                                    </constraints>
+                                                    <date key="date" timeIntervalSinceReferenceDate="570204035.61443198">
+                                                        <!--2019-01-26 14:00:35 +0000-->
+                                                    </date>
+                                                </datePicker>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Maa-oY-eN2" firstAttribute="width" secondItem="hB0-Ok-qFF" secondAttribute="width" id="3NF-RN-SDK"/>
-                                                <constraint firstItem="Maa-oY-eN2" firstAttribute="centerY" secondItem="hB0-Ok-qFF" secondAttribute="centerY" id="aRI-lC-K9q"/>
+                                                <constraint firstItem="z5G-T6-52q" firstAttribute="top" secondItem="Maa-oY-eN2" secondAttribute="bottom" id="9pG-Ye-yAG"/>
+                                                <constraint firstAttribute="trailing" secondItem="Maa-oY-eN2" secondAttribute="trailing" id="Fph-Hi-J2A"/>
+                                                <constraint firstAttribute="trailing" secondItem="z5G-T6-52q" secondAttribute="trailing" id="GPQ-Mk-BGG"/>
+                                                <constraint firstAttribute="bottom" secondItem="z5G-T6-52q" secondAttribute="bottom" id="Xbj-Qx-SOy"/>
                                                 <constraint firstItem="Maa-oY-eN2" firstAttribute="leading" secondItem="hB0-Ok-qFF" secondAttribute="leading" id="fWX-RD-buZ"/>
-                                                <constraint firstItem="Maa-oY-eN2" firstAttribute="height" secondItem="hB0-Ok-qFF" secondAttribute="height" id="v2C-ow-Kf1"/>
+                                                <constraint firstItem="z5G-T6-52q" firstAttribute="leading" secondItem="hB0-Ok-qFF" secondAttribute="leading" id="fiR-mo-DzQ"/>
+                                                <constraint firstItem="Maa-oY-eN2" firstAttribute="top" secondItem="hB0-Ok-qFF" secondAttribute="top" id="uVZ-5W-QUt"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="Maa-oY-eN2" id="Y3M-34-WEq"/>
+                                            <outlet property="datePicker" destination="z5G-T6-52q" id="fkl-iu-cyb"/>
+                                            <outlet property="datePickerHeightConstraints" destination="u9k-aQ-1QS" id="VoA-aG-OV2"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteCell" id="UBf-Uq-aN8" userLabel="DeleteCell">
-                                        <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="376.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UBf-Uq-aN8" id="RaW-4B-ZX6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -626,7 +644,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BornDatePickerCell" id="P5G-Uv-7pl">
-                                        <rect key="frame" x="0.0" y="187.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="420.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P5G-Uv-7pl" id="cUa-2c-BUC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -646,7 +664,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="GenderCell" id="azh-zu-j6A">
-                                        <rect key="frame" x="0.0" y="231.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="464.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="azh-zu-j6A" id="sUw-8Z-v1m">
                                             <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
