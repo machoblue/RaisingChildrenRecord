@@ -54,40 +54,30 @@ class RecordDetailViewController: UIViewController {
     }
     
     func configure(record: RecordModel) {
-        self.record = record
-        var recordType: RecordDetailTableConfiguration.RecordType? = nil
-        if (record.commandId == 1) {
-            recordType = .milk
-        }
-        if (record.commandId == 2) {
-            recordType = .breast
-        }
-        if (record.commandId == 3) {
-            recordType = .babyfood
-        }
-        if (record.commandId == 4) {
-            recordType = .snack
-        }
-        if (record.commandId == 5) {
-            recordType = .temperature
-        }
-        if (record.commandId == 6) {
-            recordType = .poo
-        }
-        if (record.commandId == 7) {
-            recordType = .sleep
-        }
-        if (record.commandId == 8) {
-            recordType = .awake
-        }
-        if (record.commandId == 9) {
-            recordType = .medicine
-        }
-        if (record.commandId == 99) {
-            recordType = .other
+        switch Commands.Identifier(rawValue: record.commandId)! {
+        case .milk:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .milk)
+        case .breast:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .breast)
+        case .babyfood:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .babyfood)
+        case .snack:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .snack)
+        case .temperature:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .temperature)
+        case .poo:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .poo)
+        case .sleep:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .sleep)
+        case .awake:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .awake)
+        case .medicine:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .medicine)
+        case .other:
+            self.tableConfig = RecordDetailTableConfiguration(recordType: .other)
         }
         
-        self.tableConfig = RecordDetailTableConfiguration(recordType: recordType!)
+        self.record = record
         titleStr = Commands.command(from: record.commandId)?.name
     }
     
@@ -220,6 +210,9 @@ extension RecordDetailViewController: UITableViewDataSource {
                 
                 quantityLabel = cell.label
                 quantityLabel?.text = record.value2! + "ml"
+                
+//                cell.isUserInteractionEnabled = false // this disable to tap stepper
+                cell.selectionStyle = .none
             }
         case .minutes:
             if let cell = cell as? QuantityTableViewCell {
@@ -236,6 +229,8 @@ extension RecordDetailViewController: UITableViewDataSource {
                 
                 quantityLabel = cell.label
                 quantityLabel?.text = record.value2! + "分"
+                
+                cell.selectionStyle = .none
             }
         case .temperature:
             if let cell = cell as? QuantityTableViewCell {
@@ -252,6 +247,8 @@ extension RecordDetailViewController: UITableViewDataSource {
                 
                 quantityLabel = cell.label
                 quantityLabel?.text = record.value2! + "℃"
+                
+                cell.selectionStyle = .none
             }
         case .hardness:
             if record.value2 == nil || record.value2 == "" {
