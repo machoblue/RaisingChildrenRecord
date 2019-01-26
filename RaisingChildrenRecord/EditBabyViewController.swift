@@ -73,8 +73,8 @@ class EditBabyViewController: InterstitialAdBaseViewController {
     @objc func onDeleteButtonClicked(sender: UIButton) {
         babyDaoLocal.delete(self.baby)
         babyDaoRemote.delete(self.baby)
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        
+        showInterstitialAndDismiss()
     }
     
     @objc func onDatePickerValueChanged(sender: UIDatePicker!) {
