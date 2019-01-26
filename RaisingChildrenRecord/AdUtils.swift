@@ -16,10 +16,6 @@ class AdUtils {
     private init() {
     }
     
-    func notifyToShowInterstitial() {
-        NotificationCenter.default.post(name: .ShowInterstitialAd, object: nil)
-    }
-    
     func loadAndAddAdView(_ viewController: UIViewController) {
         // In this case, we instantiate the banner with desired ad size.
         let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
@@ -58,19 +54,19 @@ class AdUtils {
         return interstitial
     }
     
-    func showInterstitial(_ interstitial: GADInterstitial, viewController: UIViewController) {
+    func showInterstitial(_ interstitial: GADInterstitial, viewController: UIViewController) -> Bool {
         var countToShowInterstitial = UserDefaults.standard.object(forKey: UserDefaults.Keys.CountToShowInterstitial.rawValue) as? Int ?? 0
         countToShowInterstitial = countToShowInterstitial + 1
+        
         if countToShowInterstitial >= 3 && interstitial.isReady {
             interstitial.present(fromRootViewController: viewController)
             countToShowInterstitial = 0
+            UserDefaults.standard.register(defaults: [UserDefaults.Keys.CountToShowInterstitial.rawValue: countToShowInterstitial])
+            return true
         } else {
             os_log("Ad wasn't ready", log: OSLog.default, type: .debug)
+            UserDefaults.standard.register(defaults: [UserDefaults.Keys.CountToShowInterstitial.rawValue: countToShowInterstitial])
+            return false
         }
-        UserDefaults.standard.register(defaults: [UserDefaults.Keys.CountToShowInterstitial.rawValue: countToShowInterstitial])
     }
-}
-
-extension Notification.Name {
-    static let ShowInterstitialAd = Notification.Name("ShowInterstitalAd")
 }

@@ -14,7 +14,7 @@ import Firebase
 
 import Shared
 
-class CreateFamilyViewController: UIViewController {
+class CreateFamilyViewController: InterstitialAdBaseViewController {
     typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String)
     let sections: [SectionModel] = [
         SectionModel("家族ID(半角英数字の任意の文字列を指定できます)", 1, "TextFieldCell")
@@ -82,8 +82,8 @@ class CreateFamilyViewController: UIViewController {
                         }
                         self.ref.child("families").child(familyId).child("records").setValue(recordsDict)
                         FirebaseUtils.shared.observeRemote()
-                        self.dismiss(animated: true, completion: nil)
-                        AdUtils.shared.notifyToShowInterstitial()
+                        
+                        self.showInterstitialAndDismiss()
                     }
                 }
             }
@@ -93,8 +93,7 @@ class CreateFamilyViewController: UIViewController {
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        self.showInterstitialAndDismiss()
     }
     
     func showAlert(title: String, message: String) {

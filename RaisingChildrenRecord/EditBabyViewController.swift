@@ -9,10 +9,11 @@
 import UIKit
 
 import RealmSwift
+import Firebase
 
 import Shared
 
-class EditBabyViewController: UIViewController {
+class EditBabyViewController: InterstitialAdBaseViewController {
     
     var sections: [(header: String, cells: [(label: String, height: CGFloat)])] = [
     (header: "名前", cells: [(label: "", height: 50)]),
@@ -82,8 +83,7 @@ class EditBabyViewController: UIViewController {
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        showInterstitialAndDismiss()
     }
     
     @IBAction func onSaveButtonClicked(_ sender: Any) {
@@ -91,8 +91,8 @@ class EditBabyViewController: UIViewController {
         let baby = BabyModel(id: self.baby.id, name: self.name, born: self.born, female: self.female)
         babyDaoLocal.insertOrUpdate(baby)
         babyDaoRemote.insertOrUpdate(baby)
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        
+        showInterstitialAndDismiss()
     }
 }
 

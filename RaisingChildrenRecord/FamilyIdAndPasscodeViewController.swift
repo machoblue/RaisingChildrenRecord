@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FamilyIdAndPasscodeViewController: UIViewController {
+class FamilyIdAndPasscodeViewController: InterstitialAdBaseViewController {
     typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String, footer: String)
     let sections: [SectionModel] = [
         SectionModel("家族ID", 1, "LabelCell", ""),
@@ -36,8 +36,7 @@ class FamilyIdAndPasscodeViewController: UIViewController {
     */
 
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        showInterstitialAndDismiss()
     }
 }
 

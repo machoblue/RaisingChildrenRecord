@@ -11,7 +11,7 @@ import Firebase
 
 import Shared
 
-class JoinFamilyViewController: UIViewController {
+class JoinFamilyViewController: InterstitialAdBaseViewController {
     typealias SectionModel = (title: String, rowCount: Int, cellReuseIdentifier: String)
     let sections: [SectionModel] = [
         SectionModel("参加する家族の家族ID", 1, "TextFieldCell"),
@@ -102,8 +102,8 @@ class JoinFamilyViewController: UIViewController {
                         FirebaseUtils.shared.observeRemote()
                         
                         self.activityIndicatorView.stopAnimating()
-                        AdUtils.shared.notifyToShowInterstitial()
-                        self.dismiss(animated: true, completion: nil)
+                        
+                        self.showInterstitialAndDismiss()
                     })
                 }
             }
@@ -115,8 +115,7 @@ class JoinFamilyViewController: UIViewController {
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        AdUtils.shared.notifyToShowInterstitial()
+        self.showInterstitialAndDismiss()
     }
 
     func showAlert(title: String, message: String) {

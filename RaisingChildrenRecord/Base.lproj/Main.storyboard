@@ -231,10 +231,10 @@
                     <connections>
                         <outlet property="tableFooterView" destination="aOm-je-XeR" id="99K-zy-Ray"/>
                         <outlet property="tableView" destination="3xX-tj-mr5" id="bKe-EP-CJy"/>
-                        <segue destination="JIX-wJ-KrN" kind="showDetail" identifier="Show Baby Detail" id="B0V-0A-Zaj"/>
+                        <segue destination="JIX-wJ-KrN" kind="presentation" identifier="Show Baby Detail" id="B0V-0A-Zaj"/>
                         <segue destination="hcJ-3D-TPe" kind="show" identifier="Create Family" id="hrR-Jf-VWG"/>
                         <segue destination="zdi-7f-DP6" kind="show" identifier="Show FamilyId And Passcode" id="IYj-8V-pMC"/>
-                        <segue destination="90t-z3-ceI" kind="show" identifier="Join Family" id="aAd-JS-mfZ"/>
+                        <segue destination="90t-z3-ceI" kind="showDetail" identifier="Join Family" id="aAd-JS-mfZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -546,7 +546,7 @@
                                     <navigationItem title="赤ちゃん" id="mIT-ln-V1E">
                                         <barButtonItem key="leftBarButtonItem" title="＜ 戻る" id="v7a-Z8-IuJ">
                                             <connections>
-                                                <action selector="onBackButtonClicked:" destination="JIX-wJ-KrN" id="BGA-Xh-07P"/>
+                                                <action selector="onBackButtonClicked:" destination="JIX-wJ-KrN" id="Ve4-QY-ccl"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="保存" id="Xs9-mn-EHT">
@@ -824,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgX-Fk-gsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2222" y="1316"/>
+            <point key="canvasLocation" x="745" y="1316"/>
         </scene>
         <!--Join Family View Controller-->
         <scene sceneID="xpI-1L-WY6">
@@ -902,7 +902,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oxL-V2-yWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="1318"/>
+            <point key="canvasLocation" x="2254" y="1316"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
