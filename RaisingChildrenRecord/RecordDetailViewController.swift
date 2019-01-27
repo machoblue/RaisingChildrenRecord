@@ -97,18 +97,23 @@ class RecordDetailViewController: UIViewController {
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {
-        record.number1 = Int(sender.value)
-        quantityLabel?.text = "\(record.number1)ml"
-    }
-    
-    @IBAction private func onStepperChanged2(_ sender: UIStepper) {
-        record.number1 = Int(sender.value)
-        quantityLabel?.text = "\(record.number1)分"
-    }
-    
-    @IBAction private func onStepperChanged3(_ sender: UIStepper) {
-        record.decimal1 = (round(Float(sender.value) * 10) / 10)
-        quantityLabel?.text = "\(record.decimal1)℃"
+        switch Commands.Identifier(rawValue: record.commandId)! {
+        case .milk:
+            let unit = Commands.command(from: record.commandId)!.unit
+            record.number1 = Int(sender.value)
+            quantityLabel?.text = "\(record.number1)\(unit.rawValue)"
+        case .breast:
+            let unit = Commands.command(from: record.commandId)!.unit
+            record.number1 = Int(sender.value)
+            quantityLabel?.text = "\(record.number1)\(unit.rawValue)"
+        case .temperature:
+            let unit = Commands.command(from: record.commandId)!.unit
+            record.decimal1 = (round(Float(sender.value) * 10) / 10)
+            quantityLabel?.text = "\(record.decimal1)\(unit.rawValue)"
+        default:
+            // do nothing
+            break
+        }
     }
     
     @IBAction private func onDateTimeButtonClicked(_ sender: UIButton) {
@@ -217,7 +222,7 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.maximumValue = 60
                 
                 cell.stepper.value = Double(record.number1)
-                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged2(_:)), for: .valueChanged)
+                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
                 
                 quantityLabel = cell.label
                 quantityLabel?.text = "\(record.number1)分"
@@ -231,7 +236,7 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.maximumValue = 42.0
                 
                 cell.stepper.value = Double(record.decimal1)
-                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged3(_:)), for: .valueChanged)
+                cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
                 
                 quantityLabel = cell.label
                 quantityLabel?.text = "\(record.decimal1)℃"
