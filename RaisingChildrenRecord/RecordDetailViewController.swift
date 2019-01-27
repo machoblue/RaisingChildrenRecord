@@ -174,7 +174,7 @@ extension RecordDetailViewController: UITableViewDataSource {
             if let cell = cell as? DateTimeTableViewCell {
                 dateTimeButton = cell.button
                 dateTimeButton?.setTitle(title, for: .normal)
-                dateTimeButton?.setTitle(UIUtils.shared.formatToMediumYYYYMMDD(record.dateTime), for: .normal)
+                dateTimeButton?.setTitle(UIUtils.shared.formatToYYYYMMDDHHmm(record.dateTime), for: .normal)
                 dateTimeButton?.addTarget(self, action: #selector(onDateTimeButtonClicked), for: .touchUpInside)
 
                 datePicker = cell.datePicker

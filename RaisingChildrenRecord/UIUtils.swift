@@ -16,6 +16,7 @@ class UIUtils {
     let longYYYYMMDDFormat = DateFormatter()
     let mediumYYYYMMDDFormat = DateFormatter()
     let hhmmFormat = DateFormatter()
+    let YYYYMMDDHHmmFormat = DateFormatter()
     
     private init() {
         longYYYYMMDDFormat.locale = Locale(identifier: "ja_JP")
@@ -27,6 +28,10 @@ class UIUtils {
         mediumYYYYMMDDFormat.timeStyle = .none
         
         hhmmFormat.dateFormat = DateFormatter.dateFormat(fromTemplate: "HHmm", options: 0, locale: Locale.current)
+        
+        YYYYMMDDHHmmFormat.locale = Locale(identifier: "ja_JP")
+        YYYYMMDDHHmmFormat.dateStyle = .medium
+        YYYYMMDDHHmmFormat.timeStyle = .short
     }
     
     func showAlert(title: String, message: String, viewController: UIViewController) {
@@ -48,5 +53,9 @@ class UIUtils {
     
     func formatToHHMM(_ date: Date) -> String {
         return hhmmFormat.string(from: date)
+    }
+    
+    func formatToYYYYMMDDHHmm(_ date: Date) -> String {
+        return YYYYMMDDHHmmFormat.string(from: date)
     }
 }
