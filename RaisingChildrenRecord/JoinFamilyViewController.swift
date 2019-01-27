@@ -66,8 +66,8 @@ class JoinFamilyViewController: InterstitialAdBaseViewController {
             
             // try add his userId his family
             let userId = Auth.auth().currentUser?.uid
-            let userName = Auth.auth().currentUser?.displayName
-            self.ref.child("users").child(userId!).setValue(["name": userName!, "passcode": passcode])
+//            let userName = Auth.auth().currentUser?.displayName // user who uses email to signup doesn't have displayName
+            self.ref.child("users").child(userId!).setValue([/* "name": userName!, */"passcode": passcode])
             
             // join family
             self.ref.child("users").child(userId!).child("families").setValue([familyId: true]) {

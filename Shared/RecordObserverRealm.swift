@@ -88,7 +88,7 @@ public class RecordObserverRealm: RecordObserver {
     
     func recordModel(from: Record) -> RecordModel {
         let to = RecordModel(id: from.id, babyId: from.babyId, userId: from.userId, commandId: from.commandId, dateTime: from.dateTime,
-                             note: from.note, value2: from.value2, value3: from.value3, value4: from.value4, value5: from.value5)
+                             note: from.note, number1: from.number1, number2: from.number2, decimal1: from.decimal1, decimal2: from.decimal2, text1: from.text1, text2: from.text2)
         return to
     }
     
@@ -98,10 +98,12 @@ public class RecordObserverRealm: RecordObserver {
         to.userId = from.userId
         to.dateTime = from.dateTime
         to.note = from.note
-        to.value2 = from.value2
-        to.value3 = from.value3
-        to.value4 = from.value4
-        to.value5 = from.value5
+        to.number1 = from.number1
+        to.number2 = from.number2
+        to.decimal1 = from.decimal1
+        to.decimal2 = from.decimal2
+        to.text1 = from.text1
+        to.text2 = from.text2
     }
     
     public func invalidate() {

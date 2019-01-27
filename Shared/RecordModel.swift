@@ -15,94 +15,125 @@ public class RecordModel: NSObject, Codable {
     public var commandId: Int = 99 // other
     public var dateTime: Date = Date()
     public var note: String?
-    public var value2: String? {
+    public var number1: Int = 0 { // milk, breast
         didSet {
-            guard let value2 = value2, !value2.isEmpty else { return }
-            switch commandId {
-            case 1:
-                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.MilkMillilitters.rawValue: value2])
-            case 2:
-                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.BreastMinutes.rawValue: value2])
-            case 5:
-                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.Temperature.rawValue: value2])
-            case 6:
-                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.PooHardness.rawValue: value2])
+            switch Commands.Identifier(rawValue: commandId)! {
+            case .milk:
+                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.MilkMillilitters.rawValue: number1])
+            case .breast:
+                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.BreastMinutes.rawValue: number1])
             default:
+                // do nothing
                 break
             }
         }
-    }// amount1
-    public var value3: String? {
+    }
+    
+    public var number2: Int = 0
+    
+    public var decimal1: Float = 0  { // temperature
         didSet {
-            guard let value3 = value3, !value3.isEmpty else { return }
-            switch commandId {
-            case 6:
-                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.PooAmount.rawValue: value3])
+            switch Commands.Identifier(rawValue: commandId)! {
+            case .temperature:
+                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.Temperature.rawValue: decimal1])
             default:
+                // do nothing
                 break
             }
         }
-    }// amount2
-    public var value4: String? // unit1
-    public var value5: String? // unit2
+    }
+    
+    public var decimal2: Float = 0
+    
+    public var text1: String? { // poo/hardness
+        didSet {
+            switch Commands.Identifier(rawValue: commandId)! {
+            case .poo:
+                guard let text1 = text1, !text1.isEmpty else { return }
+                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.PooHardness.rawValue: text1])
+            default:
+                // do nothing
+                break
+            }
+        }
+    }
+    public var text2: String? { // poo/amount
+        didSet {
+            switch Commands.Identifier(rawValue: commandId)! {
+            case .poo:
+                guard let text2 = text2, !text2.isEmpty else { return }
+                UserDefaults.dataSuite.register(defaults: [UserDefaults.Keys.PooAmount.rawValue: text2])
+            default:
+                // do nothing
+                break
+            }
+        }
+    }
     
     override public var description: String {
         return "id=\(self.id), babyId=\(self.babyId)"
     }
     
     public var label: String {
-        if let unit = Commands.command(from: commandId)?.unit, unit != .none,
-            let value2 = value2, !value2.isEmpty {
-            return "\(value2)\(unit.rawValue)"
-            
-        } else if commandId == Commands.Identifier.poo.rawValue,
-            let value2 = value2, !value2.isEmpty {
-            return Commands.HardnessOption(rawValue: value2)!.label
-            
-        } else {
+        switch Commands.Identifier(rawValue: commandId)! {
+        case .milk:
+            let unit = Commands.command(from: commandId)!.unit
+            return "\(number1)\(unit.rawValue)"
+        case .breast:
+            let unit = Commands.command(from: commandId)!.unit
+            return "\(number1)\(unit.rawValue)"
+        case .temperature:
+            let unit = Commands.command(from: commandId)!.unit
+            return "\(decimal1)\(unit.rawValue)"
+        case .poo:
+            guard let text1 = text1, !text1.isEmpty else { return "" }
+            return Commands.HardnessOption(rawValue: text1)!.label
+        default:
             return note ?? ""
         }
     }
     
-    public init(id: String, babyId: String, userId: String?, commandId: Int, dateTime: Date, note: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
+    public init(id: String, babyId: String, userId: String?, commandId: Int, dateTime: Date, note: String?, number1: Int, number2: Int, decimal1: Float, decimal2: Float, text1: String?, text2: String?) {
         self.id = id
         self.babyId = babyId
         self.userId = userId
         self.commandId = commandId
         self.dateTime = dateTime
         self.note = note
-        if let value2 = value2, !value2.isEmpty {
-            self.value2 = value2
-        } else {
-            switch commandId {
-            case 1:
-                self.value2 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.MilkMillilitters.rawValue) as? String ?? "100"
-            case 2:
-                self.value2 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.BreastMinutes.rawValue) as? String ?? "10"
-            case 5:
-                self.value2 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.Temperature.rawValue) as? String ?? "36.5"
-            case 6:
-                self.value2 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.PooHardness.rawValue) as? String ?? "normal"
-            default:
-                break
+        self.number1 = number1
+        self.number2 = number2
+        self.decimal1 = decimal1
+        self.decimal2 = decimal2
+        self.text1 = text1
+        self.text2 = text2
+        
+        switch Commands.Identifier(rawValue: commandId)! {
+        case .milk:
+            self.number1 = (number1 > 0) ? number1 : UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.MilkMillilitters.rawValue) as? Int ?? 100
+        case .breast:
+            self.number1 = (number1 > 0) ? number1 : UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.BreastMinutes.rawValue) as? Int ?? 10
+        case .temperature:
+            self.decimal1 = (decimal1 > 0.0) ? decimal1 : UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.Temperature.rawValue) as? Float ?? 36.5
+        case .poo:
+            if let text1 = text1, !text1.isEmpty {
+                self.text1 = text1
+            } else {
+                self.text1 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.PooHardness.rawValue) as? String ?? "normal"
             }
-        }
-        if let value3 = value3, !value3.isEmpty {
-            self.value3 = value3
             
-        } else {
-            switch commandId {
-            case 6:
-                self.value3 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.PooAmount.rawValue) as? String ?? "normal"
-            default:
-                break
+            if let text2 = text2, !text2.isEmpty {
+                self.text2 = text2
+            } else {
+                self.text2 = UserDefaults.dataSuite.object(forKey: UserDefaults.Keys.PooAmount.rawValue) as? String ?? "normal"
             }
+            
+        default:
+            // do nothing
+            break
         }
-        self.value4 = value4
-        self.value5 = value5
     }
     
     public convenience init(babyId: String, commandId: Int) {
-        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), note: nil, number1: 0, number2: 0, decimal1: 0.0, decimal2: 0.0, text1: nil, text2: nil)
     }
 }

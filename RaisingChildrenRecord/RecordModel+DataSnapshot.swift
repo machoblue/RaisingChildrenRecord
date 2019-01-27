@@ -28,11 +28,13 @@ extension RecordModel {
         
         let dateTime = Date(timeIntervalSince1970: recordDict["dateTime"] as! Double)
         let note = recordDict["note"] as? String
-        let value2 = recordDict["value2"] as? String
-        let value3 = recordDict["value3"] as? String
-        let value4 = recordDict["value4"] as? String
-        let value5 = recordDict["value5"] as? String
-        self.init(id: id, babyId: babyId, userId: userId, commandId: commandId, dateTime: dateTime, note: note, value2: value2, value3: value3, value4: value4, value5: value5)
+        let number1 = recordDict["number1"] as? Int ?? 0
+        let number2 = recordDict["number2"] as? Int ?? 0
+        let decimal1 = recordDict["decimal1"] as? Float ?? 0.0
+        let decimal2 = recordDict["decimal2"] as? Float ?? 0.0
+        let text1 = recordDict["text1"] as? String
+        let text2 = recordDict["text2"] as? String
+        self.init(id: id, babyId: babyId, userId: userId, commandId: commandId, dateTime: dateTime, note: note, number1: number1, number2: number2, decimal1: decimal1, decimal2: decimal2, text1: text1, text2: text2)
     }
     
     public var dictionary: [String: Any] {
@@ -43,10 +45,12 @@ extension RecordModel {
             "userId": Auth.auth().currentUser?.uid ?? "",
             "dateTime": dateTime.timeIntervalSince1970,
             "note": note ?? "",
-            "value2": value2 ?? "",
-            "value3": value3 ?? "",
-            "value4": value4 ?? "",
-            "value5": value5 ?? ""
+            "number1": number1,
+            "number2": number2,
+            "decimal1": decimal1,
+            "decimal2": decimal2,
+            "text1": text1 ?? "",
+            "text2": text2 ?? ""
         ]
     }
 }

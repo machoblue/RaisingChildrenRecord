@@ -82,7 +82,7 @@ class FirstViewController: UIViewController {
         let hms = calendar.dateComponents([.hour, .minute, .second], from: now)
         let date = calendar.date(from: DateComponents(year: ymd.year, month: ymd.month, day: ymd.day, hour: hms.hour, minute: hms.minute, second: hms.second))
         
-        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag, dateTime: date!, note: "", value2: "", value3: "", value4: "", value5: "")
+        let record = RecordModel(id: UUID().description, babyId: self.baby!.id, userId: "", commandId: sender.tag, dateTime: date!, note: "", number1: 0, number2: 0, decimal1: 0.0, decimal2: 0.0, text1: nil, text2: nil)
         self.recordDao.insertOrUpdate(record)
         self.recordDaoRemote.insertOrUpdate(record)
 

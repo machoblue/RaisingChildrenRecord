@@ -97,18 +97,18 @@ class RecordDetailViewController: UIViewController {
     }
     
     @IBAction private func onStepperChanged(_ sender: UIStepper) {
-        record.value2 = Int(sender.value).description
-        quantityLabel?.text = record.value2! + "ml"
+        record.number1 = Int(sender.value)
+        quantityLabel?.text = "\(record.number1)ml"
     }
     
     @IBAction private func onStepperChanged2(_ sender: UIStepper) {
-        record.value2 = Int(sender.value).description
-        quantityLabel?.text = record.value2! + "分"
+        record.number1 = Int(sender.value)
+        quantityLabel?.text = "\(record.number1)分"
     }
     
     @IBAction private func onStepperChanged3(_ sender: UIStepper) {
-        record.value2 = (round(Double(sender.value) * 10) / 10).description
-        quantityLabel?.text = record.value2! + "℃"
+        record.decimal1 = (round(Float(sender.value) * 10) / 10)
+        quantityLabel?.text = "\(record.decimal1)℃"
     }
     
     @IBAction private func onDateTimeButtonClicked(_ sender: UIButton) {
@@ -201,15 +201,11 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.minimumValue = 0
                 cell.stepper.maximumValue = 500
                 
-                if record.value2 == nil || record.value2 == "" {
-                    record.value2 = 100.description
-                }
-                
-                cell.stepper.value = Double(record.value2!)!
+                cell.stepper.value = Double(record.number1)
                 cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged(_:)), for: .valueChanged)
                 
                 quantityLabel = cell.label
-                quantityLabel?.text = record.value2! + "ml"
+                quantityLabel?.text = "\(record.number1)ml"
                 
 //                cell.isUserInteractionEnabled = false // this disable to tap stepper
                 cell.selectionStyle = .none
@@ -220,15 +216,11 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.minimumValue = 0
                 cell.stepper.maximumValue = 60
                 
-                if record.value2 == nil || record.value2 == "" {
-                    record.value2 = 10.description
-                }
-                
-                cell.stepper.value = Double(record.value2!)!
+                cell.stepper.value = Double(record.number1)
                 cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged2(_:)), for: .valueChanged)
                 
                 quantityLabel = cell.label
-                quantityLabel?.text = record.value2! + "分"
+                quantityLabel?.text = "\(record.number1)分"
                 
                 cell.selectionStyle = .none
             }
@@ -238,34 +230,24 @@ extension RecordDetailViewController: UITableViewDataSource {
                 cell.stepper.minimumValue = 34.0
                 cell.stepper.maximumValue = 42.0
                 
-                if record.value2 == nil || record.value2 == "" {
-                    record.value2 = 37.0.description
-                }
-                
-                cell.stepper.value = Double(record.value2!)!
+                cell.stepper.value = Double(record.decimal1)
                 cell.stepper.addTarget(self, action: #selector(RecordDetailViewController.onStepperChanged3(_:)), for: .valueChanged)
                 
                 quantityLabel = cell.label
-                quantityLabel?.text = record.value2! + "℃"
+                quantityLabel?.text = "\(record.decimal1)℃"
                 
                 cell.selectionStyle = .none
             }
         case .hardness:
-            if record.value2 == nil || record.value2 == "" {
-                record.value2 = "normal"
-            }
 
             let option = Commands.HardnessOption.all[indexPath.row]
             cell.textLabel?.text = option.label
-            cell.accessoryType = option.rawValue == record.value2 ? .checkmark : .none
+            cell.accessoryType = (option.rawValue == record.text1) ? .checkmark : .none
         case .amount:
-            if record.value3 == nil || record.value3 == "" {
-                record.value3 = "normal"
-            }
             
             let option = Commands.AmountOption.all[indexPath.row]
             cell.textLabel?.text = option.label
-            cell.accessoryType = option.rawValue == record.value3 ? .checkmark : .none
+            cell.accessoryType = (option.rawValue == record.text2) ? .checkmark : .none
         }
     }
     
@@ -290,7 +272,7 @@ extension RecordDetailViewController: UITableViewDelegate {
         let section = indexPath.section
         let sectionModel: RecordDetailTableConfiguration.SectionModel = tableConfig.sections[section]
         if sectionModel.type == RecordDetailTableConfiguration.SectionType.hardness {
-            if Commands.HardnessOption(rawValue: record.value2!)?.label == cellText {
+            if Commands.HardnessOption(rawValue: record.text1!)?.label == cellText {
             } else {
                 for row in 0..<tableConfig.sections[indexPath.section].rowCount {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))
@@ -299,11 +281,11 @@ extension RecordDetailViewController: UITableViewDelegate {
                 
                 cell.accessoryType = .checkmark
                 
-                record.value2 = Commands.HardnessOption.all[indexPath.row].rawValue
+                record.text1 = Commands.HardnessOption.all[indexPath.row].rawValue
             }
             
         } else if sectionModel.type == RecordDetailTableConfiguration.SectionType.amount {
-            if Commands.AmountOption(rawValue: record.value3!)?.label == cellText {
+            if Commands.AmountOption(rawValue: record.text2!)?.label == cellText {
             } else {
                 for row in 0..<tableConfig.sections[indexPath.section].rowCount {
                     let cell = tableView.cellForRow(at: IndexPath(row: row, section: indexPath.section))
@@ -312,7 +294,7 @@ extension RecordDetailViewController: UITableViewDelegate {
 
                 cell.accessoryType = .checkmark
 
-                record.value3 = Commands.AmountOption.all[indexPath.row].rawValue
+                record.text2 = Commands.AmountOption.all[indexPath.row].rawValue
             }
         }
 

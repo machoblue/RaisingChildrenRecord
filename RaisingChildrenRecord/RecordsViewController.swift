@@ -83,10 +83,12 @@ class RecordsViewController: UIViewController {
                 record.dateTime = newRecord.dateTime
                 record.userId = newRecord.userId
                 record.note = newRecord.note
-                record.value2 = newRecord.value2
-                record.value3 = newRecord.value3
-                record.value4 = newRecord.value4
-                record.value5 = newRecord.value5
+                record.number1 = newRecord.number1
+                record.number2 = newRecord.number2
+                record.decimal1 = newRecord.decimal1
+                record.decimal2 = newRecord.decimal2
+                record.text1 = newRecord.text1
+                record.text2 = newRecord.text2
             }
         }
     }

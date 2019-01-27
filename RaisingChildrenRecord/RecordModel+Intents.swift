@@ -24,16 +24,16 @@ extension RecordModel {
         
         switch command.unit {
         case .ml:
-            guard let amountStr = value2, let amount = Int(amountStr) else { break }
-            recordCreateIntent.amount = amount as NSNumber
+            guard number1 > 0 else { break }
+            recordCreateIntent.amount = number1 as NSNumber
             recordCreateIntent.unit = command.unit.rawValue
         case .minute:
-            guard let amountStr = value2, let amount = Int(amountStr) else { break }
-            recordCreateIntent.amount = amount as NSNumber
+            guard number1 > 0 else { break }
+            recordCreateIntent.amount = number1 as NSNumber
             recordCreateIntent.unit = command.unit.rawValue
         case .celcius:
-            guard let amountStr = value2, let amount = Float(amountStr) else { break }
-            recordCreateIntent.amountDecimal = amount as NSNumber
+            guard decimal1 > 0.0 else { break }
+            recordCreateIntent.amountDecimal = decimal1 as NSNumber
             recordCreateIntent.unit = command.unit.rawValue
         case .none:
             break

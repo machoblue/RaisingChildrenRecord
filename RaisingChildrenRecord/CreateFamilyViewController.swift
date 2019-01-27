@@ -54,8 +54,8 @@ class CreateFamilyViewController: InterstitialAdBaseViewController {
         }
         
         let userId = Auth.auth().currentUser?.uid
-        let userName = Auth.auth().currentUser?.displayName
-        ref.child("users").child(userId!).setValue(["name": userName])
+//        let userName = Auth.auth().currentUser?.displayName
+//        ref.child("users").child(userId!).setValue(["name": userName]) // user who uses email to signup doesn't have displayName
         
         self.ref.child("families").child(familyId).setValue(["dummy": true]) { // 一旦家族を作成する
             (error: Error?, ref: DatabaseReference) in

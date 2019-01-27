@@ -145,7 +145,7 @@ class SecondViewController: UIViewController {
 
         // display familyId and onetime password
         let parameterDict = ["familyId": familyId, "passcode": passcode]
-        performSegue(withIdentifier: "Create Family", sender: parameterDict)
+        performSegue(withIdentifier: "Show FamilyId And Passcode", sender: parameterDict)
     }
     
     @objc func joinFamily() {
