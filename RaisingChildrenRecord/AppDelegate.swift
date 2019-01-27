@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.configure(withApplicationID: "ca-app-pub-2062076007725970~5164800220")
         
         if Auth.auth().currentUser == nil {
-            if UserDefaults.standard.object(forKey: UserDefaults.Keys.IsSignInSkipped.rawValue) as? Bool ?? false { // Once skipped, never show signInScreen
+            if UserDefaults.standard.bool(forKey: UserDefaults.Keys.IsSignInSkipped.rawValue) { // Once skipped, never show signInScreen
                 // do nothing
             } else {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -50,7 +50,7 @@ class SignInViewController: UIViewController {
                 if let onSignedIn = self.onSignedIn {
                     onSignedIn(true)
                 }
-                UserDefaults.standard.register(defaults: [UserDefaults.Keys.IsSignInSkipped.rawValue: false])
+                UserDefaults.standard.set(false, forKey: UserDefaults.Keys.IsSignInSkipped.rawValue)
             }
         }
     }
@@ -79,7 +79,7 @@ class SignInViewController: UIViewController {
                 if let onSignedIn = self.onSignedIn {
                     onSignedIn(true)
                 }
-                UserDefaults.standard.register(defaults: [UserDefaults.Keys.IsSignInSkipped.rawValue: false])
+                UserDefaults.standard.set(false, forKey: UserDefaults.Keys.IsSignInSkipped.rawValue)
             }
         }
     }
@@ -91,7 +91,7 @@ class SignInViewController: UIViewController {
             onSkipped(true)
         }
         
-        UserDefaults.standard.register(defaults: [UserDefaults.Keys.IsSignInSkipped.rawValue: true])
+        UserDefaults.standard.set(true, forKey: UserDefaults.Keys.IsSignInSkipped.rawValue)
     }
     
 }
