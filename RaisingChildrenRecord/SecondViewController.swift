@@ -24,7 +24,7 @@ class SecondViewController: UIViewController {
     var sections: [SectionModel] = [
         SectionModel(.BabyOption, "赤ちゃんを切り替える", 0, "Cell"),
         SectionModel(.EditBabyButton, "赤ちゃんを編集する", 0, "Cell2"),
-        SectionModel(.DataShareButton, "", 5, "ShareCell")
+        SectionModel(.DataShareButton, "データを共有する", 5, "ShareCell")
     ]
     
     enum SectionType: String {
