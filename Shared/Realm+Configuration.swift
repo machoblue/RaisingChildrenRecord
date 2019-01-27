@@ -25,6 +25,31 @@ extension Realm {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
+                    migration.enumerateObjects(ofType: Record.className()) { oldObject, newObject in
+                        if let value1 = oldObject!["value1"] as? String, !value1.isEmpty {
+                            newObject!["note"] = value1
+                        }
+                        
+                        switch Commands.Identifier(rawValue: oldObject!["commandId"] as! Int)! {
+                        case .milk:
+                            guard let value2 = oldObject!["value2"] as? String, !value2.isEmpty else { break }
+                            newObject!["number1"] = Int(value2)!
+                        case .breast:
+                            guard let value2 = oldObject!["value2"] as? String, !value2.isEmpty else { break }
+                            newObject!["number1"] = Int(value2)!
+                        case .temperature:
+                            guard let value2 = oldObject!["value2"] as? String, !value2.isEmpty else { break }
+                            newObject!["decimal1"] = Float(value2)!
+                        case .poo:
+                            guard let value2 = oldObject!["value2"] as? String, !value2.isEmpty else { break }
+                            newObject!["text1"] = value2
+                            guard let value3 = oldObject!["value3"] as? String, !value3.isEmpty else { break }
+                            newObject!["text2"] = value3
+                        default:
+                            // do nothing
+                            break
+                        }
+                    }
                 }
         })
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.blue.macho.RaisingChildrenRecord")!
