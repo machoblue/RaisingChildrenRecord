@@ -33,7 +33,7 @@ public class RecordObserverRealm: RecordObserver {
         
         self.results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
         for record in results {
-            self.records.append(self.recordModel(from: record))
+            self.records.append(RecordModel(from: record))
         }
         
         notificationToken = self.results.observe { [weak self] (changes: RealmCollectionChange) in
@@ -52,15 +52,14 @@ public class RecordObserverRealm: RecordObserver {
                 }
                 for insertion in self!.sort(insertions) {
                     let result = self!.results[insertion]
-                    let record = self!.recordModel(from: result)
+                    let record = RecordModel(from: result)
                     self!.records.insert(record, at: insertion)
                     myChanges.append((record, .Insert))
                 }
                 for modification in modifications {
-                    let from = self!.results[modification]
-                    let to = self!.records[modification]
-                    self!.copy(from: from, to: to)
-                    myChanges.append((to, .Modify))
+                    let result = self!.results[modification]
+                    self!.records[modification] = RecordModel(from: result)
+                    myChanges.append((self!.records[modification], .Modify))
                 }
                 
             case .error(let error):
@@ -84,26 +83,6 @@ public class RecordObserverRealm: RecordObserver {
         var temp = array
         temp.sort(by: {$1 < $0})
         return temp
-    }
-    
-    func recordModel(from: Record) -> RecordModel {
-        let to = RecordModel(id: from.id, babyId: from.babyId, userId: from.userId, commandId: from.commandId, dateTime: from.dateTime,
-                             note: from.note, number1: from.number1, number2: from.number2, decimal1: from.decimal1, decimal2: from.decimal2, text1: from.text1, text2: from.text2)
-        return to
-    }
-    
-    func copy(from: Record, to: RecordModel) {
-        to.babyId = from.babyId
-        to.commandId = from.commandId
-        to.userId = from.userId
-        to.dateTime = from.dateTime
-        to.note = from.note
-        to.number1 = from.number1
-        to.number2 = from.number2
-        to.decimal1 = from.decimal1
-        to.decimal2 = from.decimal2
-        to.text1 = from.text1
-        to.text2 = from.text2
     }
     
     public func invalidate() {

@@ -56,6 +56,7 @@
 		9C21679321F3F8A700C42158 /* RecordModel+DataSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21679221F3F8A700C42158 /* RecordModel+DataSnapshot.swift */; };
 		9C23DBE421679DCA0091970A /* FamilyIdAndPasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */; };
 		9C23DBE621682F580091970A /* JoinFamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C23DBE521682F580091970A /* JoinFamilyViewController.swift */; };
+		9C412F0321FDC9A50087C595 /* RecordModel+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C412F0221FDC9A50087C595 /* RecordModel+Realm.swift */; };
 		9C4B220E21E02671009DEAD2 /* RecordModel+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */; };
 		9C4B221421E6BA88009DEAD2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4B221321E6BA88009DEAD2 /* SignInViewController.swift */; };
 		9C4B221821E79114009DEAD2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4B221721E79114009DEAD2 /* SignUpViewController.swift */; };
@@ -216,6 +217,7 @@
 		9C21679221F3F8A700C42158 /* RecordModel+DataSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordModel+DataSnapshot.swift"; sourceTree = "<group>"; };
 		9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyIdAndPasscodeViewController.swift; sourceTree = "<group>"; };
 		9C23DBE521682F580091970A /* JoinFamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyViewController.swift; sourceTree = "<group>"; };
+		9C412F0221FDC9A50087C595 /* RecordModel+Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordModel+Realm.swift"; sourceTree = "<group>"; };
 		9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordModel+Intents.swift"; sourceTree = "<group>"; };
 		9C4B221321E6BA88009DEAD2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9C4B221721E79114009DEAD2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				9CE76AFD2187432B002B00ED /* Info.plist */,
 				9CE76B212187D3D2002B00ED /* DataManager.swift */,
 				9C186E9521B8959800A089EF /* Realm+Configuration.swift */,
+				9C412F0221FDC9A50087C595 /* RecordModel+Realm.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				9C186EA121BB675C00A089EF /* RecordObserverRealm.swift in Sources */,
 				9CE76B1B2187CDF3002B00ED /* RecordModel.swift in Sources */,
 				9CDA326B218E739500F38D61 /* BabyDaoRealm.swift in Sources */,
+				9C412F0321FDC9A50087C595 /* RecordModel+Realm.swift in Sources */,
 				9CDA3262218E6F5200F38D61 /* RecordDaoRealm.swift in Sources */,
 				9CE76B222187D3D2002B00ED /* DataManager.swift in Sources */,
 				9CDA3260218E6F5200F38D61 /* Record.swift in Sources */,

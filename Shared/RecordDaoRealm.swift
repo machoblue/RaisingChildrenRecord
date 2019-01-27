@@ -22,20 +22,7 @@ public class RecordDaoRealm: RecordDao {
         try! self.realm.write {
             let results = self.realm.objects(Record.self).filter("id == %@", record.id)
             if results.count == 0 {
-                let newRecord = Record()
-                newRecord.id = record.id
-                newRecord.babyId = record.babyId
-                newRecord.commandId = record.commandId
-                newRecord.userId = record.userId
-                newRecord.dateTime = record.dateTime
-                newRecord.note = record.note
-                newRecord.number1 = record.number1
-                newRecord.number2 = record.number2
-                newRecord.decimal1 = record.decimal1
-                newRecord.decimal2 = record.decimal2
-                newRecord.text1 = record.text1
-                newRecord.text2 = record.text2
-                self.realm.add(newRecord)
+                self.realm.add(record.realmRecord)
             } else {
                 let existRecord = results.first!
                 existRecord.babyId = record.babyId
@@ -61,15 +48,15 @@ public class RecordDaoRealm: RecordDao {
     }
 
     public func find(id: String) -> RecordModel? {
-        guard let r = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
-        return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, note: r.note, number1: r.number1, number2: r.number2, decimal1: r.decimal1, decimal2: r.decimal2, text1: r.text1, text2: r.text2)
+        guard let result = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
+        return RecordModel(from: result)
     }
     
     public func find(babyId: String) -> [RecordModel] {
         var records: [RecordModel] = []
         let results = realm.objects(Record.self).filter("babyId == %@", babyId)
-        for r in results {
-            records.append(RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, note: r.note, number1: r.number1, number2: r.number2, decimal1: r.decimal1, decimal2: r.decimal2, text1: r.text1, text2: r.text2))
+        for result in results {
+            records.append(RecordModel(from: result))
         }
         return records
     }
