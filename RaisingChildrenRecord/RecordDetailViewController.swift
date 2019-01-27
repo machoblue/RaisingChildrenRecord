@@ -138,7 +138,7 @@ class RecordDetailViewController: UIViewController {
     }
     
     @IBAction func onTextFieldChanged(sender: UITextField!) {
-        self.record.value1 = sender.text
+        self.record.note = sender.text
     }
     
 }
@@ -191,7 +191,7 @@ extension RecordDetailViewController: UITableViewDataSource {
             if let cell = cell as? TextTableViewCell {
                 noteTextField = cell.textField
                 noteTextField!.layer.cornerRadius = 10
-                noteTextField!.text = record.value1
+                noteTextField!.text = record.note
                 noteTextField!.addTarget(self, action: #selector(onTextFieldChanged), for: .editingChanged)
             }
             break

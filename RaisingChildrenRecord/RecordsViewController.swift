@@ -82,7 +82,7 @@ class RecordsViewController: UIViewController {
                 record.commandId = newRecord.commandId
                 record.dateTime = newRecord.dateTime
                 record.userId = newRecord.userId
-                record.value1 = newRecord.value1
+                record.note = newRecord.note
                 record.value2 = newRecord.value2
                 record.value3 = newRecord.value3
                 record.value4 = newRecord.value4

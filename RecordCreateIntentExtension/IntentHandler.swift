@@ -153,22 +153,22 @@ extension RecordModel {
                 switch Commands.Target(rawValue: target) ?? .none {
                 case .milk:
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.milk.hashValue, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.milk.hashValue, dateTime: Date(), note: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.milk.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.milk.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                         return
                     }
                 case .breast:
                     if let amount = intent.amount {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.breast.hashValue, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.breast.hashValue, dateTime: Date(), note: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                         return
                     } else {
-                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.breast.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.breast.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                         return
                     }
                 case .medicine:
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.medicine.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.medicine.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
@@ -177,10 +177,10 @@ extension RecordModel {
                 guard let target = intent.target else { return nil }
                 switch Commands.Target(rawValue: target) ?? .none {
                 case .babyfood:
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.babyfood.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.babyfood.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 case .snack:
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.snack.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.snack.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
@@ -189,16 +189,16 @@ extension RecordModel {
                 guard let target = intent.target else { return nil }
                 switch Commands.Target(rawValue: target) ?? .none {
                 case .poo:
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.poo.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.poo.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 default:
                     return nil
                 }
             case .sleep:
-                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.sleep.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.sleep.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                 return
             case .awake:
-                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.awake.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.awake.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                 return
             case .none:
                 return nil
@@ -207,10 +207,10 @@ extension RecordModel {
             switch Commands.Property(rawValue: property) ?? .none {
             case .temperature:
                 if let amount = intent.amountDecimal {
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.temperature.hashValue, dateTime: Date(), value1: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.temperature.hashValue, dateTime: Date(), note: nil, value2: amount.description, value3: nil, value4: nil, value5: nil)
                     return
                 } else {
-                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.temperature.hashValue, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+                    self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: Commands.Identifier.temperature.hashValue, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
                     return
                 }
             default:

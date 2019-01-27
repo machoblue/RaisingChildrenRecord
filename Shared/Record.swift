@@ -16,7 +16,7 @@ public class Record: Object {
     @objc dynamic public var userId: String?
     @objc dynamic public var commandId: Int = 99 // other
     @objc dynamic public var dateTime: Date = Date()
-    @objc dynamic public var value1: String?
+    @objc dynamic public var note: String?
     @objc dynamic public var value2: String?
     @objc dynamic public var value3: String?
     @objc dynamic public var value4: String?

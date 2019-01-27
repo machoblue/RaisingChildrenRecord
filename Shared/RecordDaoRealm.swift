@@ -28,7 +28,7 @@ public class RecordDaoRealm: RecordDao {
                 newRecord.commandId = record.commandId
                 newRecord.userId = record.userId
                 newRecord.dateTime = record.dateTime
-                newRecord.value1 = record.value1
+                newRecord.note = record.note
                 newRecord.value2 = record.value2
                 newRecord.value3 = record.value3
                 newRecord.value4 = record.value4
@@ -40,7 +40,7 @@ public class RecordDaoRealm: RecordDao {
                 existRecord.commandId = record.commandId
                 existRecord.userId = record.userId
                 existRecord.dateTime = record.dateTime
-                existRecord.value1 = record.value1
+                existRecord.note = record.note
                 existRecord.value2 = record.value2
                 existRecord.value3 = record.value3
                 existRecord.value4 = record.value4
@@ -58,14 +58,14 @@ public class RecordDaoRealm: RecordDao {
 
     public func find(id: String) -> RecordModel? {
         guard let r = self.realm.objects(Record.self).filter("id == %@", id).first else { return nil }
-        return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5)
+        return RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, note: r.note, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5)
     }
     
     public func find(babyId: String) -> [RecordModel] {
         var records: [RecordModel] = []
         let results = realm.objects(Record.self).filter("babyId == %@", babyId)
         for r in results {
-            records.append(RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, value1: r.value1, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5))
+            records.append(RecordModel(id: r.id, babyId: r.babyId, userId: r.userId, commandId: r.commandId, dateTime: r.dateTime, note: r.note, value2: r.value2, value3: r.value3, value4: r.value4, value5: r.value5))
         }
         return records
     }

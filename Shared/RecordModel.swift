@@ -14,7 +14,7 @@ public class RecordModel: NSObject, Codable {
     public var userId: String?
     public var commandId: Int = 99 // other
     public var dateTime: Date = Date()
-    public var value1: String? // note
+    public var note: String?
     public var value2: String? {
         didSet {
             guard let value2 = value2, !value2.isEmpty else { return }
@@ -60,17 +60,17 @@ public class RecordModel: NSObject, Codable {
             return Commands.HardnessOption(rawValue: value2)!.label
             
         } else {
-            return value1 ?? ""
+            return note ?? ""
         }
     }
     
-    public init(id: String, babyId: String, userId: String?, commandId: Int, dateTime: Date, value1: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
+    public init(id: String, babyId: String, userId: String?, commandId: Int, dateTime: Date, note: String?, value2: String?, value3: String?, value4: String?, value5: String?) {
         self.id = id
         self.babyId = babyId
         self.userId = userId
         self.commandId = commandId
         self.dateTime = dateTime
-        self.value1 = value1
+        self.note = note
         if let value2 = value2, !value2.isEmpty {
             self.value2 = value2
         } else {
@@ -103,6 +103,6 @@ public class RecordModel: NSObject, Codable {
     }
     
     public convenience init(babyId: String, commandId: Int) {
-        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), value1: nil, value2: nil, value3: nil, value4: nil, value5: nil)
+        self.init(id: UUID().uuidString, babyId: babyId, userId: nil, commandId: commandId, dateTime: Date(), note: nil, value2: nil, value3: nil, value4: nil, value5: nil)
     }
 }
