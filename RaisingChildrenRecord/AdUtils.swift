@@ -21,7 +21,8 @@ class AdUtils {
         let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         addBannerViewToView(bannerView, viewController: viewController)
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // Test
+        bannerView.adUnitID = "ca-app-pub-2062076007725970/1481717848" // Release
         bannerView.rootViewController = viewController
         bannerView.load(GADRequest())
     }
@@ -48,7 +49,8 @@ class AdUtils {
     }
     
     func createAndLoadInterstitial(_ delegate: GADInterstitialDelegate) -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") // Test
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2062076007725970/8006585985") // Release
         interstitial.delegate = delegate
         interstitial.load(GADRequest())
         return interstitial

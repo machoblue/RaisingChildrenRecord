@@ -30,7 +30,12 @@ extension Realm {
                             newObject!["note"] = value1
                         }
                         
-                        switch Commands.Identifier(rawValue: oldObject!["commandId"] as! Int)! {
+                        guard let commandIdStr = oldObject!["commandId"] as? String, !commandIdStr.isEmpty else { return }
+                        guard let commandId = Int(commandIdStr), let command = Commands.Identifier(rawValue: commandId) else { return }
+                        
+                        newObject!["commandId"] = commandId
+                        
+                        switch command {
                         case .milk:
                             guard let value2 = oldObject!["value2"] as? String, !value2.isEmpty else { break }
                             newObject!["number1"] = Int(value2)!
