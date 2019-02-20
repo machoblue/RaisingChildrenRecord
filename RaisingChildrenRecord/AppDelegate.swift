@@ -31,21 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if Auth.auth().currentUser == nil {
             if UserDefaults.standard.bool(forKey: UserDefaults.Keys.IsSignInSkipped.rawValue) { // Once skipped, never show signInScreen
-                // do nothing
+                transitToFirstViewController()
             } else {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
                 signInViewController.onSignedIn = { result in
                     FirebaseUtils.shared.observeRemote()
-                    
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
-                    self.window?.rootViewController = viewController
-                    self.window?.makeKeyAndVisible()
+                    self.transitToFirstViewController()
                 }
                 signInViewController.onSkipped = { result in
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "UITabBarController")
-                    self.window?.rootViewController = viewController
-                    self.window?.makeKeyAndVisible()
+                    self.transitToFirstViewController()
                 }
                 
                 self.window?.rootViewController = signInViewController
@@ -54,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             FirebaseUtils.shared.observeRemote()
+            transitToFirstViewController()
         }
         
         self.babyDao = BabyDaoFactory.shared.createBabyDao(.Local)
@@ -104,6 +100,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         recordDataManager.clear()
+    }
+    
+    func transitToFirstViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarController = storyboard.instantiateViewController(withIdentifier: "UITabBarController") as! UITabBarController
+        let navigationViewController = tabBarController.viewControllers![0] as! UINavigationController
+        let firstViewController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
+        navigationViewController.pushViewController(firstViewController, animated: true)
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
     }
     
 }

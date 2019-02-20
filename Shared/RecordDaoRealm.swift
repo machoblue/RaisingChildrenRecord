@@ -61,6 +61,15 @@ public class RecordDaoRealm: RecordDao {
         return records
     }
     
+    public func find(babyId: String, from: Date, to: Date) -> [RecordModel] {
+        var records: [RecordModel] = []
+        let results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
+        for record in results {
+            records.append(RecordModel(from: record))
+        }
+        return records
+    }
+    
     public func deleteAll() {
         try! realm.write {
             realm.delete(realm.objects(Record.self))

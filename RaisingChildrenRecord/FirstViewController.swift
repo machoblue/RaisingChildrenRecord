@@ -16,11 +16,9 @@ import Intents
 import Shared
 
 class FirstViewController: UIViewController {
-
-    @IBOutlet weak var navigationItem2: UINavigationItem!
     
     var baby: BabyModel?
-    var date: Date?
+    var date = Date()
     var babies: [BabyModel]?
     
     var babyDao: BabyDao!
@@ -44,13 +42,12 @@ class FirstViewController: UIViewController {
         
         self.babies = babyDao.findAll()
         self.baby = nextBaby()
-        self.date = Date()
         
         let frame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 75)
-        self.navigationItem2.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
+        self.navigationItem.titleView = UICustomTitleView(frame: frame, baby: self.baby, date: self.date)
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onTitleViewTapped(_:)))
-        self.navigationItem2.titleView?.addGestureRecognizer(gesture)
-        self.navigationItem2.titleView?.isUserInteractionEnabled = true
+        self.navigationItem.titleView?.addGestureRecognizer(gesture)
+        self.navigationItem.titleView?.isUserInteractionEnabled = true
         
         // why observe at viewDidAppear
         NotificationCenter.default.addObserver(self, selector: #selector(onPageForward(notification:)), name: Notification.Name.PageForward, object: nil)
@@ -58,24 +55,30 @@ class FirstViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onRecordsViewDidAppear(notification:)), name: Notification.Name.RecordsViewDidAppear, object: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let pageViewController = segue.destination as? PageViewController, segue.identifier == "Contain" {
+            pageViewController.date = date
+        }
+    }
+    
     @objc func onPageForward(notification: Notification) -> Void {
         self.date =  (notification.userInfo?["date"] as! Date)
-        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
+        self.reloadTitleView(self.navigationItem, baby: self.baby!, data: self.date)
     }
     
     @objc func onPageBackward(notification: Notification) -> Void {
         self.date = (notification.userInfo!["date"] as! Date)
-        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
+        self.reloadTitleView(self.navigationItem, baby: self.baby!, data: self.date)
     }
     
     @objc func onRecordsViewDidAppear(notification: Notification) -> Void {
         self.date = (notification.userInfo!["date"] as! Date)
-        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
+        self.reloadTitleView(self.navigationItem, baby: self.baby!, data: self.date)
     }
     
     // MARK: - Event
     @objc func onClicked(sender: UIButton!) {
-        let displayDate = self.date!
+        let displayDate = self.date
         let now = Date()
         let calendar = Calendar.current
         let ymd = calendar.dateComponents([.year, .month, .day], from: displayDate)
@@ -103,21 +106,21 @@ class FirstViewController: UIViewController {
     @objc func onTitleViewTapped(_ sender: UITapGestureRecognizer) {
         self.baby = nextBaby()
         
-        self.reloadTitleView(self.navigationItem2, baby: self.baby!, data: self.date!)
+        self.reloadTitleView(self.navigationItem, baby: self.baby!, data: self.date)
 
         let userInfoDict = ["babyId": self.baby!.id]
         NotificationCenter.default.post(name: .TitleViewClicked, object: nil, userInfo: userInfoDict)
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        self.date = self.date! - (60 * 60 * 24)
-        let userInfoDict = ["date": self.date!]
+        self.date = self.date - (60 * 60 * 24)
+        let userInfoDict = ["date": self.date]
         NotificationCenter.default.post(name: .LeftBarButtonClicked, object: nil, userInfo: userInfoDict)
     }
     
     @IBAction func onRightBarButtonClicked(_ sender: Any) {
-        self.date = self.date! + (60 * 60 * 24)
-        let userInfoDict = ["date": self.date!]
+        self.date = self.date + (60 * 60 * 24)
+        let userInfoDict = ["date": self.date]
         NotificationCenter.default.post(name: .RightBarButtonClicked, object: nil, userInfo: userInfoDict)
     }
     
@@ -183,15 +186,29 @@ extension FirstViewController: UICollectionViewDataSource {
         cell.button.setTitle("", for: .normal)
         cell.button.addTarget(self, action: #selector(onClicked), for: .touchUpInside)
         cell.button.tag = Commands.values[indexPath.row].id.rawValue
+        attachShadow(cell.button)
         
         cell.label.text = Commands.values[indexPath.row].name
-        cell.label.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
         
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func attachShadow(_ button: UIButton) {
+        button.layer.cornerRadius = button.bounds.height / 2
+        button.layer.masksToBounds = false
+        
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
+        button.layer.shadowRadius = 2.5
+        
+        button.layer.shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: button.bounds.height / 2).cgPath
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = UIScreen.main.scale
     }
 }
 

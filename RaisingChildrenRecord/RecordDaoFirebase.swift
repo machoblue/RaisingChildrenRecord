@@ -44,6 +44,10 @@ public class RecordDaoFirebase: RecordDao {
         return []
     }
     
+    public func find(babyId: String, from: Date, to: Date) -> [RecordModel] {
+        return []
+    }
+    
     public func deleteAll() {
         guard FirebaseUtils.ready() else { return }
         let familyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.FamilyId.rawValue) as! String

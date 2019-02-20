@@ -10,15 +10,14 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-//    var date: Date?
+    var date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //        self.date = Date()
-        self.setViewControllers([getViewController(Date())], direction: .forward, animated: true, completion: nil)
+        self.setViewControllers([getViewController(date)], direction: .forward, animated: true, completion: nil)
         self.dataSource = self
-        self.delegate = self
         
         // disable transit on tap
         for recognizer in self.gestureRecognizers {
@@ -44,14 +43,14 @@ class PageViewController: UIPageViewController {
     
     @objc func onLeftBarButtonClicked(notification: Notification) -> Void {
 //        self.date = self.date! - (60 * 60 * 24)
-        let date = notification.userInfo!["date"] as! Date
+        date = notification.userInfo!["date"] as! Date
         self.setViewControllers([getViewController(date)], direction: .reverse, animated: true, completion: nil)
 //        NotificationCenter.default.post(name: .PageBackward, object: nil)
     }
     
     @objc func onRightBarButtonClicked(notification: Notification) -> Void {
 //        self.date = self.date! + (60 * 60 * 24)
-        let date = notification.userInfo!["date"] as! Date
+        date = notification.userInfo!["date"] as! Date
         self.setViewControllers([getViewController(date)], direction: .forward, animated: true, completion: nil)
 //        NotificationCenter.default.post(name: .PageForward, object: nil)
     }
@@ -61,7 +60,7 @@ class PageViewController: UIPageViewController {
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 //        self.date = self.date! - (60 * 60 * 24)
-        let date = (viewController as! RecordsViewController).date! - (60 * 60 * 24)
+        date = (viewController as! RecordsViewController).date! - (60 * 60 * 24)
         
 //        let userInfoDict = ["date": date]
 //        NotificationCenter.default.post(name: .PageBackward, object: nil, userInfo: userInfoDict)
@@ -71,17 +70,12 @@ extension PageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 //        self.date = self.date! + (60 * 60 * 24)
-        let date = (viewController as! RecordsViewController).date! + (60 * 60 * 24)
+        date = (viewController as! RecordsViewController).date! + (60 * 60 * 24)
         
 //        let userInfoDict = ["date": date]
 //        NotificationCenter.default.post(name: .PageForward, object: nil, userInfo: userInfoDict)
         
         return getViewController(date)
-    }
-}
-
-extension PageViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     }
 }
 

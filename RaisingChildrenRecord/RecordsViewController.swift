@@ -208,7 +208,6 @@ extension RecordsViewController: UITableViewDataSource {
         label2.text = Commands.command(from: record.commandId)?.name
         
         let label3 = cell.contentView.viewWithTag(4) as! UILabel
-        label3.textColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.0)
         label3.text = record.label
         
         return cell
