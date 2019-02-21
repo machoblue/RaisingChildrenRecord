@@ -74,6 +74,8 @@ class SecondViewController: UIViewController {
             self.tableView?.reloadData()
         })
         
+        navigationItem.title = "設定"
+        
         AdUtils.shared.loadAndAddAdView(self)
     }
 
