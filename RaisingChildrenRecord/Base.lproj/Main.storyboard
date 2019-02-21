@@ -332,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744.79999999999995" y="-323.38830584707648"/>
+            <point key="canvasLocation" x="1545" y="-536"/>
         </scene>
         <!--設定-->
         <scene sceneID="wg7-f3-ORb">
@@ -1172,7 +1172,7 @@
                 <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="IHr-Qc-b0J" customClass="PageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVO-7v-xBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="-324"/>
+            <point key="canvasLocation" x="2353" y="-655"/>
         </scene>
         <!--Record Detail View Controller-->
         <scene sceneID="Hag-fa-bEN">
@@ -1182,25 +1182,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90s-Xu-XG2">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="TfH-xt-uEg">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt; 戻る" id="fUe-oT-H1H">
-                                            <connections>
-                                                <action selector="onBackButtonClicked:" destination="bQx-9o-neM" id="WCg-0y-H2e"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="保存" id="WxK-5p-b37">
-                                            <connections>
-                                                <action selector="onSaveButtonClicked:" destination="bQx-9o-neM" id="BpI-lc-Mox"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="iZM-f9-O8g">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateTimeCell" rowHeight="277" id="0Ty-OQ-soo" customClass="DateTimeTableViewCell" customModule="RaisingChildrenRecord" customModuleProvider="target">
@@ -1373,22 +1356,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="90s-Xu-XG2" secondAttribute="trailing" id="I6b-me-tBz"/>
-                            <constraint firstItem="iZM-f9-O8g" firstAttribute="leading" secondItem="90s-Xu-XG2" secondAttribute="leading" id="XRi-pb-zcB"/>
-                            <constraint firstItem="90s-Xu-XG2" firstAttribute="leading" secondItem="4FX-23-6YL" secondAttribute="leading" id="bsn-il-iJT"/>
-                            <constraint firstItem="iZM-f9-O8g" firstAttribute="trailing" secondItem="90s-Xu-XG2" secondAttribute="trailing" id="d5j-Cg-xZJ"/>
+                            <constraint firstItem="iZM-f9-O8g" firstAttribute="top" secondItem="4FX-23-6YL" secondAttribute="top" id="2t4-vH-VGr"/>
                             <constraint firstItem="iZM-f9-O8g" firstAttribute="width" secondItem="Iz0-cM-NWT" secondAttribute="width" id="hEC-Ph-G1J"/>
-                            <constraint firstItem="90s-Xu-XG2" firstAttribute="top" secondItem="4FX-23-6YL" secondAttribute="top" id="l5U-ZT-RxV"/>
                             <constraint firstItem="iZM-f9-O8g" firstAttribute="bottom" secondItem="4FX-23-6YL" secondAttribute="bottom" id="lKB-S0-0gl"/>
                             <constraint firstItem="iZM-f9-O8g" firstAttribute="leading" secondItem="Iz0-cM-NWT" secondAttribute="leading" id="nNf-ad-Gkz"/>
-                            <constraint firstItem="iZM-f9-O8g" firstAttribute="top" secondItem="90s-Xu-XG2" secondAttribute="bottom" id="otD-0m-GVn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4FX-23-6YL"/>
                     </view>
                     <connections>
                         <outlet property="tableFooterView" destination="gmU-pC-Ac8" id="Mc3-vg-9lE"/>
                         <outlet property="tableView" destination="iZM-f9-O8g" id="M26-9j-MOL"/>
-                        <outlet property="titleBar" destination="TfH-xt-uEg" id="9ga-bL-hcb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lps-Ot-EKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1399,7 +1376,7 @@
                     <viewLayoutGuide key="safeArea" id="7oI-jf-z4H"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3031" y="-770"/>
+            <point key="canvasLocation" x="4058" y="-534"/>
         </scene>
         <!--Records-->
         <scene sceneID="iEk-nV-P3h">
@@ -1488,7 +1465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXD-T7-mrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2223" y="-533"/>
+            <point key="canvasLocation" x="3114" y="-535"/>
         </scene>
     </scenes>
     <resources>

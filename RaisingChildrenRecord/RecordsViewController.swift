@@ -187,13 +187,10 @@ extension UITableView {
 
 extension RecordsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Show Record Detail", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let recordDetailViewController = segue.destination as! RecordDetailViewController
+        let recordDetailViewController = storyboard?.instantiateViewController(withIdentifier: "RecordDetailViewController") as! RecordDetailViewController
         let record = records[tableView.indexPathForSelectedRow!.row]
         recordDetailViewController.configure(record: record)
+        navigationController?.pushViewController(recordDetailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

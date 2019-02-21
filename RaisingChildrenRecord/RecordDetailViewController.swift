@@ -41,7 +41,8 @@ class RecordDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleBar.title = titleStr
+        navigationItem.title = titleStr
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(onSaveButtonClicked(_:)))
 //        tableView.allowsSelection = false
         if tableConfig.recordType != .other {
             configureTableFooterView()
@@ -131,10 +132,10 @@ class RecordDetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onSaveButtonClicked(_ sender: Any) {
+    @objc func onSaveButtonClicked(_ sender: Any) {
         recordDao.insertOrUpdate(record)
         recordDaoRemote.insertOrUpdate(record)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onValueChanged(sender: UIDatePicker!) {
