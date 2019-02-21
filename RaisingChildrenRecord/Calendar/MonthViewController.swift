@@ -178,6 +178,11 @@ extension MonthViewController: UICollectionViewDataSource {
             
             cell.label.text = Calendar.current.component(.day, from: cellModel.date).description
             
+            // gray the day of other month
+            if !isThisMonth(cellModel.date) {
+                cell.label.textColor = UIColor.lightGray
+            }
+            
             // highlight today
             if isToday(cellModel.date) {
                 cell.label.layer.cornerRadius = cell.label.frame.width / 2
@@ -222,6 +227,14 @@ extension MonthViewController: UICollectionViewDataSource {
     func isToday(_ date: Date) -> Bool {
         let result = Calendar.current.compare(date, to: Date(), toGranularity: .day) == .orderedSame
         return result
+    }
+    
+    func isThisMonth(_ date: Date) -> Bool {
+        let thisMonth = Calendar.current.dateComponents([.month], from: self.date)
+        let month = Calendar.current.dateComponents([.month], from: date)
+        print("thisMOnth", thisMonth)
+        print("month", month)
+        return thisMonth == month
     }
     
 }
