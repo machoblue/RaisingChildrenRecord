@@ -124,4 +124,9 @@ class UIUtils {
         let firstDateOfMonthCalendar = Date(timeInterval: TimeInterval((-weekdayOfFirstDate + 1) * 60 * 60 * 24), since: firstDateOfThisMonth)
         return firstDateOfMonthCalendar
     }
+    
+    func getYYYYMMDD000000Date(_ date: Date) -> Date {
+        let yearMonthDate = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return Calendar.current.date(from: yearMonthDate)!
+    }
 }

@@ -110,9 +110,29 @@ class MonthViewController: UIViewController {
             }
         }
         
+        // 寝る　の後　起きる　を押していない場合（寝るを押しっぱなし）
         if let sleepPoint = sleepPoint {
-            let timeInterval = to.timeIntervalSince(sleepPoint)
-            sleepTotal += timeInterval / (60 * 60.0)
+            let now = Date()
+            
+            // 過去
+            if sleepPoint < now {
+                let today000000 = UIUtils.shared.getYYYYMMDD000000Date(now)
+                
+                // 昨日以前
+                if sleepPoint < today000000 {
+                    let timeInterval = to.timeIntervalSince(sleepPoint)
+                    sleepTotal += timeInterval / (60 * 60.0)
+                    
+                // 今日〜今
+                } else {
+                    let timeInterval = now.timeIntervalSince(sleepPoint)
+                    sleepTotal += timeInterval / (60 * 60.0)
+                }
+              
+            // 未来
+            } else {
+                // do nothing
+            }
         }
         
         if milkTotal > 0 {
