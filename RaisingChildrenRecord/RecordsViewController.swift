@@ -133,6 +133,12 @@ class RecordsViewController: UIViewController {
                 }
             }
             
+            if self.records.count > 0 {
+                self.hideEmptyMessage()
+            } else {
+                self.showEmptyMessage()
+            }
+            
             self.records.sort(by: {$0.dateTime < $1.dateTime})
             
             self.tableView.reloadData()
@@ -141,6 +147,19 @@ class RecordsViewController: UIViewController {
                 self.tableView.scrollToBottom()
             }
         })
+    }
+    
+    func showEmptyMessage() {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 21))
+        label.textAlignment = .center
+        label.text = " 記録がありません。下のボタンをタップして記録を追加してください。"
+        label.textColor = UIColor.lightGray
+        label.adjustsFontSizeToFitWidth = true
+        tableView.tableFooterView = label
+    }
+    
+    func hideEmptyMessage() {
+        tableView.tableFooterView = nil
     }
 }
 
