@@ -21,6 +21,8 @@ class FamilyIdAndPasscodeViewController: InterstitialAdBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "他ユーザーを家族に招待する"
+        
         AdUtils.shared.loadAndAddAdView(self)
     }
     
@@ -36,7 +38,9 @@ class FamilyIdAndPasscodeViewController: InterstitialAdBaseViewController {
     */
 
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

@@ -33,11 +33,14 @@ class CreateFamilyViewController: InterstitialAdBaseViewController {
         babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
         
+        navigationItem.title = "家族を新規作成する"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "作成", style: .plain, target: self, action: #selector(onCreateButtonClicked(_:)))
+        
         AdUtils.shared.loadAndAddAdView(self)
     }
     
 
-    @IBAction func onCreateButtonClicked(_ sender: Any) {
+    @objc func onCreateButtonClicked(_ sender: Any) {
         guard let familyId = self.familyId.text else {
             self.showAlert(title: "エラー", message: "家族IDを入力してください。")
             return
@@ -83,7 +86,9 @@ class CreateFamilyViewController: InterstitialAdBaseViewController {
                         self.ref.child("families").child(familyId).child("records").setValue(recordsDict)
                         FirebaseUtils.shared.observeRemote()
                         
-                        self.showInterstitialAndDismiss()
+                        self.showInterstitial {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 }
             }
@@ -93,7 +98,9 @@ class CreateFamilyViewController: InterstitialAdBaseViewController {
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        self.showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func showAlert(title: String, message: String) {

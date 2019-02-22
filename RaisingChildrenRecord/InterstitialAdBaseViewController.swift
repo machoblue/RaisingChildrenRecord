@@ -13,6 +13,8 @@ import Firebase
 class InterstitialAdBaseViewController: UIViewController {
     
     var interstitial: GADInterstitial!
+    
+    var onComplete: (() -> ()) = {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +23,18 @@ class InterstitialAdBaseViewController: UIViewController {
         interstitial.delegate = self
     }
     
-    func showInterstitialAndDismiss() {
+    func showInterstitial(onComplete: @escaping () -> ()) {
+        self.onComplete = onComplete
         let haveShownInterstitial = AdUtils.shared.showInterstitial(interstitial, viewController: self)
         if !haveShownInterstitial {
-            dismiss(animated: true, completion: nil)
+            onComplete()
         }
     }
 }
 
 extension InterstitialAdBaseViewController: GADInterstitialDelegate {
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-        dismiss(animated: true, completion: nil)
+        onComplete()
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {

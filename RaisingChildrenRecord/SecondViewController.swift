@@ -123,7 +123,9 @@ class SecondViewController: UIViewController {
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        performSegue(withIdentifier: "Create Family", sender: nil)
+//        performSegue(withIdentifier: "Create Family", sender: nil)
+        let createFamilyViewController = storyboard?.instantiateViewController(withIdentifier: "CreateFamilyViewController") as! CreateFamilyViewController
+        navigationController?.pushViewController(createFamilyViewController, animated: true)
     }
     
     @objc func addFamily() {
@@ -146,8 +148,12 @@ class SecondViewController: UIViewController {
         self.ref.child("families").child(familyId).child("passcode").setValue(["value": passcode, "expirationDate": expirationDate.timeIntervalSince1970])
 
         // display familyId and onetime password
-        let parameterDict = ["familyId": familyId, "passcode": passcode]
-        performSegue(withIdentifier: "Show FamilyId And Passcode", sender: parameterDict)
+//        let parameterDict = ["familyId": familyId, "passcode": passcode]
+//        performSegue(withIdentifier: "Show FamilyId And Passcode", sender: parameterDict)
+        let familyIdAndPasscodeViewController = storyboard?.instantiateViewController(withIdentifier: "FamilyIdAndPasscodeViewController") as! FamilyIdAndPasscodeViewController
+        familyIdAndPasscodeViewController.passcodeText = passcode
+        familyIdAndPasscodeViewController.familyIdText = familyId
+        navigationController?.pushViewController(familyIdAndPasscodeViewController, animated: true)
     }
     
     @objc func joinFamily() {
@@ -162,7 +168,9 @@ class SecondViewController: UIViewController {
             return // return when userDefaultsFamilyId is nil or ""
         }
         
-        performSegue(withIdentifier: "Join Family", sender: nil)
+//        performSegue(withIdentifier: "Join Family", sender: nil)
+        let joinFamilyViewController = storyboard?.instantiateViewController(withIdentifier: "JoinFamilyViewController") as! JoinFamilyViewController
+        navigationController?.pushViewController(joinFamilyViewController, animated: true)
     }
     
     @objc func deleteFamilyData() {
@@ -399,7 +407,11 @@ extension SecondViewController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             
         case .EditBabyButton:
-            performSegue(withIdentifier: "Show Baby Detail", sender: nil)
+//            performSegue(withIdentifier: "Show Baby Detail", sender: nil)
+            let editBabyViewController = storyboard?.instantiateViewController(withIdentifier: "EditBabyViewController") as! EditBabyViewController
+            let row = tableView.indexPathForSelectedRow!.row
+            editBabyViewController.baby = row >= babies.count ? nil : babies[row]
+            navigationController?.pushViewController(editBabyViewController, animated: true)
             
         case .DataShareButton:
             let cellModel = cells[indexPath.row]
@@ -411,15 +423,15 @@ extension SecondViewController: UITableViewDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editBaby = segue.destination as? EditBabyViewController {
-            let row = tableView.indexPathForSelectedRow!.row
-            editBaby.baby = row >= babies.count ? nil : babies[row]
-            
-        } else if let familyIdAndPasscode = segue.destination as? FamilyIdAndPasscodeViewController {
-            let parameterDict = sender as! [String: String]
-            familyIdAndPasscode.familyIdText = parameterDict["familyId"]
-            familyIdAndPasscode.passcodeText = parameterDict["passcode"]
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let editBaby = segue.destination as? EditBabyViewController {
+//            let row = tableView.indexPathForSelectedRow!.row
+//            editBaby.baby = row >= babies.count ? nil : babies[row]
+//            
+//        } else if let familyIdAndPasscode = segue.destination as? FamilyIdAndPasscodeViewController {
+//            let parameterDict = sender as! [String: String]
+//            familyIdAndPasscode.familyIdText = parameterDict["familyId"]
+//            familyIdAndPasscode.passcodeText = parameterDict["passcode"]
+//        }
+//    }
 }

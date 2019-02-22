@@ -42,11 +42,14 @@ class JoinFamilyViewController: InterstitialAdBaseViewController {
         babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         recordDaoLocal = RecordDaoFactory.shared.createRecordDao(.Local)
         
+        navigationItem.title = "招待された家族に参加する"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "参加", style: .plain, target: self, action: #selector(onJoinButtonClicked(_:)))
+        
         AdUtils.shared.loadAndAddAdView(self)
     }
     
     // MARK: Event
-    @IBAction func onJoinButtonClicked(_ sender: Any) {
+    @objc func onJoinButtonClicked(_ sender: Any) {
         let title = "家族に参加するときのご注意"
         let message = "家族に参加すると、これまでこの端末で保存したデータが消えます。よろしいですか？"
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -103,7 +106,9 @@ class JoinFamilyViewController: InterstitialAdBaseViewController {
                         
                         self.activityIndicatorView.stopAnimating()
                         
-                        self.showInterstitialAndDismiss()
+                        self.showInterstitial {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     })
                 }
             }
@@ -115,7 +120,9 @@ class JoinFamilyViewController: InterstitialAdBaseViewController {
     }
     
     @IBAction func onLeftBarButtonClicked(_ sender: Any) {
-        self.showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
     func showAlert(title: String, message: String) {

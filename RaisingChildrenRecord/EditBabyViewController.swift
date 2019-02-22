@@ -69,6 +69,9 @@ class EditBabyViewController: InterstitialAdBaseViewController {
         self.babyDaoLocal = BabyDaoFactory.shared.createBabyDao(.Local)
         self.babyDaoRemote = BabyDaoFactory.shared.createBabyDao(.Remote)
         
+        navigationItem.title = baby.name
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(onSaveButtonClicked(_:)))
+        
         AdUtils.shared.loadAndAddAdView(self)
     }
     
@@ -86,7 +89,9 @@ class EditBabyViewController: InterstitialAdBaseViewController {
         babyDaoLocal.delete(self.baby)
         babyDaoRemote.delete(self.baby)
         
-        showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func onDatePickerValueChanged(sender: UIDatePicker!) {
@@ -95,16 +100,20 @@ class EditBabyViewController: InterstitialAdBaseViewController {
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {
-        showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
-    @IBAction func onSaveButtonClicked(_ sender: Any) {
+    @objc func onSaveButtonClicked(_ sender: Any) {
         self.name = self.textField.text!
         let baby = BabyModel(id: self.baby.id, name: self.name, born: self.born, female: self.female)
         babyDaoLocal.insertOrUpdate(baby)
         babyDaoRemote.insertOrUpdate(baby)
         
-        showInterstitialAndDismiss()
+        self.showInterstitial {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

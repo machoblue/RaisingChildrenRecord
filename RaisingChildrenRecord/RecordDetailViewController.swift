@@ -125,7 +125,7 @@ class RecordDetailViewController: UIViewController {
     @IBAction private func onDeleteButtonClicked(_ sender: UIButton) {
         recordDao.delete(record)
         recordDaoRemote.delete(record)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     @IBAction func onBackButtonClicked(_ sender: Any) {

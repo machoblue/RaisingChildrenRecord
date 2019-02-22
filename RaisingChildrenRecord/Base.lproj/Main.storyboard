@@ -229,7 +229,7 @@
         <!--Calendar Page View Controller-->
         <scene sceneID="XOh-Dp-cfd">
             <objects>
-                <pageViewController storyboardIdentifier="CalendarPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="K3o-Gw-asS" customClass="CalendarPageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="CalendarPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="K3o-Gw-asS" customClass="CalendarPageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KaO-RQ-Am1"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xN7-zW-tCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -464,10 +464,6 @@
                     <connections>
                         <outlet property="tableFooterView" destination="aOm-je-XeR" id="99K-zy-Ray"/>
                         <outlet property="tableView" destination="3xX-tj-mr5" id="bKe-EP-CJy"/>
-                        <segue destination="JIX-wJ-KrN" kind="presentation" identifier="Show Baby Detail" id="B0V-0A-Zaj"/>
-                        <segue destination="hcJ-3D-TPe" kind="show" identifier="Create Family" id="hrR-Jf-VWG"/>
-                        <segue destination="zdi-7f-DP6" kind="show" identifier="Show FamilyId And Passcode" id="IYj-8V-pMC"/>
-                        <segue destination="90t-z3-ceI" kind="showDetail" identifier="Join Family" id="aAd-JS-mfZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -773,25 +769,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6I-Cd-1RX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="赤ちゃん" id="mIT-ln-V1E">
-                                        <barButtonItem key="leftBarButtonItem" title="＜ 戻る" id="v7a-Z8-IuJ">
-                                            <connections>
-                                                <action selector="onBackButtonClicked:" destination="JIX-wJ-KrN" id="Ve4-QY-ccl"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="保存" id="Xs9-mn-EHT">
-                                            <connections>
-                                                <action selector="onSaveButtonClicked:" destination="JIX-wJ-KrN" id="97v-uX-yx1"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Y01-bo-F3a">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NameCell" id="u9q-zI-EBK">
@@ -925,12 +904,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="b6I-Cd-1RX" firstAttribute="leading" secondItem="9pq-Oq-gWX" secondAttribute="leading" id="9XX-4K-hEQ"/>
-                            <constraint firstItem="b6I-Cd-1RX" firstAttribute="trailing" secondItem="9pq-Oq-gWX" secondAttribute="trailing" id="QSm-SH-bEA"/>
                             <constraint firstItem="Y01-bo-F3a" firstAttribute="leading" secondItem="9pq-Oq-gWX" secondAttribute="leading" id="RhJ-uM-oib"/>
-                            <constraint firstItem="b6I-Cd-1RX" firstAttribute="top" secondItem="9pq-Oq-gWX" secondAttribute="top" id="SG1-AE-m9H"/>
+                            <constraint firstItem="Y01-bo-F3a" firstAttribute="top" secondItem="9pq-Oq-gWX" secondAttribute="top" id="SjF-8o-KWr"/>
                             <constraint firstItem="Y01-bo-F3a" firstAttribute="trailing" secondItem="9pq-Oq-gWX" secondAttribute="trailing" id="W6q-U2-1j2"/>
-                            <constraint firstItem="Y01-bo-F3a" firstAttribute="top" secondItem="b6I-Cd-1RX" secondAttribute="bottom" id="rzW-Hb-cEz"/>
                             <constraint firstItem="Y01-bo-F3a" firstAttribute="bottom" secondItem="9pq-Oq-gWX" secondAttribute="bottom" id="wdB-or-NkE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9pq-Oq-gWX"/>
@@ -951,20 +927,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me4-Ud-go9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="他ユーザーを家族に招待する" id="hQc-Cj-Qub">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="B6V-ST-nGw">
-                                            <connections>
-                                                <action selector="onLeftBarButtonClicked:" destination="zdi-7f-DP6" id="fJs-fn-Z5v"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="BYW-P0-xoC">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" id="Phl-Lc-vT0">
@@ -986,11 +950,8 @@
                         <constraints>
                             <constraint firstItem="BYW-P0-xoC" firstAttribute="leading" secondItem="Urn-Cx-eDn" secondAttribute="leading" id="AOK-EZ-pNa"/>
                             <constraint firstItem="BYW-P0-xoC" firstAttribute="trailing" secondItem="Urn-Cx-eDn" secondAttribute="trailing" id="ArW-OH-ZZn"/>
-                            <constraint firstItem="BYW-P0-xoC" firstAttribute="top" secondItem="Me4-Ud-go9" secondAttribute="bottom" id="DW5-Me-L6p"/>
-                            <constraint firstItem="Me4-Ud-go9" firstAttribute="top" secondItem="Urn-Cx-eDn" secondAttribute="top" id="EPo-RC-Ofq"/>
-                            <constraint firstItem="Me4-Ud-go9" firstAttribute="trailing" secondItem="Urn-Cx-eDn" secondAttribute="trailing" id="NvG-iR-dg4"/>
                             <constraint firstItem="BYW-P0-xoC" firstAttribute="bottom" secondItem="Urn-Cx-eDn" secondAttribute="bottom" id="UE7-K4-LY1"/>
-                            <constraint firstItem="Me4-Ud-go9" firstAttribute="leading" secondItem="Urn-Cx-eDn" secondAttribute="leading" id="ktn-4U-BCC"/>
+                            <constraint firstItem="BYW-P0-xoC" firstAttribute="top" secondItem="Urn-Cx-eDn" secondAttribute="top" id="wcj-s7-kTe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Urn-Cx-eDn"/>
                     </view>
@@ -1007,25 +968,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MiV-4H-39r">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="家族を新規作成する" id="3Ao-i8-wtt">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="d9r-g8-8fz">
-                                            <connections>
-                                                <action selector="onLeftBarButtonClicked:" destination="hcJ-3D-TPe" id="D9v-wY-9XV"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="作成" id="7yx-hg-jWT">
-                                            <connections>
-                                                <action selector="onCreateButtonClicked:" destination="hcJ-3D-TPe" id="DgI-PS-FHP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="bK0-3c-QxP">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" id="P9L-kW-R2x" customClass="TextFieldTableViewCell" customModule="RaisingChildrenRecord" customModuleProvider="target">
@@ -1062,12 +1006,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="bK0-3c-QxP" firstAttribute="top" secondItem="XzP-pF-VGs" secondAttribute="top" id="2hi-Pt-qU6"/>
                             <constraint firstItem="bK0-3c-QxP" firstAttribute="leading" secondItem="XzP-pF-VGs" secondAttribute="leading" id="6l8-Fr-Bik"/>
-                            <constraint firstItem="MiV-4H-39r" firstAttribute="leading" secondItem="XzP-pF-VGs" secondAttribute="leading" id="N3x-ls-bnD"/>
-                            <constraint firstItem="bK0-3c-QxP" firstAttribute="top" secondItem="MiV-4H-39r" secondAttribute="bottom" id="ahu-bY-pa9"/>
-                            <constraint firstItem="MiV-4H-39r" firstAttribute="trailing" secondItem="XzP-pF-VGs" secondAttribute="trailing" id="b2N-VJ-cIc"/>
                             <constraint firstItem="bK0-3c-QxP" firstAttribute="trailing" secondItem="XzP-pF-VGs" secondAttribute="trailing" id="g2q-R2-NoE"/>
-                            <constraint firstItem="MiV-4H-39r" firstAttribute="top" secondItem="XzP-pF-VGs" secondAttribute="top" id="jxr-cn-sXB"/>
                             <constraint firstItem="bK0-3c-QxP" firstAttribute="bottom" secondItem="XzP-pF-VGs" secondAttribute="bottom" id="uht-pf-2La"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XzP-pF-VGs"/>
@@ -1085,25 +1026,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ng3-at-L1a">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="招待された家族に参加する" id="qd6-La-BMp">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="c8L-s7-4na">
-                                            <connections>
-                                                <action selector="onLeftBarButtonClicked:" destination="90t-z3-ceI" id="biO-Fa-YHa"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="加わる" id="OAh-5C-5Cc">
-                                            <connections>
-                                                <action selector="onJoinButtonClicked:" destination="90t-z3-ceI" id="neD-at-V3K"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NtD-ve-9se">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" id="siy-dC-4qW" customClass="TextFieldCell" customModule="RaisingChildrenRecord" customModuleProvider="target">
@@ -1141,10 +1065,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NtD-ve-9se" firstAttribute="leading" secondItem="isg-gz-9Z9" secondAttribute="leading" id="9ga-kM-Y48"/>
-                            <constraint firstItem="ng3-at-L1a" firstAttribute="trailing" secondItem="isg-gz-9Z9" secondAttribute="trailing" id="LaX-xl-OiE"/>
-                            <constraint firstItem="NtD-ve-9se" firstAttribute="top" secondItem="ng3-at-L1a" secondAttribute="bottom" id="TqC-ti-Y35"/>
-                            <constraint firstItem="ng3-at-L1a" firstAttribute="top" secondItem="isg-gz-9Z9" secondAttribute="top" id="UvX-7P-Ef0"/>
-                            <constraint firstItem="ng3-at-L1a" firstAttribute="leading" secondItem="isg-gz-9Z9" secondAttribute="leading" id="eCO-t1-p6U"/>
+                            <constraint firstItem="NtD-ve-9se" firstAttribute="top" secondItem="isg-gz-9Z9" secondAttribute="top" id="gVf-Zs-qy1"/>
                             <constraint firstItem="NtD-ve-9se" firstAttribute="bottom" secondItem="isg-gz-9Z9" secondAttribute="bottom" id="leY-H1-vr4"/>
                             <constraint firstItem="NtD-ve-9se" firstAttribute="trailing" secondItem="isg-gz-9Z9" secondAttribute="trailing" id="pwU-Ay-SX7"/>
                         </constraints>
@@ -1176,7 +1097,7 @@
         <!--Page View Controller-->
         <scene sceneID="RBb-eI-J3m">
             <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="IHr-Qc-b0J" customClass="PageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IHr-Qc-b0J" customClass="PageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVO-7v-xBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4015" y="-544"/>
