@@ -80,15 +80,12 @@ class CalendarPageViewController: UIPageViewController {
         navigationItem.titleView?.addGestureRecognizer(gesture)
     }
     
-    func reloadTitleView(_ date: Date) {
-        guard let calendarTitleView = navigationItem.titleView as? CalendarTitleView else { return }
-        calendarTitleView.yearAndMonth.text = format(date)
-    }
-    
-    func reloadTitleView(_ baby: BabyModel) {
+    func reloadTitleView(baby: BabyModel, date: Date) {
         guard let calendarTitleView = navigationItem.titleView as? CalendarTitleView else { return }
         calendarTitleView.name.text = baby.name
-        calendarTitleView.age.text = UIUtils.shared.resolveAge(born: baby.born, now: date)
+        let firstDate = UIUtils.shared.getFirstDateOfMonthCalendar(date: date)
+        calendarTitleView.age.text = UIUtils.shared.resolveAge(born: baby.born, now: firstDate)
+        calendarTitleView.yearAndMonth.text = format(date)
     }
     
     @objc func onTitleViewTapped(_ sender: UITapGestureRecognizer) {
@@ -103,7 +100,7 @@ class CalendarPageViewController: UIPageViewController {
             UserDefaults.standard.register(defaults: [UserDefaults.Keys.BabyId.rawValue: baby.id])
         }
         
-        self.reloadTitleView(baby)
+        self.reloadTitleView(baby: baby, date: date)
         
         let userInfoDict = ["babyId": baby.id]
         NotificationCenter.default.post(name: .CalendarTitleViewClicked, object: nil, userInfo: userInfoDict)
@@ -132,7 +129,7 @@ extension CalendarPageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         guard let monthViewController = pendingViewControllers[0] as? MonthViewController else { return }
         date = monthViewController.date
-        reloadTitleView(date)
+        reloadTitleView(baby: baby, date: date)
     }
 }
 

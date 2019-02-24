@@ -337,7 +337,7 @@
         <scene sceneID="Lrv-ht-rv0">
             <objects>
                 <navigationController id="A62-m3-ZHE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" selectedImage="baseline_settings_black_24pt" id="94W-lF-wh6"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="baseline_settings_black_24pt" id="94W-lF-wh6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gb1-Gk-aiC">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

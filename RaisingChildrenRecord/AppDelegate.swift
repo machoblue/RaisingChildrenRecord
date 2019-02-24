@@ -108,6 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "UITabBarController") as! UITabBarController
         let navigationViewController = tabBarController.viewControllers![0] as! UINavigationController
+        
+        let backButtonItem = UIBarButtonItem(title: UIUtils.shared.formatToMMOrYYYYMM(Date()), style: .plain, target: nil, action: nil)
+        navigationViewController.navigationBar.topItem?.backBarButtonItem = backButtonItem
+        
         let firstViewController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
         navigationViewController.pushViewController(firstViewController, animated: true)
         self.window?.rootViewController = tabBarController
@@ -115,9 +119,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func configureSchemeColor() {
-        UINavigationBar.appearance().tintColor = UIColor.orange
-        UITabBar.appearance().tintColor = UIColor.orange
-        UITableViewCell.appearance().tintColor = UIColor.orange
+//        UINavigationBar.appearance().tintColor = UIColor.orange
+//        UITabBar.appearance().tintColor = UIColor.orange
+//        UITableViewCell.appearance().tintColor = UIColor.orange
     }
     
 }

@@ -232,8 +232,6 @@ extension MonthViewController: UICollectionViewDataSource {
     func isThisMonth(_ date: Date) -> Bool {
         let thisMonth = Calendar.current.dateComponents([.month], from: self.date)
         let month = Calendar.current.dateComponents([.month], from: date)
-        print("thisMOnth", thisMonth)
-        print("month", month)
         return thisMonth == month
     }
     
@@ -246,6 +244,9 @@ extension MonthViewController: UICollectionViewDelegate {
         case .DateCell:
             let firstViewController = self.storyboard?.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
             firstViewController.date = cellModel.date
+            
+            let backButtonItem = UIBarButtonItem(title: UIUtils.shared.formatToMMOrYYYYMM(date), style: .plain, target: nil, action: nil)
+            navigationController?.navigationBar.topItem?.backBarButtonItem = backButtonItem
             
             navigationController?.pushViewController(firstViewController, animated: true)
 

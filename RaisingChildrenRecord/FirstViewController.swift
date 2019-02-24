@@ -124,6 +124,9 @@ class FirstViewController: UIViewController {
         NotificationCenter.default.post(name: .RightBarButtonClicked, object: nil, userInfo: userInfoDict)
     }
     
+    @objc func onBackButtonClicked() {
+        navigationController?.popViewController(animated: true)
+    }
     
     // MARK: - Utility
     func nextBaby() -> BabyModel {
