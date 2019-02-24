@@ -62,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.recordDaoRemote = RecordDaoFactory.shared.createRecordDao(.Remote)
         
         restoreRecords() // To receive records from IntentHandler
+        
+        configureSchemeColor()
 
         return true
     }
@@ -110,6 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationViewController.pushViewController(firstViewController, animated: true)
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
+    }
+    
+    func configureSchemeColor() {
+        UINavigationBar.appearance().tintColor = UIColor.orange
+        UITabBar.appearance().tintColor = UIColor.orange
+        UITableViewCell.appearance().tintColor = UIColor.orange
     }
     
 }
