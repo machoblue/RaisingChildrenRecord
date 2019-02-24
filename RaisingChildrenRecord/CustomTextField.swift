@@ -13,6 +13,22 @@ class CustomTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
+        
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.sizeToFit()
+        
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButtonClicked))
+        let toolbarItems = [spacer, doneButton]
+        
+        toolbar.setItems(toolbarItems, animated: true)
+        
+        inputAccessoryView = toolbar
+    }
+    
+    @objc func onDoneButtonClicked(textView: UITextView) {
+        self.resignFirstResponder()
     }
 
 }
