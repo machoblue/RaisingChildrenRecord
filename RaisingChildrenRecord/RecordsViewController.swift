@@ -25,6 +25,7 @@ class RecordsViewController: UIViewController {
 
     // MARK: - ViewController lifecycle callback
     override func viewDidLoad() {
+        print("*** RecordsViewController.viewDidLoad ***")
         super.viewDidLoad()
         
         self.recordObserver = RecordObserverFactory.shared.createRecordObserver(.Local)
@@ -36,6 +37,7 @@ class RecordsViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("*** RecordsViewController.viewDidAppear ***")
         super.viewDidAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onTitleViewClicked(notification:)), name: Notification.Name.TitleViewClicked, object: nil)
@@ -49,6 +51,7 @@ class RecordsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("*** RecordsViewController.viewWillAppear ***")
         super.viewWillAppear(animated)
         
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
@@ -57,6 +60,7 @@ class RecordsViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        print("*** RecordsViewController.viewDidDisppear ***")
         super.viewWillDisappear(animated)
         
         // 1. 次のRecordsViewControllerのviewWillAppear
@@ -105,6 +109,7 @@ class RecordsViewController: UIViewController {
     }
     
     func observeRecord() {
+        print("*** RecordsViewController.observeRecord***")
         guard let date = self.date else { return }
         let babyId = UserDefaults.standard.object(forKey: UserDefaults.Keys.BabyId.rawValue) as? String ?? babyDao.findAll().first?.id
         guard let unwrappedBabyId = babyId else { return }

@@ -1097,7 +1097,7 @@
         <!--Page View Controller-->
         <scene sceneID="RBb-eI-J3m">
             <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IHr-Qc-b0J" customClass="PageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="IHr-Qc-b0J" customClass="PageViewController" customModule="RaisingChildrenRecord" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVO-7v-xBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4015" y="-544"/>
