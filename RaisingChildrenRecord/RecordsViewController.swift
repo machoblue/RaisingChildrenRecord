@@ -22,6 +22,8 @@ class RecordsViewController: UIViewController {
     
     var recordObserver: RecordObserver!
     var babyDao: BabyDao!
+    
+    var observationKey: RecordObserver.ObservationKey?
 
     // MARK: - ViewController lifecycle callback
     override func viewDidLoad() {
@@ -57,18 +59,6 @@ class RecordsViewController: UIViewController {
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        print("*** RecordsViewController.viewDidDisppear ***")
-        super.viewWillDisappear(animated)
-        
-        // 1. 次のRecordsViewControllerのviewWillAppear
-        // 2. 前のRecordsViewControllerのviewWillDisappear
-        // 3. 前のRecordsViewControllerのviewDidDisappear  <-observe終了
-        // 4. 次のRecordsViewControllerのviewDidAppear     <-observe開始
-        self.recordObserver.invalidate()
-        records = []
     }
 
     // MARK: - Event
@@ -117,7 +107,11 @@ class RecordsViewController: UIViewController {
         let from = Calendar.current.startOfDay(for: date)
         let to = from + 60 * 60 * 24 // 後半の60 * 60 * 24は登録したばかりのレコードを表示するため。
         
-        self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
+        if let observationKey = observationKey {
+            recordObserver.invalidate(observationKey)
+        }
+        
+        observationKey = self.recordObserver.observe(babyId: unwrappedBabyId, from: from, to: to, with: { (recordAndChanges) in
             
             var needScroll = false
             
@@ -152,6 +146,11 @@ class RecordsViewController: UIViewController {
                 self.tableView.scrollToBottom()
             }
         })
+    }
+    
+    deinit {
+        guard let observationKey = observationKey else { return }
+        recordObserver.invalidate(observationKey)
     }
     
     func showEmptyMessage() {

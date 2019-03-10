@@ -47,8 +47,9 @@ class RecordObserverFirebase: RecordObserver {
         })
     }
     
-    func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
+    func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) -> ObservationKey {
         // do nothing
+        return ""
     }
     
     func setup() {
@@ -64,5 +65,9 @@ class RecordObserverFirebase: RecordObserver {
     
     public func invalidate() {
         recordsRef?.removeAllObservers()
+    }
+    
+    public func invalidate(_ key: ObservationKey) {
+        // do nothing
     }
 }

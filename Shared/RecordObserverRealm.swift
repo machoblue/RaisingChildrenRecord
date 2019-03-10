@@ -15,51 +15,50 @@ import Shared
 public class RecordObserverRealm: RecordObserver {
     public static let shared = RecordObserverRealm()
     var realm: Realm!
-    var results: Results<Record>!
-    var notificationToken: NotificationToken?
-    var records: [RecordModel] = []
+    
+    var observationKeyToNotificationKey: [ObservationKey: NotificationToken] = [:]
+    var observationKeyToRecords: [ObservationKey: [RecordModel]] = [:]
 
     private init() {
+        realm = try! Realm()
     }
     
     public func observe(with callback: @escaping ([(RecordModel, Change)]) -> Void) {
         // do nothing
     }
     
-    public func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) {
-        notificationToken?.invalidate()
-        records = []
-        realm = try! Realm()
+    public func observe(babyId: String, from: Date, to: Date, with callback: @escaping ([(RecordModel, Change)]) -> Void) -> ObservationKey {
+        var records: [RecordModel] = []
         
-        self.results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
+        let results = realm.objects(Record.self).filter("babyId == %@ AND %@ <= dateTime AND dateTime <= %@", babyId, from ,to)
         for record in results {
-            self.records.append(RecordModel(from: record))
+            records.append(RecordModel(from: record))
         }
         
-        notificationToken = self.results.observe { [weak self] (changes: RealmCollectionChange) in
+        let notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
             var myChanges: [(RecordModel, Change)] = []
             switch changes {
             case .initial:
-                for record in self!.records {
+                for record in records {
                     myChanges.append((record, .Init))
                 }
             case .update(_, let deletions, let insertions, let modifications):
                 for deletion in self!.reverce(deletions) {
-                    let target = self!.records[deletion]
-                    self!.records.remove(at: deletion)
+                    let target = records[deletion]
+                    records.remove(at: deletion)
                     
                     myChanges.append((target, .Delete))
                 }
                 for insertion in self!.sort(insertions) {
-                    let result = self!.results[insertion]
+                    let result = results[insertion]
                     let record = RecordModel(from: result)
-                    self!.records.insert(record, at: insertion)
+                    records.insert(record, at: insertion)
                     myChanges.append((record, .Insert))
                 }
                 for modification in modifications {
-                    let result = self!.results[modification]
-                    self!.records[modification] = RecordModel(from: result)
-                    myChanges.append((self!.records[modification], .Modify))
+                    let result = results[modification]
+                    records[modification] = RecordModel(from: result)
+                    myChanges.append((records[modification], .Modify))
                 }
                 
             case .error(let error):
@@ -67,10 +66,15 @@ public class RecordObserverRealm: RecordObserver {
             }
             callback(myChanges)
         }
+        
+        let observationKey = UUID().description
+        observationKeyToNotificationKey[observationKey] = notificationToken
+        observationKeyToRecords[observationKey] = records
+        
+        return observationKey
     }
     
     deinit {
-        invalidate()
     }
     
     func sort(_ array: [Int]) -> [Int] {
@@ -86,7 +90,11 @@ public class RecordObserverRealm: RecordObserver {
     }
     
     public func invalidate() {
-        records = []
-        notificationToken?.invalidate()
+    }
+    
+    public func invalidate(_ key: ObservationKey) {
+        observationKeyToNotificationKey[key]?.invalidate()
+        observationKeyToNotificationKey.removeValue(forKey: key)
+        observationKeyToRecords.removeValue(forKey: key)
     }
 }
