@@ -28,6 +28,8 @@ class MonthViewController: UIViewController {
     
     var recordDao: RecordDao!
     var recordObserver: RecordObserver!
+    
+    var observationKey: RecordObserver.ObservationKey?
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -48,7 +50,11 @@ class MonthViewController: UIViewController {
         let calendarFirstDate = UIUtils.shared.getFirstDateOfMonthCalendar(date: date)
         let from = calendarFirstDate
         let to = Date(timeInterval: TimeInterval(60 * 60 * 24 * 42), since: from)
-        recordObserver.observe(babyId: baby.id, from: from, to: to) { _ in // 詳細画面から戻ってきた時に記録を反映させるため
+        
+        if let observationKey = observationKey {
+            recordObserver.invalidate(observationKey)
+        }
+        observationKey = recordObserver.observe(babyId: baby.id, from: from, to: to) { _ in // 詳細画面から戻ってきた時に記録を反映させるため
             self.cellModels = self.createCellModels(baby: self.baby, date: self.date)
             self.collectionView.reloadData()
         }
@@ -160,6 +166,11 @@ class MonthViewController: UIViewController {
         baby = BabyDaoFactory.shared.createBabyDao(.Local).find(babyId)
         cellModels = self.createCellModels(baby: baby, date: date)
         collectionView.reloadData()
+    }
+    
+    deinit {
+        guard let observationKey = observationKey else { return }
+        recordObserver.invalidate(observationKey)
     }
 }
 
