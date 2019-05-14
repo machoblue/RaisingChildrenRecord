@@ -370,46 +370,17 @@
 		0CBD261B20F6CBE700542E1B /* RaisingChildrenRecord */ = {
 			isa = PBXGroup;
 			children = (
-				9C8869C6220EA3090033681E /* Calendar */,
+				9C3655562286EEF20074BB00 /* Shared */,
+				9C3655552286EE560074BB00 /* Auth */,
+				9C36554F2286ED2F0074BB00 /* Settings */,
+				9C36554E2286ED1E0074BB00 /* Records */,
 				9C186E9721B8995E00A089EF /* RaisingChildrenRecord.entitlements */,
 				9CBAE9D3216AEAC000284EDE /* GoogleService-Info.plist */,
 				0CBD261C20F6CBE700542E1B /* AppDelegate.swift */,
-				0CBD261E20F6CBE700542E1B /* FirstViewController.swift */,
-				0CBD262020F6CBE700542E1B /* SecondViewController.swift */,
 				0CBD262220F6CBE700542E1B /* Main.storyboard */,
-				0C0F7E8C210D2F520040D268 /* CustomTitleView.xib */,
 				0CBD262520F6CBE900542E1B /* Assets.xcassets */,
 				0CBD262720F6CBE900542E1B /* LaunchScreen.storyboard */,
 				0CBD262A20F6CBE900542E1B /* Info.plist */,
-				0C39F7A021069ABC00302D76 /* PageViewController.swift */,
-				0C0F7E8E210D30750040D268 /* UICustomTitleView.swift */,
-				0C007B3E2145075F0001802A /* RecordsViewController.swift */,
-				0C007B422147F0C80001802A /* CustomCollectionViewCell.swift */,
-				9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */,
-				0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */,
-				9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */,
-				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
-				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
-				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
-				9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */,
-				9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */,
-				9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */,
-				9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */,
-				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
-				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
-				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
-				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
-				9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */,
-				9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */,
-				9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */,
-				9C4B221321E6BA88009DEAD2 /* SignInViewController.swift */,
-				9C4B221721E79114009DEAD2 /* SignUpViewController.swift */,
-				9C4B221921E808FA009DEAD2 /* UIUtils.swift */,
-				9C21678A21EE196C00C42158 /* AdUtils.swift */,
-				9C21679021F3F6F500C42158 /* BabyModel+DataSnapshot.swift */,
-				9C21679221F3F8A700C42158 /* RecordModel+DataSnapshot.swift */,
-				9C19C9B821F74AD400411A73 /* CustomTextField.swift */,
-				9C19C9BA21FBE78700411A73 /* InterstitialAdBaseViewController.swift */,
 			);
 			path = RaisingChildrenRecord;
 			sourceTree = "<group>";
@@ -449,9 +420,158 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9C36554E2286ED1E0074BB00 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				0CBD261E20F6CBE700542E1B /* FirstViewController.swift */,
+				9C8869C6220EA3090033681E /* Calendar */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		9C36554F2286ED2F0074BB00 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0CBD262020F6CBE700542E1B /* SecondViewController.swift */,
+				9C3655522286ED720074BB00 /* ShareData */,
+				9C3655512286ED610074BB00 /* EditBaby */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		9C3655512286ED610074BB00 /* EditBaby */ = {
+			isa = PBXGroup;
+			children = (
+				0C0DCB132159AC28001D1FCC /* EditBabyViewController.swift */,
+			);
+			path = EditBaby;
+			sourceTree = "<group>";
+		};
+		9C3655522286ED720074BB00 /* ShareData */ = {
+			isa = PBXGroup;
+			children = (
+				9CBAE9D1216AE19800284EDE /* CreateFamilyViewController.swift */,
+				9C23DBE321679DCA0091970A /* FamilyIdAndPasscodeViewController.swift */,
+				9C23DBE521682F580091970A /* JoinFamilyViewController.swift */,
+			);
+			path = ShareData;
+			sourceTree = "<group>";
+		};
+		9C3655532286ED9C0074BB00 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9C4B221921E808FA009DEAD2 /* UIUtils.swift */,
+				9C21678A21EE196C00C42158 /* AdUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9C3655542286EDCA0074BB00 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				0C0F7E8C210D2F520040D268 /* CustomTitleView.xib */,
+				0C39F7A021069ABC00302D76 /* PageViewController.swift */,
+				0C0F7E8E210D30750040D268 /* UICustomTitleView.swift */,
+				0C007B3E2145075F0001802A /* RecordsViewController.swift */,
+				0C007B422147F0C80001802A /* CustomCollectionViewCell.swift */,
+				9C186EAF21C4C30300A089EF /* RecordDetailTableConfiguration.swift */,
+				9C186EB521C53F3700A089EF /* RecordDetailViewController.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		9C3655552286EE560074BB00 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				9C4B221321E6BA88009DEAD2 /* SignInViewController.swift */,
+				9C4B221721E79114009DEAD2 /* SignUpViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9C3655562286EEF20074BB00 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9C3655592286EF4A0074BB00 /* View */,
+				9C3655582286EF0A0074BB00 /* Data */,
+				9C3655572286EF020074BB00 /* Model */,
+				9C3655532286ED9C0074BB00 /* Utils */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		9C3655572286EF020074BB00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9C4B220D21E02671009DEAD2 /* RecordModel+Intents.swift */,
+				9C21679021F3F6F500C42158 /* BabyModel+DataSnapshot.swift */,
+				9C21679221F3F8A700C42158 /* RecordModel+DataSnapshot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9C3655582286EF0A0074BB00 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9CBAE9F1217168C100284EDE /* FamilyIdObserver.swift */,
+				9CBAE9EB216EFD6A00284EDE /* BabyObserverFirebase.swift */,
+				9CBAE9ED216F8E2E00284EDE /* BabyObserverFactory.swift */,
+				9CBAEA052172CD7000284EDE /* RecordObserverFirebase.swift */,
+				9CBAEA072172CDB000284EDE /* RecordObserverFactory.swift */,
+				9CBAE9E3216D729A00284EDE /* BabyDaoFactory.swift */,
+				9CBAE9E7216E2ADF00284EDE /* BabyDaoFirebase.swift */,
+				9CBAE9FB2172CAFE00284EDE /* RecordDaoFirebase.swift */,
+				9CBAE9FD2172CB5900284EDE /* RecordDaoFactory.swift */,
+				9C215D2021D0AA8700E9515A /* FirebaseUtils.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9C3655592286EF4A0074BB00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9C19C9B821F74AD400411A73 /* CustomTextField.swift */,
+				9C19C9BA21FBE78700411A73 /* InterstitialAdBaseViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9C36555A2286EF680074BB00 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9C186E9521B8959800A089EF /* Realm+Configuration.swift */,
+				9CBAE9E5216D75BC00284EDE /* Change.swift */,
+				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
+				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
+				9CBAEA012172CC8500284EDE /* RecordObserver.swift */,
+				9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */,
+				9CBAE9DF216D71D900284EDE /* BabyDao.swift */,
+				9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */,
+				9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */,
+				9CBAE9F52172C95D00284EDE /* RecordDao.swift */,
+				9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */,
+				9C62EB33218C1CDC005F068E /* RecordDataManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9C36555B2286EF760074BB00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C007B44214885F40001802A /* Baby.swift */,
+				0C007B46214BDD9C0001802A /* Record.swift */,
+				9CBAE9D5216C237D00284EDE /* BabyModel.swift */,
+				9CBAE9F72172C99800284EDE /* RecordModel.swift */,
+				0C2F9E66214DDE7E00CFCD2F /* Command.swift */,
+				9C412F0221FDC9A50087C595 /* RecordModel+Realm.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9C8869C6220EA3090033681E /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				9C3655542286EDCA0074BB00 /* Date */,
 				9C8869C7220EA3940033681E /* CalendarPageViewController.swift */,
 				9C8869C9220EA4AA0033681E /* MonthViewController.swift */,
 				9C8869CB221173AD0033681E /* CalendarTitleView.xib */,
@@ -463,29 +583,13 @@
 		9CE76AFB2187432B002B00ED /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				9CBAE9E5216D75BC00284EDE /* Change.swift */,
-				9CBAE9E9216EFCCB00284EDE /* BabyObserver.swift */,
-				9CBAE9F32172C1E000284EDE /* BabyObserverRealm.swift */,
-				9CBAEA012172CC8500284EDE /* RecordObserver.swift */,
-				9CBAEA032172CD2D00284EDE /* RecordObserverRealm.swift */,
-				9CBAE9DF216D71D900284EDE /* BabyDao.swift */,
-				9CBAE9E1216D722C00284EDE /* BabyDaoRealm.swift */,
-				0C007B44214885F40001802A /* Baby.swift */,
-				0C007B46214BDD9C0001802A /* Record.swift */,
-				9CBAE9FF2172CBAB00284EDE /* DatabaseType.swift */,
+				9C36555B2286EF760074BB00 /* Model */,
+				9C36555A2286EF680074BB00 /* Data */,
 				9CDA3267218E72E000F38D61 /* UserDefaults+Keys.swift */,
-				9CBAE9F52172C95D00284EDE /* RecordDao.swift */,
-				9CBAE9F92172CAA500284EDE /* RecordDaoRealm.swift */,
-				9C62EB33218C1CDC005F068E /* RecordDataManager.swift */,
+				9CE76B212187D3D2002B00ED /* DataManager.swift */,
 				9C62EB34218C1CDC005F068E /* UserDefaults+DataSuite.swift */,
-				0C2F9E66214DDE7E00CFCD2F /* Command.swift */,
-				9CBAE9D5216C237D00284EDE /* BabyModel.swift */,
-				9CBAE9F72172C99800284EDE /* RecordModel.swift */,
 				9CE76AFC2187432B002B00ED /* Shared.h */,
 				9CE76AFD2187432B002B00ED /* Info.plist */,
-				9CE76B212187D3D2002B00ED /* DataManager.swift */,
-				9C186E9521B8959800A089EF /* Realm+Configuration.swift */,
-				9C412F0221FDC9A50087C595 /* RecordModel+Realm.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

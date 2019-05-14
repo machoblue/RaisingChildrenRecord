@@ -284,7 +284,7 @@ class SecondViewController: UIViewController {
         familyIdLabel?.text = "あなたの家族の家族ID: [\(familyId)]"
         
         let appVersionLabel = tableFooterView.viewWithTag(3) as? UILabel
-        let appVersion = "1.0.5"
+        let appVersion = "1.0.6"
         appVersionLabel?.text = "アプリのバージョン: [\(appVersion)]"
         
         tableView.tableFooterView = tableFooterView
